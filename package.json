@@ -1,0 +1,31 @@
+{
+  "name": "grupoalista-website-v2",
+  "version": "2.0.0",
+  "description": "Landing page for Grupo Alista - Diversificación Empresarial con Propósito",
+  "private": true,
+  "scripts": {
+    "dev": "node serve.mjs",
+    "lint": "npm run lint:html && npm run lint:css && npm run lint:js",
+    "lint:html": "htmlhint \"**/*.html\" --ignore \"node_modules/**\"",
+    "lint:css": "stylelint \"assets/css/**/*.css\"",
+    "lint:js": "eslint \"assets/js/**/*.js\"",
+    "format": "prettier --write \"**/*.{html,css,js,json,md}\"",
+    "format:check": "prettier --check \"**/*.{html,css,js,json,md}\"",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "validate": "npm run lint && npm run test"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "htmlhint": "^1.1.4",
+    "prettier": "^3.2.5",
+    "stylelint": "^16.3.1",
+    "stylelint-config-standard": "^36.0.0",
+    "vitest": "^1.4.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "author": "Grupo Alista",
+  "license": "UNLICENSED"
+}

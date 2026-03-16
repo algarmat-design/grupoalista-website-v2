@@ -1,0 +1,18 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "parserOptions": {
+    "ecmaVersion": "latest"
+  },
+  "rules": {
+    "eqeqeq": ["error", "always"],
+    "no-console": "warn",
+    "no-eval": "error",
+    "no-var": "error",
+    "prefer-const": "error",
+    "curly": ["error", "all"],
+    "no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }]
+  }
+}
