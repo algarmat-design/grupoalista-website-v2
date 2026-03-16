@@ -1,48 +1,1501 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Grupo Alista - Diversificación Empresarial con Propósito. Consultoría, Marketing, Salud, Hotels e Imports.">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grupo Alista — Grupo Empresarial</title>
+  <meta name="description" content="Grupo Alista es un conglomerado empresarial mexicano con filiales en consultoría, marketing, salud, hotelería e importaciones." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --slate-dark:   #3E5662;
+      --slate-mid:    #57707D;
+      --slate-light:  #A5BCC6;
+      --copper-dark:  #9D4C2A;
+      --copper:       #BA6A45;
+      --bg-base:      #09141c;
+      --bg-elevated:  #0d1c26;
+      --bg-card:      #111f2a;
+      --text-primary: #e4ecf1;
+      --text-muted:   #7fa0b2;
+      --border:       rgba(165,188,198,0.10);
+    }
 
-  <title>Grupo Alista | Diversificación Empresarial con Propósito</title>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+    body {
+      background: var(--bg-base);
+      color: var(--text-primary);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
 
-  <!-- Stylesheets (load order matters) -->
-  <link rel="stylesheet" href="assets/css/tokens.css">
-  <link rel="stylesheet" href="assets/css/base.css">
-  <link rel="stylesheet" href="assets/css/layout.css">
-  <link rel="stylesheet" href="assets/css/components.css">
-  <link rel="stylesheet" href="assets/css/utilities.css">
-  <link rel="stylesheet" href="assets/css/responsive.css">
+    /* ── Grain overlay ── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9998;
+    }
+
+    /* ── Typography ── */
+    .font-mono { font-family: 'Roboto Mono', monospace; }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--bg-base); }
+    ::-webkit-scrollbar-thumb { background: var(--slate-dark); border-radius: 2px; }
+
+    /* ══════════════════════════════════════
+       NAV
+    ══════════════════════════════════════ */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.25rem 2rem;
+      transition: background 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease;
+    }
+    #navbar.scrolled {
+      background: rgba(9,20,28,0.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-links { display: flex; align-items: center; gap: 2.25rem; }
+    .nav-link {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--slate-light);
+      text-decoration: none;
+      position: relative;
+      transition: color 0.25s;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0; right: 0;
+      height: 1px;
+      background: var(--copper);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s cubic-bezier(0.22,1,0.36,1);
+    }
+    .nav-link:hover { color: #fff; }
+    .nav-link:hover::after { transform: scaleX(1); }
+
+    .lang-btn {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      color: var(--copper);
+      border: 1px solid rgba(186,106,69,0.4);
+      border-radius: 2px;
+      padding: 0.3rem 0.75rem;
+      background: none;
+      cursor: pointer;
+      transition: background 0.25s, border-color 0.25s;
+    }
+    .lang-btn:hover { background: rgba(186,106,69,0.12); border-color: var(--copper); }
+
+    /* hamburger */
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 1px; background: var(--slate-light); transition: all 0.3s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    /* mobile drawer */
+    #mobileDrawer {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(9,20,28,0.98);
+      backdrop-filter: blur(12px);
+      z-index: 90;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+    }
+    #mobileDrawer.open { display: flex; }
+    #mobileDrawer .nav-link { font-size: 1.1rem; letter-spacing: 0.1em; }
+
+    /* ══════════════════════════════════════
+       HERO
+    ══════════════════════════════════════ */
+    #home {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* Radial gradient background */
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 70% at 15% 55%, rgba(62,86,98,0.22) 0%, transparent 65%),
+        radial-gradient(ellipse 55% 55% at 85% 25%, rgba(157,76,42,0.14) 0%, transparent 55%),
+        radial-gradient(ellipse 90% 60% at 50% 110%, rgba(9,20,28,0.9) 0%, transparent 70%);
+    }
+
+    /* Decorative orbiting rings */
+    .rings-wrap {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+    .ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid;
+      opacity: 0.05;
+    }
+    @keyframes spin-cw  { to { transform: rotate(360deg);  } }
+    @keyframes spin-ccw { to { transform: rotate(-360deg); } }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 0 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Hero animations */
+    @keyframes fade-rise {
+      from { opacity: 0; transform: translateY(36px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+
+    .h-a1 { animation: fade-rise 1s cubic-bezier(0.22,1,0.36,1) 0.1s both; }
+    .h-a2 { animation: fade-rise 1s cubic-bezier(0.22,1,0.36,1) 0.3s both; }
+    .h-a3 { animation: fade-rise 1s cubic-bezier(0.22,1,0.36,1) 0.5s both; }
+    .h-a4 { animation: fade-rise 1s cubic-bezier(0.22,1,0.36,1) 0.7s both; }
+    .h-a5 { animation: fade-in  1.2s ease 1.1s both; }
+
+    .hero-logo {
+      width: min(280px, 62vw);
+      filter: drop-shadow(0 0 70px rgba(186,106,69,0.28)) drop-shadow(0 24px 48px rgba(0,0,0,0.55));
+      transition: transform 0.6s cubic-bezier(0.22,1,0.36,1);
+    }
+    .hero-logo:hover { transform: scale(1.03); }
+
+    .hero-eyebrow {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--copper);
+      margin-top: 2.5rem;
+    }
+
+    .hero-title {
+      font-family: 'Roboto Mono', monospace;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 400;
+      letter-spacing: -0.025em;
+      line-height: 1.05;
+      color: var(--text-primary);
+      margin-top: 0.75rem;
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--text-muted);
+      max-width: 520px;
+      margin-top: 1.5rem;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, var(--copper-dark), var(--copper));
+      color: #fff;
+      border: none;
+      padding: 0.9rem 2rem;
+      border-radius: 2px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: opacity 0.25s, transform 0.25s, box-shadow 0.25s;
+    }
+    .btn-primary:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 32px rgba(157,76,42,0.4);
+    }
+    .btn-primary:active { transform: translateY(0); }
+
+    .btn-ghost {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--slate-light);
+      border: 1px solid rgba(165,188,198,0.18);
+      padding: 0.9rem 2rem;
+      border-radius: 2px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.25s;
+    }
+    .btn-ghost:hover {
+      border-color: rgba(165,188,198,0.4);
+      color: #fff;
+      background: rgba(165,188,198,0.05);
+    }
+
+    /* Scroll indicator */
+    .scroll-cue {
+      position: absolute;
+      bottom: 2.25rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0.35;
+    }
+    .scroll-cue span {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+    }
+    .scroll-cue-line {
+      width: 1px;
+      height: 44px;
+      background: linear-gradient(to bottom, var(--copper), transparent);
+    }
+
+    /* ══════════════════════════════════════
+       SHARED SECTION STYLES
+    ══════════════════════════════════════ */
+    .section-wrap {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    section { padding: 6.5rem 0; }
+
+    .section-eyebrow {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--copper);
+      display: block;
+      margin-bottom: 0.85rem;
+    }
+    .copper-rule {
+      width: 44px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--copper-dark), var(--copper));
+      margin-bottom: 1.5rem;
+    }
+    .section-title {
+      font-family: 'Roboto Mono', monospace;
+      font-weight: 400;
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      color: var(--text-primary);
+    }
+    .section-body {
+      font-size: 0.95rem;
+      line-height: 1.85;
+      color: var(--text-muted);
+      font-weight: 300;
+    }
+
+    /* ══════════════════════════════════════
+       ABOUT
+    ══════════════════════════════════════ */
+    #about {
+      background: var(--bg-elevated);
+      position: relative;
+    }
+    #about::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--copper-dark), transparent);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4.5rem;
+      align-items: start;
+      margin-top: 3.5rem;
+    }
+
+    .value-card {
+      border: 1px solid var(--border);
+      border-left: 2px solid;
+      border-radius: 2px;
+      padding: 1.4rem 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .value-card-title {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+
+    /* Stats row */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 4rem;
+    }
+    .stat-cell {
+      text-align: center;
+      padding: 2rem 1rem;
+      border-right: 1px solid var(--border);
+    }
+    .stat-cell:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 2.4rem;
+      font-weight: 400;
+      color: var(--copper);
+      display: block;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .stat-lbl {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-weight: 300;
+    }
+
+    /* ══════════════════════════════════════
+       COMPANIES
+    ══════════════════════════════════════ */
+    #companies { background: var(--bg-base); }
+
+    .companies-header { text-align: center; margin-bottom: 3.5rem; }
+    .companies-header .copper-rule { margin: 0 auto 1.5rem; }
+
+    .cards-row-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .cards-row-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      max-width: 67%;
+      margin: 0 auto;
+    }
+
+    .c-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2.25rem 1.75rem;
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+      transition: transform 0.4s cubic-bezier(0.22,1,0.36,1),
+                  border-color 0.4s ease,
+                  box-shadow 0.4s ease;
+    }
+    .c-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--copper), transparent);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .c-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 100% 80% at 50% 110%, rgba(186,106,69,0.07) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .c-card:hover {
+      transform: translateY(-7px);
+      border-color: rgba(186,106,69,0.3);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.45), 0 0 0 1px rgba(186,106,69,0.12);
+    }
+    .c-card:hover::before,
+    .c-card:hover::after { opacity: 1; }
+
+    .c-logo-wrap {
+      height: 168px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+    .c-logo-wrap img {
+      max-width: 100%;
+      max-height: 150px;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 18px rgba(0,0,0,0.45));
+      transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+    }
+    .c-card:hover .c-logo-wrap img { transform: scale(1.06); }
+
+    .c-name {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--slate-light);
+      margin-bottom: 0.75rem;
+      position: relative;
+      z-index: 1;
+    }
+    .c-desc {
+      font-size: 0.86rem;
+      line-height: 1.75;
+      color: var(--text-muted);
+      font-weight: 300;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ══════════════════════════════════════
+       CONTACT
+    ══════════════════════════════════════ */
+    #contact {
+      background: var(--bg-elevated);
+      position: relative;
+    }
+    #contact::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--slate-mid), transparent);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 3.5rem;
+      margin-top: 3.5rem;
+      align-items: start;
+    }
+
+    /* Map */
+    .map-frame {
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      height: 240px;
+      position: relative;
+    }
+    .map-frame::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 1px solid rgba(186,106,69,0.18);
+      border-radius: 4px;
+      pointer-events: none;
+    }
+    .map-frame iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      filter: invert(88%) hue-rotate(180deg) brightness(0.88) saturate(0.65);
+    }
+
+    /* Address box */
+    .addr-box {
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 1.1rem 1.25rem;
+      margin-top: 0.85rem;
+      margin-bottom: 1.25rem;
+    }
+    .addr-lbl {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--copper);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    .addr-text {
+      font-size: 0.82rem;
+      line-height: 1.75;
+      color: var(--text-muted);
+      font-weight: 300;
+    }
+
+    /* Social links */
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      color: var(--slate-light);
+      text-decoration: none;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.6rem;
+      transition: border-color 0.25s, color 0.25s, background 0.25s;
+    }
+    .social-link:hover {
+      border-color: rgba(186,106,69,0.35);
+      color: #fff;
+      background: rgba(186,106,69,0.05);
+    }
+    .social-link.wa {
+      border-color: rgba(37,211,102,0.2);
+      color: #25d366;
+    }
+    .social-link.wa:hover {
+      border-color: rgba(37,211,102,0.5);
+      background: rgba(37,211,102,0.05);
+    }
+
+    /* Form */
+    .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    .field-group { margin-bottom: 1.1rem; }
+    .field-label {
+      display: block;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--slate-light);
+      margin-bottom: 0.45rem;
+    }
+    .field-input,
+    .field-select,
+    .field-textarea {
+      width: 100%;
+      background: rgba(17,31,42,0.85);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 0.8rem 1rem;
+      color: var(--text-primary);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 300;
+      outline: none;
+      transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
+      -webkit-appearance: none;
+    }
+    .field-input::placeholder,
+    .field-textarea::placeholder { color: rgba(127,160,178,0.35); }
+    .field-input:focus,
+    .field-select:focus,
+    .field-textarea:focus {
+      border-color: rgba(186,106,69,0.5);
+      background: rgba(17,31,42,1);
+      box-shadow: 0 0 0 3px rgba(186,106,69,0.08);
+    }
+    .field-select { cursor: pointer; color: var(--text-primary); }
+    .field-select option { background: var(--bg-card); }
+    .field-textarea { resize: vertical; min-height: 118px; }
+
+    .submit-btn {
+      width: 100%;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, var(--copper-dark), var(--copper));
+      color: #fff;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 2px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .submit-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.08);
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+    .submit-btn:hover::before { opacity: 1; }
+    .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(157,76,42,0.38); }
+    .submit-btn:active { transform: translateY(0); }
+
+    .form-success {
+      display: none;
+      margin-top: 0.85rem;
+      padding: 0.85rem 1rem;
+      border: 1px solid rgba(37,211,102,0.28);
+      border-radius: 2px;
+      background: rgba(37,211,102,0.07);
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: #25d366;
+      text-align: center;
+    }
+
+    /* ══════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════ */
+    footer {
+      background: #060d14;
+      border-top: 1px solid var(--border);
+      padding: 2.75rem 0 2rem;
+    }
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    .footer-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      padding-bottom: 1.75rem;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .footer-links { display: flex; align-items: center; gap: 1.5rem; }
+    .footer-link {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.63rem;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      cursor: pointer;
+      background: none;
+      border: none;
+      transition: color 0.2s;
+    }
+    .footer-link:hover { color: var(--copper); }
+    .footer-sep { color: var(--border); }
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .footer-copy {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      color: rgba(127,160,178,0.55);
+    }
+    .footer-addr {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.06em;
+      color: rgba(127,160,178,0.35);
+      text-align: right;
+    }
+
+    /* ══════════════════════════════════════
+       FLOATING WHATSAPP
+    ══════════════════════════════════════ */
+    .wa-float {
+      position: fixed;
+      bottom: 1.75rem;
+      right: 1.75rem;
+      width: 58px;
+      height: 58px;
+      background: linear-gradient(135deg, #25d366, #128c7e);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      text-decoration: none;
+      box-shadow: 0 4px 22px rgba(37,211,102,0.38);
+      animation: wa-pulse 2.8s ease-out infinite;
+      transition: transform 0.3s cubic-bezier(0.22,1,0.36,1);
+    }
+    .wa-float:hover { transform: scale(1.1); }
+    @keyframes wa-pulse {
+      0%  { box-shadow: 0 4px 22px rgba(37,211,102,0.38), 0 0 0 0 rgba(37,211,102,0.35); }
+      65% { box-shadow: 0 4px 22px rgba(37,211,102,0.38), 0 0 0 16px rgba(37,211,102,0); }
+      100%{ box-shadow: 0 4px 22px rgba(37,211,102,0.38), 0 0 0 0  rgba(37,211,102,0); }
+    }
+
+    /* ══════════════════════════════════════
+       MODALS (Terms + Privacy)
+    ══════════════════════════════════════ */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(6,13,20,0.9);
+      backdrop-filter: blur(10px);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .modal-box {
+      background: var(--bg-card);
+      border: 1px solid rgba(186,106,69,0.18);
+      border-radius: 4px;
+      max-width: 680px;
+      width: 100%;
+      max-height: 82vh;
+      overflow-y: auto;
+      padding: 2.75rem;
+      position: relative;
+      transform: translateY(18px);
+      transition: transform 0.35s cubic-bezier(0.22,1,0.36,1);
+    }
+    .modal-box::-webkit-scrollbar { width: 3px; }
+    .modal-overlay.active .modal-box { transform: translateY(0); }
+    .modal-close-btn {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      color: var(--text-muted);
+      width: 30px; height: 30px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .modal-close-btn:hover { border-color: var(--copper); color: var(--copper); }
+
+    .modal-body h2 {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin-bottom: 0.35rem;
+    }
+    .modal-date {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      color: var(--copper);
+      display: block;
+      margin-bottom: 1.75rem;
+    }
+    .modal-body h3 {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      color: var(--copper);
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .modal-body p,
+    .modal-body li {
+      font-size: 0.86rem;
+      line-height: 1.75;
+      color: var(--text-muted);
+      font-weight: 300;
+      margin-bottom: 0.4rem;
+    }
+    .modal-body ul { padding-left: 1.25rem; }
+
+    /* ══════════════════════════════════════
+       SCROLL REVEAL
+    ══════════════════════════════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s cubic-bezier(0.22,1,0.36,1),
+                  transform 0.75s cubic-bezier(0.22,1,0.36,1);
+    }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+
+    /* ══════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .cards-row-2 { max-width: 80%; }
+    }
+
+    @media (max-width: 768px) {
+      section { padding: 4.5rem 0; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .stats-row .stat-cell:nth-child(2) { border-right: none; }
+      .stats-row .stat-cell:nth-child(3) { border-top: 1px solid var(--border); }
+      .stats-row .stat-cell:nth-child(4) { border-top: 1px solid var(--border); }
+
+      .cards-row-3 { grid-template-columns: 1fr; }
+      .cards-row-2 { grid-template-columns: 1fr; max-width: 100%; }
+
+      .contact-grid { grid-template-columns: 1fr; }
+
+      .footer-top { flex-direction: column; align-items: flex-start; }
+      .footer-bottom { flex-direction: column; }
+      .footer-addr { text-align: left; }
+
+      .form-grid-2 { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      #navbar { padding: 1rem 1.25rem; }
+      .section-wrap { padding: 0 1.25rem; }
+      .modal-box { padding: 2rem 1.5rem; }
+    }
+  </style>
 </head>
 <body>
-  <!-- Header -->
-  <header class="header">
-    <nav class="nav">
-      <!-- Navigation content -->
-    </nav>
-  </header>
 
-  <!-- Main Content -->
-  <main class="main">
-    <!-- Hero Section -->
-    <section class="hero" aria-label="Hero">
-      <h1>Grupo Alista</h1>
-      <p>Diversificación Empresarial con Propósito</p>
-    </section>
+  <!-- ══════════ NAVBAR ══════════ -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="#home">
+        <img src="assets/images/logo-main.png" alt="Grupo Alista" style="height:46px;width:auto">
+      </a>
+      <div class="nav-links">
+        <a href="#home"      class="nav-link" data-es="Inicio"   data-en="Home">Inicio</a>
+        <a href="#about"     class="nav-link" data-es="Nosotros" data-en="About">Nosotros</a>
+        <a href="#companies" class="nav-link" data-es="Empresas" data-en="Companies">Empresas</a>
+        <a href="#contact"   class="nav-link" data-es="Contacto" data-en="Contact">Contacto</a>
+        <button class="lang-btn" id="langBtn">EN</button>
+      </div>
+      <div style="display:flex;align-items:center;gap:0.75rem">
+        <button class="lang-btn" id="langBtnMob" style="display:none">EN</button>
+        <div class="hamburger" id="hamburger">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </nav>
 
-    <!-- Content sections will be added here -->
-  </main>
+  <!-- Mobile drawer -->
+  <div id="mobileDrawer">
+    <a href="#home"      class="nav-link" data-es="Inicio"   data-en="Home"      onclick="closeDrawer()">Inicio</a>
+    <a href="#about"     class="nav-link" data-es="Nosotros" data-en="About"     onclick="closeDrawer()">Nosotros</a>
+    <a href="#companies" class="nav-link" data-es="Empresas" data-en="Companies" onclick="closeDrawer()">Empresas</a>
+    <a href="#contact"   class="nav-link" data-es="Contacto" data-en="Contact"   onclick="closeDrawer()">Contacto</a>
+  </div>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <p>&copy; 2026 Grupo Alista. All rights reserved.</p>
+  <!-- ══════════ HOME ══════════ -->
+  <section id="home">
+    <div class="hero-bg"></div>
+
+    <!-- Orbiting rings -->
+    <div class="rings-wrap">
+      <div class="ring" style="width:560px;height:560px;border-color:var(--slate-dark);animation:spin-cw 35s linear infinite"></div>
+      <div class="ring" style="width:780px;height:780px;border-color:var(--copper-dark);animation:spin-ccw 55s linear infinite"></div>
+      <div class="ring" style="width:1000px;height:1000px;border-color:var(--slate-mid);animation:spin-cw 75s linear infinite"></div>
+    </div>
+
+    <div class="hero-content">
+      <div class="h-a1">
+        <img src="assets/images/logo-main.png" alt="Grupo Alista" class="hero-logo">
+      </div>
+      <div class="h-a2 hero-eyebrow" data-es="Grupo Empresarial" data-en="Business Group">Grupo Empresarial</div>
+      <h1 class="h-a3 hero-title" data-es="Grupo Alista" data-en="Grupo Alista">Grupo Alista</h1>
+      <p class="h-a4 hero-sub"
+         data-es="Un conglomerado empresarial mexicano con filiales especializadas en consultoría, marketing, salud, hotelería e importaciones."
+         data-en="A Mexican business conglomerate with specialized subsidiaries in consulting, marketing, health, hospitality, and imports.">
+        Un conglomerado empresarial mexicano con filiales especializadas en consultoría, marketing, salud, hotelería e importaciones.
+      </p>
+      <div class="h-a4 hero-cta-group">
+        <a href="#about"     class="btn-primary" data-es="Conocer más"        data-en="Learn more">Conocer más</a>
+        <a href="#companies" class="btn-ghost"   data-es="Nuestras Empresas"  data-en="Our Companies">Nuestras Empresas</a>
+      </div>
+    </div>
+
+    <div class="h-a5 scroll-cue">
+      <span>scroll</span>
+      <div class="scroll-cue-line"></div>
+    </div>
+  </section>
+
+  <!-- ══════════ ABOUT ══════════ -->
+  <section id="about">
+    <div class="section-wrap">
+      <div class="reveal">
+        <span class="section-eyebrow" data-es="Quiénes somos" data-en="Who we are">Quiénes somos</span>
+        <div class="copper-rule"></div>
+        <h2 class="section-title" data-es="Un grupo con visión,<br>experiencia y alcance" data-en="A group with vision,<br>experience and reach">
+          Un grupo con visión,<br>experiencia y alcance
+        </h2>
+      </div>
+
+      <div class="about-grid">
+        <!-- Left: narrative -->
+        <div class="reveal" style="transition-delay:0.1s">
+          <p class="section-body" style="margin-bottom:1.25rem"
+             data-es="Grupo Alista es un conglomerado empresarial mexicano con sede en Guadalajara, Jalisco. Fundado con la visión de construir un ecosistema de empresas de alto rendimiento, hemos crecido para convertirnos en un referente en múltiples sectores estratégicos de la economía nacional."
+             data-en="Grupo Alista is a Mexican business conglomerate headquartered in Guadalajara, Jalisco. Founded with the vision of building a high-performance business ecosystem, we have grown to become a benchmark across multiple strategic sectors of the national economy.">
+            Grupo Alista es un conglomerado empresarial mexicano con sede en Guadalajara, Jalisco. Fundado con la visión de construir un ecosistema de empresas de alto rendimiento, hemos crecido para convertirnos en un referente en múltiples sectores estratégicos de la economía nacional.
+          </p>
+          <p class="section-body" style="margin-bottom:1.25rem"
+             data-es="Nuestra fortaleza radica en la diversificación inteligente. Operamos filiales especializadas en consultoría estratégica, marketing digital, servicios de salud, hotelería y comercio internacional — cada una liderada por expertos en su ramo, pero unidas bajo los mismos valores de innovación, integridad y resultados."
+             data-en="Our strength lies in intelligent diversification. We operate specialized subsidiaries in strategic consulting, digital marketing, health services, hospitality, and international trade — each led by experts in their field, united under the same values of innovation, integrity, and results.">
+            Nuestra fortaleza radica en la diversificación inteligente. Operamos filiales especializadas en consultoría estratégica, marketing digital, servicios de salud, hotelería y comercio internacional — cada una liderada por expertos en su ramo, pero unidas bajo los mismos valores de innovación, integridad y resultados.
+          </p>
+          <p class="section-body"
+             data-es="En Grupo Alista creemos que el verdadero éxito se construye con visión de largo plazo, equipo comprometido y la capacidad de adaptarse a un mundo en constante cambio. Somos el socio estratégico que tu empresa necesita."
+             data-en="At Grupo Alista we believe true success is built on long-term vision, a committed team, and the ability to adapt to a constantly changing world. We are the strategic partner your company needs.">
+            En Grupo Alista creemos que el verdadero éxito se construye con visión de largo plazo, equipo comprometido y la capacidad de adaptarse a un mundo en constante cambio. Somos el socio estratégico que tu empresa necesita.
+          </p>
+        </div>
+
+        <!-- Right: values -->
+        <div class="reveal" style="transition-delay:0.2s">
+          <div class="value-card" style="border-left-color:var(--copper)">
+            <div class="value-card-title section-eyebrow" style="margin-bottom:0.5rem" data-es="Misión" data-en="Mission">Misión</div>
+            <p class="section-body" style="font-size:0.86rem"
+               data-es="Crear valor sostenible a través de un portafolio diversificado de empresas que impulsen el desarrollo económico y social de México."
+               data-en="Create sustainable value through a diversified portfolio of companies that drive Mexico's economic and social development.">
+              Crear valor sostenible a través de un portafolio diversificado de empresas que impulsen el desarrollo económico y social de México.
+            </p>
+          </div>
+          <div class="value-card" style="border-left-color:var(--slate-mid)">
+            <div class="value-card-title" style="font-family:'Roboto Mono',monospace;font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--slate-light);margin-bottom:0.5rem" data-es="Visión" data-en="Vision">Visión</div>
+            <p class="section-body" style="font-size:0.86rem"
+               data-es="Ser el grupo empresarial más influyente del occidente de México, reconocido por excelencia, innovación y compromiso con sus clientes y comunidades."
+               data-en="To be the most influential business group in western Mexico, recognized for excellence, innovation, and commitment to clients and communities.">
+              Ser el grupo empresarial más influyente del occidente de México, reconocido por excelencia, innovación y compromiso con sus clientes y comunidades.
+            </p>
+          </div>
+          <div class="value-card" style="border-left-color:var(--slate-dark)">
+            <div class="value-card-title" style="font-family:'Roboto Mono',monospace;font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--slate-light);margin-bottom:0.5rem" data-es="Valores" data-en="Values">Valores</div>
+            <p class="section-body" style="font-size:0.86rem"
+               data-es="Integridad · Innovación · Excelencia · Compromiso · Responsabilidad Social"
+               data-en="Integrity · Innovation · Excellence · Commitment · Social Responsibility">
+              Integridad · Innovación · Excelencia · Compromiso · Responsabilidad Social
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="reveal stats-row" style="transition-delay:0.3s">
+        <div class="stat-cell">
+          <span class="stat-num">5</span>
+          <div class="stat-lbl" data-es="Empresas filiales" data-en="Subsidiaries">Empresas filiales</div>
+        </div>
+        <div class="stat-cell">
+          <span class="stat-num">GDL</span>
+          <div class="stat-lbl" data-es="Sede Guadalajara" data-en="HQ Guadalajara">Sede Guadalajara</div>
+        </div>
+        <div class="stat-cell">
+          <span class="stat-num">MX</span>
+          <div class="stat-lbl" data-es="Presencia nacional" data-en="National presence">Presencia nacional</div>
+        </div>
+        <div class="stat-cell">
+          <span class="stat-num">360°</span>
+          <div class="stat-lbl" data-es="Soluciones integrales" data-en="Integrated solutions">Soluciones integrales</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ COMPANIES ══════════ -->
+  <section id="companies">
+    <div class="section-wrap">
+      <div class="reveal companies-header">
+        <span class="section-eyebrow" data-es="Nuestras empresas" data-en="Our companies">Nuestras empresas</span>
+        <div class="copper-rule"></div>
+        <h2 class="section-title" data-es="Un ecosistema de empresas" data-en="A business ecosystem">Un ecosistema de empresas</h2>
+        <p class="section-body" style="max-width:480px;margin:1rem auto 0;font-size:0.9rem"
+           data-es="Cada filial opera con autonomía y especialización, respaldada por la solidez del grupo."
+           data-en="Each subsidiary operates with autonomy and specialization, backed by the group's solidity.">
+          Cada filial opera con autonomía y especialización, respaldada por la solidez del grupo.
+        </p>
+      </div>
+
+      <!-- Row of 3 -->
+      <div class="cards-row-3">
+        <!-- Consulting -->
+        <div class="c-card reveal" style="transition-delay:0.05s">
+          <div class="c-logo-wrap">
+            <img src="assets/images/logo-consulting.png" alt="Alista Consulting">
+          </div>
+          <div class="c-name" data-es="Alista Consulting" data-en="Alista Consulting">Alista Consulting</div>
+          <p class="c-desc"
+             data-es="Soluciones estratégicas de negocio para empresas que buscan optimizar procesos, escalar operaciones y tomar decisiones basadas en datos con acompañamiento experto."
+             data-en="Strategic business solutions for companies looking to optimize processes, scale operations, and make data-driven decisions with expert guidance.">
+            Soluciones estratégicas de negocio para empresas que buscan optimizar procesos, escalar operaciones y tomar decisiones basadas en datos con acompañamiento experto.
+          </p>
+        </div>
+        <!-- Marketing -->
+        <div class="c-card reveal" style="transition-delay:0.12s">
+          <div class="c-logo-wrap">
+            <img src="assets/images/logo-marketing.png" alt="Alista Marketing">
+          </div>
+          <div class="c-name" data-es="Alista Marketing" data-en="Alista Marketing">Alista Marketing</div>
+          <p class="c-desc"
+             data-es="Agencia de marketing digital integral: branding, redes sociales, campañas de performance, diseño creativo y estrategias de crecimiento para posicionar tu marca."
+             data-en="Full-service digital marketing agency: branding, social media, performance campaigns, creative design, and growth strategies to position your brand.">
+            Agencia de marketing digital integral: branding, redes sociales, campañas de performance, diseño creativo y estrategias de crecimiento para posicionar tu marca.
+          </p>
+        </div>
+        <!-- Salud -->
+        <div class="c-card reveal" style="transition-delay:0.19s">
+          <div class="c-logo-wrap">
+            <img src="assets/images/logo-salud.png" alt="Alista Salud">
+          </div>
+          <div class="c-name" data-es="Alista Salud" data-en="Alista Salud">Alista Salud</div>
+          <p class="c-desc"
+             data-es="Servicios de salud y bienestar con enfoque humano y tecnológico. Atención de calidad, programas preventivos y soluciones médicas accesibles para individuos y empresas."
+             data-en="Health and wellness services with a human and technological approach. Quality care, preventive programs, and accessible medical solutions for individuals and businesses.">
+            Servicios de salud y bienestar con enfoque humano y tecnológico. Atención de calidad, programas preventivos y soluciones médicas accesibles para individuos y empresas.
+          </p>
+        </div>
+      </div>
+
+      <!-- Row of 2 centered -->
+      <div class="cards-row-2">
+        <!-- Hotels -->
+        <div class="c-card reveal" style="transition-delay:0.26s">
+          <div class="c-logo-wrap">
+            <img src="assets/images/logo-hotels.png" alt="Alista Hotels">
+          </div>
+          <div class="c-name" data-es="Alista Hotels" data-en="Alista Hotels">Alista Hotels</div>
+          <p class="c-desc"
+             data-es="Experiencias de hospitalidad excepcionales con propiedades cuidadosamente seleccionadas. Servicio personalizado, confort premium y atención al detalle en cada estancia."
+             data-en="Exceptional hospitality experiences with carefully selected properties. Personalized service, premium comfort, and attention to detail in every stay.">
+            Experiencias de hospitalidad excepcionales con propiedades cuidadosamente seleccionadas. Servicio personalizado, confort premium y atención al detalle en cada estancia.
+          </p>
+        </div>
+        <!-- Imports -->
+        <div class="c-card reveal" style="transition-delay:0.33s">
+          <div class="c-logo-wrap">
+            <img src="assets/images/logo-imports.png" alt="Alista Imports">
+          </div>
+          <div class="c-name" data-es="Alista Imports" data-en="Alista Imports">Alista Imports</div>
+          <p class="c-desc"
+             data-es="Comercio internacional y logística de importación con cobertura en los principales puertos de México: Manzanillo, Veracruz, Tampico y Altamira. Soluciones aduaneras eficientes."
+             data-en="International trade and import logistics covering Mexico's main ports: Manzanillo, Veracruz, Tampico, and Altamira. Efficient customs and clearance solutions.">
+            Comercio internacional y logística de importación con cobertura en los principales puertos de México: Manzanillo, Veracruz, Tampico y Altamira. Soluciones aduaneras eficientes.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ CONTACT ══════════ -->
+  <section id="contact">
+    <div class="section-wrap">
+      <div class="reveal">
+        <span class="section-eyebrow" data-es="Estemos en contacto" data-en="Get in touch">Estemos en contacto</span>
+        <div class="copper-rule"></div>
+        <h2 class="section-title" data-es="Hablemos de tu proyecto" data-en="Let's talk about your project">Hablemos de tu proyecto</h2>
+      </div>
+
+      <div class="contact-grid">
+        <!-- Left col: map + address + social -->
+        <div class="reveal" style="transition-delay:0.1s">
+          <div class="map-frame">
+            <iframe
+              src="https://maps.google.com/maps?q=Lazaro+Cardenas+2953+Chapalita+Guadalajara+Jalisco+Mexico&t=&z=15&ie=UTF8&iwloc=&output=embed"
+              allowfullscreen loading="lazy" title="Ubicación Grupo Alista">
+            </iframe>
+          </div>
+
+          <div class="addr-box">
+            <span class="addr-lbl" data-es="Dirección" data-en="Address">Dirección</span>
+            <p class="addr-text">
+              Lázaro Cárdenas Pte. 2953<br>
+              Col. Chapalita<br>
+              Guadalajara, Jalisco, México<br>
+              C.P. 44500
+            </p>
+          </div>
+
+          <div style="margin-bottom:0.5rem">
+            <span class="section-eyebrow" style="font-size:0.58rem" data-es="Síguenos" data-en="Follow us">Síguenos</span>
+          </div>
+
+          <a href="https://facebook.com/grupoalista" target="_blank" rel="noopener" class="social-link">
+            <!-- Facebook icon -->
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            <span>Facebook</span>
+          </a>
+          <a href="https://instagram.com/grupoalista" target="_blank" rel="noopener" class="social-link">
+            <!-- Instagram icon -->
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            <span>Instagram</span>
+          </a>
+          <a href="https://linkedin.com/company/grupoalista" target="_blank" rel="noopener" class="social-link">
+            <!-- LinkedIn icon -->
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            <span>LinkedIn</span>
+          </a>
+          <a href="https://wa.me/523331288999" target="_blank" rel="noopener" class="social-link wa">
+            <!-- WhatsApp icon -->
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            <span>+52 333 128 8999</span>
+          </a>
+        </div>
+
+        <!-- Right col: form -->
+        <div class="reveal" style="transition-delay:0.2s">
+          <span class="section-eyebrow" style="font-size:0.58rem;margin-bottom:1rem;display:block" data-es="Envíanos un mensaje" data-en="Send us a message">Envíanos un mensaje</span>
+          <form id="contactForm" novalidate>
+            <div class="form-grid-2">
+              <div class="field-group">
+                <label class="field-label" data-es="Nombre" data-en="Name">Nombre</label>
+                <input type="text" name="name" class="field-input" required
+                  placeholder="Tu nombre completo"
+                  data-ph-es="Tu nombre completo"
+                  data-ph-en="Your full name">
+              </div>
+              <div class="field-group">
+                <label class="field-label" data-es="Correo electrónico" data-en="Email">Correo electrónico</label>
+                <input type="email" name="email" class="field-input" required
+                  placeholder="correo@empresa.com"
+                  data-ph-es="correo@empresa.com"
+                  data-ph-en="email@company.com">
+              </div>
+            </div>
+            <div class="form-grid-2">
+              <div class="field-group">
+                <label class="field-label" data-es="Teléfono (opcional)" data-en="Phone (optional)">Teléfono (opcional)</label>
+                <input type="tel" name="phone" class="field-input"
+                  placeholder="+52 33 1234 5678"
+                  data-ph-es="+52 33 1234 5678"
+                  data-ph-en="+52 33 1234 5678">
+              </div>
+              <div class="field-group">
+                <label class="field-label" data-es="Empresa de interés" data-en="Company of interest">Empresa de interés</label>
+                <select name="company" class="field-select">
+                  <option value=""         data-es="Selecciona una empresa"  data-en="Select a company">Selecciona una empresa</option>
+                  <option value="consulting" data-es="Alista Consulting"      data-en="Alista Consulting">Alista Consulting</option>
+                  <option value="marketing"  data-es="Alista Marketing"       data-en="Alista Marketing">Alista Marketing</option>
+                  <option value="salud"      data-es="Alista Salud"           data-en="Alista Salud">Alista Salud</option>
+                  <option value="hotels"     data-es="Alista Hotels"          data-en="Alista Hotels">Alista Hotels</option>
+                  <option value="imports"    data-es="Alista Imports"         data-en="Alista Imports">Alista Imports</option>
+                  <option value="general"    data-es="Información general"    data-en="General information">Información general</option>
+                </select>
+              </div>
+            </div>
+            <div class="field-group">
+              <label class="field-label" data-es="Mensaje" data-en="Message">Mensaje</label>
+              <textarea name="message" class="field-textarea" required
+                placeholder="Cuéntanos sobre tu proyecto o consulta..."
+                data-ph-es="Cuéntanos sobre tu proyecto o consulta..."
+                data-ph-en="Tell us about your project or inquiry..."></textarea>
+            </div>
+            <button type="submit" class="submit-btn" data-es="Enviar mensaje" data-en="Send message">Enviar mensaje</button>
+            <div class="form-success" id="formSuccess"
+                 data-es="¡Mensaje enviado! Nos pondremos en contacto pronto."
+                 data-en="Message sent! We'll be in touch soon.">
+              ¡Mensaje enviado! Nos pondremos en contacto pronto.
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ FOOTER ══════════ -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <a href="#home">
+          <img src="assets/images/logo-main.png" alt="Grupo Alista" style="height:44px;width:auto;opacity:0.75">
+        </a>
+        <div class="footer-links">
+          <button class="footer-link" onclick="openModal('termsModal')" data-es="Términos de Servicio" data-en="Terms of Service">Términos de Servicio</button>
+          <span class="footer-sep">|</span>
+          <button class="footer-link" onclick="openModal('privacyModal')" data-es="Aviso de Privacidad" data-en="Privacy Policy">Aviso de Privacidad</button>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">
+          © 2024 Grupo Alista.&nbsp;
+          <span data-es="Todos los derechos reservados." data-en="All rights reserved.">Todos los derechos reservados.</span>
+        </p>
+        <p class="footer-addr">
+          Lázaro Cárdenas Pte. 2953, Col. Chapalita — Guadalajara, Jalisco, MX 44500
+        </p>
+      </div>
+    </div>
   </footer>
 
-  <!-- Scripts -->
-  <script src="assets/js/main.js"></script>
+  <!-- ══════════ FLOATING WHATSAPP ══════════ -->
+  <a href="https://wa.me/523331288999" target="_blank" rel="noopener" class="wa-float" aria-label="Chatear por WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <!-- ══════════ MODAL: TERMS ══════════ -->
+  <div class="modal-overlay" id="termsModal" onclick="handleModalClick(event,'termsModal')">
+    <div class="modal-box">
+      <button class="modal-close-btn" onclick="closeModal('termsModal')">✕</button>
+      <div class="modal-body">
+        <h2 data-es="Términos de Servicio" data-en="Terms of Service">Términos de Servicio</h2>
+        <span class="modal-date" data-es="Última actualización: Enero 2024" data-en="Last updated: January 2024">Última actualización: Enero 2024</span>
+
+        <h3 data-es="1. Aceptación de los Términos" data-en="1. Acceptance of Terms">1. Aceptación de los Términos</h3>
+        <p data-es="Al acceder y utilizar el sitio web de Grupo Alista, usted acepta cumplir con estos Términos de Servicio. Si no está de acuerdo con alguna parte de estos términos, le pedimos no hacer uso del sitio." data-en="By accessing and using the Grupo Alista website, you agree to comply with these Terms of Service. If you do not agree with any part of these terms, please refrain from using the site.">Al acceder y utilizar el sitio web de Grupo Alista, usted acepta cumplir con estos Términos de Servicio. Si no está de acuerdo con alguna parte de estos términos, le pedimos no hacer uso del sitio.</p>
+
+        <h3 data-es="2. Uso del Sitio" data-en="2. Use of the Site">2. Uso del Sitio</h3>
+        <p data-es="El contenido de este sitio es de carácter informativo y comercial. Queda prohibido su uso para actividades ilegales, fraudulentas o que afecten derechos de terceros. Nos reservamos el derecho de restringir el acceso a cualquier usuario que incumpla estas condiciones." data-en="The content of this site is informational and commercial in nature. Its use for illegal, fraudulent activities or activities that affect third-party rights is prohibited. We reserve the right to restrict access to any user who violates these conditions.">El contenido de este sitio es de carácter informativo y comercial. Queda prohibido su uso para actividades ilegales, fraudulentas o que afecten derechos de terceros. Nos reservamos el derecho de restringir el acceso a cualquier usuario que incumpla estas condiciones.</p>
+
+        <h3 data-es="3. Propiedad Intelectual" data-en="3. Intellectual Property">3. Propiedad Intelectual</h3>
+        <p data-es="Todo el contenido de este sitio —textos, logotipos, imágenes, diseños y marcas— son propiedad exclusiva de Grupo Alista o sus empresas filiales. Queda prohibida su reproducción total o parcial sin autorización escrita previa." data-en="All content on this site — texts, logos, images, designs, and trademarks — are the exclusive property of Grupo Alista or its affiliates. Reproduction in whole or in part without prior written authorization is prohibited.">Todo el contenido de este sitio —textos, logotipos, imágenes, diseños y marcas— son propiedad exclusiva de Grupo Alista o sus empresas filiales. Queda prohibida su reproducción total o parcial sin autorización escrita previa.</p>
+
+        <h3 data-es="4. Servicios de Terceros" data-en="4. Third-Party Services">4. Servicios de Terceros</h3>
+        <p data-es="Este sitio puede incluir enlaces a sitios de terceros. Grupo Alista no se responsabiliza por el contenido, políticas ni prácticas de dichos sitios externos." data-en="This site may include links to third-party websites. Grupo Alista is not responsible for the content, policies, or practices of those external sites.">Este sitio puede incluir enlaces a sitios de terceros. Grupo Alista no se responsabiliza por el contenido, políticas ni prácticas de dichos sitios externos.</p>
+
+        <h3 data-es="5. Limitación de Responsabilidad" data-en="5. Limitation of Liability">5. Limitación de Responsabilidad</h3>
+        <p data-es="Grupo Alista no será responsable por daños directos, indirectos, incidentales o consecuentes derivados del uso o la imposibilidad de uso de este sitio o sus servicios." data-en="Grupo Alista shall not be liable for direct, indirect, incidental, or consequential damages arising from the use or inability to use this site or its services.">Grupo Alista no será responsable por daños directos, indirectos, incidentales o consecuentes derivados del uso o la imposibilidad de uso de este sitio o sus servicios.</p>
+
+        <h3 data-es="6. Modificaciones" data-en="6. Modifications">6. Modificaciones</h3>
+        <p data-es="Nos reservamos el derecho de modificar estos términos en cualquier momento. Los cambios serán publicados en este sitio y el uso continuado del mismo implica la aceptación de los términos actualizados." data-en="We reserve the right to modify these terms at any time. Changes will be posted on this site, and continued use of the site implies acceptance of the updated terms.">Nos reservamos el derecho de modificar estos términos en cualquier momento. Los cambios serán publicados en este sitio y el uso continuado del mismo implica la aceptación de los términos actualizados.</p>
+
+        <h3 data-es="7. Jurisdicción" data-en="7. Jurisdiction">7. Jurisdicción</h3>
+        <p data-es="Estos términos se rigen por las leyes de los Estados Unidos Mexicanos. Cualquier controversia será sometida a los tribunales competentes de Guadalajara, Jalisco, México." data-en="These terms are governed by the laws of the United Mexican States. Any dispute shall be submitted to the competent courts of Guadalajara, Jalisco, Mexico.">Estos términos se rigen por las leyes de los Estados Unidos Mexicanos. Cualquier controversia será sometida a los tribunales competentes de Guadalajara, Jalisco, México.</p>
+
+        <h3 data-es="8. Contacto" data-en="8. Contact">8. Contacto</h3>
+        <p data-es="Consultas sobre estos términos: ventas@grupoalista.com" data-en="Inquiries about these terms: ventas@grupoalista.com">Consultas sobre estos términos: ventas@grupoalista.com</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ MODAL: PRIVACY ══════════ -->
+  <div class="modal-overlay" id="privacyModal" onclick="handleModalClick(event,'privacyModal')">
+    <div class="modal-box">
+      <button class="modal-close-btn" onclick="closeModal('privacyModal')">✕</button>
+      <div class="modal-body">
+        <h2 data-es="Aviso de Privacidad" data-en="Privacy Policy">Aviso de Privacidad</h2>
+        <span class="modal-date" data-es="Última actualización: Enero 2024" data-en="Last updated: January 2024">Última actualización: Enero 2024</span>
+
+        <h3 data-es="1. Responsable del Tratamiento" data-en="1. Data Controller">1. Responsable del Tratamiento</h3>
+        <p data-es="Grupo Alista S.A. de C.V., con domicilio en Lázaro Cárdenas Pte. 2953, Col. Chapalita, Guadalajara, Jalisco, México, C.P. 44500, es responsable del tratamiento de sus datos personales conforme a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP)." data-en="Grupo Alista S.A. de C.V., with address at Lázaro Cárdenas Pte. 2953, Col. Chapalita, Guadalajara, Jalisco, México, ZIP 44500, is responsible for processing your personal data in accordance with the Federal Law on Protection of Personal Data Held by Private Parties (LFPDPPP).">Grupo Alista S.A. de C.V., con domicilio en Lázaro Cárdenas Pte. 2953, Col. Chapalita, Guadalajara, Jalisco, México, C.P. 44500, es responsable del tratamiento de sus datos personales conforme a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP).</p>
+
+        <h3 data-es="2. Datos Personales Recabados" data-en="2. Personal Data Collected">2. Datos Personales Recabados</h3>
+        <p data-es="Podemos recabar los siguientes datos:" data-en="We may collect the following data:">Podemos recabar los siguientes datos:</p>
+        <ul>
+          <li data-es="Nombre completo" data-en="Full name">Nombre completo</li>
+          <li data-es="Correo electrónico" data-en="Email address">Correo electrónico</li>
+          <li data-es="Número telefónico" data-en="Phone number">Número telefónico</li>
+          <li data-es="Empresa o razón social (opcional)" data-en="Company name (optional)">Empresa o razón social (opcional)</li>
+          <li data-es="Información de la consulta o solicitud" data-en="Inquiry or request information">Información de la consulta o solicitud</li>
+        </ul>
+
+        <h3 data-es="3. Finalidades del Tratamiento" data-en="3. Purposes of Processing">3. Finalidades del Tratamiento</h3>
+        <p data-es="Sus datos serán utilizados para:" data-en="Your data will be used to:">Sus datos serán utilizados para:</p>
+        <ul>
+          <li data-es="Atender sus consultas y solicitudes de información" data-en="Address your inquiries and information requests">Atender sus consultas y solicitudes de información</li>
+          <li data-es="Dar seguimiento comercial a su solicitud" data-en="Provide commercial follow-up to your request">Dar seguimiento comercial a su solicitud</li>
+          <li data-es="Enviar información de productos y servicios (con consentimiento)" data-en="Send product and service information (with consent)">Enviar información de productos y servicios (con consentimiento)</li>
+          <li data-es="Cumplir obligaciones legales y contractuales" data-en="Comply with legal and contractual obligations">Cumplir obligaciones legales y contractuales</li>
+        </ul>
+
+        <h3 data-es="4. Derechos ARCO" data-en="4. ARCO Rights">4. Derechos ARCO</h3>
+        <p data-es="Usted tiene derecho a Acceder, Rectificar, Cancelar u Oponerse al tratamiento de sus datos personales. Para ejercer estos derechos envíe un correo a: ventas@grupoalista.com" data-en="You have the right to Access, Rectify, Cancel, or Object to the processing of your personal data. To exercise these rights, send an email to: ventas@grupoalista.com">Usted tiene derecho a Acceder, Rectificar, Cancelar u Oponerse al tratamiento de sus datos personales. Para ejercer estos derechos envíe un correo a: ventas@grupoalista.com</p>
+
+        <h3 data-es="5. Transferencia de Datos" data-en="5. Data Transfer">5. Transferencia de Datos</h3>
+        <p data-es="Grupo Alista no venderá ni cederá sus datos personales a terceros sin su consentimiento, salvo los casos previstos en la LFPDPPP." data-en="Grupo Alista will not sell or transfer your personal data to third parties without your consent, except as provided for in the LFPDPPP.">Grupo Alista no venderá ni cederá sus datos personales a terceros sin su consentimiento, salvo los casos previstos en la LFPDPPP.</p>
+
+        <h3 data-es="6. Cookies" data-en="6. Cookies">6. Cookies</h3>
+        <p data-es="Este sitio puede utilizar cookies para mejorar su experiencia de navegación. Puede desactivarlas desde la configuración de su navegador, aunque esto podría limitar algunas funcionalidades." data-en="This site may use cookies to improve your browsing experience. You can disable them from your browser settings, though this may limit some functionality.">Este sitio puede utilizar cookies para mejorar su experiencia de navegación. Puede desactivarlas desde la configuración de su navegador, aunque esto podría limitar algunas funcionalidades.</p>
+
+        <h3 data-es="7. Marco Legal" data-en="7. Legal Framework">7. Marco Legal</h3>
+        <p data-es="Este aviso se rige por la LFPDPPP y su Reglamento, vigentes en los Estados Unidos Mexicanos." data-en="This notice is governed by the LFPDPPP and its Regulations, in force in the United Mexican States.">Este aviso se rige por la LFPDPPP y su Reglamento, vigentes en los Estados Unidos Mexicanos.</p>
+
+        <h3 data-es="8. Cambios al Aviso" data-en="8. Changes to This Policy">8. Cambios al Aviso</h3>
+        <p data-es="Cualquier modificación a este aviso será publicada en este sitio web. El uso continuado del sitio implica la aceptación de los cambios." data-en="Any changes to this notice will be published on this website. Continued use of the site implies acceptance of the changes.">Cualquier modificación a este aviso será publicada en este sitio web. El uso continuado del sitio implica la aceptación de los cambios.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ SCRIPTS ══════════ -->
+  <script>
+    // ── Language toggle ──────────────────────────────────────────
+    let lang = 'es';
+
+    function applyLang(l) {
+      lang = l;
+
+      // text nodes
+      document.querySelectorAll('[data-es]').forEach(el => {
+        const txt = l === 'es' ? el.getAttribute('data-es') : el.getAttribute('data-en');
+        if (txt !== null) el.textContent = txt;
+      });
+
+      // placeholders
+      document.querySelectorAll('[data-ph-es]').forEach(el => {
+        el.placeholder = l === 'es' ? el.getAttribute('data-ph-es') : el.getAttribute('data-ph-en');
+      });
+
+      // select options
+      document.querySelectorAll('select option[data-es]').forEach(opt => {
+        const txt = l === 'es' ? opt.getAttribute('data-es') : opt.getAttribute('data-en');
+        if (txt) opt.textContent = txt;
+      });
+
+      document.getElementById('langBtn').textContent    = l === 'es' ? 'EN' : 'ES';
+      document.getElementById('langBtnMob').textContent = l === 'es' ? 'EN' : 'ES';
+      document.documentElement.lang = l;
+    }
+
+    document.getElementById('langBtn').addEventListener('click',    () => applyLang(lang === 'es' ? 'en' : 'es'));
+    document.getElementById('langBtnMob').addEventListener('click', () => applyLang(lang === 'es' ? 'en' : 'es'));
+
+    // ── Navbar scroll ────────────────────────────────────────────
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // ── Mobile hamburger ─────────────────────────────────────────
+    const hamburger    = document.getElementById('hamburger');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    const langBtnMob   = document.getElementById('langBtnMob');
+
+    // Show mobile lang button on small screens via JS (matches CSS media query logic)
+    function syncMobileLangBtn() {
+      const isMobile = window.innerWidth <= 768;
+      langBtnMob.style.display = isMobile ? 'block' : 'none';
+    }
+    syncMobileLangBtn();
+    window.addEventListener('resize', syncMobileLangBtn);
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileDrawer.classList.toggle('open');
+    });
+    function closeDrawer() {
+      hamburger.classList.remove('open');
+      mobileDrawer.classList.remove('open');
+    }
+
+    // ── Scroll reveal ────────────────────────────────────────────
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // ── Modals ───────────────────────────────────────────────────
+    function openModal(id) {
+      document.getElementById(id).classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    function handleModalClick(e, id) {
+      if (e.target === document.getElementById(id)) closeModal(id);
+    }
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') document.querySelectorAll('.modal-overlay.active').forEach(m => closeModal(m.id));
+    });
+
+    // ── Contact form → mailto ────────────────────────────────────
+    document.getElementById('contactForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const fd      = new FormData(e.target);
+      const name    = fd.get('name')    || '';
+      const email   = fd.get('email')   || '';
+      const phone   = fd.get('phone')   || (lang === 'es' ? 'No proporcionado' : 'Not provided');
+      const company = fd.get('company') || (lang === 'es' ? 'No especificada'  : 'Not specified');
+      const message = fd.get('message') || '';
+
+      const subject = encodeURIComponent(
+        lang === 'es'
+          ? `Contacto desde sitio web — ${name}`
+          : `Website contact — ${name}`
+      );
+      const body = encodeURIComponent(
+        `${lang === 'es' ? 'Nombre' : 'Name'}: ${name}\n` +
+        `${lang === 'es' ? 'Correo' : 'Email'}: ${email}\n` +
+        `${lang === 'es' ? 'Teléfono' : 'Phone'}: ${phone}\n` +
+        `${lang === 'es' ? 'Empresa de interés' : 'Company of interest'}: ${company}\n\n` +
+        `${lang === 'es' ? 'Mensaje' : 'Message'}:\n${message}`
+      );
+
+      window.location.href = `mailto:ventas@grupoalista.com?subject=${subject}&body=${body}`;
+
+      const successEl = document.getElementById('formSuccess');
+      successEl.textContent = lang === 'es'
+        ? '¡Mensaje enviado! Nos pondremos en contacto pronto.'
+        : "Message sent! We'll be in touch soon.";
+      successEl.style.display = 'block';
+      e.target.reset();
+      setTimeout(() => { successEl.style.display = 'none'; }, 6000);
+    });
+  </script>
 </body>
 </html>
