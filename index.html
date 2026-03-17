@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Grupo Alista — Grupo Empresarial</title>
   <meta name="description" content="Grupo Alista es un conglomerado empresarial mexicano con filiales en consultoría, marketing, salud, hotelería e importaciones." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -553,11 +555,21 @@
       border-radius: 4px;
       pointer-events: none;
     }
-    .map-frame iframe {
+    /* Leaflet map container */
+    #leaflet-map {
       width: 100%;
       height: 100%;
-      border: 0;
-      filter: invert(88%) hue-rotate(180deg) brightness(0.88) saturate(0.65);
+    }
+    /* Dark tile filter */
+    #leaflet-map .leaflet-layer,
+    #leaflet-map .leaflet-control-zoom-in,
+    #leaflet-map .leaflet-control-zoom-out,
+    #leaflet-map .leaflet-control-attribution {
+      filter: invert(90%) hue-rotate(180deg) brightness(0.82) saturate(0.6);
+    }
+    #leaflet-map .leaflet-marker-icon,
+    #leaflet-map .leaflet-marker-shadow {
+      filter: none; /* keep marker natural colour */
     }
 
     /* Address box */
@@ -1159,10 +1171,7 @@
         <!-- Left col: map + address + social -->
         <div class="reveal" style="transition-delay:0.1s">
           <div class="map-frame">
-            <iframe
-              src="https://www.openstreetmap.org/export/embed.html?bbox=-103.4087%2C20.6668%2C-103.3987%2C20.6768&amp;layer=mapnik&amp;marker=20.6718%2C-103.4037"
-              allowfullscreen loading="lazy" title="Ubicación Grupo Alista — Lázaro Cárdenas 2953, Chapalita, Guadalajara">
-            </iframe>
+            <div id="leaflet-map"></div>
           </div>
 
           <div class="addr-box">
@@ -1550,6 +1559,64 @@
         setTimeout(() => { successEl.style.display = 'none'; }, 8000);
       }
     });
+
+    // ── Leaflet map ───────────────────────────────────────────────
+    // Coordinates: Calz. Lázaro Cárdenas 2953, Chapalita, Guadalajara
+    const LAT = 20.6620609;
+    const LNG = -103.3894769;
+
+    let leafletMap = null;
+
+    function initMap() {
+      if (leafletMap) return; // already initialised
+
+      leafletMap = L.map('leaflet-map', {
+        center:             [LAT, LNG],
+        zoom:               19,
+        zoomControl:        true,
+        scrollWheelZoom:    false,
+        attributionControl: true,
+      });
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 21,
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      }).addTo(leafletMap);
+
+      // Custom copper-toned pin
+      const markerIcon = L.divIcon({
+        className: '',
+        html: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="44" viewBox="0 0 32 44">
+                 <path d="M16 0C7.163 0 0 7.163 0 16c0 10 16 28 16 28S32 26 32 16C32 7.163 24.837 0 16 0z"
+                       fill="#BA6A45" stroke="#7a3e22" stroke-width="1.5"/>
+                 <circle cx="16" cy="16" r="7" fill="#fff" opacity="0.9"/>
+               </svg>`,
+        iconSize:    [32, 44],
+        iconAnchor:  [16, 44],
+        popupAnchor: [0, -44],
+      });
+
+      L.marker([LAT, LNG], { icon: markerIcon })
+        .addTo(leafletMap)
+        .bindPopup(
+          '<strong style="font-family:\'Roboto Mono\',monospace;font-size:0.75rem">Grupo Alista</strong><br>' +
+          '<span style="font-size:0.75rem">Calz. Lázaro Cárdenas 2953<br>Chapalita, Guadalajara, Jal.</span>'
+        )
+        .openPopup();
+
+      // Force Leaflet to recalculate size after reveal animation finishes
+      setTimeout(() => leafletMap.invalidateSize(), 800);
+    }
+
+    // Initialise only once the contact section scrolls into view
+    const mapObserver = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        initMap();
+        mapObserver.disconnect();
+      }
+    }, { threshold: 0.1 });
+
+    mapObserver.observe(document.getElementById('contact'));
   </script>
 </body>
 </html>
