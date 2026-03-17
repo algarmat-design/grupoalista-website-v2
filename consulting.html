@@ -1,0 +1,1761 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ALISTA Consulting — Estrategia & Transformación Tecnológica</title>
+  <meta name="description" content="ALISTA Consulting ayuda a empresas a aprovechar la tecnología para ahorrar dinero y crecer más rápido. 25+ años de experiencia." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* ── Tokens ── */
+    :root {
+      --ink:        #0B1829;
+      --ink-80:     rgba(11,24,41,0.80);
+      --paper:      #F7F4EF;
+      --paper-mid:  #EDE8DD;
+      --paper-dark: #E0D8C8;
+      --gold:       #BFA048;
+      --gold-lt:    #D4BC74;
+      --gold-dk:    #8C7030;
+      --gold-pale:  #F3EDDA;
+      --steel:      #3D5A6E;
+      --mid:        #6B7E8C;
+      --border:     rgba(11,24,41,0.10);
+      --border-gold:rgba(191,160,72,0.30);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'Figtree', sans-serif;
+      font-weight: 400;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    /* Grain */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9998;
+    }
+
+    /* ── TYPE ── */
+    .arvo { font-family: 'Arvo', Georgia, serif; }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--paper); }
+    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+
+    /* ══════════════════════════
+       NAV
+    ══════════════════════════ */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      padding: 1.25rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.4s ease, border-color 0.4s ease;
+    }
+    #navbar.scrolled {
+      background: rgba(247,244,239,0.96);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+    }
+    .nav-logo img { height: 36px; width: auto; }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .nav-link {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s;
+      font-weight: 500;
+    }
+    .nav-link:hover { color: var(--ink); }
+    .nav-cta {
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--ink);
+      border: 1.5px solid var(--gold);
+      padding: 0.55rem 1.4rem;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: background 0.25s, color 0.25s;
+    }
+    .nav-cta:hover { background: var(--gold); color: #fff; }
+    .nav-back {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.2s;
+      font-weight: 500;
+    }
+    .nav-back:hover { color: var(--gold); }
+
+    /* hamburger */
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--ink); transition: all 0.3s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    #mobileMenu {
+      display: none; position: fixed; inset: 0;
+      background: var(--paper);
+      z-index: 190;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+    }
+    #mobileMenu.open { display: flex; }
+    #mobileMenu .nav-link { font-size: 1rem; }
+
+    /* ══════════════════════════
+       HERO
+    ══════════════════════════ */
+    #hero {
+      min-height: 100vh;
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+    }
+
+    /* Left panel: paper */
+    .hero-left {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 4rem 6rem 5rem;
+      z-index: 2;
+    }
+    .hero-eyebrow {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 32px;
+      height: 1px;
+      background: var(--gold);
+    }
+    .hero-title {
+      font-family: 'Arvo', serif;
+      font-size: clamp(2.6rem, 4.5vw, 4.2rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 2rem;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+    .hero-sub {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: var(--mid);
+      max-width: 420px;
+      margin-bottom: 3rem;
+      font-weight: 400;
+    }
+    .hero-cta-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-gold {
+      display: inline-block;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 700;
+      background: var(--gold);
+      color: #fff;
+      padding: 1rem 2.25rem;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: background 0.25s, transform 0.25s;
+    }
+    .btn-gold:hover { background: var(--gold-dk); transform: translateY(-1px); }
+    .btn-outline-ink {
+      display: inline-block;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--ink);
+      border: 1.5px solid var(--border);
+      padding: 1rem 2rem;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: border-color 0.25s, color 0.25s;
+    }
+    .btn-outline-ink:hover { border-color: var(--ink); }
+
+    .hero-stats {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 3.5rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .hero-stat-num {
+      font-family: 'Arvo', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--ink);
+      display: block;
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+    .hero-stat-lbl {
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+      font-weight: 500;
+    }
+
+    /* Right panel: dark navy */
+    .hero-right {
+      position: relative;
+      background: var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .hero-right-inner {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 4rem;
+    }
+    .hero-logo-wrap img {
+      width: min(320px, 65%);
+      filter: drop-shadow(0 0 60px rgba(191,160,72,0.4));
+      animation: logo-float 6s ease-in-out infinite;
+    }
+    @keyframes logo-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    .hero-right-badge {
+      margin-top: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .hero-right-badge span {
+      font-family: 'Arvo', serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(191,160,72,0.7);
+    }
+    .clients-row {
+      display: flex;
+      gap: 1.25rem;
+      align-items: center;
+      margin-top: 0.75rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .client-pill {
+      font-family: 'Figtree', sans-serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(247,244,239,0.5);
+      border: 1px solid rgba(191,160,72,0.25);
+      padding: 0.35rem 0.85rem;
+      border-radius: 2px;
+      font-weight: 500;
+    }
+
+    /* Gold geometric BG pattern on right */
+    .hero-geo {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .hero-geo svg { width: 100%; height: 100%; opacity: 0.07; }
+
+    /* ══════════════════════════
+       SECTION COMMONS
+    ══════════════════════════ */
+    .section-wrap {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0 3rem;
+    }
+    .section-eyebrow {
+      font-size: 0.63rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+    .section-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 24px;
+      height: 1px;
+      background: var(--gold);
+    }
+    .section-title {
+      font-family: 'Arvo', serif;
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+    .section-body {
+      font-size: 1.02rem;
+      line-height: 1.78;
+      color: var(--mid);
+      font-weight: 400;
+    }
+    .gold-rule {
+      width: 48px;
+      height: 2px;
+      background: var(--gold);
+      margin: 1.5rem 0;
+    }
+
+    /* ══════════════════════════
+       QUIÉNES SOMOS
+    ══════════════════════════ */
+    #about {
+      padding: 8rem 0;
+      background: var(--paper);
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 6rem;
+      align-items: start;
+      margin-top: 4rem;
+    }
+    .about-blockquote {
+      font-family: 'Arvo', serif;
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.4;
+      color: var(--ink);
+      border-left: 3px solid var(--gold);
+      padding-left: 2rem;
+      margin-bottom: 2rem;
+    }
+    .client-logos-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-top: 2.5rem;
+    }
+    .client-logo-cell {
+      background: var(--paper);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem 1rem;
+      font-family: 'Arvo', serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      color: var(--mid);
+      font-weight: 700;
+    }
+    .about-photo {
+      border-radius: 2px;
+      overflow: hidden;
+      position: relative;
+      height: 420px;
+    }
+    .about-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .about-photo-badge {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      background: var(--gold);
+      color: #fff;
+      padding: 0.75rem 1.25rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .about-savings {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 2rem 2.25rem;
+      margin-top: 1.5rem;
+      border-radius: 2px;
+    }
+    .about-savings .num {
+      font-family: 'Arvo', serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--gold);
+      display: block;
+      line-height: 1;
+      margin-bottom: 0.35rem;
+    }
+    .about-savings .lbl {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(247,244,239,0.55);
+      font-weight: 500;
+    }
+
+    /* ══════════════════════════
+       POR QUÉ ALISTA
+    ══════════════════════════ */
+    #why {
+      padding: 8rem 0;
+      background: var(--ink);
+    }
+    #why .section-title { color: var(--paper); }
+    #why .section-body  { color: rgba(247,244,239,0.55); }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(191,160,72,0.15);
+      border: 1px solid rgba(191,160,72,0.15);
+      margin-top: 4rem;
+    }
+    .why-card {
+      background: var(--ink);
+      padding: 3rem 2.25rem;
+      transition: background 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .why-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+    }
+    .why-card:hover { background: rgba(191,160,72,0.06); }
+    .why-card:hover::after { transform: scaleX(1); }
+    .why-num {
+      font-family: 'Arvo', serif;
+      font-size: 3rem;
+      font-weight: 700;
+      color: rgba(191,160,72,0.15);
+      line-height: 1;
+      display: block;
+      margin-bottom: 1.5rem;
+    }
+    .why-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(191,160,72,0.12);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+    }
+    .why-icon svg { color: var(--gold); }
+    .why-title {
+      font-family: 'Arvo', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--paper);
+      margin-bottom: 0.85rem;
+    }
+    .why-text {
+      font-size: 0.88rem;
+      line-height: 1.68;
+      color: rgba(247,244,239,0.50);
+    }
+
+    /* ══════════════════════════
+       SERVICIOS
+    ══════════════════════════ */
+    #services {
+      padding: 8rem 0;
+      background: var(--paper);
+    }
+    .services-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: end;
+      margin-bottom: 5rem;
+    }
+    .services-tagline {
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--mid);
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+    .service-card {
+      border: 1px solid var(--border);
+      padding: 2.75rem 2rem;
+      border-radius: 2px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+      cursor: default;
+    }
+    .service-card:hover {
+      border-color: var(--gold);
+      box-shadow: 0 8px 40px rgba(191,160,72,0.10);
+      transform: translateY(-3px);
+    }
+    .service-num {
+      font-family: 'Arvo', serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      font-weight: 700;
+      display: block;
+      margin-bottom: 1.5rem;
+    }
+    .service-icon-wrap {
+      width: 52px;
+      height: 52px;
+      background: var(--gold-pale);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.75rem;
+    }
+    .service-icon-wrap svg { color: var(--gold-dk); }
+    .service-title {
+      font-family: 'Arvo', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 0.85rem;
+    }
+    .service-text {
+      font-size: 0.875rem;
+      line-height: 1.72;
+      color: var(--mid);
+    }
+
+    /* ══════════════════════════
+       FORGE METHODOLOGY
+    ══════════════════════════ */
+    #forge {
+      padding: 8rem 0;
+      background: var(--ink);
+      overflow: hidden;
+    }
+    #forge .section-title { color: var(--paper); }
+    .forge-layout {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 6rem;
+      margin-top: 5rem;
+      align-items: start;
+    }
+    .forge-word {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: sticky;
+      top: 30vh;
+    }
+    .forge-letter {
+      font-family: 'Arvo', serif;
+      font-size: clamp(4rem, 8vw, 7rem);
+      font-weight: 700;
+      line-height: 1;
+      color: rgba(191,160,72,0.15);
+      transition: color 0.4s ease;
+      cursor: pointer;
+    }
+    .forge-letter.active { color: var(--gold); }
+
+    .forge-steps { display: flex; flex-direction: column; }
+    .forge-step {
+      padding: 2.5rem 0;
+      border-top: 1px solid rgba(191,160,72,0.15);
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 2rem;
+      align-items: start;
+      transition: opacity 0.3s;
+    }
+    .forge-step:last-child { border-bottom: 1px solid rgba(191,160,72,0.15); }
+    .forge-step-letter {
+      font-family: 'Arvo', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .forge-step-word {
+      font-family: 'Arvo', serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 400;
+      opacity: 0.7;
+      display: block;
+      margin-top: 0.25rem;
+    }
+    .forge-step-title {
+      font-family: 'Arvo', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--paper);
+      margin-bottom: 0.65rem;
+    }
+    .forge-step-text {
+      font-size: 0.9rem;
+      line-height: 1.72;
+      color: rgba(247,244,239,0.50);
+    }
+
+    /* ══════════════════════════
+       CRONOLOGÍA
+    ══════════════════════════ */
+    #timeline {
+      padding: 8rem 0;
+      background: var(--paper-mid);
+    }
+    .timeline-phases {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      margin-top: 5rem;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .phase-card {
+      padding: 3.5rem 2.75rem;
+      border-right: 1px solid var(--border);
+      background: var(--paper);
+      position: relative;
+      transition: background 0.3s;
+    }
+    .phase-card:last-child { border-right: none; }
+    .phase-card:hover { background: var(--gold-pale); }
+    .phase-num {
+      font-family: 'Arvo', serif;
+      font-size: 4rem;
+      font-weight: 700;
+      color: rgba(11,24,41,0.06);
+      line-height: 1;
+      display: block;
+      margin-bottom: 1.5rem;
+    }
+    .phase-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--gold-pale);
+      border: 1px solid var(--border-gold);
+      padding: 0.3rem 0.85rem;
+      border-radius: 2px;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold-dk);
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+    }
+    .phase-title {
+      font-family: 'Arvo', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.35rem;
+      letter-spacing: -0.01em;
+    }
+    .phase-duration {
+      font-size: 0.72rem;
+      color: var(--gold);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+    .phase-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-bottom: 1.75rem;
+    }
+    .phase-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.875rem;
+      line-height: 1.55;
+      color: var(--mid);
+    }
+    .phase-list li::before {
+      content: '—';
+      color: var(--gold);
+      flex-shrink: 0;
+      font-weight: 700;
+    }
+    .phase-deliverable {
+      background: var(--ink);
+      padding: 1rem 1.25rem;
+      border-radius: 2px;
+      font-size: 0.78rem;
+      line-height: 1.55;
+      color: rgba(247,244,239,0.65);
+    }
+    .phase-deliverable strong {
+      display: block;
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.35rem;
+      font-weight: 700;
+    }
+
+    /* ══════════════════════════
+       INVERSIÓN
+    ══════════════════════════ */
+    #pricing {
+      padding: 8rem 0;
+      background: var(--paper);
+    }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-top: 4rem;
+    }
+    .pricing-card {
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+    .pricing-card:hover {
+      box-shadow: 0 8px 40px rgba(11,24,41,0.10);
+      transform: translateY(-2px);
+    }
+    .pricing-card.featured {
+      border-color: var(--gold);
+      position: relative;
+    }
+    .pricing-card.featured::before {
+      content: 'Más popular';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      background: var(--gold);
+      color: #fff;
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 700;
+      text-align: center;
+      padding: 0.4rem;
+    }
+    .pricing-header {
+      padding: 2.25rem 2rem 1.5rem;
+      background: var(--paper-mid);
+      border-bottom: 1px solid var(--border);
+    }
+    .pricing-card.featured .pricing-header {
+      padding-top: 3rem;
+    }
+    .pricing-name {
+      font-family: 'Arvo', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.35rem;
+    }
+    .pricing-phase {
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+    }
+    .pricing-body { padding: 1.75rem 2rem 2rem; }
+    .pricing-price {
+      display: flex;
+      align-items: baseline;
+      gap: 0.35rem;
+      margin-bottom: 0.35rem;
+    }
+    .pricing-price .amount {
+      font-family: 'Arvo', serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1;
+    }
+    .pricing-price .unit {
+      font-size: 0.75rem;
+      color: var(--mid);
+    }
+    .pricing-note {
+      font-size: 0.78rem;
+      color: var(--mid);
+      line-height: 1.6;
+      margin-top: 1rem;
+    }
+    .pricing-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 1.25rem 0;
+    }
+    .pricing-detail {
+      font-size: 0.8rem;
+      color: var(--mid);
+      line-height: 1.65;
+    }
+
+    /* ══════════════════════════
+       CONTACTO
+    ══════════════════════════ */
+    #contact {
+      padding: 8rem 0;
+      background: var(--ink);
+    }
+    #contact .section-title { color: var(--paper); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 6rem;
+      margin-top: 4rem;
+    }
+    .contact-info-title {
+      font-family: 'Arvo', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--paper);
+      margin-bottom: 0.65rem;
+    }
+    .contact-info-text {
+      font-size: 0.88rem;
+      line-height: 1.72;
+      color: rgba(247,244,239,0.5);
+      margin-bottom: 2.5rem;
+    }
+    .contact-detail {
+      display: flex;
+      gap: 0.85rem;
+      align-items: flex-start;
+      margin-bottom: 1.25rem;
+    }
+    .contact-detail-icon {
+      width: 36px;
+      height: 36px;
+      background: rgba(191,160,72,0.1);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .contact-detail-icon svg { color: var(--gold); }
+    .contact-detail-text {
+      font-size: 0.875rem;
+      color: rgba(247,244,239,0.65);
+      line-height: 1.6;
+    }
+    .contact-detail-text strong {
+      display: block;
+      font-size: 0.63rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+
+    /* Form */
+    .contact-form { display: flex; flex-direction: column; gap: 1.25rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    .field-group { display: flex; flex-direction: column; gap: 0.45rem; }
+    .field-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(247,244,239,0.45);
+      font-weight: 600;
+    }
+    .field-input,
+    .field-textarea,
+    .field-select {
+      background: rgba(247,244,239,0.05);
+      border: 1px solid rgba(247,244,239,0.12);
+      border-radius: 2px;
+      padding: 0.85rem 1rem;
+      color: var(--paper);
+      font-family: 'Figtree', sans-serif;
+      font-size: 0.88rem;
+      outline: none;
+      transition: border-color 0.25s, background 0.25s;
+      width: 100%;
+    }
+    .field-input:focus,
+    .field-textarea:focus,
+    .field-select:focus {
+      border-color: var(--gold);
+      background: rgba(191,160,72,0.05);
+    }
+    .field-input::placeholder,
+    .field-textarea::placeholder { color: rgba(247,244,239,0.25); }
+    .field-select option { background: var(--ink); color: var(--paper); }
+    .field-textarea { resize: vertical; min-height: 120px; }
+    .btn-submit {
+      width: 100%;
+      background: var(--gold);
+      color: #fff;
+      border: none;
+      padding: 1.1rem 2rem;
+      font-family: 'Figtree', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 700;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background 0.25s;
+    }
+    .btn-submit:hover { background: var(--gold-dk); }
+    .form-success {
+      display: none;
+      padding: 1rem 1.25rem;
+      border: 1px solid rgba(191,160,72,0.3);
+      background: rgba(191,160,72,0.08);
+      border-radius: 2px;
+      font-size: 0.82rem;
+      color: var(--gold-lt);
+      font-family: 'Figtree', monospace;
+      letter-spacing: 0.06em;
+      text-align: center;
+    }
+
+    /* ══════════════════════════
+       FOOTER
+    ══════════════════════════ */
+    footer {
+      background: #060D18;
+      border-top: 1px solid rgba(191,160,72,0.15);
+      padding: 2.5rem 0;
+    }
+    .footer-inner {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-copy {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: rgba(247,244,239,0.25);
+      font-weight: 500;
+    }
+    .footer-back {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(191,160,72,0.6);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+    .footer-back:hover { color: var(--gold); }
+
+    /* ══════════════════════════
+       SCROLL REVEAL
+    ══════════════════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.75s cubic-bezier(0.22,1,0.36,1),
+                  transform 0.75s cubic-bezier(0.22,1,0.36,1);
+    }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+    .reveal-l {
+      opacity: 0;
+      transform: translateX(-24px);
+      transition: opacity 0.75s cubic-bezier(0.22,1,0.36,1),
+                  transform 0.75s cubic-bezier(0.22,1,0.36,1);
+    }
+    .reveal-l.in { opacity: 1; transform: translateX(0); }
+
+    /* ══════════════════════════
+       RESPONSIVE
+    ══════════════════════════ */
+    @media (max-width: 1024px) {
+      #hero { grid-template-columns: 1fr; }
+      .hero-left { padding: 8rem 2rem 4rem; }
+      .hero-right { min-height: 60vh; }
+      .about-grid, .forge-layout, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .services-grid, .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+      .why-grid { grid-template-columns: repeat(2, 1fr); }
+      .timeline-phases { grid-template-columns: 1fr; }
+      .phase-card { border-right: none; border-bottom: 1px solid var(--border); }
+      .services-header { grid-template-columns: 1fr; gap: 1.5rem; }
+      .forge-word { position: static; flex-direction: row; }
+      .forge-letter { font-size: 3rem; }
+    }
+    @media (max-width: 768px) {
+      .section-wrap { padding: 0 1.5rem; }
+      #navbar { padding: 1.1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .services-grid, .pricing-grid, .why-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+    }
+    @media (max-width: 480px) {
+      .hero-left { padding: 7rem 1.5rem 3.5rem; }
+      #about, #why, #services, #forge, #timeline, #pricing, #contact { padding: 5rem 0; }
+      .client-logos-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════ NAV ══════════ -->
+  <nav id="navbar">
+    <a href="index.html" class="nav-back">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      Grupo Alista
+    </a>
+    <div class="nav-links">
+      <a href="#about"    class="nav-link">Nosotros</a>
+      <a href="#services" class="nav-link">Servicios</a>
+      <a href="#forge"    class="nav-link">Metodología</a>
+      <a href="#pricing"  class="nav-link">Inversión</a>
+      <a href="#contact"  class="nav-cta">Contactar</a>
+    </div>
+    <div class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <div id="mobileMenu">
+    <a href="#about"    class="nav-link" onclick="closeMenu()">Nosotros</a>
+    <a href="#services" class="nav-link" onclick="closeMenu()">Servicios</a>
+    <a href="#forge"    class="nav-link" onclick="closeMenu()">Metodología</a>
+    <a href="#pricing"  class="nav-link" onclick="closeMenu()">Inversión</a>
+    <a href="#contact"  class="nav-link" onclick="closeMenu()">Contactar</a>
+  </div>
+
+  <!-- ══════════ HERO ══════════ -->
+  <section id="hero">
+    <!-- Left: Text -->
+    <div class="hero-left">
+      <div class="hero-eyebrow">Consultoría Tecnológica</div>
+      <h1 class="hero-title arvo">
+        Hacemos que la<br>tecnología trabaje<br>para <em>su negocio.</em>
+      </h1>
+      <p class="hero-sub">
+        25+ años de experiencia ayudando a empresas a reducir costos operativos, automatizar procesos y crecer sin fricción tecnológica.
+      </p>
+      <div class="hero-cta-group">
+        <a href="#contact" class="btn-gold">Agendar consulta</a>
+        <a href="#about"   class="btn-outline-ink">Conocer más</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <span class="hero-stat-num">20%</span>
+          <span class="hero-stat-lbl">Reducción<br>en costos</span>
+        </div>
+        <div>
+          <span class="hero-stat-num">25+</span>
+          <span class="hero-stat-lbl">Años de<br>experiencia</span>
+        </div>
+        <div>
+          <span class="hero-stat-num">FORGE</span>
+          <span class="hero-stat-lbl">Metodología<br>propia</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Dark panel with logo -->
+    <div class="hero-right">
+      <div class="hero-geo">
+        <svg viewBox="0 0 600 900" xmlns="http://www.w3.org/2000/svg">
+          <!-- Geometric grid pattern -->
+          <defs>
+            <pattern id="hexGrid" width="60" height="52" patternUnits="userSpaceOnUse">
+              <polygon points="30,2 58,17 58,47 30,62 2,47 2,17" fill="none" stroke="#BFA048" stroke-width="0.5"/>
+            </pattern>
+          </defs>
+          <rect width="600" height="900" fill="url(#hexGrid)"/>
+          <!-- Large diagonal gold lines -->
+          <line x1="0" y1="0" x2="600" y2="900" stroke="#BFA048" stroke-width="0.8"/>
+          <line x1="100" y1="0" x2="600" y2="800" stroke="#BFA048" stroke-width="0.4"/>
+          <line x1="0" y1="100" x2="500" y2="900" stroke="#BFA048" stroke-width="0.4"/>
+        </svg>
+      </div>
+      <div class="hero-right-inner">
+        <div class="hero-logo-wrap">
+          <img src="assets/images/logo-consulting.png" alt="ALISTA Consulting">
+        </div>
+        <div class="hero-right-badge">
+          <span>Clientes de referencia</span>
+          <div class="clients-row">
+            <div class="client-pill">Hewlett-Packard</div>
+            <div class="client-pill">Morgan Stanley</div>
+            <div class="client-pill">Payclip</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ QUIÉNES SOMOS ══════════ -->
+  <section id="about">
+    <div class="section-wrap">
+      <div class="reveal">
+        <div class="section-eyebrow">Quiénes somos</div>
+        <div class="gold-rule"></div>
+        <h2 class="section-title arvo">
+          Resultados que se ven<br>en el estado financiero.
+        </h2>
+      </div>
+      <div class="about-grid">
+        <!-- Left -->
+        <div class="reveal" style="transition-delay:0.1s">
+          <blockquote class="about-blockquote">
+            "Sabemos cómo hacer que la tecnología funcione para el negocio — no al revés."
+          </blockquote>
+          <p class="section-body" style="margin-bottom:1.25rem">
+            ALISTA Consulting ayuda a empresas a aprovechar la tecnología para ahorrar dinero y crecer más rápido. Con más de 25 años de experiencia trabajando con compañías como Hewlett-Packard, Morgan Stanley y Payclip, sabemos automatizar procesos que antes tomaban horas y ahora toman minutos.
+          </p>
+          <p class="section-body" style="margin-bottom:2rem">
+            No complicamos las cosas con términos técnicos ni proyectos interminables. Trabajamos rápido, sin burocracia, y nos aseguramos de que cada peso invertido regrese multiplicado. Nuestro modelo está diseñado para que la inversión se pague sola con el ahorro que generamos.
+          </p>
+          <div class="client-logos-grid">
+            <div class="client-logo-cell">Hewlett-Packard</div>
+            <div class="client-logo-cell">Morgan Stanley</div>
+            <div class="client-logo-cell">Payclip</div>
+          </div>
+        </div>
+        <!-- Right -->
+        <div class="reveal" style="transition-delay:0.2s">
+          <div class="about-photo">
+            <img src="https://placehold.co/700x420/0B1829/BFA048?text=" alt="Equipo ALISTA Consulting">
+            <div class="about-photo-badge">Senior Consultants</div>
+          </div>
+          <div class="about-savings">
+            <span class="num">20%</span>
+            <span class="lbl">Reducción promedio en costos operativos</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ POR QUÉ ALISTA ══════════ -->
+  <section id="why">
+    <div class="section-wrap">
+      <div class="reveal">
+        <div class="section-eyebrow" style="color:var(--gold-lt)">Por qué ALISTA</div>
+        <div class="gold-rule"></div>
+        <h2 class="section-title arvo">Cuatro pilares que nos<br>definen.</h2>
+      </div>
+      <div class="why-grid reveal" style="transition-delay:0.15s">
+        <div class="why-card">
+          <span class="why-num">01</span>
+          <div class="why-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="why-title">Atención Personalizada</div>
+          <p class="why-text">Trabajarán con consultores Senior altamente experimentados, estrategas y expertos en IA que encontrarán soluciones rápidas y eficaces.</p>
+        </div>
+        <div class="why-card">
+          <span class="why-num">02</span>
+          <div class="why-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+          </div>
+          <div class="why-title">Claridad y Transparencia</div>
+          <p class="why-text">Seremos muy directos y transparentes en todo nuestro proceso, análisis y recomendaciones a lo largo de todo el ciclo.</p>
+        </div>
+        <div class="why-card">
+          <span class="why-num">03</span>
+          <div class="why-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <div class="why-title">Experiencia y Educación</div>
+          <p class="why-text">Nuestros consultores los llevarán de la mano paso a paso durante todo el ciclo para que el cliente se sienta protegido y bien informado.</p>
+        </div>
+        <div class="why-card">
+          <span class="why-num">04</span>
+          <div class="why-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <div class="why-title">Seguridad</div>
+          <p class="why-text">Apoyados por protocolos de seguridad muy estrictos para que ninguna fuga de información salga del proyecto.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ SERVICIOS ══════════ -->
+  <section id="services">
+    <div class="section-wrap">
+      <div class="services-header">
+        <div class="reveal">
+          <div class="section-eyebrow">Servicios</div>
+          <div class="gold-rule"></div>
+          <h2 class="section-title arvo">Cuatro áreas de<br>especialización.</h2>
+        </div>
+        <div class="reveal" style="transition-delay:0.1s">
+          <p class="services-tagline section-body">
+            Cada servicio está diseñado para generar un retorno medible. Si su empresa gasta tiempo y dinero en procesos que podrían ser más eficientes, nosotros le mostramos cómo arreglarlo.
+          </p>
+        </div>
+      </div>
+      <div class="services-grid">
+        <div class="service-card reveal">
+          <span class="service-num">01 / 04</span>
+          <div class="service-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+          </div>
+          <div class="service-title">Transformación</div>
+          <p class="service-text">Rediseñamos la forma en que su empresa opera con tecnología. Migramos sistemas a la nube, modernizamos infraestructura y preparamos su organización para escalar.</p>
+        </div>
+        <div class="service-card reveal" style="transition-delay:0.1s">
+          <span class="service-num">02 / 04</span>
+          <div class="service-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+          </div>
+          <div class="service-title">Automatización</div>
+          <p class="service-text">Usamos inteligencia artificial para eliminar tareas repetitivas. Procesos que tomaban horas ahora toman minutos, liberando a su equipo para trabajo de alto valor.</p>
+        </div>
+        <div class="service-card reveal" style="transition-delay:0.2s">
+          <span class="service-num">03 / 04</span>
+          <div class="service-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+          </div>
+          <div class="service-title">Estrategia y Crecimiento</div>
+          <p class="service-text">Desarrollamos roadmaps tecnológicos alineados con sus objetivos de negocio. Cada decisión técnica se toma con el estado financiero en mente.</p>
+        </div>
+        <div class="service-card reveal" style="transition-delay:0.3s">
+          <span class="service-num">04 / 04</span>
+          <div class="service-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          </div>
+          <div class="service-title">Operaciones</div>
+          <p class="service-text">Optimizamos sus operaciones de TI para que sean más ágiles y confiables. Reducimos costos operativos hasta un 20% sin comprometer la calidad del servicio.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ FORGE METHODOLOGY ══════════ -->
+  <section id="forge">
+    <div class="section-wrap">
+      <div class="reveal">
+        <div class="section-eyebrow" style="color:var(--gold-lt)">Metodología</div>
+        <div class="gold-rule"></div>
+        <h2 class="section-title arvo">FORGE — Un proceso<br>diseñado para resultados.</h2>
+        <p class="section-body" style="max-width:560px;margin-top:1.25rem;color:rgba(247,244,239,0.55)">
+          Cinco etapas probadas que nos permiten entregar valor rápido, sin interrumpir su operación y con total transparencia en cada paso.
+        </p>
+      </div>
+      <div class="forge-layout">
+        <!-- Sticky big letters -->
+        <div class="forge-word" id="forgeWord">
+          <div class="forge-letter" data-step="0">F</div>
+          <div class="forge-letter" data-step="1">O</div>
+          <div class="forge-letter" data-step="2">R</div>
+          <div class="forge-letter" data-step="3">G</div>
+          <div class="forge-letter" data-step="4">E</div>
+        </div>
+        <!-- Steps -->
+        <div class="forge-steps reveal" style="transition-delay:0.2s">
+          <div class="forge-step" data-index="0">
+            <div>
+              <div class="forge-step-letter">F</div>
+              <span class="forge-step-word">Frame</span>
+            </div>
+            <div>
+              <div class="forge-step-title">Enmarcar — Entendemos su negocio</div>
+              <p class="forge-step-text">Hablamos con usted y su equipo para entender cómo trabajan hoy, qué funciona y qué no. Sin suposiciones, sin atajos — escuchamos primero.</p>
+            </div>
+          </div>
+          <div class="forge-step" data-index="1">
+            <div>
+              <div class="forge-step-letter">O</div>
+              <span class="forge-step-word">Orchestrate</span>
+            </div>
+            <div>
+              <div class="forge-step-title">Orquestar — Diseñamos la solución</div>
+              <p class="forge-step-text">Creamos un plan específico para su empresa con opciones claras y costos transparentes. Nada genérico — cada solución es construida para su contexto.</p>
+            </div>
+          </div>
+          <div class="forge-step" data-index="2">
+            <div>
+              <div class="forge-step-letter">R</div>
+              <span class="forge-step-word">Rapid Deploy</span>
+            </div>
+            <div>
+              <div class="forge-step-title">Despliegue Rápido — Resultados sin parar</div>
+              <p class="forge-step-text">Ejecutamos en fases cortas para que vea resultados rápido, sin interrumpir su día a día. Lo implementamos sin parar su operación.</p>
+            </div>
+          </div>
+          <div class="forge-step" data-index="3">
+            <div>
+              <div class="forge-step-letter">G</div>
+              <span class="forge-step-word">Governance</span>
+            </div>
+            <div>
+              <div class="forge-step-title">Gobernanza — Aseguramos la calidad</div>
+              <p class="forge-step-text">Validamos que todo funcione como debe y que su equipo sepa usarlo. La adopción es parte del éxito — nos aseguramos de que nadie se quede atrás.</p>
+            </div>
+          </div>
+          <div class="forge-step" data-index="4">
+            <div>
+              <div class="forge-step-letter">E</div>
+              <span class="forge-step-word">Evolve</span>
+            </div>
+            <div>
+              <div class="forge-step-title">Evolucionar — Mejora continua</div>
+              <p class="forge-step-text">Medimos resultados, ajustamos lo necesario y seguimos optimizando. La tecnología cambia — nos aseguramos de que su empresa también evolucione.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ CRONOLOGÍA ══════════ -->
+  <section id="timeline">
+    <div class="section-wrap">
+      <div class="reveal">
+        <div class="section-eyebrow">Proceso</div>
+        <div class="gold-rule"></div>
+        <h2 class="section-title arvo">Tres fases. Resultados<br>claros en cada etapa.</h2>
+      </div>
+      <div class="timeline-phases reveal" style="transition-delay:0.15s">
+
+        <div class="phase-card">
+          <span class="phase-num">01</span>
+          <div class="phase-badge">Parte 1 · F + O</div>
+          <div class="phase-title">Discovery y Análisis</div>
+          <span class="phase-duration">Duración: 2–4 semanas</span>
+          <ul class="phase-list">
+            <li>Entrevistas con usted y su equipo clave</li>
+            <li>Análisis de procesos actuales</li>
+            <li>Identificación de oportunidades de ahorro</li>
+            <li>Presentación de soluciones con alternativas claras</li>
+          </ul>
+          <div class="phase-deliverable">
+            <strong>Entregable</strong>
+            Reporte ejecutivo con roadmap de implementación y ROI proyectado
+          </div>
+        </div>
+
+        <div class="phase-card">
+          <span class="phase-num">02</span>
+          <div class="phase-badge">Parte 2 · R + G</div>
+          <div class="phase-title">Implementación</div>
+          <span class="phase-duration">Duración: Variable según proyecto</span>
+          <ul class="phase-list">
+            <li>Ejecutamos el roadmap aprobado</li>
+            <li>Implementación por fases para ver resultados rápido</li>
+            <li>Capacitación a su equipo</li>
+            <li>Validación de calidad y funcionamiento</li>
+          </ul>
+          <div class="phase-deliverable">
+            <strong>Entregable</strong>
+            Sistemas funcionando + Equipo capacitado + Medición de ahorro real
+          </div>
+        </div>
+
+        <div class="phase-card">
+          <span class="phase-num">03</span>
+          <div class="phase-badge">Parte 3 · E · Opcional</div>
+          <div class="phase-title">Soporte y Mentoría</div>
+          <span class="phase-duration">Duración: Mensual renovable</span>
+          <ul class="phase-list">
+            <li>Horas mensuales de soporte técnico</li>
+            <li>Respuesta a preguntas y ajustes</li>
+            <li>Optimización continua</li>
+            <li>Seguimiento de métricas de ahorro</li>
+          </ul>
+          <div class="phase-deliverable">
+            <strong>Entregable</strong>
+            Tranquilidad operativa + Mejora continua garantizada
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ INVERSIÓN ══════════ -->
+  <section id="pricing">
+    <div class="section-wrap">
+      <div class="reveal">
+        <div class="section-eyebrow">Inversión</div>
+        <div class="gold-rule"></div>
+        <h2 class="section-title arvo">Transparencia total<br>desde el primer día.</h2>
+        <p class="section-body" style="max-width:520px;margin-top:1rem">
+          Nuestro modelo está diseñado para que la inversión se pague sola. Sin sorpresas, sin letra chica.
+        </p>
+      </div>
+      <div class="pricing-grid reveal" style="transition-delay:0.15s">
+
+        <div class="pricing-card">
+          <div class="pricing-header">
+            <div class="pricing-phase">Fase 1</div>
+            <div class="pricing-name">Iniciación / Discovery</div>
+          </div>
+          <div class="pricing-body">
+            <div class="pricing-price">
+              <span class="amount">$60</span>
+              <span class="unit">USD/hr · $1,100 MXN + IVA</span>
+            </div>
+            <hr class="pricing-divider">
+            <p class="pricing-detail">
+              <strong style="font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold-dk);font-weight:700;display:block;margin-bottom:0.4rem">Estructura</strong>
+              1h introducción + 2h detalle por área. Si se requiere entrevistar más personal: 2 horas por persona adicional.
+            </p>
+          </div>
+        </div>
+
+        <div class="pricing-card featured">
+          <div class="pricing-header">
+            <div class="pricing-phase">Fase 1</div>
+            <div class="pricing-name">Análisis</div>
+          </div>
+          <div class="pricing-body">
+            <div class="pricing-price">
+              <span class="amount">$60</span>
+              <span class="unit">USD/hr · Igual que Discovery</span>
+            </div>
+            <hr class="pricing-divider">
+            <p class="pricing-detail">
+              <strong style="font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold-dk);font-weight:700;display:block;margin-bottom:0.4rem">Incluye</strong>
+              3 horas por persona para revisión. Elaboración del reporte ejecutivo con resultados y recomendaciones incluida.
+            </p>
+          </div>
+        </div>
+
+        <div class="pricing-card">
+          <div class="pricing-header">
+            <div class="pricing-phase">Fase 2</div>
+            <div class="pricing-name">Implementación</div>
+          </div>
+          <div class="pricing-body">
+            <div class="pricing-price">
+              <span class="amount">20%</span>
+              <span class="unit">del ahorro total generado</span>
+            </div>
+            <hr class="pricing-divider">
+            <p class="pricing-detail">
+              <strong style="font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold-dk);font-weight:700;display:block;margin-bottom:0.4rem">Modelo de éxito</strong>
+              El precio se calcula al terminar el análisis y se incluye en el reporte. Se firma análisis antes de comenzar implementación.
+            </p>
+          </div>
+        </div>
+
+        <div class="pricing-card">
+          <div class="pricing-header">
+            <div class="pricing-phase">Fase 3 · Opcional</div>
+            <div class="pricing-name">Soporte Continuo</div>
+          </div>
+          <div class="pricing-body">
+            <div class="pricing-price">
+              <span class="amount">$5,000</span>
+              <span class="unit">MXN/mes + IVA</span>
+            </div>
+            <hr class="pricing-divider">
+            <p class="pricing-detail">
+              <strong style="font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold-dk);font-weight:700;display:block;margin-bottom:0.4rem">Incluye</strong>
+              5 horas mensuales de soporte, entrenamiento y consultoría. Paquetes adicionales disponibles. Sin carry-overs.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ CONTACTO ══════════ -->
+  <section id="contact">
+    <div class="section-wrap">
+      <div class="reveal">
+        <div class="section-eyebrow" style="color:var(--gold-lt)">Contacto</div>
+        <div class="gold-rule"></div>
+        <h2 class="section-title arvo">Hablemos de<br>su empresa.</h2>
+      </div>
+      <div class="contact-grid">
+        <!-- Left: info -->
+        <div class="reveal" style="transition-delay:0.1s">
+          <p class="contact-info-title">¿Listo para reducir costos y crecer más rápido?</p>
+          <p class="contact-info-text">
+            Cuéntenos brevemente en qué área tiene oportunidades de mejora. Un consultor Senior se pondrá en contacto en menos de 24 horas para agendar una llamada de diagnóstico sin costo.
+          </p>
+
+          <div class="contact-detail">
+            <div class="contact-detail-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div class="contact-detail-text">
+              <strong>Ubicación</strong>
+              Calzada Lázaro Cárdenas 2953<br>Col. Chapalita, Guadalajara, Jal.
+            </div>
+          </div>
+
+          <div class="contact-detail">
+            <div class="contact-detail-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.81a16 16 0 0 0 6.29 6.29l.95-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div class="contact-detail-text">
+              <strong>Teléfono</strong>
+              +52 333 128 8999
+            </div>
+          </div>
+
+          <div class="contact-detail">
+            <div class="contact-detail-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div class="contact-detail-text">
+              <strong>Correo</strong>
+              ventas@grupoalista.com
+            </div>
+          </div>
+
+          <div class="contact-detail" style="margin-top:0.5rem">
+            <div class="contact-detail-icon" style="background:rgba(37,211,102,0.1)">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </div>
+            <div class="contact-detail-text">
+              <strong style="color:#25D366">WhatsApp</strong>
+              <a href="https://wa.me/523331288999" style="color:#25D366;text-decoration:none">+52 333 128 8999</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: form -->
+        <div class="reveal" style="transition-delay:0.2s">
+          <form class="contact-form" id="consultingForm" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST" novalidate>
+            <div class="form-row">
+              <div class="field-group">
+                <label class="field-label">Nombre</label>
+                <input type="text" name="name" class="field-input" placeholder="Tu nombre completo" required>
+              </div>
+              <div class="field-group">
+                <label class="field-label">Correo electrónico</label>
+                <input type="email" name="email" class="field-input" placeholder="correo@empresa.com" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="field-group">
+                <label class="field-label">Empresa</label>
+                <input type="text" name="company" class="field-input" placeholder="Nombre de tu empresa">
+              </div>
+              <div class="field-group">
+                <label class="field-label">Teléfono</label>
+                <input type="tel" name="phone" class="field-input" placeholder="+52 33 1234 5678">
+              </div>
+            </div>
+            <div class="field-group">
+              <label class="field-label">Área de interés</label>
+              <select name="service" class="field-select">
+                <option value="">— Selecciona un servicio —</option>
+                <option>Transformación Digital</option>
+                <option>Automatización con IA</option>
+                <option>Estrategia y Crecimiento</option>
+                <option>Operaciones y Reducción de Costos</option>
+                <option>No estoy seguro</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label class="field-label">¿Cuál es el reto principal de su empresa?</label>
+              <textarea name="message" class="field-textarea" placeholder="Cuéntenos brevemente..."></textarea>
+            </div>
+            <button type="submit" class="btn-submit">Solicitar consulta gratuita</button>
+            <div class="form-success" id="formSuccess">
+              ✓ Mensaje enviado. Un consultor Senior se pondrá en contacto en menos de 24h.
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ FOOTER ══════════ -->
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-copy">© 2025 ALISTA Consulting · Grupo Alista · Todos los derechos reservados.</span>
+      <a href="index.html" class="footer-back">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        Volver a Grupo Alista
+      </a>
+    </div>
+  </footer>
+
+  <!-- WhatsApp float -->
+  <a href="https://wa.me/523331288999" target="_blank" rel="noopener" style="position:fixed;bottom:1.75rem;right:1.75rem;width:54px;height:54px;background:linear-gradient(135deg,#25d366,#128c7e);border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:999;text-decoration:none;box-shadow:0 4px 20px rgba(37,211,102,0.35);transition:transform 0.3s;" onmouseenter="this.style.transform='scale(1.1)'" onmouseleave="this.style.transform=''">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <script>
+    // ── Navbar scroll ──────────────────────────────────────────
+    var navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', function () {
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // ── Mobile menu ────────────────────────────────────────────
+    var hamburger = document.getElementById('hamburger');
+    var mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', function () {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+    function closeMenu() {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+    }
+
+    // ── Scroll reveal ──────────────────────────────────────────
+    var revealEls = document.querySelectorAll('.reveal, .reveal-l');
+    var revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    revealEls.forEach(function (el) { revealObserver.observe(el); });
+
+    // ── FORGE active letter highlight ─────────────────────────
+    var forgeSteps = document.querySelectorAll('.forge-step');
+    var forgeLetters = document.querySelectorAll('.forge-letter');
+    var forgeObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          var idx = parseInt(entry.target.getAttribute('data-index'));
+          forgeLetters.forEach(function (l, i) {
+            l.classList.toggle('active', i === idx);
+          });
+        }
+      });
+    }, { threshold: 0.5 });
+    forgeSteps.forEach(function (step) { forgeObserver.observe(step); });
+
+    // ── Contact form ───────────────────────────────────────────
+    var form = document.getElementById('consultingForm');
+    var successEl = document.getElementById('formSuccess');
+    if (form) {
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        var btn = form.querySelector('.btn-submit');
+        var orig = btn.textContent;
+        btn.textContent = 'Enviando…';
+        btn.disabled = true;
+        try {
+          var res = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' }
+          });
+          if (res.ok) {
+            successEl.style.display = 'block';
+            form.reset();
+          } else {
+            window.location.href = 'mailto:ventas@grupoalista.com?subject=Consulta ALISTA Consulting';
+          }
+        } catch (err) {
+          window.location.href = 'mailto:ventas@grupoalista.com?subject=Consulta ALISTA Consulting';
+        } finally {
+          btn.disabled = false;
+          btn.textContent = orig;
+          setTimeout(function () { successEl.style.display = 'none'; }, 8000);
+        }
+      });
+    }
+  </script>
+</body>
+</html>
