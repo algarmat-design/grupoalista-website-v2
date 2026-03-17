@@ -1160,8 +1160,8 @@
         <div class="reveal" style="transition-delay:0.1s">
           <div class="map-frame">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3732.5793418609484!2d-103.40367492394475!3d20.671804299999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8428ae5e9b3e1f61%3A0x4a4f2be76d61b9a0!2sL%C3%A1zaro+C%C3%A1rdenas+2953%2C+Chapalita%2C+44500+Guadalajara%2C+Jal.%2C+M%C3%A9xico!5e0!3m2!1ses!2smx!4v1710600000000!5m2!1ses!2smx"
-              allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Ubicación Grupo Alista">
+              src="https://www.openstreetmap.org/export/embed.html?bbox=-103.4087%2C20.6668%2C-103.3987%2C20.6768&amp;layer=mapnik&amp;marker=20.6718%2C-103.4037"
+              allowfullscreen loading="lazy" title="Ubicación Grupo Alista — Lázaro Cárdenas 2953, Chapalita, Guadalajara">
             </iframe>
           </div>
 
@@ -1189,7 +1189,7 @@
             <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
             <span>Instagram</span>
           </a>
-          <a href="https://linkedin.com/company/grupoalista" target="_blank" rel="noopener" class="social-link">
+          <a href="https://www.linkedin.com/company/grupoalista" target="_blank" rel="noopener" class="social-link">
             <!-- LinkedIn icon -->
             <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
             <span>LinkedIn</span>
@@ -1204,7 +1204,16 @@
         <!-- Right col: form -->
         <div class="reveal" style="transition-delay:0.2s">
           <span class="section-eyebrow" style="font-size:0.58rem;margin-bottom:1rem;display:block" data-es="Envíanos un mensaje" data-en="Send us a message">Envíanos un mensaje</span>
-          <form id="contactForm" novalidate>
+          <!--
+            FORM SETUP: This form uses Formspree to deliver emails to ventas@grupoalista.com.
+            To activate:
+              1. Go to https://formspree.io/register and sign up (free).
+              2. Create a new form → set "Email to" = ventas@grupoalista.com.
+              3. Copy your form ID (e.g. xpbljdnk).
+              4. Replace YOUR_FORMSPREE_ID below with that ID.
+            Once set, every submission is emailed directly to ventas@grupoalista.com.
+          -->
+          <form id="contactForm" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST" novalidate>
             <div class="form-grid-2">
               <div class="field-group">
                 <label class="field-label" data-es="Nombre" data-en="Name">Nombre</label>
@@ -1463,38 +1472,83 @@
       if (e.key === 'Escape') document.querySelectorAll('.modal-overlay.active').forEach(m => closeModal(m.id));
     });
 
-    // ── Contact form → mailto ────────────────────────────────────
-    document.getElementById('contactForm').addEventListener('submit', e => {
+    // ── Contact form → Formspree AJAX (delivers to ventas@grupoalista.com) ─
+    // SETUP: sign up at formspree.io, create a form pointing to
+    // ventas@grupoalista.com, then replace YOUR_FORMSPREE_ID in the
+    // <form action="..."> attribute above with your actual form ID.
+    const contactForm = document.getElementById('contactForm');
+    const successEl   = document.getElementById('formSuccess');
+    const submitBtn   = contactForm.querySelector('.submit-btn');
+
+    contactForm.addEventListener('submit', async e => {
       e.preventDefault();
-      const fd      = new FormData(e.target);
-      const name    = fd.get('name')    || '';
-      const email   = fd.get('email')   || '';
-      const phone   = fd.get('phone')   || (lang === 'es' ? 'No proporcionado' : 'Not provided');
-      const company = fd.get('company') || (lang === 'es' ? 'No especificada'  : 'Not specified');
-      const message = fd.get('message') || '';
 
-      const subject = encodeURIComponent(
+      const name    = contactForm.elements['name'].value.trim();
+      const email   = contactForm.elements['email'].value.trim();
+      const message = contactForm.elements['message'].value.trim();
+      if (!name || !email || !message) return;
+
+      // Disable button while sending
+      const originalText    = submitBtn.textContent;
+      submitBtn.disabled    = true;
+      submitBtn.textContent = lang === 'es' ? 'Enviando…' : 'Sending…';
+      submitBtn.style.opacity = '0.65';
+
+      const formData = new FormData(contactForm);
+      formData.append('_replyto', email);
+      formData.append('_subject',
         lang === 'es'
-          ? `Contacto desde sitio web — ${name}`
-          : `Website contact — ${name}`
-      );
-      const body = encodeURIComponent(
-        `${lang === 'es' ? 'Nombre' : 'Name'}: ${name}\n` +
-        `${lang === 'es' ? 'Correo' : 'Email'}: ${email}\n` +
-        `${lang === 'es' ? 'Teléfono' : 'Phone'}: ${phone}\n` +
-        `${lang === 'es' ? 'Empresa de interés' : 'Company of interest'}: ${company}\n\n` +
-        `${lang === 'es' ? 'Mensaje' : 'Message'}:\n${message}`
+          ? `Contacto desde grupoalista.com — ${name}`
+          : `Website contact from grupoalista.com — ${name}`
       );
 
-      window.location.href = `mailto:ventas@grupoalista.com?subject=${subject}&body=${body}`;
+      try {
+        const res = await fetch(contactForm.action, {
+          method:  'POST',
+          body:    formData,
+          headers: { 'Accept': 'application/json' }
+        });
 
-      const successEl = document.getElementById('formSuccess');
-      successEl.textContent = lang === 'es'
-        ? '¡Mensaje enviado! Nos pondremos en contacto pronto.'
-        : "Message sent! We'll be in touch soon.";
-      successEl.style.display = 'block';
-      e.target.reset();
-      setTimeout(() => { successEl.style.display = 'none'; }, 6000);
+        if (res.ok) {
+          successEl.style.color       = '#25d366';
+          successEl.style.borderColor = 'rgba(37,211,102,0.28)';
+          successEl.style.background  = 'rgba(37,211,102,0.07)';
+          successEl.textContent = lang === 'es'
+            ? '✓ Mensaje enviado. Nos pondremos en contacto pronto.'
+            : '✓ Message sent. We\'ll be in touch soon.';
+          contactForm.reset();
+        } else {
+          // Formspree responded with an error — use mailto fallback
+          throw new Error('send_failed');
+        }
+      } catch (_) {
+        // Fallback: open mail client so the message is not lost
+        const phone   = contactForm.elements['phone']?.value   || 'N/A';
+        const company = contactForm.elements['company']?.value || 'N/A';
+        const subj    = encodeURIComponent(
+          lang === 'es'
+            ? `Contacto desde grupoalista.com — ${name}`
+            : `Website contact — ${name}`
+        );
+        const body = encodeURIComponent(
+          `Nombre: ${name}\nCorreo: ${email}\n` +
+          `Teléfono: ${phone}\nEmpresa: ${company}\n\n${message}`
+        );
+        window.open(`mailto:ventas@grupoalista.com?subject=${subj}&body=${body}`);
+
+        successEl.style.color       = '#BA6A45';
+        successEl.style.borderColor = 'rgba(186,106,69,0.28)';
+        successEl.style.background  = 'rgba(186,106,69,0.07)';
+        successEl.textContent = lang === 'es'
+          ? 'Se abrió tu cliente de correo. Configura Formspree para envío automático.'
+          : 'Your mail client was opened. Configure Formspree for automatic delivery.';
+      } finally {
+        successEl.style.display = 'block';
+        submitBtn.disabled      = false;
+        submitBtn.textContent   = originalText;
+        submitBtn.style.opacity = '1';
+        setTimeout(() => { successEl.style.display = 'none'; }, 8000);
+      }
     });
   </script>
 </body>
