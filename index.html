@@ -117,7 +117,7 @@
 
     /* hamburger */
     .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
-    .hamburger span { display: block; width: 22px; height: 1px; background: var(--slate-light); transition: all 0.3s; }
+    .hamburger span { display: block; width: 22px; height: 1px; background: var(--slate-light); transition: transform 0.3s, opacity 0.3s; }
     .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
     .hamburger.open span:nth-child(2) { opacity: 0; }
     .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
@@ -317,7 +317,7 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      transition: all 0.25s;
+      transition: border-color 0.25s, color 0.25s, background 0.25s;
     }
     .btn-ghost:hover {
       border-color: rgba(165,188,198,0.4);
@@ -1430,6 +1430,7 @@
     }
     .diff-item:first-of-type { border-top: 1px solid var(--border); }
     .diff-item:hover { background: rgba(186,106,69,0.03); }
+    .diff-item:focus-visible { outline: 2px solid var(--copper); outline-offset: 2px; border-radius: 3px; }
     .diff-item.open { background: rgba(186,106,69,0.04); }
     .diff-title-row {
       display: flex;
@@ -1466,7 +1467,7 @@
       transition: max-height 0.38s ease, opacity 0.32s ease, padding-top 0.32s ease;
     }
     .diff-item.open .diff-desc {
-      max-height: 180px;
+      max-height: 300px;
       opacity: 1;
       padding-top: 0.65rem;
     }
@@ -1613,6 +1614,7 @@
         <img src="assets/images/logo-main.png" alt="Grupo Alista" class="hero-logo">
       </div>
       <h1 class="h-a2 hero-title"
+          data-html="true"
           data-es="Creciendo Negocios y<br>Generando Oportunidades."
           data-en="Growing Businesses and<br>Generating Opportunities.">
         Creciendo Negocios y<br>Generando Oportunidades.
@@ -1641,6 +1643,7 @@
         <span class="section-eyebrow" data-es="Nosotros" data-en="About Us">Nosotros</span>
         <div class="copper-rule"></div>
         <h2 class="section-title"
+            data-html="true"
             data-es="Creciendo Negocios y<br>Generando Oportunidades."
             data-en="Growing Businesses and<br>Generating Opportunities.">
           Creciendo Negocios y<br>Generando Oportunidades.
@@ -1661,7 +1664,7 @@
         <div class="reveal diff-list" style="transition-delay:0.2s">
           <div class="diff-section-label" data-es="Lo que nos hace diferentes:" data-en="What makes us different:">Lo que nos hace diferentes:</div>
 
-          <div class="diff-item" onclick="toggleDiff(this)">
+          <div class="diff-item" role="button" tabindex="0" aria-expanded="false" onclick="toggleDiff(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleDiff(this);}">
             <div class="diff-title-row">
               <div class="diff-title" data-es="Cinco divisiones especializadas" data-en="Five specialized divisions">Cinco divisiones especializadas</div>
               <span class="diff-arrow">+</span>
@@ -1673,7 +1676,7 @@
             </p>
           </div>
 
-          <div class="diff-item" onclick="toggleDiff(this)">
+          <div class="diff-item" role="button" tabindex="0" aria-expanded="false" onclick="toggleDiff(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleDiff(this);}">
             <div class="diff-title-row">
               <div class="diff-title" data-es="Enfoque total en resultados" data-en="Total focus on results">Enfoque total en resultados</div>
               <span class="diff-arrow">+</span>
@@ -1685,7 +1688,7 @@
             </p>
           </div>
 
-          <div class="diff-item" onclick="toggleDiff(this)">
+          <div class="diff-item" role="button" tabindex="0" aria-expanded="false" onclick="toggleDiff(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleDiff(this);}">
             <div class="diff-title-row">
               <div class="diff-title" data-es="Siempre disponibles" data-en="Always available">Siempre disponibles</div>
               <span class="diff-arrow">+</span>
@@ -1697,7 +1700,7 @@
             </p>
           </div>
 
-          <div class="diff-item" onclick="toggleDiff(this)">
+          <div class="diff-item" role="button" tabindex="0" aria-expanded="false" onclick="toggleDiff(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleDiff(this);}">
             <div class="diff-title-row">
               <div class="diff-title" data-es="Alianzas que generan valor" data-en="Alliances that generate value">Alianzas que generan valor</div>
               <span class="diff-arrow">+</span>
@@ -1709,7 +1712,7 @@
             </p>
           </div>
 
-          <div class="diff-item" onclick="toggleDiff(this)">
+          <div class="diff-item" role="button" tabindex="0" aria-expanded="false" onclick="toggleDiff(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleDiff(this);}">
             <div class="diff-title-row">
               <div class="diff-title" data-es="Innovación y adaptabilidad" data-en="Innovation and adaptability">Innovación y adaptabilidad</div>
               <span class="diff-arrow">+</span>
@@ -2143,8 +2146,8 @@
       document.querySelectorAll('[data-es]').forEach(el => {
         const txt = l === 'es' ? el.getAttribute('data-es') : el.getAttribute('data-en');
         if (txt !== null) {
-          // Use innerHTML if the value contains HTML tags
-          if (txt.includes('<')) {
+          // Only use innerHTML on elements explicitly marked data-html="true"
+          if (el.getAttribute('data-html') === 'true') {
             el.innerHTML = txt;
           } else {
             el.textContent = txt;
@@ -2319,9 +2322,10 @@
     // ── Differentiators Accordion ─────────────────────────────────
     function toggleDiff(item) {
       document.querySelectorAll('.diff-item.open').forEach(function (el) {
-        if (el !== item) el.classList.remove('open');
+        if (el !== item) { el.classList.remove('open'); el.setAttribute('aria-expanded', 'false'); }
       });
-      item.classList.toggle('open');
+      const isOpen = item.classList.toggle('open');
+      item.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     }
 
     // ── Leaflet Map ─────────────────────────────────────────────────
