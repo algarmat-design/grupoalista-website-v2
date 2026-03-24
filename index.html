@@ -2328,36 +2328,56 @@
       item.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     }
 
-    // ── Leaflet Map ─────────────────────────────────────────────────
+    // ── Leaflet Map (lazy-init on scroll-into-view) ──────────────────
     (function () {
       var mapEl = document.getElementById('leaflet-map');
       if (!mapEl || typeof L === 'undefined') return;
 
-      var lat = 20.6620, lng = -103.3894;
-      var map = L.map(mapEl, { scrollWheelZoom: false, zoomControl: true })
-                 .setView([lat, lng], 15);
+      var initialized = false;
 
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-        maxZoom: 19
-      }).addTo(map);
+      function initMap() {
+        if (initialized) return;
+        initialized = true;
 
-      var markerHtml = '<div style="width:18px;height:18px;background:#BA6A45;border-radius:50%;border:2.5px solid rgba(255,255,255,0.6);box-shadow:0 0 0 5px rgba(186,106,69,0.22),0 0 16px rgba(186,106,69,0.65);"></div>';
-      var icon = L.divIcon({
-        html: markerHtml,
-        className: '',
-        iconSize: [18, 18],
-        iconAnchor: [9, 9],
-        popupAnchor: [0, -14]
-      });
+        var lat = 20.6620, lng = -103.3894;
+        var map = L.map(mapEl, { scrollWheelZoom: false, zoomControl: true })
+                   .setView([lat, lng], 15);
 
-      L.marker([lat, lng], { icon: icon })
-        .addTo(map)
-        .bindPopup(
-          '<strong>Grupo Alista</strong>' +
-          'Lázaro Cárdenas Pte. 2953<br>Col. Chapalita<br>Guadalajara, Jalisco'
-        )
-        .openPopup();
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+          maxZoom: 19
+        }).addTo(map);
+
+        var markerHtml = '<div style="width:18px;height:18px;background:#BA6A45;border-radius:50%;border:2.5px solid rgba(255,255,255,0.6);box-shadow:0 0 0 5px rgba(186,106,69,0.22),0 0 16px rgba(186,106,69,0.65);"></div>';
+        var icon = L.divIcon({
+          html: markerHtml,
+          className: '',
+          iconSize: [18, 18],
+          iconAnchor: [9, 9],
+          popupAnchor: [0, -14]
+        });
+
+        L.marker([lat, lng], { icon: icon })
+          .addTo(map)
+          .bindPopup(
+            '<strong>Grupo Alista</strong>' +
+            'Lázaro Cárdenas Pte. 2953<br>Col. Chapalita<br>Guadalajara, Jalisco'
+          )
+          .openPopup();
+
+        // Re-calculate tile layout after reveal animation completes (0.75s)
+        setTimeout(function () { map.invalidateSize(); }, 850);
+      }
+
+      // Init only when the map element enters the viewport
+      var mapObserver = new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) {
+          initMap();
+          mapObserver.disconnect();
+        }
+      }, { threshold: 0.1 });
+
+      mapObserver.observe(mapEl);
     })();
   </script>
 </body>
