@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Términos de Servicio — Grupo Alista</title>
+  <meta name="description" content="Términos y condiciones de uso del sitio web de Grupo Alista." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --slate-dark:   #3E5662;
+      --slate-mid:    #57707D;
+      --slate-light:  #A5BCC6;
+      --copper-dark:  #9D4C2A;
+      --copper:       #BA6A45;
+      --bg-base:      #09141c;
+      --bg-elevated:  #0d1c26;
+      --bg-card:      #111f2a;
+      --text-primary: #e4ecf1;
+      --text-muted:   #7fa0b2;
+      --border:       rgba(165,188,198,0.10);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg-base);
+      color: var(--text-primary);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9998;
+    }
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--bg-base); }
+    ::-webkit-scrollbar-thumb { background: var(--copper-dark); border-radius: 2px; }
+
+    /* ══════ NAV ══════ */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.1rem 2rem;
+      background: rgba(9,20,28,0.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1024px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo-link {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+    }
+    .nav-logo-svg { width: 28px; height: 28px; }
+    .nav-logo-text {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      color: var(--text-primary);
+    }
+    .nav-right { display: flex; align-items: center; gap: 1.5rem; }
+    .nav-link-back {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--slate-light);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.2s;
+    }
+    .nav-link-back:hover { color: var(--copper); }
+    .lang-btn {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      color: var(--copper);
+      border: 1px solid rgba(186,106,69,0.4);
+      border-radius: 2px;
+      padding: 0.3rem 0.7rem;
+      background: none;
+      cursor: pointer;
+      transition: background 0.25s, border-color 0.25s;
+    }
+    .lang-btn:hover { background: rgba(186,106,69,0.12); border-color: var(--copper); }
+    .lang-btn:focus-visible { outline: 2px solid var(--copper); outline-offset: 2px; }
+
+    /* ══════ PAGE HEADER BAND ══════ */
+    .page-header {
+      background: var(--bg-elevated);
+      padding: 6.5rem 2rem 3.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--copper-dark), var(--copper), var(--copper-dark), transparent);
+    }
+    .page-header::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 100% at 50% 0%, rgba(157,76,42,0.08) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .page-header-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .page-header-logo {
+      height: 42px;
+      width: auto;
+      opacity: 0.55;
+      margin-bottom: 2rem;
+      transition: opacity 0.25s;
+    }
+    .page-header-logo:hover { opacity: 0.8; }
+    .page-eyebrow {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--copper);
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+    .copper-rule {
+      width: 36px; height: 1px;
+      background: linear-gradient(90deg, var(--copper-dark), var(--copper));
+      margin: 0 auto 1.25rem;
+    }
+    .page-title {
+      font-family: 'Roboto Mono', monospace;
+      font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+    .page-date {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      color: var(--copper);
+      display: block;
+      opacity: 0.75;
+    }
+
+    /* ══════ DOCUMENT BODY ══════ */
+    .doc-wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 3.5rem 2rem 5rem;
+    }
+    .doc-section {
+      margin-top: 2.25rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .doc-section:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+    .doc-heading {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--copper);
+      margin-bottom: 0.85rem;
+    }
+    .doc-body {
+      font-size: 0.925rem;
+      line-height: 1.95;
+      color: var(--text-muted);
+      font-weight: 300;
+      max-width: 68ch;
+    }
+    .doc-body + .doc-body { margin-top: 0.6rem; }
+    .doc-body a { color: var(--copper); text-decoration: none; }
+    .doc-body a:hover { text-decoration: underline; }
+
+    /* ══════ FOOTER ══════ */
+    footer {
+      background: #060d14;
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 0 1.75rem;
+    }
+    .footer-inner {
+      max-width: 1024px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
+      padding-bottom: 1.75rem;
+    }
+    .footer-brand-col { display: flex; flex-direction: column; gap: 0.85rem; }
+    .footer-logo-link {
+      display: inline-block;
+      opacity: 0.5;
+      transition: opacity 0.25s;
+      width: max-content;
+    }
+    .footer-logo-link:hover { opacity: 0.75; }
+    .footer-tagline {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+      font-weight: 300;
+      max-width: 260px;
+    }
+    .footer-socials { display: flex; gap: 0.4rem; }
+    .footer-social-icon {
+      display: flex; align-items: center; justify-content: center;
+      width: 30px; height: 30px;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .footer-social-icon:hover {
+      border-color: rgba(186,106,69,0.5);
+      color: var(--copper);
+      background: rgba(186,106,69,0.07);
+    }
+    .footer-social-icon:focus-visible { outline: 2px solid var(--copper); outline-offset: 2px; }
+    .footer-links-col {}
+    .footer-col-title {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 0.85rem;
+      color: var(--text-muted);
+    }
+    .footer-nav-link {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 0.28rem 0;
+      display: block;
+      transition: color 0.2s;
+    }
+    .footer-nav-link:hover { color: var(--text-primary); }
+    .footer-nav-link:focus-visible { outline: 2px solid var(--copper); outline-offset: 2px; }
+    .footer-divider { height: 1px; background: var(--border); }
+    .footer-bottom {
+      padding: 1.25rem 0 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .footer-copy {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.6rem;
+      color: rgba(127,160,178,0.45);
+    }
+    .footer-addr {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.55rem;
+      color: rgba(127,160,178,0.3);
+      text-align: right;
+    }
+
+    @media (max-width: 768px) {
+      .page-header { padding: 5.5rem 1.5rem 2.5rem; }
+      .doc-wrap { padding: 2.5rem 1.25rem 4rem; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; }
+      .footer-addr { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════ NAVBAR ══════════ -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo-link">
+        <svg class="nav-logo-svg" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="nav-cg" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#9D4C2A"/>
+              <stop offset="100%" stop-color="#BA6A45"/>
+            </linearGradient>
+          </defs>
+          <polygon points="20,3 37,20 20,37 3,20" fill="#3E5662"/>
+          <polygon points="20,3 37,20 20,20 3,20" fill="url(#nav-cg)"/>
+          <line x1="3" y1="20" x2="37" y2="20" stroke="rgba(9,20,28,0.4)" stroke-width="0.8"/>
+        </svg>
+        <span class="nav-logo-text">Grupo Alista</span>
+      </a>
+      <div class="nav-right">
+        <a href="index.html" class="nav-link-back">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><polyline points="12 19 5 12 12 5"/></svg>
+          <span data-es="Inicio" data-en="Home">Inicio</span>
+        </a>
+        <button class="lang-btn" id="langBtn">EN</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ══════════ PAGE HEADER ══════════ -->
+  <div class="page-header">
+    <div class="page-header-inner">
+      <a href="index.html">
+        <img src="assets/images/logo-main.png" alt="Grupo Alista" class="page-header-logo">
+      </a>
+      <span class="page-eyebrow" data-es="Legal" data-en="Legal">Legal</span>
+      <div class="copper-rule"></div>
+      <h1 class="page-title" data-es="Términos de Servicio" data-en="Terms of Service">Términos de Servicio</h1>
+      <span class="page-date" data-es="Última actualización: Enero 2026" data-en="Last updated: January 2026">Última actualización: Enero 2026</span>
+    </div>
+  </div>
+
+  <!-- ══════════ DOCUMENT ══════════ -->
+  <div class="doc-wrap">
+
+    <div class="doc-section">
+      <h2 class="doc-heading" data-es="1. Aceptación de los Términos" data-en="1. Acceptance of Terms">1. Aceptación de los Términos</h2>
+      <p class="doc-body"
+         data-es="Al acceder y utilizar el sitio web de Grupo Alista, usted acepta cumplir con estos Términos de Servicio. Si no está de acuerdo con alguna parte de estos términos, le pedimos no hacer uso del sitio."
+         data-en="By accessing and using the Grupo Alista website, you agree to comply with these Terms of Service. If you do not agree with any part of these terms, please refrain from using the site.">
+        Al acceder y utilizar el sitio web de Grupo Alista, usted acepta cumplir con estos Términos de Servicio. Si no está de acuerdo con alguna parte de estos términos, le pedimos no hacer uso del sitio.
+      </p>
+    </div>
+
+    <div class="doc-section">
+      <h2 class="doc-heading" data-es="2. Uso del Sitio" data-en="2. Use of the Site">2. Uso del Sitio</h2>
+      <p class="doc-body"
+         data-es="El contenido de este sitio es de carácter informativo y comercial. Queda prohibido su uso para actividades ilegales, fraudulentas o que afecten derechos de terceros. Nos reservamos el derecho de restringir el acceso a cualquier usuario que incumpla estas condiciones."
+         data-en="The content of this site is informational and commercial in nature. Its use for illegal, fraudulent activities or activities that affect third-party rights is prohibited. We reserve the right to restrict access to any user who violates these conditions.">
+        El contenido de este sitio es de carácter informativo y comercial. Queda prohibido su uso para actividades ilegales, fraudulentas o que afecten derechos de terceros. Nos reservamos el derecho de restringir el acceso a cualquier usuario que incumpla estas condiciones.
+      </p>
+    </div>
+
+    <div class="doc-section">
+      <h2 class="doc-heading" data-es="3. Propiedad Intelectual" data-en="3. Intellectual Property">3. Propiedad Intelectual</h2>
+      <p class="doc-body"
+         data-es="Todo el contenido de este sitio —textos, logotipos, imágenes, diseños y marcas— son propiedad exclusiva de Grupo Alista o sus empresas filiales. Queda prohibida su reproducción total o parcial sin autorización escrita previa."
+         data-en="All content on this site — texts, logos, images, designs, and trademarks — are the exclusive property of Grupo Alista or its affiliates. Reproduction in whole or in part without prior written authorization is prohibited.">
+        Todo el contenido de este sitio —textos, logotipos, imágenes, diseños y marcas— son propiedad exclusiva de Grupo Alista o sus empresas filiales. Queda prohibida su reproducción total o parcial sin autorización escrita previa.
+      </p>
+    </div>
+
+    <div class="doc-section">
+      <h2 class="doc-heading" data-es="4. Servicios de Terceros" data-en="4. Third-Party Services">4. Servicios de Terceros</h2>
+      <p class="doc-body"
+         data-es="Este sitio puede incluir enlaces a sitios de terceros. Grupo Alista no se responsabiliza por el contenido, políticas ni prácticas de dichos sitios externos."
+         data-en="This site may include links to third-party websites. Grupo Alista is not responsible for the content, policies, or practices of those external sites.">
+        Este sitio puede incluir enlaces a sitios de terceros. Grupo Alista no se responsabiliza por el contenido, políticas ni prácticas de dichos sitios externos.
+      </p>
+    </div>
+
+    <div class="doc-section">
+      <h2 class="doc-heading" data-es="5. Limitación de Responsabilidad" data-en="5. Limitation of Liability">5. Limitación de Responsabilidad</h2>
+      <p class="doc-body"
+         data-es="Grupo Alista no será responsable por daños directos, indirectos, incidentales o consecuentes derivados del uso o la imposibilidad de uso de este sitio o sus servicios."
+         data-en="Grupo Alista shall not be liable for direct, indirect, incidental, or consequential damages arising from the use or inability to use this site or its services.">
+        Grupo Alista no será responsable por daños directos, indirectos, incidentales o consecuentes derivados del uso o la imposibilidad de uso de este sitio o sus servicios.
+      </p>
+    </div>
+
+    <div class="doc-section">
+      <h2 class="doc-heading" data-es="6. Modificaciones" data-en="6. Modifications">6. Modificaciones</h2>
+      <p class="doc-body"
+         data-es="Nos reservamos el derecho de modificar estos términos en cualquier momento. Los cambios serán publicados en este sitio y el uso continuado del mismo implica la aceptación de los términos actualizados."
+         data-en="We reserve the right to modify these terms at any time. Changes will be posted on this site, and continued use of the site implies acceptance of the updated terms.">
+        Nos reservamos el derecho de modificar estos términos en cualquier momento. Los cambios serán publicados en este sitio y el uso continuado del mismo implica la aceptación de los términos actualizados.
+      </p>
+    </div>
+
+    <div class="doc-section">
+      <h2 class="doc-heading" data-es="7. Jurisdicción" data-en="7. Jurisdiction">7. Jurisdicción</h2>
+      <p class="doc-body"
+         data-es="Estos términos se rigen por las leyes de los Estados Unidos Mexicanos. Cualquier controversia será sometida a los tribunales competentes de Guadalajara, Jalisco, México."
+         data-en="These terms are governed by the laws of the United Mexican States. Any dispute shall be submitted to the competent courts of Guadalajara, Jalisco, Mexico.">
+        Estos términos se rigen por las leyes de los Estados Unidos Mexicanos. Cualquier controversia será sometida a los tribunales competentes de Guadalajara, Jalisco, México.
+      </p>
+    </div>
+
+    <div class="doc-section">
+      <h2 class="doc-heading" data-es="8. Contacto" data-en="8. Contact">8. Contacto</h2>
+      <p class="doc-body"
+         data-es="Consultas sobre estos términos: ventas@grupoalista.com"
+         data-en="Inquiries about these terms: ventas@grupoalista.com">
+        Consultas sobre estos términos: <a href="mailto:ventas@grupoalista.com">ventas@grupoalista.com</a>
+      </p>
+    </div>
+
+  </div>
+
+  <!-- ══════════ FOOTER ══════════ -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <!-- Brand col -->
+        <div class="footer-brand-col">
+          <a href="index.html" class="footer-logo-link">
+            <img src="assets/images/logo-main.png" alt="Grupo Alista" style="height:36px;width:auto;">
+          </a>
+          <p class="footer-tagline"
+             data-es="Un conglomerado empresarial mexicano con filiales en consultoría, marketing, salud, hotelería e importaciones."
+             data-en="A Mexican business conglomerate with subsidiaries in consulting, marketing, health, hospitality, and imports.">
+            Un conglomerado empresarial mexicano con filiales en consultoría, marketing, salud, hotelería e importaciones.
+          </p>
+          <div class="footer-socials">
+            <a href="https://www.facebook.com/grupo.alista.54" target="_blank" rel="noopener" class="footer-social-icon" aria-label="Facebook">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/grupo.alista/" target="_blank" rel="noopener" class="footer-social-icon" aria-label="Instagram">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <a href="https://wa.me/523331288999" target="_blank" rel="noopener" class="footer-social-icon" aria-label="WhatsApp">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Links col -->
+        <div class="footer-links-col">
+          <span class="footer-col-title" data-es="Navegación" data-en="Navigation">Navegación</span>
+          <nav style="display:flex;flex-direction:column;">
+            <a href="index.html"          class="footer-nav-link" data-es="Inicio"                data-en="Home">Inicio</a>
+            <a href="index.html#about"    class="footer-nav-link" data-es="Nosotros"              data-en="About">Nosotros</a>
+            <a href="index.html#contact"  class="footer-nav-link" data-es="Contacto"              data-en="Contact">Contacto</a>
+            <a href="privacy.html"        class="footer-nav-link" data-es="Aviso de Privacidad"   data-en="Privacy Policy">Aviso de Privacidad</a>
+            <a href="terms.html"          class="footer-nav-link" data-es="Términos de Servicio"  data-en="Terms of Service" style="color:var(--copper)">Términos de Servicio</a>
+          </nav>
+        </div>
+      </div>
+
+      <div class="footer-divider"></div>
+
+      <div class="footer-bottom">
+        <p class="footer-copy">
+          © 2026 Grupo Alista.<span data-es=" Todos los derechos reservados." data-en=" All rights reserved."> Todos los derechos reservados.</span>
+        </p>
+        <p class="footer-addr">Lázaro Cárdenas Pte. 2953, Col. Chapalita — Guadalajara, Jalisco, MX 44500</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    var lang = 'es';
+    function applyLang(l) {
+      lang = l;
+      document.querySelectorAll('[data-es]').forEach(function(el) {
+        var txt = l === 'es' ? el.getAttribute('data-es') : el.getAttribute('data-en');
+        if (txt !== null) el.textContent = txt;
+      });
+      document.getElementById('langBtn').textContent = l === 'es' ? 'EN' : 'ES';
+      document.documentElement.lang = l;
+    }
+    document.getElementById('langBtn').addEventListener('click', function() {
+      applyLang(lang === 'es' ? 'en' : 'es');
+    });
+  </script>
+</body>
+</html>

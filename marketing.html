@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Alista Marketing Services | Productos Promocionales</title>
   <meta name="description" content="Tu marca en cada detalle. Más de 1,300 productos promocionales personalizados: textiles, tecnología, bebidas, escritura y más. Cotiza en minutos.">
+  <link rel="icon" type="image/png" href="assets/images/logo-marketing.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&family=Playfair+Display:ital,wght@1,700&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
@@ -58,15 +59,22 @@
       height: 68px;
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 clamp(1.5rem, 5vw, 4rem);
+      background: linear-gradient(90deg, rgba(28,28,46,0.85) 0%, rgba(28,28,46,0.45) 50%, transparent 100%);
       transition: background 0.3s, box-shadow 0.3s;
     }
     #mkt-nav.scrolled {
-      background: rgba(250,247,242,0.92);
-      backdrop-filter: blur(12px);
+      background: rgba(250,247,242,0.94);
+      backdrop-filter: blur(14px);
       box-shadow: 0 1px 0 var(--border);
     }
+    /* Nav logo — circle-crop to show just the emblem */
     .nav-logo { display: flex; align-items: center; }
-    .nav-logo img { height: 44px; width: auto; }
+    .nav-logo img {
+      height: 42px; width: 42px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center;
+    }
     .nav-links {
       display: flex; align-items: center; gap: 2.5rem;
       list-style: none;
@@ -277,12 +285,42 @@
       color: var(--slate); max-width: 560px;
     }
 
-    /* ─── CÓMO FUNCIONA ──────────────────────────────────── */
-    #como {
+    /* ─── NOSOTROS ───────────────────────────────────────── */
+    #nosotros {
+      background: var(--pearl);
+      padding: clamp(5rem, 10vw, 8rem) 0;
+    }
+    .nosotros-inner {
+      display: grid; grid-template-columns: 1fr 1.6fr;
+      gap: 5rem; align-items: center;
+    }
+    .nosotros-label-col {}
+    .nosotros-stat {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic; font-size: 4.5rem; font-weight: 700;
+      color: var(--wine); line-height: 1;
+    }
+    .nosotros-stat-desc {
+      font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 300;
+      color: var(--slate); margin-top: 0.5rem; letter-spacing: 0.02em;
+    }
+    .nosotros-text-col {}
+    .nosotros-body {
+      font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 300;
+      line-height: 1.9; color: var(--slate);
+    }
+    .nosotros-body p + p { margin-top: 1.2rem; }
+    @media (max-width: 768px) {
+      .nosotros-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+
+    /* ─── PROCESO (formerly #como) ───────────────────────── */
+    #proceso {
       background: var(--ivory);
       padding: clamp(5rem, 10vw, 8rem) 0;
     }
     .como-header { margin-bottom: 4.5rem; }
+    .proceso-header { margin-bottom: 4.5rem; }
     .como-steps {
       display: grid; grid-template-columns: repeat(3, 1fr);
       gap: 2rem; position: relative;
@@ -479,118 +517,105 @@
       padding: 0 4px; line-height: 36px;
     }
 
-    /* ─── QUOTE PANEL ────────────────────────────────────── */
-    .panel-backdrop {
+    /* ─── PRODUCT MODAL ──────────────────────────────────── */
+    .modal-backdrop {
       position: fixed; inset: 0; z-index: 290;
-      background: rgba(28,28,46,0.55);
+      background: rgba(28,28,46,0.62);
       opacity: 0; pointer-events: none;
       transition: opacity 0.3s;
     }
-    .panel-backdrop.open { opacity: 1; pointer-events: all; }
-    #quote-panel {
-      position: fixed; top: 0; right: 0; bottom: 0;
-      width: min(420px, 100vw); z-index: 300;
-      background: #fff;
-      box-shadow: -8px 0 48px rgba(0,0,0,0.14);
-      display: flex; flex-direction: column;
-      transform: translateX(105%);
-      transition: transform 0.38s cubic-bezier(0.22,1,0.36,1);
+    .modal-backdrop.open { opacity: 1; pointer-events: all; }
+    #product-modal {
+      position: fixed; top: 50%; left: 50%; z-index: 300;
+      width: min(520px, 94vw);
+      background: #fff; border-radius: 12px;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.22);
+      transform: translate(-50%, -48%) scale(0.96);
+      opacity: 0; pointer-events: none;
+      transition: transform 0.32s cubic-bezier(0.22,1,0.36,1), opacity 0.28s ease;
       overflow: hidden;
     }
-    #quote-panel.open { transform: translateX(0); }
-    .qp-header {
-      padding: 1.4rem 1.5rem 1.2rem;
+    #product-modal.open {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1; pointer-events: all;
+    }
+    .pm-img-row {
+      display: grid; grid-template-columns: 140px 1fr;
+      min-height: 140px;
+    }
+    .pm-img {
+      width: 140px; height: 140px;
+      object-fit: cover; background: var(--cream);
+    }
+    .pm-info {
+      padding: 1.2rem 1.4rem 1rem;
+      display: flex; flex-direction: column; gap: 0.35rem;
       border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: space-between;
-      flex-shrink: 0;
     }
-    .qp-title {
-      font-family: 'Inter', sans-serif; font-size: 0.88rem; font-weight: 800;
-      letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink);
+    .pm-cat-badge {
+      font-family: 'Inter', sans-serif; font-size: 0.56rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      background: rgba(139,26,43,0.08); color: var(--wine);
+      display: inline-block; padding: 0.18rem 0.55rem; border-radius: 3px;
+      align-self: flex-start;
     }
-    .qp-close {
-      width: 32px; height: 32px; border-radius: 4px;
+    .pm-name {
+      font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 600;
+      color: var(--ink); line-height: 1.4; margin-top: 0.15rem;
+    }
+    .pm-sku {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--slate);
+    }
+    .pm-close {
+      position: absolute; top: 0.75rem; right: 0.9rem;
+      width: 28px; height: 28px; border-radius: 4px;
       display: flex; align-items: center; justify-content: center;
-      color: var(--slate);
+      color: var(--slate); z-index: 10;
       transition: background 0.2s, color 0.2s;
     }
-    .qp-close:hover { background: var(--pearl); color: var(--wine); }
-    .qp-body { flex: 1; overflow-y: auto; padding: 1.2rem 1.5rem; }
-    /* Items list */
-    #qp-items { display: flex; flex-direction: column; gap: 1rem; }
-    .qp-item {
-      display: grid; grid-template-columns: 52px 1fr auto;
-      gap: 0.75rem; align-items: start;
+    .pm-close:hover { background: var(--pearl); color: var(--wine); }
+    .pm-form { padding: 1.3rem 1.4rem 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
+    .pm-field { display: flex; flex-direction: column; gap: 0.3rem; }
+    .pm-field label {
+      font-family: 'Inter', sans-serif; font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.04em; color: var(--slate);
     }
-    .qp-item-img { width: 52px; height: 52px; border-radius: 4px; object-fit: cover; background: var(--cream); }
-    .qp-item-info { display: flex; flex-direction: column; gap: 2px; }
-    .qp-item-name { font-size: 0.8rem; font-weight: 500; color: var(--ink); line-height: 1.35; }
-    .qp-item-sku { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: var(--slate); }
-    .qp-item-qty {
-      display: flex; align-items: center; gap: 0.4rem; margin-top: 0.4rem;
+    .pm-field input, .pm-field textarea {
+      width: 100%; padding: 0.6rem 0.85rem;
+      font-family: 'DM Sans', sans-serif; font-size: 0.88rem; color: var(--ink);
+      background: var(--ivory); border: 1.5px solid var(--border); border-radius: 6px;
+      outline: none; transition: border-color 0.2s;
     }
-    .qty-btn {
-      width: 24px; height: 24px; border-radius: 3px;
+    .pm-field input:focus, .pm-field textarea:focus { border-color: var(--wine); }
+    .pm-field textarea { resize: vertical; min-height: 60px; }
+    .pm-qty-row { display: flex; align-items: center; gap: 0.5rem; }
+    .pm-qty-btn {
+      width: 32px; height: 32px; border-radius: 5px;
       border: 1.5px solid var(--border);
-      font-size: 1rem; line-height: 1;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--slate);
-      transition: border-color 0.15s, color 0.15s;
+      font-size: 1.1rem; display: flex; align-items: center; justify-content: center;
+      color: var(--slate); transition: border-color 0.15s, color 0.15s;
     }
-    .qty-btn:hover { border-color: var(--wine); color: var(--wine); }
-    .qty-val { font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 700; min-width: 1.5rem; text-align: center; }
-    .qp-item-del { color: var(--grey); font-size: 1rem; padding: 2px; transition: color 0.15s; margin-top: 2px; }
-    .qp-item-del:hover { color: var(--wine); }
-    .qp-empty {
-      text-align: center; padding: 3rem 1rem;
-      color: var(--slate); font-size: 0.9rem; line-height: 1.7;
+    .pm-qty-btn:hover { border-color: var(--wine); color: var(--wine); }
+    .pm-qty-val {
+      font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 700;
+      min-width: 2.2rem; text-align: center; color: var(--ink);
     }
-    .qp-empty strong { display: block; margin-bottom: 0.4rem; color: var(--ink); font-size: 1rem; }
-    /* Form */
-    .qp-divider { height: 1px; background: var(--border); margin: 1.5rem 0; }
-    .qp-form-title {
-      font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 700;
-      letter-spacing: 0.16em; text-transform: uppercase;
-      color: var(--slate); margin-bottom: 1rem;
-    }
-    .qp-field { margin-bottom: 0.85rem; }
-    .qp-field label {
-      display: block; font-size: 0.72rem; font-weight: 600;
-      color: var(--slate); margin-bottom: 0.32rem; letter-spacing: 0.03em;
-    }
-    .qp-field input,
-    .qp-field textarea {
-      width: 100%; padding: 0.65rem 0.85rem;
-      font-family: 'DM Sans', sans-serif; font-size: 0.88rem;
-      color: var(--ink); background: var(--ivory);
-      border: 1.5px solid var(--border); border-radius: 5px; outline: none;
-      transition: border-color 0.2s;
-    }
-    .qp-field textarea { resize: vertical; min-height: 72px; }
-    .qp-field input:focus, .qp-field textarea:focus { border-color: var(--wine); }
-    .qp-submit {
-      width: 100%; padding: 0.92rem;
+    .pm-add-btn {
+      width: 100%; padding: 0.9rem;
       font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 800;
-      letter-spacing: 0.16em; text-transform: uppercase;
-      color: #fff; background: var(--wine);
-      border-radius: 5px;
-      transition: background 0.2s;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: #fff; background: var(--wine); border-radius: 6px;
+      transition: background 0.2s, transform 0.15s;
     }
-    .qp-submit:hover { background: var(--wine-l); }
-    .qp-submit:disabled { opacity: 0.6; cursor: not-allowed; }
-    #quote-thanks {
-      display: none;
-      text-align: center; padding: 2rem 1rem;
-    }
-    #quote-thanks .thanks-icon { font-size: 2.5rem; margin-bottom: 1rem; }
-    #quote-thanks h3 { font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 800; margin-bottom: 0.5rem; }
-    #quote-thanks p { font-size: 0.88rem; color: var(--slate); line-height: 1.65; }
-    /* Floating cart FAB for mobile */
+    .pm-add-btn:hover { background: var(--wine-l); transform: translateY(-1px); }
+    .pm-add-btn.added { background: var(--success); }
+    /* Floating cotizar FAB for mobile */
     .cart-fab {
       position: fixed; bottom: 5.5rem; right: 1.5rem; z-index: 180;
       display: none;
       width: 52px; height: 52px; border-radius: 50%;
       background: var(--wine); color: #fff;
+      text-decoration: none;
       box-shadow: 0 4px 16px rgba(139,26,43,0.45);
       align-items: center; justify-content: center;
       transition: transform 0.2s, box-shadow 0.2s;
@@ -600,7 +625,7 @@
       position: absolute; top: -4px; right: -4px;
       min-width: 18px; height: 18px; border-radius: 9px;
       background: var(--gold); color: var(--ob); font-size: 0.6rem; font-weight: 800;
-      display: flex; align-items: center; justify-content: center; padding: 0 3px;
+      display: none; align-items: center; justify-content: center; padding: 0 3px;
     }
 
     /* ─── SERVICIOS ──────────────────────────────────────── */
@@ -640,6 +665,20 @@
       transition: gap 0.2s;
     }
     .serv-link:hover { gap: 0.6rem; }
+    /* Alliance logos */
+    .alliance-logos {
+      display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+    .alliance-logo-link {
+      display: flex; align-items: center; justify-content: center;
+      padding: 0.4rem 0.8rem;
+      border: 1px solid var(--border); border-radius: 6px;
+      background: var(--ivory);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .alliance-logo-link:hover { border-color: var(--gold); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .alliance-logo-link img { height: 28px; width: auto; object-fit: contain; }
 
     /* ─── CTA FINAL ──────────────────────────────────────── */
     #cta-final {
@@ -773,16 +812,19 @@
     <img src="assets/images/logo-marketing.png" alt="Alista Marketing Services">
   </a>
   <ul class="nav-links">
-    <li><a href="#catalogo">Catálogo</a></li>
+    <li><a href="#nosotros">Nosotros</a></li>
     <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#catalogo">Catálogo</a></li>
+    <li><a href="#proceso">Proceso</a></li>
     <li><a href="#cta-final">Contacto</a></li>
   </ul>
   <div class="nav-right">
-    <button class="cart-trigger" onclick="openPanel()" aria-label="Ver cotización">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+    <a class="cart-trigger" href="cotizar.html" aria-label="Ver cotización">
+      <!-- Quotation document icon -->
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
       Cotizar
       <span id="nav-badge" class="cart-badge"></span>
-    </button>
+    </a>
     <button class="nav-hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menú">
       <span></span><span></span><span></span>
     </button>
@@ -791,11 +833,12 @@
 
 <!-- ── MOBILE DRAWER ──────────────────────────────────────── -->
 <div id="mkt-mob-drawer">
-  <a href="#catalogo" onclick="closeMenu()">Catálogo</a>
-  <a href="#como" onclick="closeMenu()">Cómo funciona</a>
+  <a href="#nosotros" onclick="closeMenu()">Nosotros</a>
   <a href="#servicios" onclick="closeMenu()">Servicios</a>
+  <a href="#catalogo" onclick="closeMenu()">Catálogo</a>
+  <a href="#proceso" onclick="closeMenu()">Proceso</a>
   <a href="#cta-final" onclick="closeMenu()">Contacto</a>
-  <a href="#" onclick="closeMenu(); openPanel(); return false;">Ver cotización</a>
+  <a href="cotizar.html" onclick="closeMenu()">Ver cotización</a>
 </div>
 
 <!-- ── HERO ───────────────────────────────────────────────── -->
@@ -824,7 +867,7 @@
     <p class="hero-sub">Más de 1,300 productos personalizados con la identidad de tu empresa. Desde textiles hasta tecnología, cada artículo es una oportunidad para que tu marca esté presente donde importa.</p>
     <div class="hero-ctas">
       <a href="#catalogo" class="btn-wine">Explorar catálogo →</a>
-      <a href="#como" class="btn-outline">Cómo funciona</a>
+      <a href="#proceso" class="btn-outline">Cómo funciona</a>
     </div>
   </div>
 
@@ -834,10 +877,31 @@
   </div>
 </section>
 
-<!-- ── CÓMO FUNCIONA ──────────────────────────────────────── -->
-<section id="como">
+<!-- ── NOSOTROS ────────────────────────────────────────────── -->
+<section id="nosotros">
   <div class="section-wrap">
-    <div class="como-header reveal">
+    <div class="nosotros-inner">
+      <div class="nosotros-label-col reveal">
+        <span class="section-eyebrow">Quiénes somos</span>
+        <div class="nosotros-stat">+10</div>
+        <div class="nosotros-stat-desc">años ayudando a<br>empresas a fortalecer<br>su marca.</div>
+      </div>
+      <div class="nosotros-text-col reveal" style="transition-delay:0.1s">
+        <h2 class="section-title" style="margin-bottom:1.5rem">Alista Marketing Services.</h2>
+        <div class="nosotros-body">
+          <p>En ALISTA Marketing Services llevamos más de 10 años ayudando a empresas a fortalecer su marca a través de artículos promocionales de alta calidad. Nos especializamos en crear productos personalizados que no solo representan tu identidad, sino que también generan impacto y recordación en tus clientes.</p>
+          <p>Desde el diseño hasta la entrega, cuidamos cada detalle para garantizar resultados consistentes, tiempos confiables y una experiencia sin complicaciones. Trabajamos con empresas de todos los tamaños, adaptándonos a sus necesidades y asegurando que cada proyecto cumpla con los más altos estándares de calidad.</p>
+          <p>En ALISTA, no solo entregamos productos: ayudamos a posicionar tu marca de manera profesional y efectiva.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROCESO ────────────────────────────────────────────── -->
+<section id="proceso">
+  <div class="section-wrap">
+    <div class="proceso-header reveal">
       <span class="section-eyebrow">El proceso</span>
       <h2 class="section-title">Así de fácil.</h2>
       <p class="section-sub">Sin complicaciones. Sin registros. Sin compromiso hasta que tú decidas.</p>
@@ -870,7 +934,7 @@
         <span class="section-eyebrow">Catálogo completo</span>
         <h2 class="section-title" style="margin-bottom:0">
           Productos
-          <span class="cat-count-badge" id="total-badge">1,375 artículos</span>
+          <span class="cat-count-badge" id="total-badge"></span>
         </h2>
       </div>
     </div>
@@ -902,60 +966,46 @@
   </div>
 </section>
 
-<!-- ── QUOTE PANEL BACKDROP ───────────────────────────────── -->
-<div class="panel-backdrop" id="panel-backdrop" onclick="closePanel()"></div>
+<!-- ── PRODUCT MODAL BACKDROP ─────────────────────────────── -->
+<div class="modal-backdrop" id="modal-backdrop" onclick="closeModal()"></div>
 
-<!-- ── QUOTE PANEL ─────────────────────────────────────────── -->
-<div id="quote-panel" role="dialog" aria-label="Tu cotización">
-  <div class="qp-header">
-    <span class="qp-title">Tu cotización <span id="qp-count-label"></span></span>
-    <button class="qp-close" onclick="closePanel()" aria-label="Cerrar">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
-    </button>
+<!-- ── PRODUCT MODAL ──────────────────────────────────────── -->
+<div id="product-modal" role="dialog" aria-modal="true" aria-label="Agregar a cotización">
+  <button class="pm-close" onclick="closeModal()" aria-label="Cerrar">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+  </button>
+  <div class="pm-img-row">
+    <img class="pm-img" id="pm-img" src="" alt="">
+    <div class="pm-info">
+      <span class="pm-cat-badge" id="pm-cat"></span>
+      <div class="pm-name" id="pm-name"></div>
+      <div class="pm-sku" id="pm-sku"></div>
+    </div>
   </div>
-  <div class="qp-body">
-    <div id="qp-items"></div>
-    <div id="qp-form-wrap">
-      <div class="qp-divider"></div>
-      <p class="qp-form-title">Datos de contacto</p>
-      <form id="quote-form" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
-        <div class="qp-field">
-          <label for="qf-name">Nombre completo *</label>
-          <input type="text" id="qf-name" name="nombre" required placeholder="Tu nombre">
-        </div>
-        <div class="qp-field">
-          <label for="qf-company">Empresa *</label>
-          <input type="text" id="qf-company" name="empresa" required placeholder="Nombre de tu empresa">
-        </div>
-        <div class="qp-field">
-          <label for="qf-email">Correo electrónico *</label>
-          <input type="email" id="qf-email" name="email" required placeholder="correo@empresa.com">
-        </div>
-        <div class="qp-field">
-          <label for="qf-phone">Teléfono</label>
-          <input type="tel" id="qf-phone" name="telefono" placeholder="+52 (333) 000-0000">
-        </div>
-        <div class="qp-field">
-          <label for="qf-notes">Notas adicionales</label>
-          <textarea id="qf-notes" name="notas" placeholder="Colores, cantidad estimada, fecha de entrega…"></textarea>
-        </div>
-        <input type="hidden" name="productos" id="qf-products">
-        <button type="submit" class="qp-submit">Enviar cotización →</button>
-      </form>
-      <div id="quote-thanks">
-        <div class="thanks-icon">✅</div>
-        <h3>¡Cotización enviada!</h3>
-        <p>Recibimos tu solicitud. Nuestro equipo te contactará en menos de 24 horas con precios, tiempos de entrega y opciones de personalización.</p>
+  <div class="pm-form">
+    <div class="pm-field">
+      <label>Cantidad aproximada</label>
+      <div class="pm-qty-row">
+        <button class="pm-qty-btn" type="button" onclick="modalQty(-1)">−</button>
+        <span class="pm-qty-val" id="pm-qty">1</span>
+        <button class="pm-qty-btn" type="button" onclick="modalQty(1)">+</button>
       </div>
     </div>
+    <div class="pm-field">
+      <label for="pm-specs">Color / especificaciones (opcional)</label>
+      <textarea id="pm-specs" placeholder="Ej. Azul marino, logo a 1 tinta, talla L…"></textarea>
+    </div>
+    <button class="pm-add-btn" id="pm-add-btn" type="button" onclick="confirmAddToCart()">
+      + Añadir a cotización
+    </button>
   </div>
 </div>
 
-<!-- ── MOBILE CART FAB ─────────────────────────────────────── -->
-<button class="cart-fab" id="cart-fab" onclick="openPanel()" aria-label="Ver cotización">
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-  <span class="cart-fab-badge" id="fab-badge" style="display:none"></span>
-</button>
+<!-- ── MOBILE COTIZAR FAB ─────────────────────────────────── -->
+<a class="cart-fab" id="cart-fab" href="cotizar.html" aria-label="Ver cotización">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+  <span class="cart-fab-badge" id="fab-badge"></span>
+</a>
 
 <!-- ── SERVICIOS ──────────────────────────────────────────── -->
 <section id="servicios">
@@ -980,6 +1030,14 @@
         </div>
         <div class="serv-title">Alianzas con agencias de marketing</div>
         <p class="serv-desc">Colaboramos con agencias para integrar productos promocionales en campañas 360°. Desde activaciones de marca hasta programas de lealtad — somos el brazo ejecutor que convierte estrategia en objetos que se tocan, se usan y se recuerdan.</p>
+        <div class="alliance-logos">
+          <a href="https://burobd.com" class="alliance-logo-link" target="_blank" rel="noopener" aria-label="Buró">
+            <img src="assets/images/marketing/logo-buro.png" alt="Buró">
+          </a>
+          <a href="https://feuerluft.com" class="alliance-logo-link" target="_blank" rel="noopener" aria-label="Feuerluft">
+            <img src="assets/images/marketing/logo-feuerluft.png" alt="Feuerluft">
+          </a>
+        </div>
         <a href="#cta-final" class="serv-link">Hablemos <span>→</span></a>
       </div>
       <div class="serv-card reveal" style="transition-delay:0.25s">
@@ -988,7 +1046,7 @@
         </div>
         <div class="serv-title">Desarrollo de productos a medida</div>
         <p class="serv-desc">¿No encuentras lo que buscas en el catálogo? Diseñamos y fabricamos artículos promocionales exclusivos desde cero. Packaging personalizado, artículos de edición limitada, sets de regalo de alto impacto — todo con tu ADN de marca.</p>
-        <a href="#cta-final" class="serv-link">Solicitar desarrollo <span>→</span></a>
+        <a href="mailto:ventas@grupoalista.com" class="serv-link">Solicitar desarrollo <span>→</span></a>
       </div>
     </div>
   </div>
@@ -1002,7 +1060,7 @@
       <p class="cta-sub">Cotiza sin compromiso. Nuestro equipo te asesora en menos de 24 horas con precios, tiempos y opciones de personalización.</p>
       <div class="cta-btns">
         <a href="#catalogo" class="btn-wine">Explorar catálogo →</a>
-        <a href="https://wa.me/523331288999?text=Hola%2C%20me%20interesa%20cotizar%20productos%20promocionales%20con%20Alista%20Marketing." class="btn-outline" target="_blank" rel="noopener">Contactar por WhatsApp</a>
+        <a href="https://wa.me/523331288999" class="btn-outline" target="_blank" rel="noopener">Contactar por WhatsApp</a>
       </div>
     </div>
   </div>
@@ -1021,13 +1079,17 @@
           <a href="https://www.instagram.com/grupo.alista/" class="footer-social" aria-label="Instagram" target="_blank" rel="noopener">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
           </a>
+          <!-- Facebook -->
+          <a href="https://www.facebook.com/grupo.alista.54" class="footer-social" aria-label="Facebook" target="_blank" rel="noopener">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <!-- TikTok -->
+          <a href="https://www.tiktok.com/@grupo.alista" class="footer-social" aria-label="TikTok" target="_blank" rel="noopener">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/></svg>
+          </a>
           <!-- LinkedIn -->
           <a href="https://www.linkedin.com/company/grupo-alista" class="footer-social" aria-label="LinkedIn" target="_blank" rel="noopener">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-          </a>
-          <!-- WhatsApp -->
-          <a href="https://wa.me/523331288999" class="footer-social" aria-label="WhatsApp" target="_blank" rel="noopener">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
           </a>
         </div>
       </div>
@@ -1040,13 +1102,17 @@
         </nav>
       </div>
 
-      <!-- Servicios + Contacto -->
+      <!-- Empresa + Contacto -->
       <div>
         <div class="footer-col-title">Empresa</div>
         <nav class="footer-nav">
-          <a href="#como">Cómo funciona</a>
-          <a href="#servicios">Nuestros servicios</a>
-          <a href="#cta-final">Cotizar</a>
+          <a href="#nosotros">Nosotros</a>
+          <a href="#servicios">Servicios</a>
+          <a href="#catalogo">Catálogo</a>
+          <a href="#proceso">Proceso</a>
+          <a href="cotizar.html">Cotizar</a>
+          <a href="privacy.html">Privacidad</a>
+          <a href="terms.html">Términos de uso</a>
         </nav>
         <div style="margin-top:1.8rem">
           <div class="footer-col-title">Contacto</div>
@@ -1072,7 +1138,7 @@
 </footer>
 
 <!-- ── WHATSAPP FAB ────────────────────────────────────────── -->
-<a class="wa-fab" href="https://wa.me/523331288999?text=Hola%2C%20me%20interesa%20cotizar%20productos%20promocionales." target="_blank" rel="noopener" aria-label="WhatsApp">
+<a class="wa-fab" href="https://wa.me/523331288999" target="_blank" rel="noopener" aria-label="WhatsApp">
   <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
@@ -1260,41 +1326,76 @@
     return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
-  // ── Cart operations ───────────────────────────────────────
+  // ── Modal state ───────────────────────────────────────────
+  var modalProduct = null;
+  var modalQtyVal = 1;
+
+  // ── Open product modal ────────────────────────────────────
   window.addToCart = function (productId) {
     var product = CATALOG.find(function (p) { return p.id === productId; });
     if (!product) return;
-    var existing = cart.find(function (c) { return c.id === productId; });
+    modalProduct = product;
+    modalQtyVal = 1;
+
+    var catLabel = catLabelMap[product.category] || product.category;
+    var imgPath = 'assets/images/marketing/' + product.category + '/' + product.img;
+
+    document.getElementById('pm-img').src = imgPath;
+    document.getElementById('pm-img').alt = product.name;
+    document.getElementById('pm-cat').textContent = catLabel;
+    document.getElementById('pm-name').textContent = product.name;
+    document.getElementById('pm-sku').textContent = product.sku;
+    document.getElementById('pm-qty').textContent = '1';
+    document.getElementById('pm-specs').value = '';
+    var addBtn = document.getElementById('pm-add-btn');
+    addBtn.textContent = '+ Añadir a cotización';
+    addBtn.classList.remove('added');
+
+    document.getElementById('product-modal').classList.add('open');
+    document.getElementById('modal-backdrop').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+
+  window.closeModal = function () {
+    document.getElementById('product-modal').classList.remove('open');
+    document.getElementById('modal-backdrop').classList.remove('open');
+    document.body.style.overflow = '';
+    modalProduct = null;
+  };
+
+  window.modalQty = function (delta) {
+    modalQtyVal = Math.max(1, modalQtyVal + delta);
+    document.getElementById('pm-qty').textContent = modalQtyVal;
+  };
+
+  window.confirmAddToCart = function () {
+    if (!modalProduct) return;
+    var specs = document.getElementById('pm-specs').value.trim();
+    var existing = cart.find(function (c) { return c.id === modalProduct.id; });
     if (existing) {
-      existing.qty += 1;
+      existing.qty += modalQtyVal;
+      if (specs) existing.specs = specs;
     } else {
-      cart.push({ id: product.id, category: product.category, name: product.name, sku: product.sku, img: product.img, qty: 1 });
+      cart.push({
+        id: modalProduct.id, category: modalProduct.category,
+        name: modalProduct.name, sku: modalProduct.sku, img: modalProduct.img,
+        qty: modalQtyVal, specs: specs
+      });
     }
     saveCart();
     updateBadge();
-    renderCartPanel();
-    // Update button in grid
-    document.querySelectorAll('.prod-quote-btn[data-pid="' + productId + '"]').forEach(function (btn) {
-      btn.textContent = '✓ Agregado';
-      btn.classList.add('added');
+
+    // Visual feedback on button
+    var addBtn = document.getElementById('pm-add-btn');
+    addBtn.textContent = '✓ Agregado a cotización';
+    addBtn.classList.add('added');
+
+    // Update grid button if visible
+    document.querySelectorAll('.prod-quote-btn[data-pid="' + modalProduct.id + '"]').forEach(function (btn) {
+      btn.textContent = '✓ Agregado'; btn.classList.add('added');
     });
-    openPanel();
-  };
 
-  window.removeFromCart = function (productId) {
-    cart = cart.filter(function (c) { return c.id !== productId; });
-    saveCart();
-    updateBadge();
-    renderCartPanel();
-    renderCatalog();
-  };
-
-  window.updateQty = function (productId, delta) {
-    var item = cart.find(function (c) { return c.id === productId; });
-    if (!item) return;
-    item.qty = Math.max(1, item.qty + delta);
-    saveCart();
-    renderCartPanel();
+    setTimeout(function () { closeModal(); }, 900);
   };
 
   function updateBadge() {
@@ -1308,71 +1409,7 @@
       badge.classList.remove('visible');
       fabBadge.style.display = 'none';
     }
-    var countLabel = document.getElementById('qp-count-label');
-    if (countLabel) countLabel.textContent = total > 0 ? '(' + total + ')' : '';
   }
-
-  function renderCartPanel() {
-    var wrap = document.getElementById('qp-items');
-    var formWrap = document.getElementById('qp-form-wrap');
-    if (cart.length === 0) {
-      wrap.innerHTML = '<div class="qp-empty"><strong>Tu cotización está vacía</strong>Agrega productos desde el catálogo y solicita tu cotización sin compromiso.</div>';
-      formWrap.style.display = 'none';
-      return;
-    }
-    formWrap.style.display = '';
-    var html = '';
-    cart.forEach(function (item) {
-      var imgPath = 'assets/images/marketing/' + item.category + '/' + item.img;
-      html += '<div class="qp-item">' +
-        '<img class="qp-item-img" src="' + imgPath + '" alt="' + escHtml(item.name) + '">' +
-        '<div class="qp-item-info">' +
-        '<div class="qp-item-name">' + escHtml(item.name) + '</div>' +
-        '<div class="qp-item-sku">' + escHtml(item.sku) + '</div>' +
-        '<div class="qp-item-qty">' +
-        '<button class="qty-btn" onclick="updateQty(' + JSON.stringify(item.id) + ',-1)">−</button>' +
-        '<span class="qty-val">' + item.qty + '</span>' +
-        '<button class="qty-btn" onclick="updateQty(' + JSON.stringify(item.id) + ',1)">+</button>' +
-        '</div></div>' +
-        '<button class="qp-item-del" onclick="removeFromCart(' + JSON.stringify(item.id) + ')" aria-label="Eliminar">✕</button>' +
-        '</div>';
-    });
-    wrap.innerHTML = html;
-  }
-
-  // ── Panel open/close ──────────────────────────────────────
-  window.openPanel = function () {
-    renderCartPanel();
-    document.getElementById('quote-panel').classList.add('open');
-    document.getElementById('panel-backdrop').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  };
-  window.closePanel = function () {
-    document.getElementById('quote-panel').classList.remove('open');
-    document.getElementById('panel-backdrop').classList.remove('open');
-    document.body.style.overflow = '';
-  };
-
-  // ── Quote form submit ─────────────────────────────────────
-  document.getElementById('quote-form').addEventListener('submit', function (e) {
-    e.preventDefault();
-    var btn = this.querySelector('.qp-submit');
-    btn.disabled = true; btn.textContent = 'Enviando…';
-    // Embed cart summary
-    document.getElementById('qf-products').value =
-      cart.map(function (i) { return i.name + ' (' + i.sku + ') x' + i.qty; }).join(' | ');
-    var data = new FormData(this);
-    fetch(this.action, { method: 'POST', body: data, headers: { Accept: 'application/json' } })
-      .then(function (r) {
-        document.getElementById('quote-thanks').style.display = 'block';
-        document.getElementById('quote-form').style.display = 'none';
-        cart = []; saveCart(); updateBadge(); renderCatalog();
-      })
-      .catch(function () {
-        btn.disabled = false; btn.textContent = 'Enviar cotización →';
-        alert('Hubo un error. Por favor intenta de nuevo o contáctanos por WhatsApp.');
-      });
-  });
 
   // ── Category filter ───────────────────────────────────────
   window.setCategory = function (slug) {
@@ -1441,8 +1478,9 @@
   document.querySelectorAll('.reveal').forEach(function (el) { revealObs.observe(el); });
 
   // ── Init ──────────────────────────────────────────────────
+  var totalBadge = document.getElementById('total-badge');
+  if (totalBadge) totalBadge.textContent = CATALOG.length.toLocaleString('es-MX') + ' artículos';
   renderCatalog();
-  renderCartPanel();
   updateBadge();
 
 })();

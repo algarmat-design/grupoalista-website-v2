@@ -50,7 +50,7 @@ function findXlsx(folderPath) {
 // Find image files for a category folder, sorted by row number
 function findImages(folderPath) {
   return fs.readdirSync(folderPath)
-    .filter(f => /\.(jpg|jpeg)$/i.test(f) && f.startsWith('row_'))
+    .filter(f => /\.(jpg|jpeg|png)$/i.test(f) && f.startsWith('row_'))
     .sort((a, b) => {
       const na = parseInt(a.match(/row_(\d+)/)?.[1] ?? '0');
       const nb = parseInt(b.match(/row_(\d+)/)?.[1] ?? '0');
@@ -124,6 +124,66 @@ for (const cat of CATEGORY_MAP) {
 
   categories.push({ slug: cat.slug, label: cat.label, icon: cat.icon, count: catCount });
   console.log(`✓ ${cat.label}: ${catCount} products`);
+}
+
+// ── PREMIUM: collect from all premium/ subfolders ──────────────────────────
+{
+  const premiumSlug  = 'premium';
+  const premiumLabel = 'Premium';
+  const premiumIcon  = '⭐';
+  const premiumProducts = [];
+
+  for (const cat of CATEGORY_MAP) {
+    const premDir = path.join(SRC_BASE, cat.folder, 'premium');
+    if (!fs.existsSync(premDir)) continue;
+
+    const xlsxPath  = findXlsx(premDir);
+    const imageFiles = findImages(premDir);
+    if (imageFiles.length === 0) continue;
+
+    // Parse xlsx if available
+    const xData = {};
+    if (xlsxPath) {
+      const wb = xlsx.readFile(xlsxPath);
+      const ws = wb.Sheets[wb.SheetNames[0]];
+      const rows = xlsx.utils.sheet_to_json(ws, { header: 1 });
+      const headers = rows[0] ?? [];
+      const nameCol = headers.findIndex(h => String(h).toLowerCase().includes('description'));
+      const skuCol  = headers.findIndex(h => String(h).toLowerCase().includes('sku'));
+      for (let i = 1; i < rows.length; i++) {
+        const row = rows[i];
+        if (!row || row.every(v => !v)) continue;
+        xData[i] = {
+          name: nameCol >= 0 ? String(row[nameCol] ?? '').trim() : '',
+          sku:  skuCol  >= 0 ? String(row[skuCol]  ?? '').trim() : '',
+        };
+      }
+    }
+
+    for (const imgFile of imageFiles) {
+      const rowNum = parseInt(imgFile.match(/row_(\d+)/)?.[1] ?? '0');
+      const xRow = xData[rowNum] ?? { name: '', sku: '' };
+      const name = xRow.name || `${cat.label} Premium ${rowNum}`;
+      const sku  = xRow.sku  || `PRE-${cat.slug.toUpperCase().slice(0, 3)}-${String(rowNum).padStart(3, '0')}`;
+      const id   = `PRE-${cat.slug.toUpperCase().slice(0, 3)}-${String(rowNum).padStart(3, '0')}`;
+
+      premiumProducts.push({
+        id,
+        category: premiumSlug,
+        name,
+        sku,
+        // img path includes origin subcategory to avoid naming conflicts
+        img: `${cat.slug}/${imgFile}`,
+      });
+    }
+    console.log(`  ↳ Premium ${cat.label}: ${imageFiles.length} products`);
+  }
+
+  if (premiumProducts.length > 0) {
+    allProducts.push(...premiumProducts);
+    categories.push({ slug: premiumSlug, label: premiumLabel, icon: premiumIcon, count: premiumProducts.length });
+    console.log(`✓ Premium (total): ${premiumProducts.length} products`);
+  }
 }
 
 // Write output JS file
