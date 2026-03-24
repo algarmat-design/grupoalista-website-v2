@@ -28,5 +28,8 @@
     "node": ">=18"
   },
   "author": "Grupo Alista",
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "dependencies": {
+    "motion": "^12.38.0"
+  }
 }
