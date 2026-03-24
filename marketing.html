@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alista Marketing Services | Productos Promocionales</title>
+  <meta name="description" content="Tu marca en cada detalle. Más de 1,300 productos promocionales personalizados: textiles, tecnología, bebidas, escritura y más. Cotiza en minutos.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&family=Playfair+Display:ital,wght@1,700&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <style>
+    /* ─── TOKENS ─────────────────────────────────────────── */
+    :root {
+      --ob:      #1C1C2E;
+      --ob2:     #13132280;
+      --wine:    #8B1A2B;
+      --wine-l:  #A62D42;
+      --wine-d:  #5C0E1F;
+      --coral:   #E07A5F;
+      --gold:    #C9A84C;
+      --gold-l:  #DFC16A;
+      --ivory:   #FAF7F2;
+      --pearl:   #F0EDE8;
+      --cream:   #F5F0E8;
+      --slate:   #6B6B7B;
+      --grey:    #A8A3A0;
+      --charcoal:#2E2E3A;
+      --ink:     #111111;
+      --border:  rgba(17,17,17,0.09);
+      --success: #10B981;
+      --r:       8px;
+    }
+
+    /* ─── RESET ──────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--ivory);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+    /* ─── SCROLL REVEAL ──────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1);
+    }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+
+    /* ─── NAVBAR ─────────────────────────────────────────── */
+    #mkt-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      height: 68px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+    #mkt-nav.scrolled {
+      background: rgba(250,247,242,0.92);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 var(--border);
+    }
+    .nav-logo { display: flex; align-items: center; }
+    .nav-logo img { height: 44px; width: auto; }
+    .nav-links {
+      display: flex; align-items: center; gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--ivory); opacity: 0.82;
+      transition: opacity 0.2s, color 0.2s;
+      position: relative;
+    }
+    #mkt-nav.scrolled .nav-links a { color: var(--ink); opacity: 0.7; }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1.5px;
+      background: var(--wine); transition: width 0.25s ease;
+    }
+    .nav-links a:hover { opacity: 1; }
+    .nav-links a:hover::after { width: 100%; }
+    #mkt-nav.scrolled .nav-links a:hover { color: var(--wine); }
+    .nav-right { display: flex; align-items: center; gap: 1.2rem; }
+    .cart-trigger {
+      position: relative; display: flex; align-items: center; gap: 0.5rem;
+      font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--ivory); background: transparent;
+      border: 1.5px solid rgba(255,255,255,0.25);
+      padding: 0.42rem 1rem; border-radius: 4px;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+    #mkt-nav.scrolled .cart-trigger { color: var(--wine); border-color: var(--wine); }
+    .cart-trigger:hover { background: var(--wine); border-color: var(--wine); color: #fff !important; }
+    .cart-badge {
+      display: none; min-width: 18px; height: 18px;
+      background: var(--wine); color: #fff;
+      font-size: 0.62rem; font-weight: 800; border-radius: 9px;
+      align-items: center; justify-content: center; padding: 0 4px;
+    }
+    .cart-badge.visible { display: flex; }
+    .nav-hamburger {
+      display: none; flex-direction: column; gap: 5px; padding: 4px;
+    }
+    .nav-hamburger span {
+      display: block; width: 22px; height: 1.5px;
+      background: var(--ivory);
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    #mkt-nav.scrolled .nav-hamburger span { background: var(--ink); }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* ─── MOBILE DRAWER ──────────────────────────────────── */
+    #mkt-mob-drawer {
+      position: fixed; inset: 0; z-index: 190;
+      background: var(--ob);
+      display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2.5rem;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    #mkt-mob-drawer.open { opacity: 1; pointer-events: all; }
+    #mkt-mob-drawer a {
+      font-family: 'Inter', sans-serif; font-size: 1.4rem; font-weight: 800;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--ivory); opacity: 0.75;
+      transition: opacity 0.2s, color 0.2s;
+    }
+    #mkt-mob-drawer a:hover { opacity: 1; color: var(--gold); }
+
+    /* ─── HERO ───────────────────────────────────────────── */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      background: var(--ob);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 7rem 1.5rem 5rem;
+      overflow: hidden;
+    }
+    /* Crosshatch SVG background */
+    .hero-crosshatch {
+      position: absolute; inset: 0; pointer-events: none;
+      opacity: 0.04;
+    }
+    /* Wine radial glow */
+    .hero-glow-wine {
+      position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse 65% 60% at 15% 25%, rgba(139,26,43,0.22) 0%, transparent 65%);
+    }
+    /* Gold glow bottom-right */
+    .hero-glow-gold {
+      position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse 50% 45% at 88% 85%, rgba(201,168,76,0.10) 0%, transparent 60%);
+    }
+    .hero-content {
+      position: relative; z-index: 10;
+      display: flex; flex-direction: column; align-items: center; gap: 0;
+      max-width: 760px;
+    }
+    /* Logo hover effect — "ignition" */
+    .hero-logo {
+      width: clamp(160px, 20vw, 220px);
+      margin-bottom: 2.5rem;
+      filter: drop-shadow(0 4px 20px rgba(139,26,43,0.0));
+      transform: scale(1);
+      transition: transform 0.45s cubic-bezier(0.22,1,0.36,1), filter 0.45s ease;
+      cursor: default;
+    }
+    .hero-logo:hover {
+      transform: scale(1.09);
+      filter: drop-shadow(0 0 28px rgba(139,26,43,0.60))
+              drop-shadow(0 0 64px rgba(201,168,76,0.20));
+    }
+    /* Gold rule */
+    .hero-rule {
+      width: 48px; height: 1.5px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 0 auto 2rem;
+    }
+    .hero-eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--gold); opacity: 0.9;
+      margin-bottom: 1.4rem;
+    }
+    .hero-h1 {
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      line-height: 1.05;
+      color: var(--ivory);
+      margin-bottom: 1.5rem;
+    }
+    .hero-h1 em {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      color: var(--gold);
+      display: block;
+    }
+    .hero-h1 strong {
+      font-family: 'Inter', sans-serif;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      display: block;
+    }
+    .hero-sub {
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
+      font-weight: 300;
+      line-height: 1.85;
+      color: rgba(250,247,242,0.68);
+      max-width: 560px;
+      margin-bottom: 2.8rem;
+    }
+    .hero-ctas {
+      display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; justify-content: center;
+    }
+    .btn-wine {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: #fff; background: var(--wine);
+      border: 2px solid var(--wine);
+      padding: 0.9rem 2rem; border-radius: 5px;
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    }
+    .btn-wine:hover { background: var(--wine-l); border-color: var(--wine-l); transform: translateY(-2px); }
+    .btn-wine:active { transform: translateY(0); }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(250,247,242,0.8);
+      border: 1.5px solid rgba(250,247,242,0.25);
+      padding: 0.9rem 2rem; border-radius: 5px;
+      transition: border-color 0.2s, color 0.2s, transform 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+    /* Scroll arrow */
+    .hero-scroll {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      color: rgba(250,247,242,0.35); font-family: 'Inter', sans-serif;
+      font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase;
+      animation: bounce 2.4s ease-in-out infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ─── SECTION COMMONS ────────────────────────────────── */
+    .section-wrap { max-width: 1280px; margin: 0 auto; padding: 0 clamp(1.5rem, 5vw, 4rem); }
+    .section-eyebrow {
+      font-family: 'Inter', sans-serif; font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.28em; text-transform: uppercase; color: var(--wine);
+      display: block; margin-bottom: 0.85rem;
+    }
+    .section-title {
+      font-family: 'Inter', sans-serif; font-weight: 900;
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      line-height: 1.08; letter-spacing: -0.02em;
+      color: var(--ink); margin-bottom: 1.2rem;
+    }
+    .section-sub {
+      font-family: 'DM Sans', sans-serif; font-weight: 300;
+      font-size: 1.05rem; line-height: 1.8;
+      color: var(--slate); max-width: 560px;
+    }
+
+    /* ─── CÓMO FUNCIONA ──────────────────────────────────── */
+    #como {
+      background: var(--ivory);
+      padding: clamp(5rem, 10vw, 8rem) 0;
+    }
+    .como-header { margin-bottom: 4.5rem; }
+    .como-steps {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2rem; position: relative;
+    }
+    /* Gold connector line between steps */
+    .como-steps::before {
+      content: '';
+      position: absolute; top: 2.4rem; left: calc(16.66% + 1rem); right: calc(16.66% + 1rem);
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--gold) 20%, var(--gold) 80%, transparent 100%);
+      opacity: 0.4; pointer-events: none;
+    }
+    .step-card { display: flex; flex-direction: column; gap: 1rem; }
+    .step-number {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic; font-size: 3rem; font-weight: 700;
+      color: var(--gold); line-height: 1; width: 4.8rem;
+      position: relative; z-index: 1;
+    }
+    .step-title {
+      font-family: 'Inter', sans-serif; font-weight: 800;
+      font-size: 1.05rem; letter-spacing: -0.01em; color: var(--ink);
+    }
+    .step-desc { font-size: 0.92rem; line-height: 1.75; color: var(--slate); }
+
+    /* ─── CATALOG ─────────────────────────────────────────── */
+    #catalogo {
+      background: var(--pearl);
+      padding: clamp(4rem, 8vw, 6.5rem) 0 5rem;
+    }
+    .cat-header {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      gap: 1rem; flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+    .cat-title-wrap {}
+    .cat-count-badge {
+      display: inline-flex; align-items: center;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.7rem;
+      color: var(--wine); border: 1.5px solid var(--wine);
+      padding: 0.22rem 0.75rem; border-radius: 20px;
+      margin-left: 1rem; vertical-align: middle;
+      letter-spacing: 0.06em;
+    }
+    /* Search */
+    .cat-search-wrap {
+      position: relative; margin-bottom: 1.75rem;
+    }
+    .cat-search-wrap svg {
+      position: absolute; left: 1.1rem; top: 50%; transform: translateY(-50%);
+      color: var(--slate); pointer-events: none;
+    }
+    #cat-search {
+      width: 100%; padding: 0.9rem 1rem 0.9rem 3rem;
+      font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 400;
+      color: var(--ink); background: #fff;
+      border: 1.5px solid var(--border); border-radius: var(--r);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    #cat-search:focus {
+      border-color: var(--wine);
+      box-shadow: 0 0 0 3px rgba(139,26,43,0.10);
+    }
+    #cat-search::placeholder { color: var(--grey); }
+    /* Category pills */
+    .cat-pills {
+      display: flex; gap: 0.55rem; flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+    .cat-pill {
+      font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.05em;
+      padding: 0.45rem 1.1rem; border-radius: 20px;
+      border: 1.5px solid var(--border);
+      background: #fff; color: var(--slate);
+      transition: background 0.18s, border-color 0.18s, color 0.18s;
+      cursor: pointer;
+    }
+    .cat-pill:hover { border-color: var(--wine); color: var(--wine); }
+    .cat-pill.active { background: var(--wine); border-color: var(--wine); color: #fff; }
+    /* Toolbar */
+    .cat-toolbar {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 1.5rem; gap: 1rem; flex-wrap: wrap;
+    }
+    .cat-result-label {
+      font-family: 'DM Sans', sans-serif; font-size: 0.85rem; color: var(--slate);
+    }
+    .cat-result-label strong { color: var(--ink); }
+    /* Product grid */
+    #cat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 1.25rem;
+      min-height: 300px;
+    }
+    /* Product card */
+    .prod-card {
+      background: #fff; border-radius: var(--r);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      display: flex; flex-direction: column;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+    }
+    .prod-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 36px rgba(0,0,0,0.10);
+    }
+    .prod-img-wrap {
+      position: relative;
+      height: 200px;
+      overflow: hidden;
+      background: var(--cream);
+    }
+    .prod-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .prod-card:hover .prod-img-wrap img { transform: scale(1.04); }
+    /* Placeholder while loading */
+    .prod-img-wrap img:not([src]) {
+      background: linear-gradient(110deg, var(--cream) 8%, var(--pearl) 18%, var(--cream) 33%);
+      background-size: 200% 100%;
+      animation: skeleton 1.5s linear infinite;
+    }
+    @keyframes skeleton {
+      to { background-position: -200% 0; }
+    }
+    .prod-cat-badge {
+      position: absolute; top: 0.6rem; left: 0.6rem;
+      font-family: 'Inter', sans-serif; font-size: 0.58rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      background: var(--wine); color: #fff;
+      padding: 0.2rem 0.55rem; border-radius: 3px;
+    }
+    .prod-body {
+      padding: 0.9rem 1rem 0.85rem;
+      display: flex; flex-direction: column; gap: 0.35rem;
+      flex: 1;
+    }
+    .prod-name {
+      font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 500;
+      color: var(--ink); line-height: 1.45;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .prod-sku {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.66rem;
+      color: var(--slate); letter-spacing: 0.05em;
+    }
+    .prod-action {
+      margin-top: auto; padding-top: 0.6rem;
+      display: flex; align-items: center; justify-content: flex-end;
+    }
+    .prod-quote-btn {
+      font-family: 'Inter', sans-serif; font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--wine); background: transparent;
+      border: 1.5px solid rgba(139,26,43,0.2);
+      padding: 0.38rem 0.85rem; border-radius: 4px;
+      transition: background 0.18s, color 0.18s, border-color 0.18s;
+    }
+    .prod-quote-btn:hover { background: var(--wine); color: #fff; border-color: var(--wine); }
+    .prod-quote-btn.added { background: var(--success); color: #fff; border-color: var(--success); }
+    /* Empty state */
+    #cat-empty {
+      display: none; grid-column: 1/-1;
+      text-align: center; padding: 4rem 1rem;
+      color: var(--slate); font-size: 0.95rem;
+    }
+    #cat-empty a { color: var(--wine); text-decoration: underline; cursor: pointer; }
+    /* Pagination */
+    #cat-pagination {
+      display: flex; align-items: center; justify-content: center;
+      gap: 0.45rem; margin-top: 3rem; flex-wrap: wrap;
+    }
+    .pg-btn {
+      min-width: 36px; height: 36px; border-radius: 4px;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 600;
+      border: 1.5px solid var(--border);
+      background: #fff; color: var(--slate);
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+      cursor: pointer; padding: 0 8px;
+    }
+    .pg-btn:hover { border-color: var(--wine); color: var(--wine); }
+    .pg-btn.active { background: var(--wine); border-color: var(--wine); color: #fff; }
+    .pg-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+    .pg-ellipsis {
+      font-family: 'Inter', sans-serif; font-size: 0.78rem; color: var(--slate);
+      padding: 0 4px; line-height: 36px;
+    }
+
+    /* ─── QUOTE PANEL ────────────────────────────────────── */
+    .panel-backdrop {
+      position: fixed; inset: 0; z-index: 290;
+      background: rgba(28,28,46,0.55);
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .panel-backdrop.open { opacity: 1; pointer-events: all; }
+    #quote-panel {
+      position: fixed; top: 0; right: 0; bottom: 0;
+      width: min(420px, 100vw); z-index: 300;
+      background: #fff;
+      box-shadow: -8px 0 48px rgba(0,0,0,0.14);
+      display: flex; flex-direction: column;
+      transform: translateX(105%);
+      transition: transform 0.38s cubic-bezier(0.22,1,0.36,1);
+      overflow: hidden;
+    }
+    #quote-panel.open { transform: translateX(0); }
+    .qp-header {
+      padding: 1.4rem 1.5rem 1.2rem;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-shrink: 0;
+    }
+    .qp-title {
+      font-family: 'Inter', sans-serif; font-size: 0.88rem; font-weight: 800;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink);
+    }
+    .qp-close {
+      width: 32px; height: 32px; border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--slate);
+      transition: background 0.2s, color 0.2s;
+    }
+    .qp-close:hover { background: var(--pearl); color: var(--wine); }
+    .qp-body { flex: 1; overflow-y: auto; padding: 1.2rem 1.5rem; }
+    /* Items list */
+    #qp-items { display: flex; flex-direction: column; gap: 1rem; }
+    .qp-item {
+      display: grid; grid-template-columns: 52px 1fr auto;
+      gap: 0.75rem; align-items: start;
+    }
+    .qp-item-img { width: 52px; height: 52px; border-radius: 4px; object-fit: cover; background: var(--cream); }
+    .qp-item-info { display: flex; flex-direction: column; gap: 2px; }
+    .qp-item-name { font-size: 0.8rem; font-weight: 500; color: var(--ink); line-height: 1.35; }
+    .qp-item-sku { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: var(--slate); }
+    .qp-item-qty {
+      display: flex; align-items: center; gap: 0.4rem; margin-top: 0.4rem;
+    }
+    .qty-btn {
+      width: 24px; height: 24px; border-radius: 3px;
+      border: 1.5px solid var(--border);
+      font-size: 1rem; line-height: 1;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--slate);
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .qty-btn:hover { border-color: var(--wine); color: var(--wine); }
+    .qty-val { font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 700; min-width: 1.5rem; text-align: center; }
+    .qp-item-del { color: var(--grey); font-size: 1rem; padding: 2px; transition: color 0.15s; margin-top: 2px; }
+    .qp-item-del:hover { color: var(--wine); }
+    .qp-empty {
+      text-align: center; padding: 3rem 1rem;
+      color: var(--slate); font-size: 0.9rem; line-height: 1.7;
+    }
+    .qp-empty strong { display: block; margin-bottom: 0.4rem; color: var(--ink); font-size: 1rem; }
+    /* Form */
+    .qp-divider { height: 1px; background: var(--border); margin: 1.5rem 0; }
+    .qp-form-title {
+      font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--slate); margin-bottom: 1rem;
+    }
+    .qp-field { margin-bottom: 0.85rem; }
+    .qp-field label {
+      display: block; font-size: 0.72rem; font-weight: 600;
+      color: var(--slate); margin-bottom: 0.32rem; letter-spacing: 0.03em;
+    }
+    .qp-field input,
+    .qp-field textarea {
+      width: 100%; padding: 0.65rem 0.85rem;
+      font-family: 'DM Sans', sans-serif; font-size: 0.88rem;
+      color: var(--ink); background: var(--ivory);
+      border: 1.5px solid var(--border); border-radius: 5px; outline: none;
+      transition: border-color 0.2s;
+    }
+    .qp-field textarea { resize: vertical; min-height: 72px; }
+    .qp-field input:focus, .qp-field textarea:focus { border-color: var(--wine); }
+    .qp-submit {
+      width: 100%; padding: 0.92rem;
+      font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 800;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: #fff; background: var(--wine);
+      border-radius: 5px;
+      transition: background 0.2s;
+    }
+    .qp-submit:hover { background: var(--wine-l); }
+    .qp-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+    #quote-thanks {
+      display: none;
+      text-align: center; padding: 2rem 1rem;
+    }
+    #quote-thanks .thanks-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+    #quote-thanks h3 { font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 800; margin-bottom: 0.5rem; }
+    #quote-thanks p { font-size: 0.88rem; color: var(--slate); line-height: 1.65; }
+    /* Floating cart FAB for mobile */
+    .cart-fab {
+      position: fixed; bottom: 5.5rem; right: 1.5rem; z-index: 180;
+      display: none;
+      width: 52px; height: 52px; border-radius: 50%;
+      background: var(--wine); color: #fff;
+      box-shadow: 0 4px 16px rgba(139,26,43,0.45);
+      align-items: center; justify-content: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .cart-fab:hover { transform: scale(1.08); box-shadow: 0 6px 22px rgba(139,26,43,0.55); }
+    .cart-fab-badge {
+      position: absolute; top: -4px; right: -4px;
+      min-width: 18px; height: 18px; border-radius: 9px;
+      background: var(--gold); color: var(--ob); font-size: 0.6rem; font-weight: 800;
+      display: flex; align-items: center; justify-content: center; padding: 0 3px;
+    }
+
+    /* ─── SERVICIOS ──────────────────────────────────────── */
+    #servicios {
+      background: var(--ivory);
+      padding: clamp(5rem, 10vw, 8rem) 0;
+    }
+    .serv-header { margin-bottom: 4rem; }
+    .serv-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .serv-card {
+      background: #fff; border-radius: var(--r);
+      border: 1px solid var(--border);
+      padding: 2.5rem 2rem;
+      display: flex; flex-direction: column; gap: 1.25rem;
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+    .serv-card:hover { box-shadow: 0 12px 36px rgba(0,0,0,0.08); transform: translateY(-4px); }
+    .serv-icon {
+      width: 48px; height: 48px; border-radius: 10px;
+      background: rgba(139,26,43,0.08);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--wine);
+    }
+    .serv-title {
+      font-family: 'Inter', sans-serif; font-weight: 800;
+      font-size: 1.05rem; letter-spacing: -0.01em; color: var(--ink);
+    }
+    .serv-desc { font-size: 0.9rem; line-height: 1.75; color: var(--slate); }
+    .serv-link {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--wine); margin-top: auto;
+      transition: gap 0.2s;
+    }
+    .serv-link:hover { gap: 0.6rem; }
+
+    /* ─── CTA FINAL ──────────────────────────────────────── */
+    #cta-final {
+      background: var(--ob);
+      padding: clamp(5rem, 10vw, 8rem) 0;
+      text-align: center; position: relative; overflow: hidden;
+    }
+    #cta-final::before {
+      content: '';
+      position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse 80% 70% at 50% 100%, rgba(139,26,43,0.18) 0%, transparent 65%);
+    }
+    .cta-content { position: relative; z-index: 1; }
+    .cta-title {
+      font-family: 'Inter', sans-serif; font-weight: 900;
+      font-size: clamp(1.8rem, 4.5vw, 3rem);
+      line-height: 1.1; letter-spacing: -0.02em;
+      color: var(--ivory); max-width: 700px; margin: 0 auto 1.2rem;
+    }
+    .cta-sub {
+      font-family: 'DM Sans', sans-serif; font-weight: 300;
+      font-size: 1rem; color: rgba(250,247,242,0.65);
+      max-width: 480px; margin: 0 auto 2.8rem; line-height: 1.75;
+    }
+    .cta-btns { display: flex; align-items: center; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* ─── FOOTER ─────────────────────────────────────────── */
+    #mkt-footer {
+      background: var(--charcoal);
+      padding: clamp(4rem, 8vw, 6rem) 0 0;
+      color: var(--ivory);
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr;
+      gap: 3rem; margin-bottom: 3.5rem;
+    }
+    .footer-brand {}
+    .footer-logo-mkt { height: 52px; width: auto; margin-bottom: 1.2rem; }
+    .footer-tagline {
+      font-family: 'DM Sans', sans-serif; font-size: 0.88rem;
+      font-weight: 300; font-style: italic;
+      color: rgba(250,247,242,0.55); line-height: 1.65;
+      max-width: 280px; margin-bottom: 1.5rem;
+    }
+    .footer-socials { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .footer-social {
+      width: 34px; height: 34px; border-radius: 5px;
+      border: 1px solid rgba(250,247,242,0.14);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(250,247,242,0.5);
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .footer-social:hover { border-color: var(--wine); color: #fff; background: var(--wine); }
+    .footer-col-title {
+      font-family: 'Inter', sans-serif; font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(250,247,242,0.35); margin-bottom: 1.2rem;
+    }
+    .footer-nav { display: flex; flex-direction: column; gap: 0.7rem; }
+    .footer-nav a {
+      font-family: 'DM Sans', sans-serif; font-size: 0.82rem;
+      color: rgba(250,247,242,0.6);
+      transition: color 0.2s;
+    }
+    .footer-nav a:hover { color: var(--gold); }
+    .footer-divider { height: 1px; background: rgba(250,247,242,0.08); margin: 0 clamp(1.5rem,5vw,4rem); }
+    .footer-bottom {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.6rem clamp(1.5rem, 5vw, 4rem);
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .ga-back-link {
+      display: flex; align-items: center; gap: 0.75rem;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .ga-back-link:hover { opacity: 0.8; }
+    .ga-back-link img { height: 32px; width: auto; opacity: 0.6; filter: brightness(0) invert(1); }
+    .ga-back-text {
+      font-family: 'Inter', sans-serif; font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: rgba(250,247,242,0.38);
+    }
+    .footer-copy {
+      font-family: 'DM Sans', sans-serif; font-size: 0.75rem;
+      color: rgba(250,247,242,0.28);
+    }
+
+    /* ─── WHATSAPP FAB ───────────────────────────────────── */
+    .wa-fab {
+      position: fixed; bottom: 1.8rem; right: 1.8rem; z-index: 170;
+      width: 52px; height: 52px; border-radius: 50%;
+      background: #25D366;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px rgba(37,211,102,0.40);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .wa-fab:hover { transform: scale(1.1); box-shadow: 0 6px 24px rgba(37,211,102,0.55); }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .serv-grid { grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .footer-brand { grid-column: 1 / -1; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .serv-grid { grid-template-columns: 1fr; }
+      .como-steps { grid-template-columns: 1fr; gap: 2.5rem; }
+      .como-steps::before { display: none; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-brand { grid-column: auto; }
+      #cat-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+      .cart-fab { display: flex; }
+      .cat-pills { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 0.5rem; -webkit-overflow-scrolling: touch; }
+      .cat-pill { white-space: nowrap; }
+    }
+    @media (max-width: 480px) {
+      #cat-grid { grid-template-columns: repeat(2, 1fr); }
+      .prod-img-wrap { height: 160px; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVBAR ─────────────────────────────────────────────── -->
+<nav id="mkt-nav">
+  <a class="nav-logo" href="marketing.html">
+    <img src="assets/images/logo-marketing.png" alt="Alista Marketing Services">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#catalogo">Catálogo</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#cta-final">Contacto</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="cart-trigger" onclick="openPanel()" aria-label="Ver cotización">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      Cotizar
+      <span id="nav-badge" class="cart-badge"></span>
+    </button>
+    <button class="nav-hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ── MOBILE DRAWER ──────────────────────────────────────── -->
+<div id="mkt-mob-drawer">
+  <a href="#catalogo" onclick="closeMenu()">Catálogo</a>
+  <a href="#como" onclick="closeMenu()">Cómo funciona</a>
+  <a href="#servicios" onclick="closeMenu()">Servicios</a>
+  <a href="#cta-final" onclick="closeMenu()">Contacto</a>
+  <a href="#" onclick="closeMenu(); openPanel(); return false;">Ver cotización</a>
+</div>
+
+<!-- ── HERO ───────────────────────────────────────────────── -->
+<section id="hero">
+  <!-- Crosshatch SVG bg -->
+  <svg class="hero-crosshatch" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="none">
+    <defs>
+      <pattern id="cross" width="40" height="40" patternUnits="userSpaceOnUse">
+        <path d="M0 40 L40 0 M-10 10 L10 -10 M30 50 L50 30" stroke="#FAF7F2" stroke-width="0.5" fill="none"/>
+        <path d="M0 0 L40 40 M-10 30 L10 50 M30 -10 L50 10" stroke="#FAF7F2" stroke-width="0.5" fill="none"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#cross)"/>
+  </svg>
+  <div class="hero-glow-wine"></div>
+  <div class="hero-glow-gold"></div>
+
+  <div class="hero-content">
+    <img class="hero-logo" src="assets/images/logo-marketing.png" alt="Alista Marketing Services">
+    <div class="hero-rule"></div>
+    <p class="hero-eyebrow">Productos Promocionales Premium</p>
+    <h1 class="hero-h1">
+      <em>Tu marca</em>
+      <strong>en cada detalle.</strong>
+    </h1>
+    <p class="hero-sub">Más de 1,300 productos personalizados con la identidad de tu empresa. Desde textiles hasta tecnología, cada artículo es una oportunidad para que tu marca esté presente donde importa.</p>
+    <div class="hero-ctas">
+      <a href="#catalogo" class="btn-wine">Explorar catálogo →</a>
+      <a href="#como" class="btn-outline">Cómo funciona</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll" aria-hidden="true">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    Scroll
+  </div>
+</section>
+
+<!-- ── CÓMO FUNCIONA ──────────────────────────────────────── -->
+<section id="como">
+  <div class="section-wrap">
+    <div class="como-header reveal">
+      <span class="section-eyebrow">El proceso</span>
+      <h2 class="section-title">Así de fácil.</h2>
+      <p class="section-sub">Sin complicaciones. Sin registros. Sin compromiso hasta que tú decidas.</p>
+    </div>
+    <div class="como-steps">
+      <div class="step-card reveal" style="transition-delay:0.05s">
+        <div class="step-number">01</div>
+        <div class="step-title">Explora el catálogo</div>
+        <p class="step-desc">Navega más de 1,300 productos organizados por categoría. Desde artículos de escritura hasta gadgets de tecnología — encuentra exactamente lo que tu marca necesita.</p>
+      </div>
+      <div class="step-card reveal" style="transition-delay:0.15s">
+        <div class="step-number">02</div>
+        <div class="step-title">Agrega al cotizador</div>
+        <p class="step-desc">Selecciona los productos que te interesan, indica cantidades aproximadas y agrégalos a tu cotización. Sin registro, sin tarjeta, sin compromiso.</p>
+      </div>
+      <div class="step-card reveal" style="transition-delay:0.25s">
+        <div class="step-number">03</div>
+        <div class="step-title">Nosotros ejecutamos</div>
+        <p class="step-desc">Nuestro equipo te contacta en menos de 24 horas con precios, tiempos de entrega y opciones de personalización con tu imagen. Tú apruebas, nosotros hacemos el resto.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CATALOG ─────────────────────────────────────────────── -->
+<section id="catalogo">
+  <div class="section-wrap">
+    <div class="cat-header">
+      <div class="cat-title-wrap reveal">
+        <span class="section-eyebrow">Catálogo completo</span>
+        <h2 class="section-title" style="margin-bottom:0">
+          Productos
+          <span class="cat-count-badge" id="total-badge">1,375 artículos</span>
+        </h2>
+      </div>
+    </div>
+
+    <!-- Search -->
+    <div class="cat-search-wrap reveal">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="search" id="cat-search" placeholder="Buscar por nombre o categoría…" autocomplete="off">
+    </div>
+
+    <!-- Category pills -->
+    <div class="cat-pills reveal" id="cat-pills">
+      <button class="cat-pill active" data-cat="todos">Todos</button>
+      <!-- Pills injected by JS from CATEGORIES array -->
+    </div>
+
+    <!-- Toolbar -->
+    <div class="cat-toolbar">
+      <span class="cat-result-label" id="result-label"></span>
+    </div>
+
+    <!-- Grid -->
+    <div id="cat-grid">
+      <div id="cat-empty">Sin resultados para tu búsqueda. <a onclick="clearSearch()">Limpiar filtros</a></div>
+    </div>
+
+    <!-- Pagination -->
+    <div id="cat-pagination"></div>
+  </div>
+</section>
+
+<!-- ── QUOTE PANEL BACKDROP ───────────────────────────────── -->
+<div class="panel-backdrop" id="panel-backdrop" onclick="closePanel()"></div>
+
+<!-- ── QUOTE PANEL ─────────────────────────────────────────── -->
+<div id="quote-panel" role="dialog" aria-label="Tu cotización">
+  <div class="qp-header">
+    <span class="qp-title">Tu cotización <span id="qp-count-label"></span></span>
+    <button class="qp-close" onclick="closePanel()" aria-label="Cerrar">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="qp-body">
+    <div id="qp-items"></div>
+    <div id="qp-form-wrap">
+      <div class="qp-divider"></div>
+      <p class="qp-form-title">Datos de contacto</p>
+      <form id="quote-form" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
+        <div class="qp-field">
+          <label for="qf-name">Nombre completo *</label>
+          <input type="text" id="qf-name" name="nombre" required placeholder="Tu nombre">
+        </div>
+        <div class="qp-field">
+          <label for="qf-company">Empresa *</label>
+          <input type="text" id="qf-company" name="empresa" required placeholder="Nombre de tu empresa">
+        </div>
+        <div class="qp-field">
+          <label for="qf-email">Correo electrónico *</label>
+          <input type="email" id="qf-email" name="email" required placeholder="correo@empresa.com">
+        </div>
+        <div class="qp-field">
+          <label for="qf-phone">Teléfono</label>
+          <input type="tel" id="qf-phone" name="telefono" placeholder="+52 (333) 000-0000">
+        </div>
+        <div class="qp-field">
+          <label for="qf-notes">Notas adicionales</label>
+          <textarea id="qf-notes" name="notas" placeholder="Colores, cantidad estimada, fecha de entrega…"></textarea>
+        </div>
+        <input type="hidden" name="productos" id="qf-products">
+        <button type="submit" class="qp-submit">Enviar cotización →</button>
+      </form>
+      <div id="quote-thanks">
+        <div class="thanks-icon">✅</div>
+        <h3>¡Cotización enviada!</h3>
+        <p>Recibimos tu solicitud. Nuestro equipo te contactará en menos de 24 horas con precios, tiempos de entrega y opciones de personalización.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── MOBILE CART FAB ─────────────────────────────────────── -->
+<button class="cart-fab" id="cart-fab" onclick="openPanel()" aria-label="Ver cotización">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+  <span class="cart-fab-badge" id="fab-badge" style="display:none"></span>
+</button>
+
+<!-- ── SERVICIOS ──────────────────────────────────────────── -->
+<section id="servicios">
+  <div class="section-wrap">
+    <div class="serv-header reveal">
+      <span class="section-eyebrow">Nuestros servicios</span>
+      <h2 class="section-title">Más que productos.</h2>
+      <p class="section-sub">Somos el socio estratégico detrás de las marcas que quieren dejar huella. No solo entregamos artículos — construimos presencia.</p>
+    </div>
+    <div class="serv-grid">
+      <div class="serv-card reveal" style="transition-delay:0.05s">
+        <div class="serv-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        </div>
+        <div class="serv-title">Productos promocionales personalizados</div>
+        <p class="serv-desc">Tu logo en artículos que la gente realmente usa y conserva. Trabajamos con más de 1,300 productos en 18 categorías — textiles, tecnología, escritura, bebidas y más. Tú eliges, nosotros personalizamos con tu imagen.</p>
+        <a href="#catalogo" class="serv-link">Ver catálogo <span>→</span></a>
+      </div>
+      <div class="serv-card reveal" style="transition-delay:0.15s">
+        <div class="serv-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="serv-title">Alianzas con agencias de marketing</div>
+        <p class="serv-desc">Colaboramos con agencias para integrar productos promocionales en campañas 360°. Desde activaciones de marca hasta programas de lealtad — somos el brazo ejecutor que convierte estrategia en objetos que se tocan, se usan y se recuerdan.</p>
+        <a href="#cta-final" class="serv-link">Hablemos <span>→</span></a>
+      </div>
+      <div class="serv-card reveal" style="transition-delay:0.25s">
+        <div class="serv-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+        </div>
+        <div class="serv-title">Desarrollo de productos a medida</div>
+        <p class="serv-desc">¿No encuentras lo que buscas en el catálogo? Diseñamos y fabricamos artículos promocionales exclusivos desde cero. Packaging personalizado, artículos de edición limitada, sets de regalo de alto impacto — todo con tu ADN de marca.</p>
+        <a href="#cta-final" class="serv-link">Solicitar desarrollo <span>→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA FINAL ──────────────────────────────────────────── -->
+<section id="cta-final">
+  <div class="section-wrap">
+    <div class="cta-content reveal">
+      <h2 class="cta-title">¿Listo para llevar tu marca a las manos de tus clientes?</h2>
+      <p class="cta-sub">Cotiza sin compromiso. Nuestro equipo te asesora en menos de 24 horas con precios, tiempos y opciones de personalización.</p>
+      <div class="cta-btns">
+        <a href="#catalogo" class="btn-wine">Explorar catálogo →</a>
+        <a href="https://wa.me/523331288999?text=Hola%2C%20me%20interesa%20cotizar%20productos%20promocionales%20con%20Alista%20Marketing." class="btn-outline" target="_blank" rel="noopener">Contactar por WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────────────────── -->
+<footer id="mkt-footer">
+  <div class="section-wrap">
+    <div class="footer-grid">
+      <!-- Brand -->
+      <div class="footer-brand">
+        <img class="footer-logo-mkt" src="assets/images/logo-marketing.png" alt="Alista Marketing Services">
+        <p class="footer-tagline">"Tu marca en cada detalle." Productos promocionales personalizados para empresas que quieren ser recordadas.</p>
+        <div class="footer-socials">
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/grupo.alista/" class="footer-social" aria-label="Instagram" target="_blank" rel="noopener">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <!-- LinkedIn -->
+          <a href="https://www.linkedin.com/company/grupo-alista" class="footer-social" aria-label="LinkedIn" target="_blank" rel="noopener">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <!-- WhatsApp -->
+          <a href="https://wa.me/523331288999" class="footer-social" aria-label="WhatsApp" target="_blank" rel="noopener">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Catálogo links (top 10 categories) -->
+      <div>
+        <div class="footer-col-title">Catálogo</div>
+        <nav class="footer-nav" id="footer-cat-links">
+          <!-- injected by JS -->
+        </nav>
+      </div>
+
+      <!-- Servicios + Contacto -->
+      <div>
+        <div class="footer-col-title">Empresa</div>
+        <nav class="footer-nav">
+          <a href="#como">Cómo funciona</a>
+          <a href="#servicios">Nuestros servicios</a>
+          <a href="#cta-final">Cotizar</a>
+        </nav>
+        <div style="margin-top:1.8rem">
+          <div class="footer-col-title">Contacto</div>
+          <nav class="footer-nav">
+            <a href="mailto:ventas@grupoalista.com">ventas@grupoalista.com</a>
+            <a href="https://wa.me/523331288999">+52 333 128 8999</a>
+            <a href="index.html">Grupo Alista</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-divider"></div>
+
+  <div class="footer-bottom">
+    <a href="index.html" class="ga-back-link">
+      <img src="assets/images/logo-main.png" alt="Grupo Alista">
+      <span class="ga-back-text">Parte de Grupo Alista</span>
+    </a>
+    <p class="footer-copy">© 2026 Alista Marketing Services. Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+<!-- ── WHATSAPP FAB ────────────────────────────────────────── -->
+<a class="wa-fab" href="https://wa.me/523331288999?text=Hola%2C%20me%20interesa%20cotizar%20productos%20promocionales." target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- ── DATA ───────────────────────────────────────────────── -->
+<script src="assets/js/marketing-catalog.js"></script>
+
+<!-- ── APP JS ─────────────────────────────────────────────── -->
+<script>
+(function () {
+  'use strict';
+
+  // ── State ─────────────────────────────────────────────────
+  const PAGE_SIZE = 48;
+  let state = { category: 'todos', search: '', page: 1 };
+  let cart = [];
+
+  // ── Cart persistence ──────────────────────────────────────
+  try { cart = JSON.parse(localStorage.getItem('mkt-cart') || '[]'); } catch (e) { cart = []; }
+  function saveCart() {
+    try { localStorage.setItem('mkt-cart', JSON.stringify(cart)); } catch (e) {}
+  }
+
+  // ── Category pills injection ───────────────────────────────
+  var pillsWrap = document.getElementById('cat-pills');
+  CATEGORIES.forEach(function (cat) {
+    var btn = document.createElement('button');
+    btn.className = 'cat-pill';
+    btn.dataset.cat = cat.slug;
+    btn.textContent = cat.icon + ' ' + cat.label;
+    pillsWrap.appendChild(btn);
+  });
+
+  // Footer category links (first 9 categories)
+  var footerCatLinks = document.getElementById('footer-cat-links');
+  CATEGORIES.slice(0, 9).forEach(function (cat) {
+    var a = document.createElement('a');
+    a.href = '#catalogo';
+    a.textContent = cat.label;
+    a.addEventListener('click', function () {
+      setCategory(cat.slug);
+      document.getElementById('catalogo').scrollIntoView({ behavior: 'smooth' });
+    });
+    footerCatLinks.appendChild(a);
+  });
+  var viewAll = document.createElement('a');
+  viewAll.href = '#catalogo';
+  viewAll.textContent = 'Ver todo →';
+  viewAll.addEventListener('click', function () { setCategory('todos'); });
+  footerCatLinks.appendChild(viewAll);
+
+  // ── Lazy image IntersectionObserver ───────────────────────
+  var imgObs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        var img = e.target;
+        if (img.dataset.src) { img.src = img.dataset.src; }
+        imgObs.unobserve(img);
+      }
+    });
+  }, { rootMargin: '300px' });
+
+  // ── Filtering ─────────────────────────────────────────────
+  function getFiltered() {
+    var q = state.search;
+    return CATALOG.filter(function (p) {
+      var matchCat = state.category === 'todos' || p.category === state.category;
+      var matchSearch = !q || p.name.toLowerCase().indexOf(q) !== -1 || p.sku.toLowerCase().indexOf(q) !== -1;
+      return matchCat && matchSearch;
+    });
+  }
+
+  // ── Category label lookup ─────────────────────────────────
+  var catLabelMap = {};
+  CATEGORIES.forEach(function (c) { catLabelMap[c.slug] = c.label; });
+
+  // ── Render catalog ────────────────────────────────────────
+  function renderCatalog() {
+    var filtered = getFiltered();
+    var totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+    if (state.page > totalPages) state.page = totalPages;
+    var start = (state.page - 1) * PAGE_SIZE;
+    var items = filtered.slice(start, start + PAGE_SIZE);
+
+    var grid = document.getElementById('cat-grid');
+    var empty = document.getElementById('cat-empty');
+
+    if (items.length === 0) {
+      grid.innerHTML = '';
+      grid.appendChild(empty);
+      empty.style.display = 'block';
+      document.getElementById('cat-pagination').innerHTML = '';
+      document.getElementById('result-label').innerHTML = '<strong>0</strong> resultados';
+      return;
+    }
+    empty.style.display = 'none';
+
+    var html = '';
+    items.forEach(function (p) {
+      var imgPath = 'assets/images/marketing/' + p.category + '/' + p.img;
+      var catLabel = catLabelMap[p.category] || p.category;
+      var inCart = cart.some(function (c) { return c.id === p.id; });
+      html += '<div class="prod-card">' +
+        '<div class="prod-img-wrap">' +
+        '<img data-src="' + imgPath + '" alt="' + escHtml(p.name) + '" loading="lazy">' +
+        '<span class="prod-cat-badge">' + escHtml(catLabel) + '</span>' +
+        '</div>' +
+        '<div class="prod-body">' +
+        '<div class="prod-name">' + escHtml(p.name) + '</div>' +
+        '<div class="prod-sku">' + escHtml(p.sku) + '</div>' +
+        '<div class="prod-action">' +
+        '<button class="prod-quote-btn' + (inCart ? ' added' : '') + '" ' +
+        'onclick="addToCart(' + JSON.stringify(p.id) + ')" ' +
+        'data-pid="' + escHtml(p.id) + '">' +
+        (inCart ? '✓ Agregado' : '+ Cotizar') +
+        '</button>' +
+        '</div></div></div>';
+    });
+    grid.innerHTML = html;
+    grid.appendChild(empty);
+
+    // Observe lazy images
+    grid.querySelectorAll('img[data-src]').forEach(function (img) { imgObs.observe(img); });
+
+    // Result label
+    var label = document.getElementById('result-label');
+    var catName = state.category === 'todos' ? 'todos los productos' : (catLabelMap[state.category] || state.category);
+    label.innerHTML = '<strong>' + filtered.length + '</strong> productos · Página ' + state.page + ' de ' + totalPages;
+
+    // Pagination
+    renderPagination(totalPages);
+  }
+
+  // ── Render pagination ─────────────────────────────────────
+  function renderPagination(totalPages) {
+    var pg = document.getElementById('cat-pagination');
+    if (totalPages <= 1) { pg.innerHTML = ''; return; }
+
+    var cur = state.page;
+    var html = '';
+
+    // Prev
+    html += '<button class="pg-btn" onclick="goPage(' + (cur - 1) + ')"' + (cur === 1 ? ' disabled' : '') + '>←</button>';
+
+    // Page numbers with ellipsis
+    var pages = getPageRange(cur, totalPages);
+    pages.forEach(function (p) {
+      if (p === '…') {
+        html += '<span class="pg-ellipsis">…</span>';
+      } else {
+        html += '<button class="pg-btn' + (p === cur ? ' active' : '') + '" onclick="goPage(' + p + ')">' + p + '</button>';
+      }
+    });
+
+    // Next
+    html += '<button class="pg-btn" onclick="goPage(' + (cur + 1) + ')"' + (cur === totalPages ? ' disabled' : '') + '>→</button>';
+
+    pg.innerHTML = html;
+  }
+
+  function getPageRange(cur, total) {
+    if (total <= 7) {
+      var r = [];
+      for (var i = 1; i <= total; i++) r.push(i);
+      return r;
+    }
+    var pages = [1];
+    if (cur > 3) pages.push('…');
+    var start = Math.max(2, cur - 1);
+    var end = Math.min(total - 1, cur + 1);
+    for (var j = start; j <= end; j++) pages.push(j);
+    if (cur < total - 2) pages.push('…');
+    pages.push(total);
+    return pages;
+  }
+
+  window.goPage = function (n) {
+    var filtered = getFiltered();
+    var totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+    state.page = Math.max(1, Math.min(n, totalPages));
+    renderCatalog();
+    document.getElementById('catalogo').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  function escHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  // ── Cart operations ───────────────────────────────────────
+  window.addToCart = function (productId) {
+    var product = CATALOG.find(function (p) { return p.id === productId; });
+    if (!product) return;
+    var existing = cart.find(function (c) { return c.id === productId; });
+    if (existing) {
+      existing.qty += 1;
+    } else {
+      cart.push({ id: product.id, category: product.category, name: product.name, sku: product.sku, img: product.img, qty: 1 });
+    }
+    saveCart();
+    updateBadge();
+    renderCartPanel();
+    // Update button in grid
+    document.querySelectorAll('.prod-quote-btn[data-pid="' + productId + '"]').forEach(function (btn) {
+      btn.textContent = '✓ Agregado';
+      btn.classList.add('added');
+    });
+    openPanel();
+  };
+
+  window.removeFromCart = function (productId) {
+    cart = cart.filter(function (c) { return c.id !== productId; });
+    saveCart();
+    updateBadge();
+    renderCartPanel();
+    renderCatalog();
+  };
+
+  window.updateQty = function (productId, delta) {
+    var item = cart.find(function (c) { return c.id === productId; });
+    if (!item) return;
+    item.qty = Math.max(1, item.qty + delta);
+    saveCart();
+    renderCartPanel();
+  };
+
+  function updateBadge() {
+    var total = cart.reduce(function (s, c) { return s + c.qty; }, 0);
+    var badge = document.getElementById('nav-badge');
+    var fabBadge = document.getElementById('fab-badge');
+    if (total > 0) {
+      badge.textContent = total; badge.classList.add('visible');
+      fabBadge.textContent = total; fabBadge.style.display = 'flex';
+    } else {
+      badge.classList.remove('visible');
+      fabBadge.style.display = 'none';
+    }
+    var countLabel = document.getElementById('qp-count-label');
+    if (countLabel) countLabel.textContent = total > 0 ? '(' + total + ')' : '';
+  }
+
+  function renderCartPanel() {
+    var wrap = document.getElementById('qp-items');
+    var formWrap = document.getElementById('qp-form-wrap');
+    if (cart.length === 0) {
+      wrap.innerHTML = '<div class="qp-empty"><strong>Tu cotización está vacía</strong>Agrega productos desde el catálogo y solicita tu cotización sin compromiso.</div>';
+      formWrap.style.display = 'none';
+      return;
+    }
+    formWrap.style.display = '';
+    var html = '';
+    cart.forEach(function (item) {
+      var imgPath = 'assets/images/marketing/' + item.category + '/' + item.img;
+      html += '<div class="qp-item">' +
+        '<img class="qp-item-img" src="' + imgPath + '" alt="' + escHtml(item.name) + '">' +
+        '<div class="qp-item-info">' +
+        '<div class="qp-item-name">' + escHtml(item.name) + '</div>' +
+        '<div class="qp-item-sku">' + escHtml(item.sku) + '</div>' +
+        '<div class="qp-item-qty">' +
+        '<button class="qty-btn" onclick="updateQty(' + JSON.stringify(item.id) + ',-1)">−</button>' +
+        '<span class="qty-val">' + item.qty + '</span>' +
+        '<button class="qty-btn" onclick="updateQty(' + JSON.stringify(item.id) + ',1)">+</button>' +
+        '</div></div>' +
+        '<button class="qp-item-del" onclick="removeFromCart(' + JSON.stringify(item.id) + ')" aria-label="Eliminar">✕</button>' +
+        '</div>';
+    });
+    wrap.innerHTML = html;
+  }
+
+  // ── Panel open/close ──────────────────────────────────────
+  window.openPanel = function () {
+    renderCartPanel();
+    document.getElementById('quote-panel').classList.add('open');
+    document.getElementById('panel-backdrop').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+  window.closePanel = function () {
+    document.getElementById('quote-panel').classList.remove('open');
+    document.getElementById('panel-backdrop').classList.remove('open');
+    document.body.style.overflow = '';
+  };
+
+  // ── Quote form submit ─────────────────────────────────────
+  document.getElementById('quote-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var btn = this.querySelector('.qp-submit');
+    btn.disabled = true; btn.textContent = 'Enviando…';
+    // Embed cart summary
+    document.getElementById('qf-products').value =
+      cart.map(function (i) { return i.name + ' (' + i.sku + ') x' + i.qty; }).join(' | ');
+    var data = new FormData(this);
+    fetch(this.action, { method: 'POST', body: data, headers: { Accept: 'application/json' } })
+      .then(function (r) {
+        document.getElementById('quote-thanks').style.display = 'block';
+        document.getElementById('quote-form').style.display = 'none';
+        cart = []; saveCart(); updateBadge(); renderCatalog();
+      })
+      .catch(function () {
+        btn.disabled = false; btn.textContent = 'Enviar cotización →';
+        alert('Hubo un error. Por favor intenta de nuevo o contáctanos por WhatsApp.');
+      });
+  });
+
+  // ── Category filter ───────────────────────────────────────
+  window.setCategory = function (slug) {
+    state.category = slug;
+    state.page = 1;
+    document.querySelectorAll('.cat-pill').forEach(function (p) {
+      p.classList.toggle('active', p.dataset.cat === slug);
+    });
+    renderCatalog();
+  };
+
+  document.querySelectorAll('.cat-pill').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      setCategory(this.dataset.cat);
+    });
+  });
+
+  // ── Search ────────────────────────────────────────────────
+  var searchTimer;
+  document.getElementById('cat-search').addEventListener('input', function (e) {
+    clearTimeout(searchTimer);
+    var val = e.target.value;
+    searchTimer = setTimeout(function () {
+      state.search = val.toLowerCase().trim();
+      state.page = 1;
+      renderCatalog();
+    }, 260);
+  });
+
+  window.clearSearch = function () {
+    document.getElementById('cat-search').value = '';
+    state.search = '';
+    state.category = 'todos';
+    state.page = 1;
+    document.querySelectorAll('.cat-pill').forEach(function (p) {
+      p.classList.toggle('active', p.dataset.cat === 'todos');
+    });
+    renderCatalog();
+  };
+
+  // ── Navbar ────────────────────────────────────────────────
+  window.addEventListener('scroll', function () {
+    document.getElementById('mkt-nav').classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  // ── Mobile menu ───────────────────────────────────────────
+  window.toggleMenu = function () {
+    var hb = document.getElementById('hamburger');
+    var drawer = document.getElementById('mkt-mob-drawer');
+    hb.classList.toggle('open');
+    drawer.classList.toggle('open');
+    document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+  };
+  window.closeMenu = function () {
+    document.getElementById('hamburger').classList.remove('open');
+    document.getElementById('mkt-mob-drawer').classList.remove('open');
+    document.body.style.overflow = '';
+  };
+
+  // ── Scroll reveal ─────────────────────────────────────────
+  var revealObs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('in'); revealObs.unobserve(e.target); }
+    });
+  }, { threshold: 0.06 });
+  document.querySelectorAll('.reveal').forEach(function (el) { revealObs.observe(el); });
+
+  // ── Init ──────────────────────────────────────────────────
+  renderCatalog();
+  renderCartPanel();
+  updateBadge();
+
+})();
+</script>
+</body>
+</html>

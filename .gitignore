@@ -40,3 +40,6 @@ temporary screenshots/
 .cache/
 .parcel-cache/
 screenshots/
+
+# Product images — deploy directly to S3, not via git (~200MB)
+assets/images/marketing/
