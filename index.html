@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet" />
@@ -1389,6 +1390,7 @@
       font-weight: 400;
       flex: 1;
     }
+    .company-card { cursor: pointer; }
     .company-link {
       font-family: 'Roboto Mono', monospace;
       font-size: 0.58rem;
@@ -1401,6 +1403,13 @@
       flex-shrink: 0;
     }
     .company-link:hover { color: #BA6A45; }
+    /* Stretched link — makes the entire card clickable */
+    .company-link::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+    }
     @media (max-width: 900px) {
       .companies-grid { grid-template-columns: repeat(2, 1fr); }
       .company-card:nth-child(n) { grid-column: auto; }
@@ -1626,7 +1635,7 @@
       </p>
       <div class="h-a4 hero-nav-tags">
         <a href="#about"     class="grad-btn" data-es="Nosotros"  data-en="About Us">Nosotros</a>
-        <a href="#companies" class="grad-btn" data-es="Servicios" data-en="Services">Servicios</a>
+        <a href="#companies" class="grad-btn" data-es="Empresas" data-en="Companies">Empresas</a>
       </div>
     </div>
 
@@ -1900,15 +1909,14 @@
         <div class="reveal" style="transition-delay:0.2s">
           <span class="section-eyebrow" style="font-size:0.58rem;margin-bottom:1rem;display:block" data-es="Envíanos un mensaje" data-en="Send us a message">Envíanos un mensaje</span>
           <!--
-            FORM SETUP: This form uses Formspree to deliver emails to ventas@grupoalista.com.
-            To activate:
-              1. Go to https://formspree.io/register and sign up (free).
-              2. Create a new form → set "Email to" = ventas@grupoalista.com.
-              3. Copy your form ID (e.g. xpbljdnk).
-              4. Replace YOUR_FORMSPREE_ID below with that ID.
-            Once set, every submission is emailed directly to ventas@grupoalista.com.
+            FORM SETUP: EmailJS
+            1. emailjs.com → Email Services → Add Service → copy Service ID
+            2. Email Templates → Create Template → copy Template ID
+               Template variables used: {{name}}, {{email}}, {{phone}}, {{company}}, {{message}}
+            3. Account → General → copy Public Key
+            4. Replace EMAILJS_PUBLIC_KEY, EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID in the JS below.
           -->
-          <form id="contactForm" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST" novalidate>
+          <form id="contactForm" novalidate>
             <div class="form-grid-2">
               <div class="field-group">
                 <label class="field-label" data-es="Nombre" data-en="Name">Nombre</label>
@@ -2230,10 +2238,10 @@
       if (e.key === 'Escape') document.querySelectorAll('.modal-overlay.active').forEach(m => closeModal(m.id));
     });
 
-    // ── Contact form → Formspree AJAX (delivers to ventas@grupoalista.com) ─
-    // SETUP: sign up at formspree.io, create a form pointing to
-    // ventas@grupoalista.com, then replace YOUR_FORMSPREE_ID in the
-    // <form action="..."> attribute above with your actual form ID.
+    // ── Contact form → EmailJS ────────────────────────────────────────
+    // Replace the three placeholders below with your EmailJS credentials.
+    emailjs.init('NAbz4ZYSbxQfKC5fw');
+
     const contactForm = document.getElementById('contactForm');
     const successEl   = document.getElementById('formSuccess');
     const submitBtn   = contactForm.querySelector('.submit-btn');
@@ -2246,60 +2254,27 @@
       const message = contactForm.elements['message'].value.trim();
       if (!name || !email || !message) return;
 
-      // Disable button while sending
       const originalText    = submitBtn.textContent;
       submitBtn.disabled    = true;
       submitBtn.textContent = lang === 'es' ? 'Enviando…' : 'Sending…';
       submitBtn.style.opacity = '0.65';
 
-      const formData = new FormData(contactForm);
-      formData.append('_replyto', email);
-      formData.append('_subject',
-        lang === 'es'
-          ? `Contacto desde grupoalista.com — ${name}`
-          : `Website contact from grupoalista.com — ${name}`
-      );
-
       try {
-        const res = await fetch(contactForm.action, {
-          method:  'POST',
-          body:    formData,
-          headers: { 'Accept': 'application/json' }
-        });
-
-        if (res.ok) {
-          successEl.style.color       = '#25d366';
-          successEl.style.borderColor = 'rgba(37,211,102,0.28)';
-          successEl.style.background  = 'rgba(37,211,102,0.07)';
-          successEl.textContent = lang === 'es'
-            ? '✓ Mensaje enviado. Nos pondremos en contacto pronto.'
-            : '✓ Message sent. We\'ll be in touch soon.';
-          contactForm.reset();
-        } else {
-          // Formspree responded with an error — use mailto fallback
-          throw new Error('send_failed');
-        }
-      } catch (_) {
-        // Fallback: open mail client so the message is not lost
-        const phone   = contactForm.elements['phone']?.value   || 'N/A';
-        const company = contactForm.elements['company']?.value || 'N/A';
-        const subj    = encodeURIComponent(
-          lang === 'es'
-            ? `Contacto desde grupoalista.com — ${name}`
-            : `Website contact — ${name}`
-        );
-        const body = encodeURIComponent(
-          `Nombre: ${name}\nCorreo: ${email}\n` +
-          `Teléfono: ${phone}\nEmpresa: ${company}\n\n${message}`
-        );
-        window.open(`mailto:ventas@grupoalista.com?subject=${subj}&body=${body}`);
-
-        successEl.style.color       = '#BA6A45';
-        successEl.style.borderColor = 'rgba(186,106,69,0.28)';
-        successEl.style.background  = 'rgba(186,106,69,0.07)';
+        await emailjs.sendForm('service_zv8sxis', 'template_ouzukio', contactForm);
+        successEl.style.color       = '#25d366';
+        successEl.style.borderColor = 'rgba(37,211,102,0.28)';
+        successEl.style.background  = 'rgba(37,211,102,0.07)';
         successEl.textContent = lang === 'es'
-          ? 'Se abrió tu cliente de correo. Configura Formspree para envío automático.'
-          : 'Your mail client was opened. Configure Formspree for automatic delivery.';
+          ? '✓ Mensaje enviado. Nos pondremos en contacto pronto.'
+          : '✓ Message sent. We\'ll be in touch soon.';
+        contactForm.reset();
+      } catch (_) {
+        successEl.style.color       = '#e74c3c';
+        successEl.style.borderColor = 'rgba(231,76,60,0.28)';
+        successEl.style.background  = 'rgba(231,76,60,0.07)';
+        successEl.textContent = lang === 'es'
+          ? '✗ Error al enviar. Intenta de nuevo o escríbenos a ventas@grupoalista.com'
+          : '✗ Send failed. Try again or email us at ventas@grupoalista.com';
       } finally {
         successEl.style.display = 'block';
         submitBtn.disabled      = false;
