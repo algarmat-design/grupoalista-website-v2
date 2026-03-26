@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Alista Consulting — Estrategia &amp; Transformación</title>
   <meta name="description" content="Consultoría en TI, negocios y finanzas. Optimización de procesos y decisiones basadas en datos para transformar tu organización." />
+  <link rel="icon" type="image/png" href="assets/images/logo-consulting.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet" />
@@ -226,9 +227,9 @@
       to   { opacity: 1; transform: none; }
     }
     .hero-logo-img {
-      height: clamp(80px, 10vw, 120px); width: auto;
-      filter: drop-shadow(0 2px 12px rgba(var(--copper-rgb), 0.35));
-      margin-bottom: 0.3rem;
+      height: clamp(160px, 20vw, 240px); width: auto;
+      filter: drop-shadow(0 4px 20px rgba(var(--copper-rgb), 0.40));
+      margin-bottom: 0.6rem;
     }
     .hero-tagline {
       font-family: 'Roboto Mono', monospace;
@@ -354,66 +355,96 @@
     /* ════════════════════════════════════════════
        ENGAGEMENT
     ════════════════════════════════════════════ */
+    /* ════════════════════════════════════════════
+       NUESTRO PROCESO — Interactive tabs
+    ════════════════════════════════════════════ */
     #engagement { background: var(--bg-elevated); }
     .eng-header { margin-bottom: 3.5rem; }
-    .eng-timeline {
-      position: relative;
-      display: flex; flex-direction: column; gap: 0;
-      max-width: 740px;
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: 1px solid var(--border);
+      border-radius: 4px 4px 0 0;
+      overflow: hidden;
     }
-    .eng-timeline::before {
+    .process-step {
+      padding: 2rem 1.8rem;
+      cursor: pointer;
+      position: relative;
+      border-right: 1px solid var(--border);
+      transition: background 0.3s;
+      overflow: hidden;
+      user-select: none;
+    }
+    .process-step:last-child { border-right: none; }
+    /* copper underline that slides in when active */
+    .process-step::after {
       content: '';
-      position: absolute; left: 21px; top: 0; bottom: 0; width: 1px;
-      background: linear-gradient(180deg,
-        transparent 0%, rgba(var(--copper-rgb),0.3) 10%,
-        rgba(var(--copper-rgb),0.3) 90%, transparent 100%);
+      position: absolute;
+      bottom: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--copper-dark), var(--copper));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    .eng-item {
-      display: flex; gap: 2rem;
-      padding: 0 0 3rem 0;
-      position: relative;
+    .process-step.active { background: rgba(var(--copper-rgb), 0.04); }
+    .process-step.active::after { transform: scaleX(1); }
+    .process-step-num {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 2.8rem; font-weight: 300; line-height: 1;
+      color: rgba(165,188,198,0.12);
+      margin-bottom: 0.8rem;
+      transition: color 0.35s;
     }
-    .eng-item:last-child { padding-bottom: 0; }
-    .eng-num {
-      width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0;
-      border: 1px solid var(--border-cu);
+    .process-step.active .process-step-num { color: var(--copper); }
+    .process-step-title {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.7rem; font-weight: 500; line-height: 1.45;
+      color: var(--text-muted);
+      transition: color 0.35s;
+    }
+    .process-step.active .process-step-title { color: var(--text-primary); }
+    .process-panels {
+      border: 1px solid var(--border);
+      border-top: none;
+      border-radius: 0 0 4px 4px;
+      overflow: hidden;
+    }
+    .process-panel {
+      display: none;
+      padding: 2.8rem 2.5rem;
       background: var(--bg-card);
-      display: flex; align-items: center; justify-content: center;
+    }
+    .process-panel.active {
+      display: block;
+      animation: panel-in 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    @keyframes panel-in {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .process-panel-eyebrow {
       font-family: 'Roboto Mono', monospace;
-      font-size: 0.62rem; color: var(--copper);
-      letter-spacing: 0.05em;
-      position: relative; z-index: 1;
-      transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+      font-size: 0.52rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--copper); margin-bottom: 0.6rem;
     }
-    .eng-item:hover .eng-num {
-      background: rgba(var(--copper-rgb), 0.12);
-      border-color: var(--copper);
-      box-shadow: 0 0 16px rgba(var(--copper-rgb), 0.3);
-    }
-    .eng-body {
-      flex: 1; padding-top: 0.6rem;
-    }
-    .eng-phase-label {
+    .process-panel h3 {
       font-family: 'Roboto Mono', monospace;
-      font-size: 0.52rem; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--copper); margin-bottom: 0.4rem;
+      font-size: 1.25rem; font-weight: 500;
+      color: var(--text-primary); margin-bottom: 1rem;
     }
-    .eng-phase-name {
-      font-family: 'Roboto Mono', monospace;
-      font-size: 1rem; font-weight: 500;
-      color: var(--text-primary); margin-bottom: 0.8rem;
+    .process-panel-desc {
+      font-size: 0.9rem; color: var(--text-muted);
+      line-height: 1.9; max-width: 700px;
+      margin-bottom: 1.4rem;
     }
-    .eng-phase-desc {
-      font-size: 0.85rem; color: var(--text-muted); line-height: 1.8;
-    }
-    .eng-deliverable {
-      margin-top: 0.8rem;
+    .process-deliverable {
       display: inline-flex; align-items: center; gap: 0.5rem;
       font-family: 'Roboto Mono', monospace;
       font-size: 0.6rem; letter-spacing: 0.1em;
-      color: rgba(var(--copper-rgb), 0.75);
-      border: 1px solid rgba(var(--copper-rgb), 0.2);
-      padding: 0.3rem 0.75rem; border-radius: 2px;
+      color: rgba(var(--copper-rgb), 0.8);
+      border: 1px solid rgba(var(--copper-rgb), 0.22);
+      padding: 0.35rem 0.85rem; border-radius: 2px;
     }
 
     /* ════════════════════════════════════════════
@@ -597,32 +628,18 @@
       border: 1px solid var(--border);
       padding: 2.5rem;
     }
-    .founder-head {
-      display: flex; gap: 1.8rem; align-items: flex-start;
-      margin-bottom: 2rem;
-    }
-    .founder-photo {
-      width: 80px; height: 80px; flex-shrink: 0;
-      border: 1px dashed rgba(var(--copper-rgb), 0.35);
-      border-radius: 3px;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Roboto Mono', monospace;
-      font-size: 0.45rem; text-align: center; letter-spacing: 0.1em;
-      color: rgba(var(--copper-rgb), 0.45);
-      padding: 0.5rem;
-    }
     .founder-name {
       font-family: 'Roboto Mono', monospace;
-      font-size: 1.05rem; font-weight: 500;
-      color: var(--text-primary); margin-bottom: 0.2rem;
+      font-size: 1.15rem; font-weight: 500;
+      color: var(--text-primary); margin-bottom: 0.3rem;
     }
     .founder-title {
       font-family: 'Roboto Mono', monospace;
       font-size: 0.6rem; letter-spacing: 0.12em;
-      color: var(--copper); margin-bottom: 0.6rem;
+      color: var(--copper); margin-bottom: 1.4rem;
     }
     .founder-bio {
-      font-size: 0.83rem; color: var(--text-muted); line-height: 1.8;
+      font-size: 0.88rem; color: var(--text-muted); line-height: 1.9;
       margin-bottom: 1.8rem;
     }
     .founder-stats {
@@ -661,114 +678,6 @@
       content: '';
       width: 5px; height: 5px; border-radius: 50%;
       background: rgba(var(--copper-rgb), 0.5); flex-shrink: 0;
-    }
-
-    /* ════════════════════════════════════════════
-       ASK ALISTA
-    ════════════════════════════════════════════ */
-    #ask { background: var(--bg-elevated); }
-    .ask-header { text-align: center; margin-bottom: 3rem; }
-    .ask-header .section-rule { margin: 0 auto 1.6rem; }
-    .chat-container {
-      max-width: 680px; margin: 0 auto;
-      background: var(--bg-card);
-      border: 1px solid var(--border-cu);
-      border-radius: 4px;
-      overflow: hidden;
-    }
-    .chat-topbar {
-      padding: 0.9rem 1.4rem;
-      background: linear-gradient(90deg, rgba(var(--copper-rgb),0.08), transparent);
-      border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; gap: 0.7rem;
-    }
-    .chat-dot {
-      width: 8px; height: 8px; border-radius: 50%;
-      background: var(--copper); opacity: 0.7;
-      animation: dot-pulse 2s ease-in-out infinite;
-    }
-    @keyframes dot-pulse {
-      0%,100% { opacity: 0.5; }
-      50%      { opacity: 1; }
-    }
-    .chat-topbar-label {
-      font-family: 'Roboto Mono', monospace;
-      font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--text-muted);
-    }
-    .chat-messages {
-      height: 340px;
-      overflow-y: auto;
-      padding: 1.4rem;
-      display: flex; flex-direction: column; gap: 1rem;
-      scroll-behavior: smooth;
-    }
-    .chat-messages::-webkit-scrollbar { width: 2px; }
-    .chat-messages::-webkit-scrollbar-thumb { background: var(--border-cu); }
-    .chat-msg {
-      max-width: 80%;
-      padding: 0.75rem 1rem;
-      border-radius: 3px;
-      font-size: 0.83rem; line-height: 1.7;
-    }
-    .chat-msg--assistant {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--border);
-      color: var(--text-primary);
-      align-self: flex-start;
-    }
-    .chat-msg--user {
-      background: rgba(var(--copper-rgb), 0.12);
-      border: 1px solid var(--border-cu);
-      color: var(--text-primary);
-      align-self: flex-end;
-    }
-    .chat-typing {
-      display: flex; gap: 5px; align-items: center; padding: 0.5rem;
-      align-self: flex-start;
-    }
-    .chat-typing span {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: var(--copper); opacity: 0.5;
-      animation: typing-bounce 1.2s ease-in-out infinite;
-    }
-    .chat-typing span:nth-child(2) { animation-delay: 0.2s; }
-    .chat-typing span:nth-child(3) { animation-delay: 0.4s; }
-    @keyframes typing-bounce {
-      0%,80%,100% { transform: translateY(0); opacity: 0.4; }
-      40%          { transform: translateY(-5px); opacity: 1; }
-    }
-    .chat-input-row {
-      padding: 1rem 1.2rem;
-      border-top: 1px solid var(--border);
-      display: flex; gap: 0.7rem;
-    }
-    .chat-input {
-      flex: 1; background: transparent;
-      border: 1px solid var(--border);
-      border-radius: 2px;
-      padding: 0.65rem 0.9rem;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.82rem; color: var(--text-primary);
-      outline: none;
-      transition: border-color 0.2s;
-    }
-    .chat-input::placeholder { color: var(--text-muted); opacity: 0.6; }
-    .chat-input:focus { border-color: var(--border-cu); }
-    .chat-send {
-      background: linear-gradient(135deg, var(--copper-dark), var(--copper));
-      border: none; color: #fff;
-      width: 40px; height: 40px; border-radius: 2px;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer; flex-shrink: 0;
-      transition: opacity 0.2s, transform 0.2s;
-    }
-    .chat-send:hover { opacity: 0.85; transform: scale(1.05); }
-    .chat-disclaimer {
-      text-align: center; margin-top: 1rem;
-      font-family: 'Roboto Mono', monospace;
-      font-size: 0.52rem; letter-spacing: 0.1em;
-      color: rgba(var(--copper-rgb), 0.45);
     }
 
     /* ════════════════════════════════════════════
@@ -947,7 +856,9 @@
     @media (max-width: 480px) {
       .hero-ctas { flex-direction: column; width: 100%; }
       .hero-ctas .btn { text-align: center; justify-content: center; }
-      .eng-timeline::before { display: none; }
+      .process-steps { grid-template-columns: 1fr; }
+      .process-step { border-right: none; border-bottom: 1px solid var(--border); }
+      .process-step:last-child { border-bottom: none; }
     }
   </style>
 </head>
@@ -965,14 +876,12 @@
     <ul class="nav-links" role="list">
       <li><a href="#servicios"  data-nav="servicios">Servicios</a></li>
       <li><a href="#framework"  data-nav="framework">Framework</a></li>
-      <li><a href="#engagement" data-nav="engagement">Engagement</a></li>
-      <li><a href="#alliances"  data-nav="alliances">Alliances</a></li>
-      <li><a href="#pricing"    data-nav="pricing">Pricing</a></li>
-      <li><a href="#about"      data-nav="about">About</a></li>
-      <li><a href="#ask"        data-nav="ask">Ask ALISTA</a></li>
+      <li><a href="#engagement" data-nav="engagement">Proceso</a></li>
+      <li><a href="#alliances"  data-nav="alliances">Alianzas</a></li>
+      <li><a href="#pricing"    data-nav="pricing">Inversión</a></li>
+      <li><a href="#about"      data-nav="about">Nosotros</a></li>
       <li><a href="#contact"    data-nav="contact">Contacto</a></li>
     </ul>
-    <a class="nav-ext" href="index.html">Grupo Alista ↗</a>
     <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -984,13 +893,11 @@
   <button id="drawer-close" aria-label="Cerrar menú">✕</button>
   <a href="#servicios"  onclick="closeDrawer()">Servicios</a>
   <a href="#framework"  onclick="closeDrawer()">Framework</a>
-  <a href="#engagement" onclick="closeDrawer()">Engagement</a>
-  <a href="#alliances"  onclick="closeDrawer()">Alliances</a>
-  <a href="#pricing"    onclick="closeDrawer()">Pricing</a>
-  <a href="#about"      onclick="closeDrawer()">About</a>
-  <a href="#ask"        onclick="closeDrawer()">Ask ALISTA</a>
+  <a href="#engagement" onclick="closeDrawer()">Proceso</a>
+  <a href="#alliances"  onclick="closeDrawer()">Alianzas</a>
+  <a href="#pricing"    onclick="closeDrawer()">Inversión</a>
+  <a href="#about"      onclick="closeDrawer()">Nosotros</a>
   <a href="#contact"    onclick="closeDrawer()">Contacto</a>
-  <a href="index.html"  style="color:var(--copper);margin-top:1rem">Grupo Alista ↗</a>
 </div>
 
 <main>
@@ -1090,7 +997,7 @@
 <section id="framework" class="section" data-section>
   <div class="section-inner">
     <div class="forge-header reveal">
-      <p class="eyebrow">02 · Our Framework</p>
+      <p class="eyebrow">02 · Nuestro Framework</p>
       <h2 class="section-title">La Metodología FORGE</h2>
       <div class="section-rule"></div>
       <p class="section-lead" style="margin:0 auto">Un proceso probado de cinco pasos diseñado para entregar resultados medibles sin interrumpir su operación.</p>
@@ -1142,49 +1049,53 @@
 </section>
 
 <!-- ════════════════════════════════════════════
-     §4 ENGAGEMENT
+     §4 NUESTRO PROCESO
 ════════════════════════════════════════════ -->
 <section id="engagement" class="section section--alt" data-section>
   <div class="section-inner">
     <div class="eng-header reveal">
-      <p class="eyebrow">03 · Our Engagement</p>
-      <h2 class="section-title">Cómo trabajamos juntos</h2>
+      <p class="eyebrow">03 · Nuestro Proceso</p>
+      <h2 class="section-title">Nuestro Proceso</h2>
       <div class="section-rule"></div>
       <p class="section-lead">Un modelo de tres fases diseñado para generar confianza progresiva — usted solo avanza cuando los resultados lo justifican.</p>
     </div>
-    <div class="eng-timeline">
 
-      <div class="eng-item reveal" style="transition-delay:0s">
-        <div class="eng-num">01</div>
-        <div class="eng-body">
-          <p class="eng-phase-label">Fase 01</p>
-          <h3 class="eng-phase-name">Discovery</h3>
-          <p class="eng-phase-desc">Diagnóstico inicial completo: entrevistas a todos los niveles de la organización, recolección de datos, mapeo de procesos e identificación de brechas. Abordamos el problema desde adentro — sin suponer nada.</p>
-          <span class="eng-deliverable">↳ Entregable: Reporte de hallazgos y oportunidades</span>
-        </div>
+    <div class="process-steps reveal">
+      <div class="process-step active" data-step="0">
+        <div class="process-step-num">01</div>
+        <div class="process-step-title">Análisis y<br>Descubrimiento</div>
       </div>
-
-      <div class="eng-item reveal" style="transition-delay:0.12s">
-        <div class="eng-num">02</div>
-        <div class="eng-body">
-          <p class="eng-phase-label">Fase 02</p>
-          <h3 class="eng-phase-name">Implementation</h3>
-          <p class="eng-phase-desc">Ejecución priorizada de las recomendaciones del Discovery con KPIs definidos desde el inicio. Nuestros honorarios en esta fase están ligados a resultados medibles — no al esfuerzo. Si los ahorros no se materializan, tampoco nuestra factura.</p>
-          <span class="eng-deliverable">↳ Entregable: Soluciones implementadas + KPIs validados</span>
-        </div>
+      <div class="process-step" data-step="1">
+        <div class="process-step-num">02</div>
+        <div class="process-step-title">Implementación</div>
       </div>
-
-      <div class="eng-item reveal" style="transition-delay:0.24s">
-        <div class="eng-num">03</div>
-        <div class="eng-body">
-          <p class="eng-phase-label">Fase 03</p>
-          <h3 class="eng-phase-name">Monitoring &amp; Evolution</h3>
-          <p class="eng-phase-desc">Seguimiento continuo, refinamiento iterativo y transferencia de conocimiento al equipo interno. El engagement termina cuando los ahorros están confirmados — no cuando el reporte está archivado. Su equipo queda preparado para sostener los resultados.</p>
-          <span class="eng-deliverable">↳ Entregable: Equipo autónomo + resultados sostenidos</span>
-        </div>
+      <div class="process-step" data-step="2">
+        <div class="process-step-num">03</div>
+        <div class="process-step-title">Mejora Continua<br>y Soporte</div>
       </div>
-
     </div>
+
+    <div class="process-panels reveal">
+      <div class="process-panel active" data-panel="0">
+        <p class="process-panel-eyebrow">Fase 01 · Análisis y Descubrimiento</p>
+        <h3>Entendemos su organización antes de proponer cualquier solución</h3>
+        <p class="process-panel-desc">Iniciamos con un diagnóstico profundo: entrevistamos a todos los niveles de su organización, recopilamos datos operativos, mapeamos procesos clave e identificamos brechas y oportunidades. No hacemos suposiciones — escuchamos primero, analizamos después, y solo entonces construimos una visión clara del estado actual y del camino hacia donde quiere llegar. Este análisis es la base que garantiza que cada acción posterior tenga impacto real.</p>
+        <span class="process-deliverable">↳ Entregable: Reporte ejecutivo de hallazgos, brechas y oportunidades priorizadas</span>
+      </div>
+      <div class="process-panel" data-panel="1">
+        <p class="process-panel-eyebrow">Fase 02 · Implementación</p>
+        <h3>Ejecutamos con precisión, ligados a resultados — no al esfuerzo</h3>
+        <p class="process-panel-desc">Con el análisis como mapa, ejecutamos las iniciativas priorizadas en fases cortas y medibles. Los KPIs se definen antes de comenzar, y nuestros honorarios están directamente vinculados a los resultados que se materializan — si los ahorros no se concretan, nuestra factura tampoco. Trabajamos junto a su equipo sin interrumpir la operación, asegurando que cada cambio se adopte correctamente y genere el impacto esperado desde el primer sprint.</p>
+        <span class="process-deliverable">↳ Entregable: Soluciones implementadas, KPIs validados y equipo adoptando los cambios</span>
+      </div>
+      <div class="process-panel" data-panel="2">
+        <p class="process-panel-eyebrow">Fase 03 · Mejora Continua y Soporte</p>
+        <h3>Seguimos contigo hasta alcanzar la excelencia operativa que buscas</h3>
+        <p class="process-panel-desc">El trabajo no termina cuando se instala una solución — termina cuando su organización la domina y sigue mejorando por sí sola. Ofrecemos acompañamiento continuo por el tiempo que su empresa necesite: refinamiento iterativo, transferencia de conocimiento, monitoreo de resultados y ajustes estratégicos en tiempo real. Permanecemos como su sombra operativa hasta que alcancen los estándares de excelencia que se fijaron como objetivo — y más allá.</p>
+        <span class="process-deliverable">↳ Entregable: Equipo autónomo, cultura de mejora instalada y resultados sostenidos</span>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -1194,7 +1105,7 @@
 <section id="alliances" class="section" data-section>
   <div class="section-inner">
     <div class="allia-header reveal">
-      <p class="eyebrow">04 · Alliances</p>
+      <p class="eyebrow">04 · Alianzas</p>
       <h2 class="section-title">Nuestros Aliados Estratégicos</h2>
       <div class="section-rule"></div>
       <p class="section-lead" style="margin:0 auto">Los mejores de su clase en el mercado latinoamericano — aliados que complementan nuestra propuesta de valor con capacidades especializadas.</p>
@@ -1295,7 +1206,7 @@
 <section id="about" class="section" data-section>
   <div class="section-inner">
     <div class="reveal" style="margin-bottom:3.5rem">
-      <p class="eyebrow">06 · About Us</p>
+      <p class="eyebrow">06 · Nosotros</p>
       <h2 class="section-title">Quiénes somos</h2>
       <div class="section-rule"></div>
     </div>
@@ -1334,15 +1245,9 @@
 
       <div class="about-right reveal">
         <div class="founder-card">
-          <div class="founder-head">
-            <div class="founder-photo">Foto<br>Fundador</div>
-            <div>
-              <h3 class="founder-name">Álvaro García</h3>
-              <p class="founder-title">IT Senior Director · Co-Fundador</p>
-              <p style="font-size:0.78rem;color:var(--text-muted);line-height:1.6">Ingeniero en Sistemas por ITESO · Liderazgo Ejecutivo ITESM</p>
-            </div>
-          </div>
-          <p class="founder-bio">Ejecutivo de TI con más de 25 años liderando transformaciones digitales en empresas Fortune 500 y scale-ups latinoamericanos. Experto en integración de IA, ciberseguridad (PCI, SOC2, SOX), arquitectura cloud (AWS, Azure, GCP) y liderazgo de equipos globales. Ha gestionado presupuestos multimillonarios y equipos en tres continentes — siempre con un objetivo: hacer que la tecnología genere dinero, no problemas.</p>
+          <h3 class="founder-name">Álvaro García</h3>
+          <p class="founder-title">IT Senior Director · Co-Fundador &amp; Consultor Principal</p>
+          <p class="founder-bio">Álvaro García es un ejecutivo de alto nivel con más de 25 años de trayectoria en la industria tecnológica, con profunda especialización en el sector financiero global. A lo largo de su carrera ha liderado iniciativas de transformación digital de alto impacto en empresas Fortune 500, desde la gobernanza de TI y la ciberseguridad de nivel internacional, hasta la arquitectura de soluciones en nube y el liderazgo de equipos distribuidos en múltiples mercados. Ha administrado y optimizado carteras de P&amp;L multimillonarias, convirtiendo la visibilidad financiera en una herramienta estratégica que permite a los líderes ejecutivos tomar decisiones basadas en datos reales. Su enfoque combina rigor técnico con pensamiento de negocio, con un historial comprobado de crecimiento sostenido y resultados medibles en cada organización donde ha participado.</p>
           <div class="founder-stats">
             <div class="founder-stat">
               <span class="founder-stat-val">25+</span>
@@ -1350,15 +1255,19 @@
             </div>
             <div class="founder-stat">
               <span class="founder-stat-val">5+</span>
-              <span class="founder-stat-lbl">Empresas Fortune</span>
+              <span class="founder-stat-lbl">Fortune 500</span>
             </div>
             <div class="founder-stat">
-              <span class="founder-stat-val">3</span>
-              <span class="founder-stat-lbl">Continentes</span>
+              <span class="founder-stat-val">100%</span>
+              <span class="founder-stat-lbl">Éxito en implementación</span>
             </div>
             <div class="founder-stat">
-              <span class="founder-stat-val">40%</span>
-              <span class="founder-stat-lbl">Crecimiento entregado</span>
+              <span class="founder-stat-val">20%</span>
+              <span class="founder-stat-lbl">Crecimiento YoY</span>
+            </div>
+            <div class="founder-stat">
+              <span class="founder-stat-val">P&amp;L</span>
+              <span class="founder-stat-lbl">Control financiero estratégico</span>
             </div>
           </div>
           <div class="founder-career">
@@ -1367,7 +1276,7 @@
             <div class="career-item">Morgan Stanley — Dirección TI, Fortune 500</div>
             <div class="career-item">Payclip — Transformación digital fintech México</div>
             <div class="career-item">Rackspace — Estrategia cloud enterprise</div>
-            <div class="career-item">The Credit Pros — IT Senior Director, 40% business growth</div>
+            <div class="career-item">The Credit Pros — IT Senior Director, 20% crecimiento sostenido</div>
           </div>
         </div>
       </div>
@@ -1377,40 +1286,12 @@
 </section>
 
 <!-- ════════════════════════════════════════════
-     §8 ASK ALISTA
-════════════════════════════════════════════ -->
-<section id="ask" class="section section--alt" data-section>
-  <div class="section-inner">
-    <div class="ask-header reveal">
-      <p class="eyebrow">07 · Ask ALISTA CONSULTING</p>
-      <h2 class="section-title">Pregúntale a nuestro asistente</h2>
-      <div class="section-rule"></div>
-      <p class="section-lead" style="margin:0 auto">¿Tienes preguntas sobre nuestros servicios, metodología FORGE, o simplemente quieres saber si podemos ayudarte? Nuestro asistente está aquí.</p>
-    </div>
-    <div class="chat-container reveal">
-      <div class="chat-topbar">
-        <div class="chat-dot"></div>
-        <span class="chat-topbar-label">ALISTA AI Assistant · Powered by Claude</span>
-      </div>
-      <div class="chat-messages" id="chat-messages"></div>
-      <div class="chat-input-row">
-        <input type="text" id="chat-input" class="chat-input" placeholder="Escribe tu pregunta…" autocomplete="off" />
-        <button class="chat-send" id="chat-send" aria-label="Enviar mensaje">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-        </button>
-      </div>
-    </div>
-    <p class="chat-disclaimer">IA experimental · Respuestas informativas · Para cotizaciones formales, usa el formulario de contacto</p>
-  </div>
-</section>
-
-<!-- ════════════════════════════════════════════
-     §9 CONTACT
+     §8 CONTACT
 ════════════════════════════════════════════ -->
 <section id="contact" class="section" data-section>
   <div class="section-inner">
     <div class="reveal" style="margin-bottom:3.5rem">
-      <p class="eyebrow">08 · Contacto</p>
+      <p class="eyebrow">07 · Contacto</p>
       <h2 class="section-title">Hablemos de tu proyecto</h2>
       <div class="section-rule"></div>
     </div>
@@ -1507,12 +1388,11 @@
         <p class="footer-col-title">Secciones</p>
         <nav class="footer-nav">
           <a href="#servicios">Servicios</a>
-          <a href="#framework">Our Framework</a>
-          <a href="#engagement">Our Engagement</a>
-          <a href="#alliances">Alliances</a>
-          <a href="#pricing">Pricing</a>
-          <a href="#about">About Us</a>
-          <a href="#ask">Ask ALISTA</a>
+          <a href="#framework">Nuestro Framework</a>
+          <a href="#engagement">Nuestro Proceso</a>
+          <a href="#alliances">Alianzas</a>
+          <a href="#pricing">Inversión</a>
+          <a href="#about">Nosotros</a>
           <a href="#contact">Contacto</a>
         </nav>
       </div>
@@ -1521,8 +1401,8 @@
         <p class="footer-col-title">Empresa</p>
         <nav class="footer-nav">
           <a href="index.html">Grupo Alista ↗</a>
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Service</a>
+          <a href="consulting-privacy.html">Aviso de Privacidad</a>
+          <a href="consulting-terms.html">Términos de Servicio</a>
         </nav>
         <a class="ppt-link" title="Próximamente — deck en preparación" aria-disabled="true">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
@@ -1600,77 +1480,16 @@
   }, { threshold: 0.07 });
   document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
-  /* ── Chatbot ─────────────────────────────── */
-  // Set CHAT_ENDPOINT once the Lambda proxy is deployed.
-  // POST body: { message: string, history: [{role, content}] }
-  // Expected response: { reply: string }
-  var CHAT_ENDPOINT = '';
-
-  var chatHistory = [];
-  var GREETING = 'Hola, soy el asistente de ALISTA CONSULTING. ¿En qué puedo ayudarte hoy? Puedo explicarte nuestros servicios, la metodología FORGE, precios o simplemente agendar una consulta.';
-
-  function appendMsg(role, text) {
-    var msgs = document.getElementById('chat-messages');
-    var div  = document.createElement('div');
-    div.className = 'chat-msg chat-msg--' + role;
-    div.innerHTML = '<p>' + text.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</p>';
-    msgs.appendChild(div);
-    msgs.scrollTop = msgs.scrollHeight;
-    return div;
-  }
-
-  function showTyping() {
-    var msgs = document.getElementById('chat-messages');
-    var t = document.createElement('div');
-    t.className = 'chat-typing';
-    t.innerHTML = '<span></span><span></span><span></span>';
-    msgs.appendChild(t);
-    msgs.scrollTop = msgs.scrollHeight;
-    return t;
-  }
-
-  async function sendChat() {
-    var input = document.getElementById('chat-input');
-    var msg   = input.value.trim();
-    if (!msg) return;
-    input.value = '';
-    appendMsg('user', msg);
-    chatHistory.push({ role: 'user', content: msg });
-
-    if (!CHAT_ENDPOINT) {
-      var t = showTyping();
-      setTimeout(function () {
-        t.remove();
-        appendMsg('assistant', 'El servicio de chat estará disponible muy pronto. Mientras tanto, contáctanos en ventas@grupoalista.com o por WhatsApp al +52 333 128 8999.');
-      }, 900);
-      return;
-    }
-
-    var typing = showTyping();
-    try {
-      var res  = await fetch(CHAT_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: msg, history: chatHistory })
-      });
-      typing.remove();
-      var data = await res.json();
-      var reply = data.reply || 'No se pudo obtener una respuesta. Intenta de nuevo.';
-      appendMsg('assistant', reply);
-      chatHistory.push({ role: 'assistant', content: reply });
-    } catch (err) {
-      typing.remove();
-      appendMsg('assistant', 'Error de conexión. Contáctanos directamente en ventas@grupoalista.com.');
-    }
-  }
-
-  document.getElementById('chat-send').addEventListener('click', sendChat);
-  document.getElementById('chat-input').addEventListener('keydown', function (e) {
-    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendChat(); }
+  /* ── Nuestro Proceso tabs ────────────────── */
+  document.querySelectorAll('.process-step').forEach(function(step) {
+    step.addEventListener('click', function() {
+      const idx = this.dataset.step;
+      document.querySelectorAll('.process-step').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.process-panel').forEach(p => p.classList.remove('active'));
+      this.classList.add('active');
+      document.querySelector('.process-panel[data-panel="' + idx + '"]').classList.add('active');
+    });
   });
-
-  // Show greeting on load
-  appendMsg('assistant', GREETING);
 
   /* ── Contact form → EmailJS ───────────────── */
   emailjs.init('NAbz4ZYSbxQfKC5fw');

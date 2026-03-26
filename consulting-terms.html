@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Términos de Servicio — Alista Consulting</title>
+  <meta name="description" content="Términos y condiciones de contratación de servicios de consultoría de Alista Consulting." />
+  <link rel="icon" type="image/png" href="assets/images/logo-consulting.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-base:      #09141c;
+      --bg-elevated:  #0d1c26;
+      --bg-card:      #111f2a;
+      --copper-dark:  #9D4C2A;
+      --copper:       #BA6A45;
+      --copper-rgb:   186, 106, 69;
+      --slate-light:  #A5BCC6;
+      --text-primary: #e4ecf1;
+      --text-muted:   #7fa0b2;
+      --border:       rgba(165,188,198,0.10);
+      --border-cu:    rgba(186,106,69,0.22);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg-base);
+      color: var(--text-primary);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+    a { color: var(--copper); text-decoration: none; }
+    a:hover { opacity: 0.8; }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(9,20,28,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { display: flex; align-items: center; }
+    .nav-logo img { height: 32px; width: auto; }
+    .nav-back {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--copper); }
+
+    /* ── Page layout ── */
+    .page-wrap {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 100px 2rem 6rem;
+    }
+    .doc-header {
+      margin-bottom: 3.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2.5rem;
+    }
+    .doc-eyebrow {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--copper); margin-bottom: 1rem;
+    }
+    .doc-title {
+      font-family: 'Roboto Mono', monospace;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 400; line-height: 1.2;
+      color: var(--text-primary); margin-bottom: 1rem;
+    }
+    .doc-meta {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.62rem; letter-spacing: 0.1em;
+      color: var(--text-muted);
+    }
+
+    /* ── Body content ── */
+    .doc-section {
+      margin-bottom: 3rem;
+    }
+    .doc-section h2 {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.75rem; font-weight: 500; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--copper);
+      margin-bottom: 1.2rem;
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+    .doc-section h2::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(90deg, var(--border-cu), transparent);
+    }
+    .doc-section p {
+      font-size: 0.9rem; color: var(--text-muted);
+      line-height: 1.85; margin-bottom: 1rem;
+    }
+    .doc-section ul, .doc-section ol {
+      padding-left: 1.4rem; margin-bottom: 1rem;
+    }
+    .doc-section li {
+      font-size: 0.9rem; color: var(--text-muted);
+      line-height: 1.85; margin-bottom: 0.4rem;
+    }
+    .doc-section strong {
+      color: var(--text-primary); font-weight: 500;
+    }
+    .doc-highlight {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--copper);
+      padding: 1.2rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 0.88rem; color: var(--text-muted); line-height: 1.8;
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: #060d14;
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+    }
+    footer p {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.55rem; letter-spacing: 0.1em;
+      color: rgba(165,188,198,0.35);
+    }
+    footer a {
+      color: rgba(var(--copper-rgb),0.6);
+      margin: 0 0.5rem;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="consulting.html">
+    <img src="assets/images/logo-consulting.png" alt="Alista Consulting" />
+  </a>
+  <a class="nav-back" href="consulting.html">← Volver al sitio</a>
+</nav>
+
+<div class="page-wrap">
+
+  <div class="doc-header">
+    <p class="doc-eyebrow">Documento Legal</p>
+    <h1 class="doc-title">Términos y Condiciones de Servicio</h1>
+    <p class="doc-meta">Última actualización: 25 de marzo de 2026 · Versión 1.0</p>
+  </div>
+
+  <div class="doc-section">
+    <h2>1. Identificación de las Partes</h2>
+    <p><strong>Alista Consulting</strong>, en adelante denominada "el Proveedor" o "la Firma", es una empresa de consultoría estratégica en tecnología de la información y negocios, con domicilio en Lázaro Cárdenas Pte. 2953, Col. Chapalita, Guadalajara, Jalisco, México, C.P. 44500, y contacto electrónico en ventas@grupoalista.com.</p>
+    <p>El "Cliente" es toda persona física o moral que contrata, accede o hace uso de los servicios de Alista Consulting, ya sea a través de un contrato de prestación de servicios formal, carta propuesta aceptada, correo electrónico de confirmación o cualquier otro instrumento equivalente.</p>
+    <p>La aceptación de una propuesta de servicios, el inicio de los trabajos o el acceso a los entregables implica la aceptación plena e irrestricta de estos Términos y Condiciones.</p>
+  </div>
+
+  <div class="doc-section">
+    <h2>2. Naturaleza de los Servicios</h2>
+    <p>Alista Consulting presta servicios profesionales de consultoría que incluyen, de manera enunciativa mas no limitativa:</p>
+    <ul>
+      <li>Diagnóstico y análisis organizacional en tecnología de la información</li>
+      <li>Diseño e implementación de estrategias de transformación digital</li>
+      <li>Optimización de procesos operativos y control de P&L</li>
+      <li>Servicios de Fractional CTO y liderazgo tecnológico fraccionado</li>
+      <li>Gestión y estrategia de proyectos de innovación</li>
+      <li>Asesoría en implementación de inteligencia artificial para negocios</li>
+      <li>Consultoría en ciberseguridad, gobernanza de TI y cumplimiento normativo</li>
+    </ul>
+    <p>Los servicios se prestan conforme al alcance específico definido en cada propuesta o contrato individual. Cualquier servicio fuera del alcance acordado deberá ser solicitado formalmente y estará sujeto a una cotización adicional.</p>
+  </div>
+
+  <div class="doc-section">
+    <h2>3. Propuesta, Aceptación y Formalización</h2>
+    <p>Todo engagement inicia con la presentación de una propuesta escrita que describe el alcance, metodología, entregables, plazos y condiciones económicas. La propuesta tiene una vigencia de <strong>30 días naturales</strong> a partir de su fecha de emisión, salvo indicación contraria.</p>
+    <p>La aceptación formal se perfecciona mediante:</p>
+    <ul>
+      <li>Firma del contrato de prestación de servicios, o</li>
+      <li>Aceptación escrita de la propuesta vía correo electrónico, o</li>
+      <li>Pago del anticipo correspondiente</li>
+    </ul>
+    <p>El inicio de los trabajos sin formalización previa, a solicitud expresa del Cliente, se entenderá como aceptación tácita de los términos de la propuesta vigente.</p>
+  </div>
+
+  <div class="doc-section">
+    <h2>4. Condiciones Económicas y Forma de Pago</h2>
+    <p>Los honorarios, estructura de pago y moneda aplicable se establecen en cada propuesta de servicios. Como regla general:</p>
+    <ul>
+      <li><strong>Proyectos de diagnóstico:</strong> tarifa fija, pago al inicio o contra entregable final según se acuerde</li>
+      <li><strong>Proyectos de implementación:</strong> estructura ligada a KPIs con hitos de pago definidos</li>
+      <li><strong>Retainer / Fractional CTO:</strong> mensualidad fija con vencimiento el primer día hábil de cada mes</li>
+    </ul>
+    <p>Los pagos deben realizarse dentro de los <strong>15 días naturales</strong> siguientes a la fecha de factura o hito acordado. El retraso en el pago genera intereses moratorios del 2% mensual sobre el saldo insoluto, sin perjuicio del derecho de la Firma a suspender los servicios hasta la regularización del adeudo.</p>
+    <p>Los precios no incluyen IVA ni cualquier otro impuesto aplicable, salvo indicación expresa en contrario.</p>
+  </div>
+
+  <div class="doc-section">
+    <h2>5. Obligaciones del Cliente</h2>
+    <p>Para el correcto desarrollo de los servicios, el Cliente se obliga a:</p>
+    <ul>
+      <li>Proporcionar acceso oportuno a la información, sistemas y personal necesarios para ejecutar el diagnóstico o implementación</li>
+      <li>Designar un interlocutor interno con capacidad de decisión para agilizar la toma de decisiones</li>
+      <li>Revisar y aprobar o rechazar los entregables dentro de los plazos acordados; la falta de respuesta en <strong>10 días hábiles</strong> se considerará aprobación tácita</li>
+      <li>Mantener la confidencialidad sobre la metodología, herramientas y documentación proporcionada por la Firma</li>
+      <li>Cumplir con los compromisos de pago en los términos acordados</li>
+    </ul>
+    <div class="doc-highlight">
+      La calidad y oportunidad de los resultados dependen directamente de la colaboración activa del Cliente. Alista Consulting no será responsable por demoras o resultados insatisfactorios derivados de información incompleta, accesos restringidos o falta de participación del equipo del Cliente.
+    </div>
+  </div>
+
+  <div class="doc-section">
+    <h2>6. Propiedad Intelectual y Entregables</h2>
+    <p>Los entregables generados durante el engagement — incluyendo reportes, diagnósticos, planes estratégicos, manuales de proceso y documentación técnica — serán propiedad del Cliente una vez liquidado el total de los honorarios acordados.</p>
+    <p>La metodología FORGE, los marcos de trabajo propietarios, las plantillas, herramientas y procesos internos de Alista Consulting son propiedad exclusiva de la Firma y no forman parte de los entregables cedidos al Cliente.</p>
+    <p>El Cliente otorga a Alista Consulting el derecho de mencionar el engagement como referencia de portafolio, sin revelar información confidencial, salvo instrucción expresa en contrario documentada por escrito.</p>
+  </div>
+
+  <div class="doc-section">
+    <h2>7. Confidencialidad</h2>
+    <p>Ambas partes se obligan a mantener estricta confidencialidad sobre la información intercambiada durante el engagement. Esta obligación incluye, sin limitarse a:</p>
+    <ul>
+      <li>Información financiera, operativa y estratégica del Cliente</li>
+      <li>Metodologías, tarifas y condiciones comerciales de la Firma</li>
+      <li>Datos personales de empleados, clientes o proveedores de cualquiera de las partes</li>
+    </ul>
+    <p>La obligación de confidencialidad permanece vigente por un período de <strong>3 años</strong> posteriores a la conclusión del engagement, independientemente de la causa de terminación.</p>
+    <p>Se exceptúa de esta obligación la información que sea de dominio público por causas ajenas a las partes, o que deba ser revelada por mandato legal o resolución judicial.</p>
+  </div>
+
+  <div class="doc-section">
+    <h2>8. Limitación de Responsabilidad</h2>
+    <p>Alista Consulting presta servicios de consultoría y asesoría profesional. La implementación de las recomendaciones y las decisiones ejecutivas son responsabilidad exclusiva del Cliente.</p>
+    <p>La responsabilidad total de la Firma frente al Cliente, por cualquier causa, no excederá el monto total de los honorarios efectivamente pagados en el engagement correspondiente durante los 12 meses anteriores al evento que da origen al reclamo.</p>
+    <p>Alista Consulting no será responsable por daños indirectos, lucro cesante, pérdida de datos o daños consecuentes, salvo que medie dolo o negligencia grave debidamente probada.</p>
+  </div>
+
+  <div class="doc-section">
+    <h2>9. Terminación del Engagement</h2>
+    <p>Cualquiera de las partes puede terminar el engagement mediante aviso escrito con <strong>30 días de anticipación</strong>. En caso de terminación anticipada:</p>
+    <ul>
+      <li>El Cliente pagará los honorarios proporcionales a los trabajos realizados hasta la fecha de terminación efectiva</li>
+      <li>La Firma entregará los avances y documentación generada hasta ese momento</li>
+      <li>Los compromisos de confidencialidad permanecen vigentes según lo establecido en la Cláusula 7</li>
+    </ul>
+    <p>La Firma se reserva el derecho de terminar el engagement de forma inmediata en caso de incumplimiento de pago mayor a 30 días, sin perjuicio del cobro de los servicios devengados.</p>
+  </div>
+
+  <div class="doc-section">
+    <h2>10. Relación entre las Partes</h2>
+    <p>La relación entre Alista Consulting y el Cliente es de prestación independiente de servicios profesionales. Nada en estos términos crea una relación laboral, sociedad, franquicia, representación o agencia entre las partes.</p>
+    <p>Los consultores asignados a cada engagement actúan en representación de la Firma y bajo su supervisión, sin que ello implique una relación laboral con el Cliente.</p>
+  </div>
+
+  <div class="doc-section">
+    <h2>11. Modificaciones a estos Términos</h2>
+    <p>Alista Consulting se reserva el derecho de actualizar estos Términos y Condiciones. Los cambios serán notificados a los clientes activos con al menos <strong>15 días de anticipación</strong> a su entrada en vigor. Para nuevos clientes, la versión vigente al momento de formalizar el engagement será la aplicable.</p>
+  </div>
+
+  <div class="doc-section">
+    <h2>12. Jurisdicción y Ley Aplicable</h2>
+    <p>Estos Términos y Condiciones se rigen por las leyes vigentes de los <strong>Estados Unidos Mexicanos</strong>. Para la resolución de cualquier controversia derivada de su interpretación o cumplimiento, las partes se someten expresamente a la jurisdicción de los tribunales competentes de la ciudad de <strong>Guadalajara, Jalisco</strong>, renunciando a cualquier otro fuero que pudiera corresponderles por razón de su domicilio presente o futuro.</p>
+    <p>Las partes procurarán resolver cualquier diferencia de forma amigable antes de iniciar acciones legales formales.</p>
+  </div>
+
+  <div class="doc-section">
+    <h2>13. Contacto</h2>
+    <p>Para cualquier consulta relacionada con estos Términos y Condiciones, puede contactarnos en:</p>
+    <ul>
+      <li><strong>Email:</strong> <a href="mailto:ventas@grupoalista.com">ventas@grupoalista.com</a></li>
+      <li><strong>WhatsApp:</strong> <a href="https://wa.me/523331288999">+52 333 128 8999</a></li>
+      <li><strong>Domicilio:</strong> Lázaro Cárdenas Pte. 2953, Col. Chapalita, Guadalajara, Jalisco, México, C.P. 44500</li>
+    </ul>
+  </div>
+
+</div>
+
+<footer>
+  <p>
+    © 2026 Alista Consulting · Todos los derechos reservados ·
+    <a href="consulting-privacy.html">Aviso de Privacidad</a> ·
+    <a href="consulting.html">Volver al sitio</a>
+  </p>
+</footer>
+
+</body>
+</html>
