@@ -440,15 +440,21 @@
       box-shadow: 0 12px 40px rgba(0,0,0,0.3);
       transform: translateY(-4px);
     }
-    .allia-logo-placeholder {
-      width: 100px; height: 40px;
-      border: 1px dashed rgba(var(--copper-rgb), 0.3);
-      border-radius: 3px;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Roboto Mono', monospace;
-      font-size: 0.6rem; letter-spacing: 0.1em;
-      color: rgba(var(--copper-rgb), 0.45);
+    .allia-logo {
+      height: 36px; width: auto; max-width: 140px;
+      object-fit: contain;
+      background: #fff;
+      padding: 6px 10px;
+      border-radius: 4px;
       margin-bottom: 1.4rem;
+    }
+    /* Stretched-link: .allia-link::after covers entire .allia-card */
+    .allia-card { cursor: pointer; }
+    .allia-link::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 1;
     }
     .allia-badge {
       display: inline-block;
@@ -520,16 +526,16 @@
       color: var(--text-primary); margin-bottom: 0.5rem;
     }
     .pricing-best {
-      font-size: 0.75rem; color: var(--text-muted);
-      margin-bottom: 1.4rem; line-height: 1.6;
+      font-size: 0.88rem; color: var(--text-muted);
+      margin-bottom: 1.4rem; line-height: 1.7;
     }
     .pricing-features {
-      list-style: none; display: flex; flex-direction: column; gap: 0.6rem;
-      margin-bottom: 2rem;
+      list-style: none; display: flex; flex-direction: column; gap: 0.7rem;
+      margin-bottom: 0;
     }
     .pricing-features li {
-      font-size: 0.8rem; color: var(--text-muted);
-      display: flex; align-items: flex-start; gap: 0.6rem; line-height: 1.5;
+      font-size: 0.88rem; color: var(--text-muted);
+      display: flex; align-items: flex-start; gap: 0.6rem; line-height: 1.6;
     }
     .pricing-features li::before {
       content: '·'; color: var(--copper); flex-shrink: 0;
@@ -1196,7 +1202,7 @@
     <div class="allia-grid">
 
       <div class="allia-card reveal" style="transition-delay:0s">
-        <div class="allia-logo-placeholder">LOGO</div>
+        <img src="assets/images/logo-burobd.png" alt="BuroDB" class="allia-logo" />
         <span class="allia-badge">Marketing &amp; Campañas</span>
         <h3 class="allia-name">BuroDB</h3>
         <p class="allia-desc">Aliado estratégico de marketing digital y campañas de alto impacto. Especialistas en posicionamiento de marca y estrategias de crecimiento para el mercado latinoamericano. Cuando su negocio necesita visibilidad y tráfico cualificado, BuroDB entra al equipo.</p>
@@ -1204,7 +1210,7 @@
       </div>
 
       <div class="allia-card reveal" style="transition-delay:0.1s">
-        <div class="allia-logo-placeholder">LOGO</div>
+        <img src="assets/images/logo-feuerluft.png" alt="Feuerluft" class="allia-logo" />
         <span class="allia-badge">Desarrollo de Producto</span>
         <h3 class="allia-name">FEUERLUFT</h3>
         <p class="allia-desc">Aliado en desarrollo de producto y soluciones digitales para el mercado latinoamericano. Expertos en construir productos que conectan con los consumidores y generan adopción real. Cuando la estrategia necesita convertirse en código, FEUERLUFT entrega.</p>
@@ -1239,7 +1245,6 @@
           <li>Reporte completo de hallazgos</li>
           <li>Sesión de presentación ejecutiva</li>
         </ul>
-        <a href="#contact" class="btn btn-ghost" style="width:100%;justify-content:center">Solicitar propuesta</a>
       </div>
 
       <div class="pricing-card featured reveal" style="transition-delay:0.1s">
@@ -1254,7 +1259,6 @@
           <li>Transferencia de conocimiento</li>
           <li>Garantía de resultados o ajuste</li>
         </ul>
-        <a href="#contact" class="btn btn-primary" style="width:100%;justify-content:center">Solicitar propuesta</a>
       </div>
 
       <div class="pricing-card reveal" style="transition-delay:0.2s">
@@ -1268,9 +1272,11 @@
           <li>Roadmap tecnológico actualizado</li>
           <li>Red de consultores bajo demanda</li>
         </ul>
-        <a href="#contact" class="btn btn-ghost" style="width:100%;justify-content:center">Solicitar propuesta</a>
       </div>
 
+    </div>
+    <div style="text-align:center;margin-bottom:2.5rem">
+      <a href="#contact" class="btn btn-primary">Solicitar propuesta</a>
     </div>
     <div class="pricing-callouts reveal">
       <div class="pricing-callout">
