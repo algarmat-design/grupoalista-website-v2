@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catálogo de Productos — Alista Hotels</title>
+  <meta name="description" content="Catálogo completo de suministros hoteleros. Toallas de lujo, artículos de limpieza, amenidades y productos de baño para hoteles y eventos." />
+  <link rel="icon" type="image/png" href="../assets/images/logo-hotels.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;500&family=Montserrat:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:            #ffffff;
+      --bg-elevated:   #f5f5f2;
+      --bg-card:       #ededea;
+      --bg-card-hover: #e4e4e0;
+      --text:          #282826;
+      --text-muted:    #666660;
+      --silver:        #2a2a2a;
+      --silver-dim:    #888880;
+      --gold:          #8a6030;
+      --gold-dark:     #6a4820;
+      --gold-light:    #c8a070;
+      --border:        rgba(0,0,0,0.10);
+      --border-soft:   rgba(0,0,0,0.05);
+      --shadow:        rgba(0,0,0,0.08);
+      --shadow-md:     rgba(0,0,0,0.14);
+      --metallic:      linear-gradient(135deg,#3a3a3a 0%,#0a0a0a 40%,#4a4a4a 60%,#1a1a1a 100%);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;font-size:16px}
+    body{font-family:'Lato',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden}
+    img{display:block;max-width:100%}
+    a{color:inherit;text-decoration:none}
+    button{font-family:inherit;cursor:pointer;border:none;background:none}
+    ::-webkit-scrollbar{width:4px;height:4px}
+    ::-webkit-scrollbar-track{background:var(--bg-elevated)}
+    ::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px}
+
+    /* ── NAV ─────────────────────────────────────────── */
+    .nav{
+      position:sticky;top:0;z-index:100;
+      background:rgba(255,255,255,0.97);
+      backdrop-filter:blur(16px);
+      border-bottom:1px solid var(--border);
+      height:68px;
+    }
+    .nav-inner{
+      max-width:1360px;margin:0 auto;
+      padding:0 2rem;height:100%;
+      display:flex;align-items:center;gap:1rem;
+    }
+    .nav-logo img{height:38px;width:auto;flex-shrink:0}
+    .nav-div{width:1px;height:24px;background:var(--border);flex-shrink:0}
+    .nav-back{
+      font-family:'Montserrat',sans-serif;
+      font-size:0.58rem;letter-spacing:0.16em;text-transform:uppercase;
+      color:var(--silver-dim);display:flex;align-items:center;gap:0.3rem;
+      transition:color 0.2s;flex-shrink:0;white-space:nowrap;
+    }
+    .nav-back:hover{color:var(--gold)}
+    .nav-back svg{width:11px;height:11px}
+    .nav-search{flex:1;position:relative;max-width:440px}
+    .nav-search input{
+      width:100%;padding:0.48rem 1rem 0.48rem 2.5rem;
+      border:1.5px solid var(--border);border-radius:3px;
+      background:var(--bg-elevated);color:var(--text);
+      font-family:'Lato',sans-serif;font-size:0.86rem;
+      outline:none;transition:border-color 0.2s,box-shadow 0.2s;
+    }
+    .nav-search input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(138,96,48,0.10)}
+    .nav-search input::placeholder{color:var(--silver-dim);opacity:0.55}
+    .nav-search-icon{position:absolute;left:0.8rem;top:50%;transform:translateY(-50%);color:var(--silver-dim);pointer-events:none}
+    .nav-search-icon svg{width:13px;height:13px;display:block}
+    .nav-right{display:flex;align-items:center;gap:0.85rem;margin-left:auto;flex-shrink:0}
+    .nav-count{font-family:'Montserrat',sans-serif;font-size:0.58rem;letter-spacing:0.1em;color:var(--silver-dim);white-space:nowrap}
+    .nav-count strong{color:var(--gold)}
+    .nav-lang{
+      font-family:'Montserrat',sans-serif;font-size:0.58rem;font-weight:500;
+      letter-spacing:0.14em;text-transform:uppercase;color:var(--silver-dim);
+      border:1px solid var(--border);border-radius:2px;padding:0.28rem 0.6rem;
+      transition:border-color 0.2s,color 0.2s;
+    }
+    .nav-lang:hover{color:var(--gold);border-color:var(--gold)}
+
+    /* ── CATEGORY STRIP ──────────────────────────────── */
+    .cat-strip{
+      position:sticky;top:68px;z-index:90;
+      background:rgba(255,255,255,0.97);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--border-soft);
+    }
+    .cat-strip-inner{
+      max-width:1360px;margin:0 auto;
+      padding:0 2rem;
+      display:flex;align-items:stretch;gap:0;
+      overflow-x:auto;scrollbar-width:none;
+    }
+    .cat-strip-inner::-webkit-scrollbar{display:none}
+    .cat-btn{
+      display:flex;align-items:center;gap:0.55rem;
+      padding:0.75rem 1.4rem;
+      border-bottom:2px solid transparent;
+      font-family:'Montserrat',sans-serif;font-size:0.65rem;font-weight:500;
+      letter-spacing:0.12em;text-transform:uppercase;
+      color:var(--silver-dim);white-space:nowrap;flex-shrink:0;
+      transition:color 0.18s,border-color 0.18s;
+    }
+    .cat-btn:hover{color:var(--silver)}
+    .cat-btn.active{color:var(--gold);border-bottom-color:var(--gold)}
+    .cat-btn svg{width:15px;height:15px;flex-shrink:0}
+    .cat-btn-count{
+      font-size:0.55rem;padding:0.1rem 0.4rem;border-radius:2px;
+      background:var(--bg-card);color:var(--silver-dim);
+    }
+    .cat-btn.active .cat-btn-count{background:rgba(138,96,48,0.12);color:var(--gold)}
+
+    /* ── SUBCAT PILLS ────────────────────────────────── */
+    .subcat-bar{
+      background:var(--bg-elevated);
+      border-bottom:1px solid var(--border-soft);
+      min-height:0;overflow:hidden;
+      transition:max-height 0.3s ease;
+      max-height:0;
+    }
+    .subcat-bar.visible{max-height:60px}
+    .subcat-inner{
+      max-width:1360px;margin:0 auto;
+      padding:0.6rem 2rem;
+      display:flex;align-items:center;gap:0.4rem;
+      overflow-x:auto;scrollbar-width:none;
+    }
+    .subcat-inner::-webkit-scrollbar{display:none}
+    .sub-pill{
+      padding:0.28rem 0.85rem;border-radius:2px;
+      border:1px solid var(--border);background:transparent;
+      color:var(--silver-dim);
+      font-family:'Montserrat',sans-serif;font-size:0.6rem;
+      font-weight:500;letter-spacing:0.08em;text-transform:uppercase;
+      white-space:nowrap;flex-shrink:0;
+      transition:background 0.15s,border-color 0.15s,color 0.15s;
+    }
+    .sub-pill:hover{color:var(--silver);border-color:rgba(0,0,0,0.25)}
+    .sub-pill.active{background:var(--metallic);border-color:transparent;color:#fff}
+
+    /* ── CATALOG WRAP ────────────────────────────────── */
+    .catalog-wrap{max-width:1360px;margin:0 auto;padding:2rem 2rem 6rem}
+
+    /* No results */
+    .no-results{display:none;text-align:center;padding:5rem 2rem;color:var(--text-muted)}
+    .no-results.visible{display:block}
+    .no-results svg{width:48px;height:48px;margin:0 auto 1rem;opacity:0.25}
+    .no-results p{font-weight:300}
+    .no-results strong{font-weight:600;color:var(--text);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1em}
+
+    /* Grid */
+    .prod-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1.25rem}
+    @media(max-width:1200px){.prod-grid{grid-template-columns:repeat(4,1fr)}}
+    @media(max-width:900px) {.prod-grid{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:640px) {.prod-grid{grid-template-columns:repeat(2,1fr);gap:0.85rem}}
+    @media(max-width:380px) {.prod-grid{grid-template-columns:1fr}}
+
+    /* Section dividers in grid */
+    .grid-section-label{
+      grid-column:1/-1;
+      display:flex;align-items:center;gap:1rem;
+      padding:1.5rem 0 0.5rem;
+    }
+    .grid-section-label:first-child{padding-top:0}
+    .grid-section-icon{
+      width:28px;height:28px;display:flex;align-items:center;justify-content:center;
+      background:var(--bg-elevated);border:1px solid var(--border);border-radius:3px;
+      color:var(--gold);flex-shrink:0;
+    }
+    .grid-section-icon svg{width:14px;height:14px}
+    .grid-section-text{
+      font-family:'Montserrat',sans-serif;font-size:0.62rem;font-weight:500;
+      letter-spacing:0.18em;text-transform:uppercase;color:var(--silver-dim);
+    }
+    .grid-section-rule{flex:1;height:1px;background:var(--border-soft)}
+
+    /* Product card */
+    .prod-card{
+      background:var(--bg);border:1px solid var(--border-soft);
+      overflow:hidden;
+      transition:transform 0.22s,box-shadow 0.22s,border-color 0.22s;
+    }
+    .prod-card:hover{
+      transform:translateY(-3px);
+      box-shadow:0 12px 36px var(--shadow-md);
+      border-color:var(--border);
+    }
+    .prod-img-wrap{
+      position:relative;aspect-ratio:1;
+      background:var(--bg-elevated);overflow:hidden;
+    }
+    .prod-img-wrap img{
+      width:100%;height:100%;object-fit:contain;padding:1rem;
+      transition:transform 0.38s ease;
+    }
+    .prod-img-wrap img.loading{filter:blur(8px)}
+    .prod-card:hover .prod-img-wrap img{transform:scale(1.06)}
+    .prod-badge{
+      position:absolute;top:0.6rem;left:0.6rem;
+      font-family:'Montserrat',sans-serif;font-size:0.48rem;
+      font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#fff;
+      background:linear-gradient(135deg,var(--gold-dark),var(--gold),var(--gold-dark));
+      padding:0.18rem 0.5rem;border-radius:2px;
+    }
+    .prod-body{
+      padding:0.85rem 1rem;background:var(--bg);
+      border-top:1px solid var(--border-soft);
+    }
+    .prod-name{
+      font-family:'Cormorant Garamond',serif;font-size:0.92rem;font-weight:600;
+      color:var(--silver);line-height:1.3;letter-spacing:0.01em;
+    }
+    .prod-sku{
+      font-family:'Montserrat',sans-serif;font-size:0.5rem;
+      letter-spacing:0.1em;color:var(--silver-dim);margin-top:0.25rem;text-transform:uppercase;
+    }
+
+    /* ── CONTACT NOTE ────────────────────────────────── */
+    .contact-note{
+      margin-top:3rem;
+      background:var(--bg-elevated);
+      border:1px solid var(--border);
+      border-left:3px solid var(--gold);
+      padding:1.5rem 2rem;
+      display:flex;align-items:flex-start;gap:1.25rem;
+    }
+    .contact-note-icon{
+      width:36px;height:36px;flex-shrink:0;
+      background:linear-gradient(135deg,var(--gold-dark),var(--gold));
+      border-radius:2px;display:flex;align-items:center;justify-content:center;
+      color:#fff;
+    }
+    .contact-note-icon svg{width:18px;height:18px}
+    .contact-note-body{}
+    .contact-note-title{
+      font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:700;
+      color:var(--silver);margin-bottom:0.35rem;
+    }
+    .contact-note-text{
+      font-family:'Lato',sans-serif;font-size:0.88rem;font-weight:300;
+      color:var(--text-muted);line-height:1.7;
+    }
+    .contact-note-cta{
+      display:inline-flex;align-items:center;gap:0.4rem;margin-top:0.85rem;
+      font-family:'Montserrat',sans-serif;font-size:0.62rem;font-weight:500;
+      letter-spacing:0.12em;text-transform:uppercase;
+      color:#fff;background:linear-gradient(135deg,#25d366,#1daa53);
+      border-radius:2px;padding:0.5rem 1rem;
+      transition:opacity 0.2s,transform 0.2s;
+    }
+    .contact-note-cta:hover{opacity:0.88;transform:translateY(-1px)}
+    .contact-note-cta svg{width:15px;height:15px}
+
+    /* ── PAGINATION ──────────────────────────────────── */
+    .pagination{display:flex;justify-content:center;align-items:center;gap:0.3rem;margin-top:2.5rem}
+    .page-btn{
+      width:34px;height:34px;display:flex;align-items:center;justify-content:center;
+      border:1px solid var(--border);border-radius:2px;
+      color:var(--silver-dim);font-family:'Montserrat',sans-serif;font-size:0.72rem;
+      transition:border-color 0.15s,color 0.15s,background 0.15s;
+    }
+    .page-btn:hover:not(:disabled){border-color:rgba(0,0,0,0.25);color:var(--silver)}
+    .page-btn.active{background:var(--metallic);border-color:transparent;color:#fff}
+    .page-btn:disabled{opacity:0.3;cursor:not-allowed}
+    .page-btn svg{width:13px;height:13px}
+    .page-ellipsis{font-family:'Montserrat',sans-serif;font-size:0.72rem;color:var(--silver-dim);padding:0 0.2rem}
+
+    /* ── FLOATING WA ─────────────────────────────────── */
+    .wa-float{
+      position:fixed;bottom:1.75rem;right:1.75rem;z-index:200;
+      display:flex;align-items:center;gap:0.65rem;
+      background:#25d366;color:#fff;border-radius:50px;
+      padding:0.8rem 1.3rem;
+      box-shadow:0 6px 24px rgba(37,211,102,0.35),0 2px 8px rgba(0,0,0,0.12);
+      font-family:'Montserrat',sans-serif;font-size:0.65rem;font-weight:500;
+      letter-spacing:0.1em;text-transform:uppercase;
+      transition:transform 0.22s,box-shadow 0.22s;
+    }
+    .wa-float:hover{transform:translateY(-3px);box-shadow:0 10px 32px rgba(37,211,102,0.45)}
+    .wa-float svg{width:18px;height:18px;flex-shrink:0}
+    @media(max-width:580px){
+      .wa-float-label{display:none}
+      .wa-float{padding:0.85rem;border-radius:50%}
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────────── */
+    @media(max-width:760px){
+      .nav-search{max-width:180px}
+      .nav-count{display:none}
+      .catalog-wrap{padding:1.5rem 1rem 5rem}
+      .subcat-bar.visible{max-height:80px}
+      .contact-note{flex-direction:column;gap:0.85rem}
+    }
+    @media(max-width:500px){
+      .nav-inner{padding:0 1rem;gap:0.6rem}
+      .nav-search{display:none}
+      .cat-strip-inner{padding:0 1rem}
+      .subcat-inner{padding:0.6rem 1rem}
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ─────────────────────────────────────────────── -->
+<nav class="nav" aria-label="Navegación catálogo">
+  <div class="nav-inner">
+    <a href="../hotels.html" class="nav-logo" aria-label="Alista Hotels">
+      <img src="../assets/images/logo-hotels.png" alt="Alista Hotels" />
+    </a>
+    <div class="nav-div" aria-hidden="true"></div>
+    <a href="../hotels.html" class="nav-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+      <span id="back-label">Inicio</span>
+    </a>
+    <div class="nav-search" role="search">
+      <span class="nav-search-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </span>
+      <input id="search-input" type="search" placeholder="Buscar producto…" aria-label="Buscar producto" autocomplete="off" />
+    </div>
+    <div class="nav-right">
+      <span class="nav-count" aria-live="polite"><strong id="count-num">—</strong> <span id="count-label">productos</span></span>
+      <button class="nav-lang" id="lang-btn" aria-label="Switch language">EN</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ── CATEGORY STRIP ───────────────────────────────────── -->
+<div class="cat-strip" role="navigation" aria-label="Categorías">
+  <div class="cat-strip-inner" id="cat-strip"></div>
+</div>
+
+<!-- ── SUBCATEGORY BAR ──────────────────────────────────── -->
+<div class="subcat-bar" id="subcat-bar">
+  <div class="subcat-inner" id="subcat-inner"></div>
+</div>
+
+<!-- ── CATALOG ─────────────────────────────────────────── -->
+<main class="catalog-wrap">
+  <div id="no-results" class="no-results" role="alert" aria-live="polite">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+    <p id="no-results-msg">Sin resultados para <strong id="no-results-term"></strong></p>
+  </div>
+  <div id="prod-grid" class="prod-grid"></div>
+  <nav id="pagination" class="pagination" aria-label="Paginación"></nav>
+
+  <!-- Contact note -->
+  <div class="contact-note" id="contact-note">
+    <div class="contact-note-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    </div>
+    <div class="contact-note-body">
+      <div class="contact-note-title" id="note-title">¿No encuentras lo que buscas?</div>
+      <p class="contact-note-text" id="note-text">Nuestro catálogo es solo una muestra de lo que podemos conseguirte. Si necesitas un producto que no aparece aquí, contáctanos — trabajamos con cientos de proveedores y con gusto cotizamos cualquier insumo hotelero a medida.</p>
+      <a class="contact-note-cta" href="https://wa.me/523331288999?text=Hola%2C+necesito+cotizar+un+producto+que+no+está+en+el+catálogo+de+Alista+Hotels." target="_blank" rel="noopener noreferrer" id="note-cta">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+        <span id="note-cta-text">Cotizar por WhatsApp</span>
+      </a>
+    </div>
+  </div>
+</main>
+
+<!-- ── FLOATING WA ──────────────────────────────────────── -->
+<a class="wa-float" href="https://wa.me/523331288999?text=Hola%2C+me+interesa+cotizar+productos+del+catálogo+de+Alista+Hotels." target="_blank" rel="noopener noreferrer" aria-label="Cotizar por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+  <span class="wa-float-label" id="wa-label">Cotizar</span>
+</a>
+
+<script>
+'use strict';
+
+/* ─────────────────────────────────────────────────────────
+   ICONS (inline SVG strings)
+───────────────────────────────────────────────────────── */
+const ICONS = {
+  todos:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>`,
+  limpieza: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M9 3h6l1 6H8L9 3z"/><path d="M8 9v11a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V9"/><path d="M11 13v4"/><path d="M15 6c1.5 0 3 .8 3 2"/></svg>`,
+  toallas:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/><path d="M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2"/></svg>`,
+  banos:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M9 6 9 3.5a1.5 1.5 0 0 1 3 0V6"/><path d="M3 11h18v2a6 6 0 0 1-6 6H9a6 6 0 0 1-6-6v-2z"/><path d="M6 19v2"/><path d="M18 19v2"/></svg>`,
+  // subcategory icons
+  'papel-toallas': `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M4.93 4.93l2.83 2.83"/><path d="M16.24 16.24l2.83 2.83"/></svg>`,
+  'papel-higienico': `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="6" y="3" width="12" height="18" rx="6"/><path d="M10 12h4"/></svg>`,
+  jabones:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M8 3h8l2 4H6L8 3z"/><rect x="5" y="7" width="14" height="14" rx="2"/><path d="M9 14c0-1.1.9-2 2-2h2c1.1 0 2 .9 2 2v0c0 1.1-.9 2-2 2h-2c-1.1 0-2-.9-2-2z"/></svg>`,
+  limpiadores: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>`,
+  trapeadores: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><line x1="12" y1="2" x2="12" y2="14"/><path d="M6 14h12l-2 7H8l-2-7z"/></svg>`,
+  bolsas:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>`,
+  microfibra: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10"/><path d="M12 8v4l3 3"/></svg>`,
+  suministros: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`,
+  'toallas-lujo': `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+  'accesorios-bano': `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M9 6 9 3.5a1.5 1.5 0 0 1 3 0V6"/><path d="M3 11h18v2a6 6 0 0 1-6 6H9a6 6 0 0 1-6-6v-2z"/></svg>`,
+  'kits-derrames': `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`,
+};
+
+/* ─────────────────────────────────────────────────────────
+   DATA
+───────────────────────────────────────────────────────── */
+const CATALOG = [
+  // ── Toallas de Papel ──────────────────────────────────
+  {id:'tdp-01',file:'tdp-01-toallas-dobladas.png',    sub:'papel-toallas', es:'Toallas de Papel Dobladas y Despachadores',  en:'Folded Paper Towels & Dispensers'},
+  {id:'tdp-02',file:'tdp-02-toallas-rollo.png',       sub:'papel-toallas', es:'Toallas de Papel en Rollo y Despachadores',  en:'Roll Paper Towels & Dispensers'},
+  {id:'tdp-03',file:'tdp-03-toallas-papel.png',       sub:'papel-toallas', es:'Toallas de Papel',                           en:'Paper Towels'},
+  {id:'tdp-04',file:'tdp-04-tork-xpress-cubierto.png',sub:'papel-toallas', es:'Tork® Xpress® Cubierto',                    en:'Tork® Xpress® Countertop'},
+  {id:'tdp-05',file:'tdp-05-kimberly-mesa.png',       sub:'papel-toallas', es:'Kimberly-Clark® De Mesa',                   en:'Kimberly-Clark® Countertop'},
+  {id:'tdp-06',file:'tdp-06-toallas-mano.png',        sub:'papel-toallas', es:'Toallas de Mano',                           en:'Hand Towels'},
+  {id:'tdp-07',file:'tdp-07-portarollos.png',         sub:'papel-toallas', es:'Portarollos para Toallas',                  en:'Towel Roll Holders'},
+  {id:'tdp-08',file:'tdp-08-tork-xpress-pared.png',   sub:'papel-toallas', es:'Tork® Xpress® para Pared',                 en:'Tork® Xpress® Wall-Mount'},
+  {id:'tdp-09',file:'tdp-09-tork-peakserve.png',      sub:'papel-toallas', es:'Tork® Peakserve®',                         en:'Tork® Peakserve®'},
+  {id:'tdp-10',file:'tdp-10-tork-slimroll.png',       sub:'papel-toallas', es:'Tork® Control™ Slimroll®',                 en:'Tork® Control™ Slimroll®'},
+  {id:'tdp-11',file:'tdp-11-sistemas-toallas.png',    sub:'papel-toallas', es:'Sistemas para Toallas',                     en:'Towel Systems'},
+  // ── Papel Higiénico ───────────────────────────────────
+  {id:'ph-01', file:'ph-01-ph-despachadores.png',     sub:'papel-higienico', es:'Papel Higiénico y Despachadores',          en:'Toilet Tissue & Dispensers'},
+  {id:'ph-02', file:'ph-02-ph-tubo.png',              sub:'papel-higienico', es:'Papel Higiénico en Tubo y Despachadores',  en:'Coreless Toilet Tissue & Dispensers'},
+  {id:'ph-03', file:'ph-03-tork-ultra-jumbo.png',     sub:'papel-higienico', es:'Tork® Ultra Papel Higiénico Jumbo',       en:'Tork® Ultra Jumbo Toilet Tissue'},
+  {id:'ph-04', file:'ph-04-ph-estandar.png',          sub:'papel-higienico', es:'Papel Higiénico Estándar',                 en:'Standard Toilet Tissue'},
+  {id:'ph-05', file:'ph-05-ph-premium.png',           sub:'papel-higienico', es:'Papel Higiénico Premium',                  en:'Premium Toilet Tissue'},
+  {id:'ph-06', file:'ph-06-tork-opticore.png',        sub:'papel-higienico', es:'Tork® Ópticore® Papel Higiénico',         en:'Tork® Ópticore® Toilet Tissue'},
+  {id:'ph-07', file:'ph-07-ph-rollo-grande.png',      sub:'papel-higienico', es:'Papel Higiénico en Rollo Grande',          en:'Large Roll Toilet Tissue'},
+  {id:'ph-08', file:'ph-08-uline-ultra.png',          sub:'papel-higienico', es:'Uline Ultra Papel Higiénico',              en:'Uline Ultra Toilet Tissue'},
+  {id:'ph-09', file:'ph-09-angel-soft.png',           sub:'papel-higienico', es:'Angel Soft® Papel Higiénico',             en:'Angel Soft® Toilet Tissue'},
+  // ── Jabones ───────────────────────────────────────────
+  {id:'jab-01',file:'jab-01-jabon-liquido.png',       sub:'jabones', es:'Jabón Líquido para Manos',                  en:'Liquid Hand Soap'},
+  {id:'jab-02',file:'jab-02-jabon-espuma.png',        sub:'jabones', es:'Jabón en Espuma para Manos',                en:'Foam Hand Soap'},
+  {id:'jab-03',file:'jab-03-uline-tuff.png',          sub:'jabones', es:'Uline Tuff Espuma',                         en:'Uline Tuff Foam Soap'},
+  {id:'jab-04',file:'jab-04-industrial.png',          sub:'jabones', es:'Jabón Industrial para Manos',               en:'Industrial Hand Soap'},
+  {id:'jab-05',file:'jab-05-gojo-2000.png',           sub:'jabones', es:'GOJO® 2000 ml',                             en:'GOJO® 2000 ml Dispenser'},
+  {id:'jab-06',file:'jab-06-gojo-5000.png',           sub:'jabones', es:'GOJO® 5000 ml',                             en:'GOJO® 5000 ml Dispenser'},
+  {id:'jab-07',file:'jab-07-mop-palmas.png',          sub:'jabones', es:'Mop® Limpiador de Palmas',                  en:'Mop® Palm Cleaner'},
+  {id:'jab-08',file:'jab-08-barra-industrial.png',    sub:'jabones', es:'Jabón en Barra Industrial',                 en:'Industrial Bar Soap'},
+  // ── Limpiadores ───────────────────────────────────────
+  {id:'lim-01',file:'lim-01-multiuso.png',            sub:'limpiadores', es:'Jabón y Detergente Multiuso',            en:'Multi-Purpose Cleaner'},
+  {id:'lim-02',file:'lim-02-desinfectante.png',       sub:'limpiadores', es:'Desinfectante para Superficies',         en:'Surface Disinfectant'},
+  {id:'lim-03',file:'lim-03-vidrio.png',              sub:'limpiadores', es:'Limpiador para Vidrio',                  en:'Glass Cleaner'},
+  {id:'lim-04',file:'lim-04-banos.png',               sub:'limpiadores', es:'Detergente para Baños',                  en:'Bathroom Detergent'},
+  {id:'lim-05',file:'lim-05-desengrasante.png',       sub:'limpiadores', es:'Desengrasante Industrial',               en:'Industrial Degreaser'},
+  {id:'lim-06',file:'lim-06-pisos.png',               sub:'limpiadores', es:'Limpiador para Pisos',                   en:'Floor Cleaner'},
+  {id:'lim-07',file:'lim-07-aromatico.png',           sub:'limpiadores', es:'Limpiador Aromático',                    en:'Aromatic Cleaner'},
+  {id:'lim-08',file:'lim-08-especializado.png',       sub:'limpiadores', es:'Limpiador Especializado',                en:'Specialized Cleaner'},
+  {id:'lim-09',file:'lim-09-alfombras.png',           sub:'limpiadores', es:'Limpiador para Alfombras',               en:'Carpet Cleaner'},
+  {id:'lim-10',file:'lim-10-acero.png',               sub:'limpiadores', es:'Limpiador para Acero Inoxidable',        en:'Stainless Steel Cleaner'},
+  {id:'lim-11',file:'lim-11-automotriz.png',          sub:'limpiadores', es:'Limpiador Automotriz',                   en:'Automotive Cleaner'},
+  // ── Trapeadores & Escobas ─────────────────────────────
+  {id:'trap-01',file:'trap-01-trapeadores.png',       sub:'trapeadores', es:'Trapeadores',                            en:'Wet Mops'},
+  {id:'trap-02',file:'trap-02-polvo.png',             sub:'trapeadores', es:'Trapeadores para Polvo',                 en:'Dust Mops'},
+  {id:'trap-03',file:'trap-03-jaladores.png',         sub:'trapeadores', es:'Jaladores',                              en:'Floor Squeegees'},
+  {id:'trap-04',file:'trap-04-baspadores.png',        sub:'trapeadores', es:'Baspadores para Piso',                   en:'Floor Scrapers'},
+  {id:'trap-05',file:'trap-05-soporte.png',           sub:'trapeadores', es:'Soporte para Trapeador y Escoba',        en:'Mop & Broom Holder'},
+  {id:'trap-06',file:'trap-06-soporte-ayuda.png',     sub:'trapeadores', es:'Soporte de Ayuda para Trapeador',        en:'Mop Aid Holder'},
+  {id:'trap-07',file:'trap-07-solucion.png',          sub:'trapeadores', es:'Solución de Limpieza 10 Pasos',          en:'10-Step Cleaning Solution'},
+  {id:'esc-01', file:'esc-01-cocinistas.png',         sub:'trapeadores', es:'Escobas para Cocinistas',                en:'Kitchen Brooms'},
+  {id:'esc-02', file:'esc-02-alto-calidad.png',       sub:'trapeadores', es:'Escobas de Alto Calidad',                en:'Premium Brooms'},
+  {id:'esc-03', file:'esc-03-cocheras.png',           sub:'trapeadores', es:'Escobas para Cocheras',                  en:'Garage Brooms'},
+  {id:'esc-04', file:'esc-04-maximizer.png',          sub:'trapeadores', es:'Maximizer™ Escobas',                     en:'Maximizer™ Brooms'},
+  {id:'esc-05', file:'esc-05-angostas.png',           sub:'trapeadores', es:'Escobas Angostas',                       en:'Narrow Brooms'},
+  {id:'esc-06', file:'esc-06-colores.png',            sub:'trapeadores', es:'Escobas Angostas de Colores',            en:'Colored Narrow Brooms'},
+  {id:'esc-07', file:'esc-07-color-coded.png',        sub:'trapeadores', es:'Escobas de Colores',                     en:'Color-Coded Brooms'},
+  {id:'esc-08', file:'esc-08-colas.png',              sub:'trapeadores', es:'Escobas para Colas',                     en:'Queue Brooms'},
+  {id:'esc-09', file:'esc-09-mijo.png',               sub:'trapeadores', es:'Escobas de Mijo',                        en:'Corn Brooms'},
+  {id:'esc-10', file:'esc-10-combo.png',              sub:'trapeadores', es:'Combo Escoba y Recogedor',               en:'Broom & Dustpan Combo'},
+  {id:'esc-11', file:'esc-11-recogedor.png',          sub:'trapeadores', es:'Recogedor y Escoba de Colores',          en:'Colored Dustpan & Broom'},
+  {id:'esc-12', file:'esc-12-barredoras.png',         sub:'trapeadores', es:'Barredoras',                             en:'Push Sweepers'},
+  // ── Bolsas ────────────────────────────────────────────
+  {id:'bol-01',file:'bol-01-economicas.png',          sub:'bolsas', es:'Bolsas Económicas para Basura',               en:'Economy Trash Bags'},
+  {id:'bol-02',file:'bol-02-industriales.png',        sub:'bolsas', es:'Bolsas Industriales para Basura',             en:'Industrial Trash Bags'},
+  {id:'bol-03',file:'bol-03-strentuf.png',            sub:'bolsas', es:'Bolsas StrenTuf® para Basura',               en:'StrenTuf® Trash Bags'},
+  {id:'bol-04',file:'bol-04-nucleo-eco.png',          sub:'bolsas', es:'Bolsas en Núcleo Económicas',                en:'Economy Core Trash Bags'},
+  {id:'bol-05',file:'bol-05-nucleo-ind.png',          sub:'bolsas', es:'Bolsas en Núcleo Industriales',              en:'Industrial Core Trash Bags'},
+  {id:'bol-06',file:'bol-06-colores.png',             sub:'bolsas', es:'Bolsas de Colores para Basura',              en:'Color-Coded Trash Bags'},
+  {id:'bol-07',file:'bol-07-contenedores.png',        sub:'bolsas', es:'Bolsas para Contenedores',                   en:'Container Trash Bags'},
+  {id:'bol-08',file:'bol-08-estandar.png',            sub:'bolsas', es:'Bolsas para Basura Estándar',                en:'Standard Trash Bags'},
+  {id:'bol-09',file:'bol-09-premium.png',             sub:'bolsas', es:'Bolsas para Basura Premium',                 en:'Premium Trash Bags'},
+  {id:'bol-10',file:'bol-10-glad.png',                sub:'bolsas', es:'Glad® Bolsas para Basura',                  en:'Glad® Trash Bags'},
+  {id:'bol-11',file:'bol-11-glad-arom.png',           sub:'bolsas', es:'Glad® Bolsas Aromadas',                     en:'Glad® Scented Trash Bags'},
+  // ── Trapos & Microfibra ───────────────────────────────
+  {id:'tyt-01',file:'tyt-01-cotonero.png',            sub:'microfibra', es:'Trapos Tipo Cotonero',                   en:'Cotton Wiping Rags'},
+  {id:'tyt-02',file:'tyt-02-terry.png',               sub:'microfibra', es:'Toallas de Tela Terry',                  en:'Terry Cloth Towels'},
+  {id:'tyt-03',file:'tyt-03-talleres.png',            sub:'microfibra', es:'Toallas para Talleres',                  en:'Shop Towels'},
+  {id:'tyt-04',file:'tyt-04-cotonero-colores.png',    sub:'microfibra', es:'Trapos Cotonero de Colores',             en:'Colored Cotton Rags'},
+  {id:'tyt-05',file:'tyt-05-absorbentes.png',         sub:'microfibra', es:'Toallas Absorbentes',                    en:'Absorbent Towels'},
+  {id:'tyt-06',file:'tyt-06-microfibra-caja.png',     sub:'microfibra', es:'Trapos de Microfibra en Caja',           en:'Microfiber Cloths Box'},
+  {id:'tyt-07',file:'tyt-07-microfibra-bolsa.png',    sub:'microfibra', es:'Trapos de Microfibra en Bolsa',          en:'Microfiber Cloths Bag'},
+  {id:'tyt-08',file:'tyt-08-microfibra.png',          sub:'microfibra', es:'Toallas de Microfibra',                  en:'Microfiber Towels'},
+  {id:'tyt-09',file:'tyt-09-texturizadas.png',        sub:'microfibra', es:'Toallas de Microfibra Texturizadas',     en:'Textured Microfiber Towels'},
+  {id:'tyt-10',file:'tyt-10-restaurantes.png',        sub:'microfibra', es:'Toallas de Microfibra Restaurantes',     en:'Restaurant Microfiber Towels'},
+  {id:'tyt-11',file:'tyt-11-terry-rest.png',          sub:'microfibra', es:'Toallas Terry para Restaurantes',        en:'Restaurant Terry Towels'},
+  // ── Suministros Hoteleros ─────────────────────────────
+  {id:'sum-01',file:'sum-01-toallas-blancas.png',     sub:'suministros', es:'Toallas Blancas para Baño y Manos',     en:'White Bath & Hand Towels'},
+  {id:'sum-02',file:'sum-02-toallas-negras.png',      sub:'suministros', es:'Toallas Negras para Baño y Manos',      en:'Black Bath & Hand Towels'},
+  {id:'sum-03',file:'sum-03-sillones.png',            sub:'suministros', es:'Sillones y Fundas',                     en:'Pillow Cases & Covers'},
+  {id:'sum-04',file:'sum-04-protecciones.png',        sub:'suministros', es:'Protecciones de Cojín y Almohada',      en:'Pillow & Cushion Protectors'},
+  {id:'sum-05',file:'sum-05-tapete-bano.png',         sub:'suministros', es:'Tapete Antideslizante para Baño',       en:'Non-Slip Bath Mat'},
+  {id:'sum-06',file:'sum-06-cortinas.png',            sub:'suministros', es:'Cortinas de Baño y Accesorios',         en:'Shower Curtains & Accessories'},
+  {id:'sum-07',file:'sum-07-jabon-hotel.png',         sub:'suministros', es:'Jabón y Despachadores Hoteleros',       en:'Hotel Soap & Dispensers'},
+  {id:'sum-08',file:'sum-08-tocador.png',             sub:'suministros', es:'Artículos de Tocador Hoteleros',        en:'Hotel Toiletry Items'},
+  {id:'sum-09',file:'sum-09-higiene-bucal.png',       sub:'suministros', es:'Artículos de Higiene Bucal',            en:'Oral Hygiene Products'},
+  {id:'sum-10',file:'sum-10-secadora.png',            sub:'suministros', es:'Secadora de Cabello',                   en:'Hair Dryer'},
+  // ── Toallas de Lujo ───────────────────────────────────
+  {id:'tp-01', file:'tp-01-luxury-clasico.png',       sub:'toallas-lujo', es:'Set de Lujo — Bordado Clásico',        en:'Luxury Set — Classic Embroidery'},
+  {id:'tp-02', file:'tp-02-luxury-logo.png',          sub:'toallas-lujo', es:'Set de Lujo — Logo Hotel',             en:'Luxury Set — Hotel Logo'},
+  {id:'tp-03', file:'tp-03-luxury-mono.png',          sub:'toallas-lujo', es:'Set de Lujo — Monograma',              en:'Luxury Set — Monogram'},
+  {id:'tp-04', file:'tp-04-luxury-bordado.png',       sub:'toallas-lujo', es:'Set de Lujo — Bordado Premium',        en:'Luxury Set — Premium Embroidery'},
+  {id:'tp-05', file:'tp-05-luxury-floral.png',        sub:'toallas-lujo', es:'Set de Lujo — Diseño Floral',          en:'Luxury Set — Floral Design'},
+  {id:'tp-06', file:'tp-06-luxury-moderno.png',       sub:'toallas-lujo', es:'Set de Lujo — Estilo Moderno',         en:'Luxury Set — Modern Style'},
+  {id:'tp-07', file:'tp-07-luxury-suite.png',         sub:'toallas-lujo', es:'Set de Lujo — Suite Premium',          en:'Luxury Set — Premium Suite'},
+  {id:'tp-08', file:'tp-08-luxury-gran.png',          sub:'toallas-lujo', es:'Set de Lujo — Gran Clase',             en:'Luxury Set — Grand Class'},
+  {id:'tp2-01',file:'tp2-01-golf.png',                sub:'toallas-lujo', es:'Pack Golf 100% Algodón Egipcio',       en:'Golf Pack 100% Egyptian Cotton'},
+  {id:'tp2-02',file:'tp2-02-hydrangea.png',           sub:'toallas-lujo', es:'Set Hydrangea',                        en:'Hydrangea Set'},
+  {id:'tp2-03',file:'tp2-03-delhicott.png',           sub:'toallas-lujo', es:'Toalla Delhicott',                     en:'Delhicott Bath Towel'},
+  {id:'tp2-04',file:'tp2-04-leblanc-diamond.png',     sub:'toallas-lujo', es:'Toalla Le Blanc Diamond',              en:'Le Blanc Diamond Towel'},
+  {id:'tp2-05',file:'tp2-05-leblanc-rubi.png',        sub:'toallas-lujo', es:'Toalla Le Blanc Rubi',                 en:'Le Blanc Rubi Towel'},
+  {id:'tp2-06',file:'tp2-06-leblanc-amatista.png',    sub:'toallas-lujo', es:'Toalla Le Blanc Amatista',             en:'Le Blanc Amatista Towel'},
+  // ── Accesorios de Baño ────────────────────────────────
+  {id:'pb-01', file:'pb-01-ambientadores.png',        sub:'accesorios-bano', es:'Ambientadores para Baños',          en:'Bathroom Air Fresheners'},
+  {id:'pb-02', file:'pb-02-tapetes-inodoro.png',      sub:'accesorios-bano', es:'Tapetes para Inodoro y Mingitorio', en:'Toilet & Urinal Mats'},
+  {id:'pb-03', file:'pb-03-cubresientos.png',         sub:'accesorios-bano', es:'Cubresientos para Inodoro',         en:'Toilet Seat Covers'},
+  {id:'pb-04', file:'pb-04-bolsas-ming.png',          sub:'accesorios-bano', es:'Bolsas para Mingitorio',            en:'Urinal Bags'},
+  {id:'pb-05', file:'pb-05-pastillas-ming.png',       sub:'accesorios-bano', es:'Pastillas y Gránulos para Mingitorio', en:'Urinal Blocks & Granules'},
+  {id:'pb-06', file:'pb-06-tapete-antidesl.png',      sub:'accesorios-bano', es:'Tapete Antideslizante para Baños',  en:'Non-Slip Bath Mat'},
+  {id:'pb-07', file:'pb-07-mamparas.png',             sub:'accesorios-bano', es:'Mamparas para Mingitorio',          en:'Urinal Screens'},
+  {id:'pb-08', file:'pb-08-secadoras-manos.png',      sub:'accesorios-bano', es:'Secadoras de Manos',                en:'Hand Dryers'},
+  {id:'pb-09', file:'pb-09-higiene-personal.png',     sub:'accesorios-bano', es:'Higiene Personal y Despachadores',  en:'Personal Hygiene Dispensers'},
+  {id:'pb-10', file:'pb-10-pallets.png',              sub:'accesorios-bano', es:'Soluciones para Combinar Pallets',  en:'Pallet Combination Solutions'},
+  {id:'pb-11', file:'pb-11-asientos.png',             sub:'accesorios-bano', es:'Asientos de Inodoro Santa®',       en:'Santa® Toilet Seats'},
+  // ── Kits de Derrames ──────────────────────────────────
+  {id:'kit-01',file:'kit-01-universales.png',         sub:'kits-derrames', es:'Absorbentes Universales',             en:'Universal Absorbents'},
+  {id:'kit-02',file:'kit-02-aceite.png',              sub:'kits-derrames', es:'Absorbentes Solo para Aceite',        en:'Oil-Only Absorbents'},
+  {id:'kit-03',file:'kit-03-hazmat.png',              sub:'kits-derrames', es:'Absorbentes Materiales Peligrosos',   en:'Hazmat Absorbents'},
+  {id:'kit-04',file:'kit-04-kit-universal.png',       sub:'kits-derrames', es:'Kits Universales para Derrames',      en:'Universal Spill Kits'},
+  {id:'kit-05',file:'kit-05-kit-aceite.png',          sub:'kits-derrames', es:'Kits para Derrames de Aceite',        en:'Oil Spill Kits'},
+  {id:'kit-06',file:'kit-06-kit-hazmat.png',          sub:'kits-derrames', es:'Kits para Derrames Materiales Peligrosos', en:'Hazmat Spill Kits'},
+  {id:'kit-07',file:'kit-07-alta-visib.png',          sub:'kits-derrames', es:'Absorbentes de Alta Visibilidad',     en:'High-Visibility Absorbents'},
+  {id:'kit-08',file:'kit-08-kit-aceite-s.png',        sub:'kits-derrames', es:'Kit para Derrames de Aceite',         en:'Oil Spill Kit'},
+  {id:'kit-09',file:'kit-09-mercurio.png',            sub:'kits-derrames', es:'Kit para Derrames de Mercurio',       en:'Mercury Spill Kit'},
+  {id:'kit-10',file:'kit-10-bolsas-desecho.png',      sub:'kits-derrames', es:'Bolsas para Desechos de Absorbentes', en:'Absorbent Waste Bags'},
+  {id:'kit-11',file:'kit-11-otspill.png',             sub:'kits-derrames', es:'Over-The-Spill™ Pufas',              en:'Over-The-Spill™ Pads'},
+];
+
+/* sub → main category mapping */
+const SUB_TO_CAT = {
+  'papel-toallas':'limpieza','papel-higienico':'limpieza','jabones':'limpieza',
+  'limpiadores':'limpieza','trapeadores':'limpieza','bolsas':'limpieza','microfibra':'limpieza',
+  'suministros':'toallas','toallas-lujo':'toallas',
+  'accesorios-bano':'banos','kits-derrames':'banos',
+};
+
+/* subcategory labels */
+const SUB_LABELS = {
+  es: {
+    'papel-toallas':'Toallas de Papel','papel-higienico':'Papel Higiénico',
+    'jabones':'Jabones','limpiadores':'Limpiadores',
+    'trapeadores':'Trapeadores & Escobas','bolsas':'Bolsas',
+    'microfibra':'Trapos & Microfibra',
+    'suministros':'Suministros Hoteleros','toallas-lujo':'Toallas de Lujo',
+    'accesorios-bano':'Accesorios de Baño','kits-derrames':'Kits de Derrames',
+  },
+  en: {
+    'papel-toallas':'Paper Towels','papel-higienico':'Toilet Tissue',
+    'jabones':'Hand Soaps','limpiadores':'Cleaners',
+    'trapeadores':'Mops & Brooms','bolsas':'Trash Bags',
+    'microfibra':'Rags & Microfiber',
+    'suministros':'Hotel Supplies','toallas-lujo':'Luxury Towels',
+    'accesorios-bano':'Bath Accessories','kits-derrames':'Spill Kits',
+  },
+};
+
+/* main categories config (built dynamically) */
+function buildCats(l) {
+  const total = CATALOG.length;
+  const nLim  = CATALOG.filter(p=>SUB_TO_CAT[p.sub]==='limpieza').length;
+  const nToa  = CATALOG.filter(p=>SUB_TO_CAT[p.sub]==='toallas').length;
+  const nBan  = CATALOG.filter(p=>SUB_TO_CAT[p.sub]==='banos').length;
+  return [
+    {slug:'todos',   label:l==='es'?'Todos':'All',                        count:total, icon:'todos'},
+    {slug:'limpieza',label:l==='es'?'Limpieza':'Cleaning',                count:nLim,  icon:'limpieza'},
+    {slug:'toallas', label:l==='es'?'Toallas & Amenidades':'Towels & Amenities', count:nToa, icon:'toallas'},
+    {slug:'banos',   label:l==='es'?'Baños & Seguridad':'Bathrooms & Safety',    count:nBan, icon:'banos'},
+  ];
+}
+
+const SUBCATS_BY_MAIN = {
+  limpieza: ['papel-toallas','papel-higienico','jabones','limpiadores','trapeadores','bolsas','microfibra'],
+  toallas:  ['suministros','toallas-lujo'],
+  banos:    ['accesorios-bano','kits-derrames'],
+};
+
+const IMG_BASE  = '../assets/images/hotels/products/individual/';
+const PER_PAGE  = 48;
+
+/* ─────────────────────────────────────────────────────────
+   STATE
+───────────────────────────────────────────────────────── */
+let lang       = 'es';
+let activeCat  = 'todos';
+let activeSub  = null;   // null = all within cat
+let searchTerm = '';
+let page       = 1;
+
+/* ─────────────────────────────────────────────────────────
+   DOM REFS
+───────────────────────────────────────────────────────── */
+const catStripEl  = document.getElementById('cat-strip');
+const subcatBar   = document.getElementById('subcat-bar');
+const subcatInner = document.getElementById('subcat-inner');
+const gridEl      = document.getElementById('prod-grid');
+const paginEl     = document.getElementById('pagination');
+const countNumEl  = document.getElementById('count-num');
+const countLblEl  = document.getElementById('count-label');
+const noResultsEl = document.getElementById('no-results');
+const noTermEl    = document.getElementById('no-results-term');
+const noMsgEl     = document.getElementById('no-results-msg');
+const searchEl    = document.getElementById('search-input');
+const langBtn     = document.getElementById('lang-btn');
+const backLbl     = document.getElementById('back-label');
+const waLbl       = document.getElementById('wa-label');
+
+/* i18n for contact note */
+const NOTE = {
+  es: {
+    title:'¿No encuentras lo que buscas?',
+    text:'Nuestro catálogo es solo una muestra de lo que podemos conseguirte. Si necesitas un producto que no aparece aquí, contáctanos — trabajamos con cientos de proveedores y cotizamos cualquier insumo hotelero.',
+    cta:'Cotizar por WhatsApp',
+    waMsg:'Hola%2C+necesito+cotizar+un+producto+que+no+está+en+el+catálogo+de+Alista+Hotels.',
+  },
+  en: {
+    title:"Can't find what you need?",
+    text:"Our catalog is just a sample of what we can source for you. If you need a product not listed here, reach out — we work with hundreds of suppliers and can quote any hotel supply.",
+    cta:'Quote via WhatsApp',
+    waMsg:'Hello%2C+I+need+to+quote+a+product+not+listed+in+the+Alista+Hotels+catalog.',
+  },
+};
+
+/* ─────────────────────────────────────────────────────────
+   INIT from URL param
+───────────────────────────────────────────────────────── */
+const urlP = new URLSearchParams(window.location.search);
+if (['limpieza','toallas','banos'].includes(urlP.get('cat'))) activeCat = urlP.get('cat');
+if (urlP.get('sub') && SUB_TO_CAT[urlP.get('sub')]) {
+  activeCat = SUB_TO_CAT[urlP.get('sub')];
+  activeSub = urlP.get('sub');
+}
+
+/* ─────────────────────────────────────────────────────────
+   LANGUAGE
+───────────────────────────────────────────────────────── */
+function applyLang() {
+  document.documentElement.lang = lang;
+  langBtn.textContent    = lang==='es'?'EN':'ES';
+  searchEl.placeholder   = lang==='es'?'Buscar producto…':'Search product…';
+  countLblEl.textContent = lang==='es'?'productos':'products';
+  backLbl.textContent    = lang==='es'?'Inicio':'Home';
+  waLbl.textContent      = lang==='es'?'Cotizar':'Quote';
+  // contact note
+  const n = NOTE[lang];
+  document.getElementById('note-title').textContent = n.title;
+  document.getElementById('note-text').textContent  = n.text;
+  document.getElementById('note-cta-text').textContent = n.cta;
+  document.getElementById('note-cta').href =
+    'https://wa.me/523331288999?text=' + n.waMsg;
+}
+langBtn.addEventListener('click', ()=>{
+  lang = lang==='es'?'en':'es';
+  applyLang(); buildCatStrip(); buildSubcats(); render();
+});
+
+/* ─────────────────────────────────────────────────────────
+   CATEGORY STRIP
+───────────────────────────────────────────────────────── */
+function buildCatStrip() {
+  catStripEl.innerHTML = '';
+  buildCats(lang).forEach(cat => {
+    const btn = document.createElement('button');
+    btn.className = 'cat-btn' + (cat.slug===activeCat?' active':'');
+    btn.dataset.slug = cat.slug;
+    btn.innerHTML = `<span class="cat-btn-icon">${ICONS[cat.icon]}</span>${cat.label}<span class="cat-btn-count">${cat.count}</span>`;
+    btn.addEventListener('click', ()=>{
+      activeCat = cat.slug;
+      activeSub = null;
+      page = 1;
+      buildCatStrip(); buildSubcats(); render();
+    });
+    catStripEl.appendChild(btn);
+  });
+}
+
+/* ─────────────────────────────────────────────────────────
+   SUBCATEGORY BAR
+───────────────────────────────────────────────────────── */
+function buildSubcats() {
+  const subs = activeCat==='todos' ? null : SUBCATS_BY_MAIN[activeCat];
+  if (!subs) {
+    subcatBar.classList.remove('visible');
+    subcatInner.innerHTML = '';
+    return;
+  }
+  subcatBar.classList.add('visible');
+  subcatInner.innerHTML = '';
+  const allCount = CATALOG.filter(p=>SUB_TO_CAT[p.sub]===activeCat).length;
+  const allBtn = document.createElement('button');
+  allBtn.className = 'sub-pill' + (!activeSub?' active':'');
+  allBtn.textContent = (lang==='es'?'Todos':'All') + ' (' + allCount + ')';
+  allBtn.addEventListener('click', ()=>{ activeSub=null; page=1; buildSubcats(); render(); });
+  subcatInner.appendChild(allBtn);
+
+  subs.forEach(sub => {
+    const count = CATALOG.filter(p=>p.sub===sub).length;
+    const btn = document.createElement('button');
+    btn.className = 'sub-pill' + (activeSub===sub?' active':'');
+    btn.textContent = SUB_LABELS[lang][sub] + ' (' + count + ')';
+    btn.addEventListener('click', ()=>{ activeSub=sub; page=1; buildSubcats(); render(); });
+    subcatInner.appendChild(btn);
+  });
+}
+
+/* ─────────────────────────────────────────────────────────
+   FILTER
+───────────────────────────────────────────────────────── */
+function filtered() {
+  const q = searchTerm.toLowerCase();
+  return CATALOG.filter(p => {
+    const matchCat = activeCat==='todos' || SUB_TO_CAT[p.sub]===activeCat;
+    const matchSub = !activeSub || p.sub===activeSub;
+    const matchQ   = !q || p.es.toLowerCase().includes(q) || p.en.toLowerCase().includes(q) || p.id.includes(q);
+    return matchCat && matchSub && matchQ;
+  });
+}
+
+/* ─────────────────────────────────────────────────────────
+   LAZY IMAGES
+───────────────────────────────────────────────────────── */
+let imgObs = null;
+function setupLazy() {
+  if (imgObs) imgObs.disconnect();
+  imgObs = new IntersectionObserver((entries,obs)=>{
+    entries.forEach(e=>{
+      if(!e.isIntersecting) return;
+      const img = e.target;
+      img.src = img.dataset.src;
+      img.onload = ()=>img.classList.remove('loading');
+      obs.unobserve(img);
+    });
+  },{rootMargin:'200px'});
+  gridEl.querySelectorAll('img[data-src]').forEach(img=>imgObs.observe(img));
+}
+
+/* ─────────────────────────────────────────────────────────
+   RENDER — grouped by subcategory when showing all/main cat
+───────────────────────────────────────────────────────── */
+function render() {
+  const items   = filtered();
+  const total   = items.length;
+  const pages   = Math.max(1, Math.ceil(total/PER_PAGE));
+  if (page>pages) page=pages;
+  countNumEl.textContent = total;
+
+  if (total===0) {
+    gridEl.innerHTML='';
+    noResultsEl.classList.add('visible');
+    const lbl = activeSub ? SUB_LABELS[lang][activeSub] : buildCats(lang).find(c=>c.slug===activeCat)?.label || activeCat;
+    noMsgEl.innerHTML = (lang==='es'?'Sin resultados para ':'No results for ') +
+      '<strong>' + (searchTerm?'"'+searchTerm+'"':lbl) + '</strong>';
+    paginEl.innerHTML='';
+    return;
+  }
+  noResultsEl.classList.remove('visible');
+
+  const start = (page-1)*PER_PAGE;
+  const slice = items.slice(start, start+PER_PAGE);
+
+  /* Group by subcategory for section labels — only when not filtered to single sub */
+  const showGroups = !activeSub && !searchTerm;
+  let html = '';
+
+  if (showGroups) {
+    const grouped = {};
+    slice.forEach(p=>{ (grouped[p.sub]||(grouped[p.sub]=[])).push(p); });
+    const orderedSubs = activeCat==='todos'
+      ? ['papel-toallas','papel-higienico','jabones','limpiadores','trapeadores','bolsas','microfibra','suministros','toallas-lujo','accesorios-bano','kits-derrames']
+      : (SUBCATS_BY_MAIN[activeCat]||[]);
+    orderedSubs.forEach(sub=>{
+      if (!grouped[sub]?.length) return;
+      const lbl = SUB_LABELS[lang][sub];
+      html += `<div class="grid-section-label">
+        <div class="grid-section-icon">${ICONS[sub]||ICONS.todos}</div>
+        <span class="grid-section-text">${lbl}</span>
+        <div class="grid-section-rule"></div>
+      </div>`;
+      html += grouped[sub].map(p=>cardHtml(p)).join('');
+    });
+  } else {
+    html = slice.map(p=>cardHtml(p)).join('');
+  }
+
+  gridEl.innerHTML = html;
+  setupLazy();
+  renderPagination(pages);
+}
+
+function cardHtml(p) {
+  const name  = lang==='es'?p.es:p.en;
+  const badge = SUB_LABELS[lang][p.sub];
+  return `<article class="prod-card" data-id="${p.id}">
+    <div class="prod-img-wrap">
+      <img class="loading" data-src="${IMG_BASE}${p.file}" alt="${name}" width="300" height="300" loading="lazy"/>
+      <span class="prod-badge">${badge}</span>
+    </div>
+    <div class="prod-body">
+      <div class="prod-name">${name}</div>
+      <div class="prod-sku">${p.id.toUpperCase()}</div>
+    </div>
+  </article>`;
+}
+
+/* ─────────────────────────────────────────────────────────
+   PAGINATION
+───────────────────────────────────────────────────────── */
+function renderPagination(pages) {
+  if (pages<=1){paginEl.innerHTML='';return;}
+  const range=[];
+  for(let i=1;i<=pages;i++){
+    if(i===1||i===pages||(i>=page-1&&i<=page+1)) range.push(i);
+    else if(range[range.length-1]!=='…') range.push('…');
+  }
+  paginEl.innerHTML='';
+  const prev=mkBtn();
+  prev.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>`;
+  prev.setAttribute('aria-label',lang==='es'?'Anterior':'Previous');
+  if(page===1) prev.disabled=true;
+  prev.addEventListener('click',()=>{page--;render();scrollTo({top:0,behavior:'smooth'});});
+  paginEl.appendChild(prev);
+  range.forEach(r=>{
+    if(r==='…'){const s=document.createElement('span');s.className='page-ellipsis';s.textContent='…';paginEl.appendChild(s);}
+    else{
+      const b=mkBtn();b.textContent=r;
+      if(r===page){b.classList.add('active');b.setAttribute('aria-current','page');}
+      b.addEventListener('click',()=>{page=r;render();scrollTo({top:0,behavior:'smooth'});});
+      paginEl.appendChild(b);
+    }
+  });
+  const next=mkBtn();
+  next.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>`;
+  next.setAttribute('aria-label',lang==='es'?'Siguiente':'Next');
+  if(page===pages) next.disabled=true;
+  next.addEventListener('click',()=>{page++;render();scrollTo({top:0,behavior:'smooth'});});
+  paginEl.appendChild(next);
+}
+function mkBtn(){const b=document.createElement('button');b.className='page-btn';return b;}
+
+/* ─────────────────────────────────────────────────────────
+   SEARCH
+───────────────────────────────────────────────────────── */
+let searchTimer=null;
+searchEl.addEventListener('input',()=>{
+  clearTimeout(searchTimer);
+  searchTimer=setTimeout(()=>{searchTerm=searchEl.value.trim();page=1;render();},260);
+});
+
+/* ─────────────────────────────────────────────────────────
+   BOOT
+───────────────────────────────────────────────────────── */
+applyLang();
+buildCatStrip();
+buildSubcats();
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alista Salud — Insumos Médicos y de Salud</title>
+  <meta name="description" content="Distribución de insumos médicos y productos de salud de alta calidad para clínicas, hospitales y empresas en México. Más de 10 años de experiencia." />
+  <link rel="icon" type="image/png" href="assets/images/logo-salud.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Open+Sans:wght@300;400;500&family=Space+Mono:wght@400&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Tokens ───────────────────────────────────────── */
+    :root {
+      --bg:          #ffffff;
+      --bg-soft:     #edf9f7;
+      --bg-card:     #ffffff;
+      --teal:        #00a896;
+      --teal-dark:   #007a6e;
+      --teal-light:  #4dc9bc;
+      --teal-rgb:    0, 168, 150;
+      --ink:         #0f2b28;
+      --ink-footer:  #0a1f1d;
+      --slate:       #4a7772;
+      --slate-light: #8ab5b0;
+      --border:      rgba(0,168,150,0.14);
+      --border-soft: rgba(0,168,150,0.08);
+      --shadow:      rgba(0,100,90,0.10);
+      --shadow-md:   rgba(0,100,90,0.16);
+    }
+
+    /* ── Reset ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Open Sans', Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.7em;
+      overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; }
+
+    /* ── Scrollbar ──────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg-soft); }
+    ::-webkit-scrollbar-thumb { background: var(--teal); border-radius: 2px; }
+
+    /* ── Scroll reveal ──────────────────────────────────── */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* ── Section common ─────────────────────────────────── */
+    .section { padding: 6rem 2rem; }
+    .section--soft { background: var(--bg-soft); }
+    .section-inner { max-width: 1120px; margin: 0 auto; }
+    .eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem; font-weight: 400;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--teal); margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(1.7rem, 3vw, 2.5rem);
+      font-weight: 700; line-height: 1.2;
+      color: var(--ink); margin-bottom: 1rem;
+    }
+    .section-rule {
+      width: 40px; height: 3px;
+      background: var(--teal);
+      border-radius: 2px;
+      margin-bottom: 1.4rem;
+    }
+    .section-lead {
+      font-size: 1rem; font-weight: 300;
+      color: var(--slate); max-width: 540px; line-height: 1.8;
+    }
+
+    /* ── Buttons ─────────────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.82rem; font-weight: 600;
+      letter-spacing: 0.03em;
+      padding: 0.85rem 2rem; border-radius: 50px;
+      transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
+      cursor: pointer; border: none;
+    }
+    .btn:hover { opacity: 0.9; transform: translateY(-2px); }
+    .btn-primary {
+      background: var(--teal);
+      color: #fff;
+      box-shadow: 0 4px 18px rgba(var(--teal-rgb), 0.35);
+    }
+    .btn-primary:hover { box-shadow: 0 8px 28px rgba(var(--teal-rgb), 0.45); }
+    .btn-ghost {
+      background: transparent; color: #fff;
+      border: 2px solid rgba(255,255,255,0.7);
+    }
+    .btn-ghost:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
+    .btn-outline {
+      background: transparent; color: var(--teal);
+      border: 2px solid var(--teal);
+    }
+    .btn-outline:hover { background: var(--teal); color: #fff; }
+
+    /* ═══════════════════════════════════════════
+       NAVIGATION
+    ═══════════════════════════════════════════ */
+    #nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      transition: background 0.3s, box-shadow 0.3s, backdrop-filter 0.3s;
+    }
+    #nav.scrolled {
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 2px 20px rgba(0,100,90,0.10);
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; gap: 1.5rem;
+      padding: 1.1rem 2rem;
+    }
+    .nav-logo { display: flex; align-items: center; flex-shrink: 0; margin-right: auto; }
+    .nav-logo img { height: 88px; width: auto; }
+    .nav-links {
+      display: flex; align-items: center; gap: 0.2rem; list-style: none;
+    }
+    .nav-links a {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.78rem; font-weight: 500;
+      color: #fff; padding: 0.4rem 0.75rem; border-radius: 6px;
+      transition: background 0.2s, color 0.2s;
+    }
+    #nav.scrolled .nav-links a { color: var(--ink); }
+    .nav-links a:hover { background: rgba(var(--teal-rgb),0.12); color: var(--teal); }
+    .nav-cta {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.75rem; font-weight: 600;
+      background: var(--teal); color: #fff;
+      padding: 0.5rem 1.2rem; border-radius: 50px;
+      border: none; cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      flex-shrink: 0;
+    }
+    .nav-cta:hover { background: var(--teal-dark); transform: translateY(-1px); }
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      background: none; border: none; padding: 4px; cursor: pointer;
+    }
+    .hamburger span {
+      display: block; width: 22px; height: 2px;
+      background: #fff; transition: transform 0.3s, opacity 0.3s;
+      border-radius: 2px;
+    }
+    #nav.scrolled .hamburger span { background: var(--ink); }
+
+    /* ── Mobile drawer ─────────────────────────────────── */
+    #mobile-drawer {
+      display: none; position: fixed; inset: 0; z-index: 99;
+      background: var(--bg); flex-direction: column;
+      align-items: center; justify-content: center; gap: 0.5rem;
+      opacity: 0; transition: opacity 0.3s;
+    }
+    #mobile-drawer.open { display: flex; opacity: 1; }
+    #mobile-drawer a {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem; font-weight: 600;
+      color: var(--ink); padding: 0.75rem 1.5rem;
+      transition: color 0.2s;
+    }
+    #mobile-drawer a:hover { color: var(--teal); }
+    #drawer-close {
+      position: absolute; top: 1.2rem; right: 1.5rem;
+      background: none; border: none; color: var(--slate);
+      font-size: 1.6rem; cursor: pointer; transition: color 0.2s;
+    }
+    #drawer-close:hover { color: var(--teal); }
+
+    /* ═══════════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════════ */
+    #hero {
+      min-height: 100dvh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 8rem 2rem 5rem;
+      position: relative; overflow: hidden;
+      background: url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1920&q=80')
+                  center center / cover no-repeat;
+    }
+    #hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg,
+        rgba(0,80,72,0.88) 0%,
+        rgba(0,40,36,0.78) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 1;
+      text-align: center;
+      display: flex; flex-direction: column; align-items: center; gap: 1.1rem;
+      animation: hero-rise 0.9s 0.2s both ease;
+    }
+    @keyframes hero-rise {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: none; }
+    }
+    .hero-logo {
+      height: clamp(270px, 36vw, 480px); width: auto;
+      filter: drop-shadow(0 4px 24px rgba(var(--teal-rgb), 0.5));
+      margin-bottom: 0.5rem;
+    }
+    .hero-eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem; letter-spacing: 0.24em; text-transform: uppercase;
+      color: var(--teal-light); font-weight: 400;
+    }
+    .hero-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 700; line-height: 1.15;
+      color: #fff; max-width: 680px;
+    }
+    .hero-desc {
+      font-size: 1rem; font-weight: 300;
+      color: rgba(255,255,255,0.80); max-width: 500px; line-height: 1.8;
+    }
+    .hero-ctas {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      justify-content: center; margin-top: 0.5rem;
+    }
+    .hero-scroll {
+      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+      font-family: 'Space Mono', monospace; font-size: 0.5rem;
+      letter-spacing: 0.16em; color: rgba(255,255,255,0.45);
+      animation: scroll-bounce 2s ease-in-out infinite;
+    }
+    @keyframes scroll-bounce {
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50%      { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ═══════════════════════════════════════════
+       NOSOTROS
+    ═══════════════════════════════════════════ */
+    #nosotros { background: var(--bg-soft); }
+    .nosotros-inner {
+      max-width: 780px; margin: 0 auto; text-align: center;
+    }
+    .nosotros-inner .section-rule { margin: 0 auto 1.4rem; }
+    .nosotros-body {
+      font-size: 1rem; color: var(--slate); line-height: 1.9;
+      font-weight: 300; margin-bottom: 3rem;
+    }
+    .nosotros-stats {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 2px; border-radius: 12px; overflow: hidden;
+      box-shadow: 0 4px 24px var(--shadow);
+    }
+    .stat-block {
+      background: #fff; padding: 2rem 1.5rem; text-align: center;
+      transition: background 0.25s;
+    }
+    .stat-block:hover { background: #f0faf8; }
+    .stat-val {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.2rem; font-weight: 700;
+      color: var(--teal); line-height: 1;
+      display: block; margin-bottom: 0.5rem;
+    }
+    .stat-lbl {
+      font-size: 0.8rem; color: var(--slate);
+      font-weight: 400;
+    }
+    .stat-val--sm { font-size: 1.5rem; }
+    .stat-map-icon {
+      display: block; margin: 0 auto 0.5rem;
+      width: 72px; height: 56px;
+      color: var(--teal);
+    }
+    .stat-map-icon svg { width: 100%; height: 100%; display: block; }
+
+    /* ═══════════════════════════════════════════
+       CATÁLOGO PREVIEW
+    ═══════════════════════════════════════════ */
+    #catalogo-preview { background: var(--bg); }
+    .cat-header { margin-bottom: 3rem; }
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem; margin-bottom: 2.5rem;
+    }
+    .cat-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem 1.8rem;
+      display: flex; flex-direction: column; gap: 0.7rem;
+      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+      cursor: pointer;
+      text-decoration: none; color: inherit;
+      position: relative; overflow: hidden;
+    }
+    .cat-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--teal); border-radius: 12px 12px 0 0;
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+    .cat-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px var(--shadow-md); border-color: var(--teal); }
+    .cat-card:hover::before { transform: scaleX(1); }
+    .cat-card.cta-card {
+      background: var(--teal); border-color: var(--teal);
+      justify-content: center; align-items: center; text-align: center;
+      gap: 1rem;
+    }
+    .cat-card.cta-card:hover { background: var(--teal-dark); border-color: var(--teal-dark); box-shadow: 0 16px 40px rgba(var(--teal-rgb),0.3); }
+    .cat-card.cta-card::before { display: none; }
+    .cat-icon {
+      width: 44px; height: 44px;
+      background: var(--bg-soft); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .cat-icon svg { width: 20px; height: 20px; color: var(--teal); }
+    .cat-name {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.95rem; font-weight: 600;
+      color: var(--ink);
+    }
+    .cat-desc {
+      font-size: 0.82rem; color: var(--slate); line-height: 1.7;
+    }
+    .cat-count {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem; letter-spacing: 0.1em;
+      color: var(--teal); margin-top: auto; padding-top: 0.5rem;
+    }
+    .cat-card.cta-card .cat-cta-text {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.05rem; font-weight: 700; color: #fff; line-height: 1.3;
+    }
+    .cat-card.cta-card .cat-cta-arrow {
+      font-size: 1.5rem; color: rgba(255,255,255,0.8);
+    }
+    .cat-cta-row { text-align: center; }
+
+    /* ═══════════════════════════════════════════
+       CONTACTO
+    ═══════════════════════════════════════════ */
+    #contacto { background: var(--bg-soft); }
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1.2fr;
+      gap: 5rem; align-items: start;
+    }
+    .contact-left {}
+    .contact-lead {
+      font-size: 1rem; color: var(--slate); line-height: 1.85;
+      font-weight: 300; margin-top: 1rem; max-width: 380px;
+    }
+    .contact-right {
+      display: flex; flex-direction: column; gap: 1.2rem;
+    }
+    .contact-card {
+      background: #fff; border-radius: 12px;
+      border: 1.5px solid var(--border);
+      padding: 1.5rem 1.8rem;
+      display: flex; align-items: center; gap: 1.2rem;
+      transition: transform 0.22s, box-shadow 0.22s, border-color 0.22s;
+      text-decoration: none; color: inherit;
+    }
+    .contact-card:hover { transform: translateY(-3px); box-shadow: 0 10px 28px var(--shadow-md); border-color: var(--teal); }
+    .contact-card-icon {
+      width: 48px; height: 48px; border-radius: 12px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .contact-card-icon.wa  { background: #25d366; }
+    .contact-card-icon.email { background: var(--teal); }
+    .contact-card-icon.email2 { background: var(--teal-dark); }
+    .contact-card-icon.addr  { background: var(--bg-soft); }
+    .contact-card-icon svg { width: 20px; height: 20px; }
+    .contact-card-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.8rem; font-weight: 600;
+      color: var(--slate); text-transform: uppercase; letter-spacing: 0.08em;
+      margin-bottom: 0.2rem;
+    }
+    .contact-card-val {
+      font-size: 0.9rem; color: var(--ink); font-weight: 400;
+    }
+    .contact-addr {
+      background: #fff; border-radius: 12px;
+      border: 1.5px solid var(--border); padding: 1.5rem 1.8rem;
+      display: flex; align-items: flex-start; gap: 1.2rem;
+    }
+    .contact-addr-text {
+      font-size: 0.88rem; color: var(--slate); line-height: 1.7;
+    }
+
+    /* ═══════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════ */
+    #footer {
+      background: var(--ink-footer);
+      padding: 4rem 2rem 2rem;
+      border-top: 3px solid var(--teal-dark);
+    }
+    .footer-inner { max-width: 1120px; margin: 0 auto; }
+    .footer-top {
+      display: grid; grid-template-columns: 1.6fr 1fr 1fr;
+      gap: 3rem; margin-bottom: 3rem;
+    }
+    .footer-logo { height: 36px; opacity: 0.65; margin-bottom: 1rem; }
+    .footer-tagline {
+      font-size: 0.82rem; color: rgba(255,255,255,0.45);
+      max-width: 240px; line-height: 1.7; margin-bottom: 1.4rem;
+    }
+    .footer-socials { display: flex; gap: 0.6rem; }
+    .footer-social {
+      width: 36px; height: 36px; border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.12);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.5);
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .footer-social:hover { border-color: var(--teal); color: var(--teal); background: rgba(var(--teal-rgb),0.1); }
+    .footer-col-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--teal-light); margin-bottom: 1.2rem;
+    }
+    .footer-nav { display: flex; flex-direction: column; gap: 0.6rem; }
+    .footer-nav a {
+      font-size: 0.82rem; color: rgba(255,255,255,0.5);
+      transition: color 0.2s;
+    }
+    .footer-nav a:hover { color: var(--teal-light); }
+    .footer-nav-legal {
+      margin-top: 0.5rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      font-size: 0.75rem !important;
+      color: rgba(255,255,255,0.38) !important;
+    }
+    .footer-nav-legal:hover { color: var(--teal-light) !important; }
+    .footer-bottom {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+      padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.07);
+    }
+    .footer-ga {
+      display: flex; align-items: center; gap: 0.6rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.52rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(255,255,255,0.35); transition: color 0.2s;
+    }
+    .footer-ga:hover { color: var(--teal-light); }
+    .footer-ga img { height: 20px; opacity: 0.4; }
+    .footer-copy {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.52rem; letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.25);
+    }
+    .footer-legal-links {
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .footer-legal-link {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.78rem; font-weight: 400;
+      color: rgba(255,255,255,0.55);
+      transition: color 0.2s;
+    }
+    .footer-legal-link:hover { color: var(--teal-light); text-decoration: underline; }
+    .footer-legal-sep {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.25);
+    }
+
+    /* ── WhatsApp FAB ────────────────────────────────── */
+    .wa-fab {
+      position: fixed; bottom: 1.75rem; right: 1.75rem; z-index: 9000;
+      width: 56px; height: 56px; border-radius: 50%;
+      background: linear-gradient(135deg, #25d366, #128c7e);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 18px rgba(37,211,102,0.35);
+      transition: transform 0.25s, box-shadow 0.25s;
+      animation: wa-pulse 2.8s ease-in-out infinite;
+    }
+    .wa-fab:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 28px rgba(37,211,102,0.5);
+      animation-play-state: paused;
+    }
+    @keyframes wa-pulse {
+      0%,100% { box-shadow: 0 4px 18px rgba(37,211,102,0.3); }
+      50%      { box-shadow: 0 4px 28px rgba(37,211,102,0.55); }
+    }
+
+    /* ── Responsive ──────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .nav-links { display: none; }
+      .nav-cta   { display: none; }
+      .hamburger { display: flex; }
+      .cat-grid  { grid-template-columns: repeat(2, 1fr); }
+      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    }
+    @media (max-width: 768px) {
+      .section { padding: 4.5rem 1.5rem; }
+      .nosotros-stats { grid-template-columns: repeat(2, 1fr); }
+      .cat-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 480px) {
+      .hero-ctas { flex-direction: column; width: 100%; }
+      .hero-ctas .btn { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Navigation ─────────────────────────── -->
+<nav id="nav" role="navigation" aria-label="Navegación principal">
+  <div class="nav-inner">
+    <a class="nav-logo" href="#hero" aria-label="Alista Salud inicio">
+      <img src="assets/images/logo-salud.png" alt="Alista Salud" />
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="#nosotros"         data-nav="nosotros">Nosotros</a></li>
+      <li><a href="#catalogo-preview" data-nav="catalogo-preview">Catálogo</a></li>
+      <li><a href="#contacto"         data-nav="contacto">Contacto</a></li>
+    </ul>
+    <a href="https://wa.me/523331288999" class="nav-cta" target="_blank" rel="noopener">
+      WhatsApp
+    </a>
+    <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ── Mobile Drawer ──────────────────────── -->
+<div id="mobile-drawer" role="dialog" aria-modal="true" aria-label="Menú de navegación">
+  <button id="drawer-close" aria-label="Cerrar menú">✕</button>
+  <a href="#nosotros"         onclick="closeDrawer()">Nosotros</a>
+  <a href="#catalogo-preview" onclick="closeDrawer()">Catálogo</a>
+  <a href="#contacto"         onclick="closeDrawer()">Contacto</a>
+  <a href="https://wa.me/523331288999" target="_blank" rel="noopener" style="color:var(--teal)">WhatsApp ↗</a>
+</div>
+
+<main>
+
+<!-- ════════════════════════════════════════
+     §0 HERO
+════════════════════════════════════════ -->
+<section id="hero" aria-label="Inicio">
+  <div class="hero-content">
+    <img src="assets/images/logo-salud.png" alt="Alista Salud" class="hero-logo" />
+    <p class="hero-eyebrow">Distribución de Insumos Médicos</p>
+    <h1 class="hero-title">Calidad clínica al servicio de tu empresa</h1>
+    <p class="hero-desc">Más de 10 años distribuyendo insumos médicos y productos de salud con los más altos estándares de calidad. Atendemos clínicas, hospitales, empresas e individuos en todo México.</p>
+    <div class="hero-ctas">
+      <a href="salud/catalogo.html" class="btn btn-primary">Ver Catálogo</a>
+      <a href="#contacto" class="btn btn-ghost">Contactar</a>
+    </div>
+  </div>
+  <div class="hero-scroll" aria-hidden="true">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    SCROLL
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     §1 NOSOTROS
+════════════════════════════════════════ -->
+<section id="nosotros" class="section section--soft" data-section>
+  <div class="section-inner">
+    <div class="nosotros-inner">
+      <div class="reveal">
+        <p class="eyebrow">01 · Quiénes somos</p>
+        <h2 class="section-title">10 años llevando salud donde más importa</h2>
+        <div class="section-rule"></div>
+        <p class="nosotros-body">Alista Salud nació con un propósito claro: acercar los mejores insumos médicos y productos de salud a las personas y organizaciones que más los necesitan. A lo largo de una década, hemos construido relaciones de confianza con distribuidores, clínicas, hospitales y empresas en todo México, garantizando en cada entrega los más altos estándares de calidad, puntualidad y servicio. Trabajamos con las marcas líderes del mercado en categorías como insumos de inyección, infusión intravenosa, cuidado diabético, salud femenina y material hospitalario, asegurando siempre disponibilidad, trazabilidad y precio competitivo. Porque cuando se trata de salud, no hay margen para la mediocridad.</p>
+      </div>
+      <div class="nosotros-stats reveal">
+        <div class="stat-block">
+          <span class="stat-val">10+</span>
+          <span class="stat-lbl">Años en el mercado</span>
+        </div>
+        <div class="stat-block">
+          <span class="stat-val">500+</span>
+          <span class="stat-lbl">Productos disponibles</span>
+        </div>
+        <div class="stat-block">
+          <span class="stat-val">100%</span>
+          <span class="stat-lbl">Certificados y garantizados</span>
+        </div>
+        <div class="stat-block stat-block--map">
+          <span class="stat-map-icon">
+            <!-- Mexico silhouette: two clearly-separated shapes -->
+            <svg viewBox="0 0 110 88" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+              <!-- Baja California peninsula (far left, narrow) -->
+              <path d="M20,8 L13,14 L8,24 L6,36 L8,50 L11,62 L13,70 L16,69 L15,58 L13,46 L14,32 L17,22 L21,14 Z"/>
+              <!-- Mainland Mexico (starts clearly to the right, gap = Gulf of California) -->
+              <path d="M30,8 L32,6 L102,5 L108,14 L107,26 L105,36 L102,44 L104,52 L107,62 L103,70 L92,75 L80,77 L66,73 L54,66 L46,59 L38,50 L30,40 L26,30 L26,20 L28,14 Z"/>
+            </svg>
+          </span>
+          <span class="stat-val stat-val--sm">Todo</span>
+          <span class="stat-lbl">Envíos a todo México</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     §2 CATÁLOGO PREVIEW
+════════════════════════════════════════ -->
+<section id="catalogo-preview" class="section" data-section>
+  <div class="section-inner">
+    <div class="cat-header reveal">
+      <p class="eyebrow">02 · Catálogo</p>
+      <h2 class="section-title">Nuestros Productos</h2>
+      <div class="section-rule"></div>
+      <p class="section-lead">Explora nuestra línea de insumos médicos y productos de salud. Para cotizaciones y pedidos, contáctanos directamente.</p>
+    </div>
+    <div class="cat-grid">
+
+      <a href="salud/catalogo.html?cat=inyeccion" class="cat-card reveal" style="transition-delay:0s">
+        <div class="cat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M17 3l4 4-4 4"/><path d="M7 7h10"/><path d="M3 17l4 4 4-4"/><path d="M7 21V11"/><path d="M21 7v4a4 4 0 0 1-8 0V7"/></svg>
+        </div>
+        <p class="cat-name">Insumos de Inyección</p>
+        <p class="cat-desc">Jeringas, agujas hipodérmicas, catéteres y dispositivos de administración parenteral.</p>
+        <p class="cat-count">8 productos</p>
+      </a>
+
+      <a href="salud/catalogo.html?cat=iv-infusion" class="cat-card reveal" style="transition-delay:0.07s">
+        <div class="cat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+        </div>
+        <p class="cat-name">Infusión &amp; IV</p>
+        <p class="cat-desc">Equipos de venoclisis, tubos IV, llaves de tres vías, sondas y catéteres de infusión.</p>
+        <p class="cat-count">14 productos</p>
+      </a>
+
+      <a href="salud/catalogo.html?cat=femenino" class="cat-card reveal" style="transition-delay:0.14s">
+        <div class="cat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M12 12v8M9 17h6"/></svg>
+        </div>
+        <p class="cat-name">Salud Femenina</p>
+        <p class="cat-desc">Copas menstruales, espéculos, preservativos y productos para el cuidado femenino.</p>
+        <p class="cat-count">3 productos</p>
+      </a>
+
+      <a href="salud/catalogo.html?cat=diabetico" class="cat-card reveal" style="transition-delay:0.21s">
+        <div class="cat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 2l2 7h7l-5.5 4 2 7L12 16l-5.5 4 2-7L3 9h7z"/></svg>
+        </div>
+        <p class="cat-name">Cuidado Diabético</p>
+        <p class="cat-desc">Monitores de glucosa, jeringas de insulina y dispositivos para el manejo de diabetes.</p>
+        <p class="cat-count">1 producto</p>
+      </a>
+
+      <a href="salud/catalogo.html?cat=hospitalario" class="cat-card reveal" style="transition-delay:0.28s">
+        <div class="cat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <p class="cat-name">Material Hospitalario</p>
+        <p class="cat-desc">Guantes, mascarillas, bisturís, bolsas de esterilización, toallitas y equipo clínico general.</p>
+        <p class="cat-count">18 productos</p>
+      </a>
+
+      <a href="salud/catalogo.html" class="cat-card cta-card reveal" style="transition-delay:0.35s">
+        <span class="cat-cta-arrow">→</span>
+        <span class="cat-cta-text">Ver todo el catálogo</span>
+      </a>
+
+    </div>
+    <div class="cat-cta-row reveal">
+      <a href="salud/catalogo.html" class="btn btn-outline">Explorar catálogo completo →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     §3 CONTACTO
+════════════════════════════════════════ -->
+<section id="contacto" class="section section--soft" data-section>
+  <div class="section-inner">
+    <div class="contact-grid">
+
+      <div class="contact-left reveal">
+        <p class="eyebrow">03 · Contacto</p>
+        <h2 class="section-title">¿Necesitas un producto?</h2>
+        <div class="section-rule"></div>
+        <p class="contact-lead">Para pedidos, cotizaciones o información sobre nuestro catálogo, comunícate directamente con nosotros. Respondemos en menos de 24 horas hábiles.</p>
+      </div>
+
+      <div class="contact-right reveal">
+        <a href="https://wa.me/523331288999" class="contact-card" target="_blank" rel="noopener">
+          <div class="contact-card-icon wa">
+            <svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          </div>
+          <div>
+            <p class="contact-card-title">WhatsApp</p>
+            <p class="contact-card-val">+52 333 128 8999</p>
+          </div>
+        </a>
+
+        <a href="mailto:ventas@grupoalista.com" class="contact-card">
+          <div class="contact-card-icon email">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </div>
+          <div>
+            <p class="contact-card-title">Email Ventas</p>
+            <p class="contact-card-val">ventas@grupoalista.com</p>
+          </div>
+        </a>
+
+        <a href="mailto:salud@grupoalista.com" class="contact-card">
+          <div class="contact-card-icon email2">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </div>
+          <div>
+            <p class="contact-card-title">Email Salud</p>
+            <p class="contact-card-val">salud@grupoalista.com</p>
+          </div>
+        </a>
+
+        <div class="contact-addr">
+          <div class="contact-card-icon addr">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <p class="contact-card-title" style="color:var(--slate)">Dirección</p>
+            <p class="contact-addr-text">Lázaro Cárdenas Pte. 2953<br>Col. Chapalita, Guadalajara<br>Jalisco, México C.P. 44500</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════ -->
+<footer id="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+
+      <div>
+        <img src="assets/images/logo-salud.png" alt="Alista Salud" class="footer-logo" />
+        <p class="footer-tagline">Distribución de insumos médicos y productos de salud de alta calidad para todo México.</p>
+        <div class="footer-socials">
+          <a href="https://www.facebook.com/grupo.alista.54" class="footer-social" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/grupo.alista/" class="footer-social" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="https://wa.me/523331288999" class="footer-social" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <p class="footer-col-title">Secciones</p>
+        <nav class="footer-nav">
+          <a href="#nosotros">Nosotros</a>
+          <a href="#catalogo-preview">Catálogo</a>
+          <a href="#contacto">Contacto</a>
+          <a href="salud/catalogo.html">Ver todos los productos</a>
+        </nav>
+      </div>
+
+      <div>
+        <p class="footer-col-title">Empresa</p>
+        <nav class="footer-nav">
+          <a href="index.html">Grupo Alista ↗</a>
+          <a href="mailto:salud@grupoalista.com">salud@grupoalista.com</a>
+          <a href="mailto:ventas@grupoalista.com">ventas@grupoalista.com</a>
+          <a href="https://wa.me/523331288999" target="_blank" rel="noopener">+52 333 128 8999</a>
+          <a href="salud/terminos.html" class="footer-nav-legal">Términos y Condiciones</a>
+          <a href="salud/privacidad.html" class="footer-nav-legal">Política de Privacidad</a>
+        </nav>
+      </div>
+
+    </div>
+    <div class="footer-bottom">
+      <a href="index.html" class="footer-ga">
+        <img src="assets/images/logo-main.png" alt="Grupo Alista" />
+        Parte de Grupo Alista
+      </a>
+      <p class="footer-copy">© 2026 Alista Salud · Todos los derechos reservados.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp FAB -->
+<a class="wa-fab" href="https://wa.me/523331288999" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+</a>
+
+<script>
+  /* ── Navbar scroll ───────────────────────── */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  /* ── Mobile menu ─────────────────────────── */
+  const hamburger = document.getElementById('hamburger');
+  const drawer    = document.getElementById('mobile-drawer');
+  hamburger.addEventListener('click', () => {
+    const open = drawer.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', String(open));
+  });
+  function closeDrawer() {
+    drawer.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+  }
+  document.getElementById('drawer-close').addEventListener('click', closeDrawer);
+
+  /* ── Smooth scroll with nav offset ─────── */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href').slice(1);
+      const target = document.getElementById(id);
+      if (!target) return;
+      e.preventDefault();
+      closeDrawer();
+      const offset = nav.offsetHeight + 16;
+      window.scrollTo({ top: target.offsetTop - offset, behavior: 'smooth' });
+    });
+  });
+
+  /* ── Scroll reveal ───────────────────────── */
+  const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); revealObs.unobserve(e.target); }
+    });
+  }, { threshold: 0.07 });
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+</script>
+</body>
+</html>

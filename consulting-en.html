@@ -1,0 +1,1533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alista Consulting — Strategy &amp; Transformation</title>
+  <meta name="description" content="IT, business, and finance consulting. Process optimization and data-driven decisions to transform your organization." />
+  <link rel="icon" type="image/png" href="assets/images/logo-consulting.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <style>
+    /* ── Tokens ─────────────────────────────────── */
+    :root {
+      --bg-base:      #09141c;
+      --bg-elevated:  #0d1c26;
+      --bg-card:      #111f2a;
+      --copper-dark:  #9D4C2A;
+      --copper:       #BA6A45;
+      --copper-rgb:   186, 106, 69;
+      --slate-dark:   #3E5662;
+      --slate-mid:    #57707D;
+      --slate-light:  #A5BCC6;
+      --text-primary: #e4ecf1;
+      --text-muted:   #7fa0b2;
+      --border:       rgba(165,188,198,0.10);
+      --border-cu:    rgba(186,106,69,0.22);
+    }
+
+    /* ── Reset ──────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg-base);
+      color: var(--text-primary);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; }
+
+    /* ── Scrollbar ───────────────────────────────── */
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--bg-base); }
+    ::-webkit-scrollbar-thumb { background: var(--copper-dark); border-radius: 2px; }
+
+    /* ── Grain overlay ───────────────────────────── */
+    .grain {
+      position: fixed; inset: 0; z-index: 9998; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.035;
+    }
+
+    /* ── Scroll reveal ───────────────────────────── */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* ── Section common ──────────────────────────── */
+    .section { padding: 7rem 2rem; position: relative; overflow: hidden; }
+    .section--alt { background: var(--bg-elevated); }
+    .section-inner { max-width: 1180px; margin: 0 auto; }
+    .eyebrow {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.6rem; font-weight: 400;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--copper); margin-bottom: 0.9rem;
+    }
+    .section-title {
+      font-family: 'Roboto Mono', monospace;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 400; line-height: 1.2;
+      color: var(--text-primary); margin-bottom: 1.2rem;
+    }
+    .section-rule {
+      width: 44px; height: 1px;
+      background: linear-gradient(90deg, var(--copper), transparent);
+      margin-bottom: 1.6rem;
+    }
+    .section-lead {
+      font-size: 0.95rem; font-weight: 300;
+      color: var(--text-muted); max-width: 520px;
+      line-height: 1.8;
+    }
+
+    /* ── Buttons ─────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.7rem; font-weight: 400;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 0.85rem 2rem; border-radius: 3px;
+      transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
+      cursor: pointer; border: none;
+    }
+    .btn:hover { opacity: 0.88; transform: translateY(-2px); }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--copper-dark), var(--copper));
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(var(--copper-rgb), 0.3);
+    }
+    .btn-primary:hover { box-shadow: 0 8px 28px rgba(var(--copper-rgb), 0.45); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--border-cu);
+    }
+    .btn-ghost:hover { border-color: var(--copper); color: var(--copper); }
+
+    /* ════════════════════════════════════════════
+       NAVIGATION
+    ════════════════════════════════════════════ */
+    #nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      transition: background 0.35s, border-color 0.35s, backdrop-filter 0.35s;
+    }
+    #nav.scrolled {
+      background: rgba(9,20,28,0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1280px; margin: 0 auto;
+      display: flex; align-items: center; gap: 1.5rem;
+      padding: 1.1rem 2rem;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 0.7rem;
+      flex-shrink: 0; margin-right: auto;
+    }
+    .nav-logo img { height: 40px; width: auto; }
+    .nav-links {
+      display: flex; align-items: center; gap: 0.15rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.58rem; font-weight: 400;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-muted); padding: 0.4rem 0.6rem;
+      border-radius: 2px;
+      transition: color 0.2s, background 0.2s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -1px; left: 0.6rem; right: 0.6rem;
+      height: 1px; background: var(--copper);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.25s ease;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--text-primary); }
+    .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+    .nav-ext {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--copper); padding: 0.4rem 0.8rem;
+      border: 1px solid var(--border-cu); border-radius: 2px;
+      transition: background 0.2s, color 0.2s;
+      flex-shrink: 0;
+    }
+    .nav-ext:hover { background: rgba(var(--copper-rgb), 0.1); }
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      background: none; border: none; padding: 4px; cursor: pointer;
+    }
+    .hamburger span {
+      display: block; width: 22px; height: 1.5px;
+      background: var(--text-muted);
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    /* ── Mobile drawer ───────────────────────────── */
+    #mobile-drawer {
+      display: none; position: fixed; inset: 0; z-index: 99;
+      background: var(--bg-base); flex-direction: column;
+      align-items: center; justify-content: center; gap: 0.6rem;
+      opacity: 0; transition: opacity 0.3s;
+    }
+    #mobile-drawer.open { display: flex; opacity: 1; }
+    #mobile-drawer a {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.75rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--text-muted); padding: 0.6rem 1rem;
+      transition: color 0.2s;
+    }
+    #mobile-drawer a:hover { color: var(--copper); }
+    #drawer-close {
+      position: absolute; top: 1.2rem; right: 1.5rem;
+      background: none; border: none; color: var(--text-muted);
+      font-size: 1.4rem; cursor: pointer;
+      transition: color 0.2s;
+    }
+    #drawer-close:hover { color: var(--copper); }
+
+    /* ════════════════════════════════════════════
+       HERO — RADAR
+    ════════════════════════════════════════════ */
+    #hero {
+      min-height: 100dvh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 7rem 2rem 5rem;
+      position: relative; overflow: hidden;
+      background: var(--bg-base);
+    }
+    /* Background glows */
+    #hero::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 50% at 20% 30%, rgba(var(--copper-rgb),0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 60% at 80% 70%, rgba(62,86,98,0.08) 0%, transparent 70%);
+    }
+
+    /* Hero text block */
+    .hero-text {
+      margin-top: 3rem;
+      text-align: center;
+      display: flex; flex-direction: column; align-items: center; gap: 1rem;
+      animation: hero-rise 0.9s 0.3s both ease;
+    }
+    @keyframes hero-rise {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: none; }
+    }
+    .hero-logo-img {
+      height: clamp(160px, 20vw, 240px); width: auto;
+      filter: drop-shadow(0 4px 20px rgba(var(--copper-rgb), 0.40));
+      margin-bottom: 0.6rem;
+    }
+    .hero-tagline {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.62rem; font-weight: 400;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--copper);
+    }
+    .hero-desc {
+      font-size: 0.9rem; font-weight: 300;
+      color: var(--text-muted); max-width: 480px;
+      line-height: 1.8;
+    }
+    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 0.5rem; }
+
+    /* ════════════════════════════════════════════
+       SERVICES
+    ════════════════════════════════════════════ */
+    #servicios { background: var(--bg-elevated); }
+    .svc-header { margin-bottom: 3.5rem; }
+
+    /* Features-4 bordered grid */
+    .feat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .feat-cell {
+      padding: 2.5rem 2rem;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.25s;
+    }
+    .feat-cell:hover { background: rgba(165,188,198,0.03); }
+    .feat-cell:nth-child(3n)   { border-right: none; }
+    .feat-cell:nth-last-child(-n+3) { border-bottom: none; }
+    .feat-icon-row {
+      display: flex; align-items: center; gap: 0.55rem;
+      margin-bottom: 0.8rem;
+    }
+    .feat-icon-row svg {
+      width: 16px; height: 16px;
+      color: var(--copper); flex-shrink: 0;
+    }
+    .feat-title {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.78rem; font-weight: 500;
+      color: var(--text-primary);
+    }
+    .feat-desc {
+      font-size: 0.82rem; color: var(--text-muted);
+      line-height: 1.8;
+    }
+
+    /* ════════════════════════════════════════════
+       FORGE FRAMEWORK
+    ════════════════════════════════════════════ */
+    #framework { background: var(--bg-base); }
+    .forge-header { text-align: center; margin-bottom: 4rem; }
+    .forge-header .section-rule { margin: 0 auto 1.6rem; }
+    .forge-row {
+      display: flex; gap: 0;
+      position: relative;
+    }
+    .forge-row::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg,
+        transparent 0%, rgba(var(--copper-rgb),0.25) 10%,
+        rgba(var(--copper-rgb),0.25) 90%, transparent 100%);
+      pointer-events: none; z-index: 0;
+    }
+    .forge-card {
+      flex: 1; padding: 2.5rem 1.6rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-top: 2px solid transparent;
+      position: relative; overflow: hidden; z-index: 1;
+      transition: border-top-color 0.3s, transform 0.35s, box-shadow 0.35s;
+    }
+    .forge-card + .forge-card { border-left: none; }
+    .forge-card:hover {
+      border-top-color: var(--copper);
+      transform: translateY(-6px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.35);
+      z-index: 2;
+    }
+    .forge-letter {
+      position: absolute; bottom: -10px; right: 4px;
+      font-family: 'Roboto Mono', monospace;
+      font-size: clamp(80px, 10vw, 120px);
+      font-weight: 500; line-height: 1;
+      color: var(--copper);
+      opacity: 0.055;
+      pointer-events: none; user-select: none;
+      transition: opacity 0.35s;
+    }
+    .forge-card:hover .forge-letter { opacity: 0.16; }
+    .forge-phase {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.52rem; letter-spacing: 0.2em;
+      color: var(--copper); margin-bottom: 0.7rem;
+      text-transform: uppercase;
+    }
+    .forge-name {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 1.05rem; font-weight: 500;
+      color: var(--text-primary); margin-bottom: 0.3rem;
+      line-height: 1.3;
+    }
+    .forge-name-es {
+      font-size: 0.7rem; color: var(--copper);
+      font-family: 'Roboto Mono', monospace;
+      letter-spacing: 0.08em; margin-bottom: 1rem;
+    }
+    .forge-desc {
+      font-size: 0.8rem; color: var(--text-muted);
+      line-height: 1.8;
+    }
+
+    /* ════════════════════════════════════════════
+       OUR PROCESS — Interactive tabs
+    ════════════════════════════════════════════ */
+    #engagement { background: var(--bg-elevated); }
+    .eng-header { margin-bottom: 3.5rem; }
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: 1px solid var(--border);
+      border-radius: 4px 4px 0 0;
+      overflow: hidden;
+    }
+    .process-step {
+      padding: 2rem 1.8rem;
+      cursor: pointer;
+      position: relative;
+      border-right: 1px solid var(--border);
+      transition: background 0.3s;
+      overflow: hidden;
+      user-select: none;
+    }
+    .process-step:last-child { border-right: none; }
+    /* copper underline that slides in when active */
+    .process-step::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--copper-dark), var(--copper));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .process-step.active { background: rgba(var(--copper-rgb), 0.04); }
+    .process-step.active::after { transform: scaleX(1); }
+    .process-step-num {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 2.8rem; font-weight: 300; line-height: 1;
+      color: rgba(165,188,198,0.12);
+      margin-bottom: 0.8rem;
+      transition: color 0.35s;
+    }
+    .process-step.active .process-step-num { color: var(--copper); }
+    .process-step-title {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.7rem; font-weight: 500; line-height: 1.45;
+      color: var(--text-muted);
+      transition: color 0.35s;
+    }
+    .process-step.active .process-step-title { color: var(--text-primary); }
+    .process-panels {
+      border: 1px solid var(--border);
+      border-top: none;
+      border-radius: 0 0 4px 4px;
+      overflow: hidden;
+    }
+    .process-panel {
+      display: none;
+      padding: 2.8rem 2.5rem;
+      background: var(--bg-card);
+    }
+    .process-panel.active {
+      display: block;
+      animation: panel-in 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    @keyframes panel-in {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .process-panel-eyebrow {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.52rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--copper); margin-bottom: 0.6rem;
+    }
+    .process-panel h3 {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 1.25rem; font-weight: 500;
+      color: var(--text-primary); margin-bottom: 1rem;
+    }
+    .process-panel-desc {
+      font-size: 0.9rem; color: var(--text-muted);
+      line-height: 1.9; max-width: 700px;
+      margin-bottom: 1.4rem;
+    }
+    .process-deliverable {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 0.1em;
+      color: rgba(var(--copper-rgb), 0.8);
+      border: 1px solid rgba(var(--copper-rgb), 0.22);
+      padding: 0.35rem 0.85rem; border-radius: 2px;
+    }
+
+    /* ════════════════════════════════════════════
+       ALLIANCES
+    ════════════════════════════════════════════ */
+    #alliances { background: var(--bg-base); }
+    .allia-header { text-align: center; margin-bottom: 3.5rem; }
+    .allia-header .section-rule { margin: 0 auto 1.6rem; }
+    .allia-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem; max-width: 820px; margin: 0 auto;
+    }
+    .allia-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-top: 2px solid var(--border-cu);
+      padding: 2.5rem 2rem;
+      position: relative; overflow: hidden;
+      transition: border-top-color 0.3s, box-shadow 0.3s, transform 0.3s;
+    }
+    .allia-card:hover {
+      border-top-color: var(--copper);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+      transform: translateY(-4px);
+    }
+    .allia-logo {
+      height: 36px; width: auto; max-width: 140px;
+      object-fit: contain;
+      background: #fff;
+      padding: 6px 10px;
+      border-radius: 4px;
+      margin-bottom: 1.4rem;
+    }
+    /* Stretched-link: .allia-link::after covers entire .allia-card */
+    .allia-card { cursor: pointer; }
+    .allia-link::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+    .allia-badge {
+      display: inline-block;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.5rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--copper); border: 1px solid var(--border-cu);
+      padding: 0.25rem 0.6rem; border-radius: 2px;
+      margin-bottom: 0.9rem;
+    }
+    .allia-name {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 1.15rem; font-weight: 500;
+      color: var(--text-primary); margin-bottom: 0.9rem;
+    }
+    .allia-desc {
+      font-size: 0.83rem; color: var(--text-muted);
+      line-height: 1.8; margin-bottom: 1.5rem;
+    }
+    .allia-link {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--copper);
+      transition: letter-spacing 0.2s;
+    }
+    .allia-link:hover { letter-spacing: 0.18em; }
+
+    /* ════════════════════════════════════════════
+       INVESTMENT
+    ════════════════════════════════════════════ */
+    #pricing { background: var(--bg-elevated); }
+    .pricing-header { margin-bottom: 3.5rem; }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px; margin-bottom: 2.5rem;
+    }
+    .pricing-card {
+      background: var(--bg-card);
+      padding: 2.5rem 2rem;
+      border-top: 2px solid transparent;
+      position: relative; overflow: hidden;
+      transition: border-top-color 0.3s, transform 0.35s, box-shadow 0.35s;
+    }
+    .pricing-card:hover {
+      border-top-color: var(--copper);
+      transform: translateY(-5px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.3);
+      z-index: 1;
+    }
+    .pricing-card.featured {
+      border-top: 2px solid var(--copper);
+      background: linear-gradient(160deg, rgba(var(--copper-rgb),0.05) 0%, var(--bg-card) 60%);
+    }
+    .pricing-badge {
+      position: absolute; top: 1.2rem; right: 1.2rem;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.48rem; letter-spacing: 0.14em;
+      color: var(--copper); border: 1px solid var(--border-cu);
+      padding: 0.2rem 0.55rem; border-radius: 2px;
+    }
+    .pricing-tier {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--copper); margin-bottom: 0.6rem;
+    }
+    .pricing-name {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 1.1rem; font-weight: 500;
+      color: var(--text-primary); margin-bottom: 0.5rem;
+    }
+    .pricing-best {
+      font-size: 0.88rem; color: var(--text-muted);
+      margin-bottom: 1.4rem; line-height: 1.7;
+    }
+    .pricing-features {
+      list-style: none; display: flex; flex-direction: column; gap: 0.7rem;
+      margin-bottom: 0;
+    }
+    .pricing-features li {
+      font-size: 0.88rem; color: var(--text-muted);
+      display: flex; align-items: flex-start; gap: 0.6rem; line-height: 1.6;
+    }
+    .pricing-features li::before {
+      content: '·'; color: var(--copper); flex-shrink: 0;
+      font-size: 1rem; line-height: 1.2;
+    }
+    .pricing-callouts {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+    }
+    .pricing-callout {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--copper);
+      padding: 1.4rem 1.6rem;
+    }
+    .pricing-callout p {
+      font-size: 0.83rem; color: var(--text-muted); line-height: 1.7;
+      font-style: italic;
+    }
+
+    /* ════════════════════════════════════════════
+       ABOUT
+    ════════════════════════════════════════════ */
+    #about { background: var(--bg-base); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 5rem; align-items: start;
+    }
+    .about-left { display: flex; flex-direction: column; gap: 2.5rem; }
+    .about-mv { display: flex; flex-direction: column; gap: 2rem; }
+    .about-mv-block {}
+    .about-mv-label {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--copper); margin-bottom: 0.5rem;
+    }
+    .about-mv-text {
+      font-size: 0.88rem; color: var(--text-muted); line-height: 1.8;
+    }
+    .pillars-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+    }
+    .pillar-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-top: 2px solid var(--border-cu);
+      padding: 1.3rem;
+      transition: border-top-color 0.25s;
+    }
+    .pillar-card:hover { border-top-color: var(--copper); }
+    .pillar-card p {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.7rem; color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .about-right {}
+    .founder-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+    }
+    .founder-name {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 1.15rem; font-weight: 500;
+      color: var(--text-primary); margin-bottom: 0.3rem;
+    }
+    .founder-title {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 0.12em;
+      color: var(--copper); margin-bottom: 1.4rem;
+    }
+    .founder-bio {
+      font-size: 0.88rem; color: var(--text-muted); line-height: 1.9;
+      margin-bottom: 1.8rem;
+    }
+    .founder-stats {
+      display: flex; gap: 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .founder-stat {
+      flex: 1; padding: 1rem 0.5rem; text-align: center;
+      border-right: 1px solid var(--border);
+    }
+    .founder-stat:last-child { border-right: none; }
+    .founder-stat-val {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 1.3rem; font-weight: 500;
+      color: var(--copper); display: block;
+    }
+    .founder-stat-lbl {
+      font-size: 0.62rem; color: var(--text-muted);
+      display: block; margin-top: 0.2rem;
+    }
+    .founder-career {
+      margin-top: 1.8rem;
+      display: flex; flex-direction: column; gap: 0.6rem;
+    }
+    .founder-career-label {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.55rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--copper); margin-bottom: 0.3rem;
+    }
+    .career-item {
+      display: flex; align-items: center; gap: 0.7rem;
+      font-size: 0.78rem; color: var(--text-muted);
+    }
+    .career-item::before {
+      content: '';
+      width: 5px; height: 5px; border-radius: 50%;
+      background: rgba(var(--copper-rgb), 0.5); flex-shrink: 0;
+    }
+
+    /* ════════════════════════════════════════════
+       CONTACT
+    ════════════════════════════════════════════ */
+    #contact { background: var(--bg-base); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr; gap: 5rem;
+      align-items: start;
+    }
+    .contact-info { display: flex; flex-direction: column; gap: 2rem; }
+    .contact-item {
+      display: flex; flex-direction: column; gap: 0.3rem;
+    }
+    .contact-item-label {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.52rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--copper);
+    }
+    .contact-item-val {
+      font-size: 0.88rem; color: var(--text-muted);
+      transition: color 0.2s;
+    }
+    .contact-item-val:hover { color: var(--copper); }
+    .contact-form { display: flex; flex-direction: column; gap: 1.1rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-label {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.54rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .form-input, .form-select, .form-textarea {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 0.75rem 1rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.85rem; color: var(--text-primary);
+      outline: none; width: 100%;
+      transition: border-color 0.2s;
+    }
+    .form-input::placeholder, .form-textarea::placeholder { color: var(--text-muted); opacity: 0.5; }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--border-cu);
+    }
+    .form-select { appearance: none; cursor: pointer; }
+    .form-select option { background: var(--bg-card); }
+    .form-textarea { resize: vertical; min-height: 100px; }
+    .form-note {
+      font-size: 0.72rem; color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* ════════════════════════════════════════════
+       FOOTER
+    ════════════════════════════════════════════ */
+    #footer {
+      background: #060d14;
+      border-top: 1px solid var(--border);
+      padding: 4rem 2rem 2rem;
+    }
+    .footer-inner {
+      max-width: 1180px; margin: 0 auto;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr; gap: 3rem;
+      margin-bottom: 3rem;
+    }
+    .footer-brand img { height: 28px; margin-bottom: 1rem; opacity: 0.65; }
+    .footer-tagline {
+      font-size: 0.78rem; color: var(--text-muted); max-width: 240px;
+      line-height: 1.7; margin-bottom: 1.4rem;
+    }
+    .footer-socials { display: flex; gap: 0.6rem; }
+    .footer-social {
+      width: 34px; height: 34px; border-radius: 50%;
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-muted);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .footer-social:hover { border-color: var(--copper); color: var(--copper); }
+    .footer-col-title {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--copper); margin-bottom: 1.2rem;
+    }
+    .footer-nav { display: flex; flex-direction: column; gap: 0.55rem; }
+    .footer-nav a {
+      font-size: 0.8rem; color: var(--text-muted);
+      transition: color 0.2s;
+    }
+    .footer-nav a:hover { color: var(--copper); }
+    .ppt-link {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 0.1em;
+      color: rgba(var(--copper-rgb), 0.4);
+      border: 1px dashed rgba(var(--copper-rgb), 0.2);
+      padding: 0.4rem 0.8rem; border-radius: 2px;
+      margin-top: 0.6rem; cursor: default;
+    }
+    .footer-bottom {
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+      padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-ga-link {
+      display: flex; align-items: center; gap: 0.7rem;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.55rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+    .footer-ga-link:hover { color: var(--copper); }
+    .footer-ga-link img { height: 22px; opacity: 0.5; }
+    .footer-copy {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.55rem; letter-spacing: 0.1em;
+      color: rgba(165,188,198,0.35);
+    }
+
+    /* ── WhatsApp FAB ─────────────────────────── */
+    .wa-fab {
+      position: fixed; bottom: 1.75rem; right: 1.75rem; z-index: 9000;
+      width: 56px; height: 56px; border-radius: 50%;
+      background: linear-gradient(135deg, #25d366, #128c7e);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 18px rgba(37,211,102,0.35);
+      transition: transform 0.25s, box-shadow 0.25s;
+      animation: wa-pulse 2.8s ease-in-out infinite;
+    }
+    .wa-fab:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 28px rgba(37,211,102,0.5);
+      animation-play-state: paused;
+    }
+    @keyframes wa-pulse {
+      0%,100% { box-shadow: 0 4px 18px rgba(37,211,102,0.3); }
+      50%      { box-shadow: 0 4px 28px rgba(37,211,102,0.55); }
+    }
+
+    /* ── Responsive ──────────────────────────── */
+    @media (max-width: 1024px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .feat-grid { grid-template-columns: repeat(2, 1fr); }
+      .feat-cell:nth-child(2n)   { border-right: none; }
+      .feat-cell:nth-child(3n)   { border-right: 1px solid var(--border); }
+      .feat-cell:nth-last-child(-n+3) { border-bottom: 1px solid var(--border); }
+      .feat-cell:nth-last-child(-n+2) { border-bottom: none; }
+      .forge-row { flex-direction: column; gap: 1px; }
+      .forge-row::before { display: none; }
+      .forge-card + .forge-card { border-left: 1px solid var(--border); border-top: none; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .pricing-callouts { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .allia-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .section { padding: 5rem 1.5rem; }
+      .feat-grid { grid-template-columns: 1fr; }
+      .feat-cell { border-right: none !important; }
+      .feat-cell:not(:last-child) { border-bottom: 1px solid var(--border) !important; }
+      .feat-cell:last-child { border-bottom: none !important; }
+      .nav-ext { display: none; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+      .pillars-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .hero-ctas { flex-direction: column; width: 100%; }
+      .hero-ctas .btn { text-align: center; justify-content: center; }
+      .process-steps { grid-template-columns: 1fr; }
+      .process-step { border-right: none; border-bottom: 1px solid var(--border); }
+      .process-step:last-child { border-bottom: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Grain overlay -->
+<div class="grain" aria-hidden="true"></div>
+
+<!-- ── Navigation ──────────────────────────── -->
+<nav id="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a class="nav-logo" href="#hero" aria-label="Alista Consulting home">
+      <img src="assets/images/logo-consulting-2rows.png" alt="Alista Consulting" />
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="#servicios"  data-nav="servicios">Services</a></li>
+      <li><a href="#framework"  data-nav="framework">Framework</a></li>
+      <li><a href="#engagement" data-nav="engagement">Process</a></li>
+      <li><a href="#alliances"  data-nav="alliances">Alliances</a></li>
+      <li><a href="#pricing"    data-nav="pricing">Investment</a></li>
+      <li><a href="#about"      data-nav="about">About</a></li>
+      <li><a href="#contact"    data-nav="contact">Contact</a></li>
+    </ul>
+    <a href="consulting.html" class="nav-ext" title="Ver en Español">ES</a>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ── Mobile Drawer ───────────────────────── -->
+<div id="mobile-drawer" role="dialog" aria-modal="true" aria-label="Navigation menu">
+  <button id="drawer-close" aria-label="Close menu">✕</button>
+  <a href="#servicios"  onclick="closeDrawer()">Services</a>
+  <a href="#framework"  onclick="closeDrawer()">Framework</a>
+  <a href="#engagement" onclick="closeDrawer()">Process</a>
+  <a href="#alliances"  onclick="closeDrawer()">Alliances</a>
+  <a href="#pricing"    onclick="closeDrawer()">Investment</a>
+  <a href="#about"      onclick="closeDrawer()">About</a>
+  <a href="#contact"    onclick="closeDrawer()">Contact</a>
+</div>
+
+<main>
+
+<!-- ════════════════════════════════════════════
+     §1 HERO
+════════════════════════════════════════════ -->
+<section id="hero" aria-label="Home">
+
+  <!-- Hero text -->
+  <div class="hero-text">
+    <img src="assets/images/logo-consulting-2rows.png" alt="Alista Consulting" class="hero-logo-img" />
+    <p class="hero-tagline">Strategic Consulting</p>
+    <p class="hero-desc">IT, business, and finance consulting — process optimization and data-driven decisions to transform your organization. We know how to make technology work for the business&nbsp;— not the other way around.</p>
+    <div class="hero-ctas">
+      <a href="#servicios" class="btn btn-primary">Explore Services</a>
+      <a href="#contact"   class="btn btn-ghost">Contact Us</a>
+    </div>
+  </div>
+
+</section>
+
+<!-- ════════════════════════════════════════════
+     §2 SERVICES
+════════════════════════════════════════════ -->
+<section id="servicios" class="section section--alt" data-section>
+  <div class="section-inner">
+    <div class="svc-header reveal">
+      <p class="eyebrow">01 · Services</p>
+      <h2 class="section-title">What We Do</h2>
+      <div class="section-rule"></div>
+      <p class="section-lead">Consulting solutions designed to transform the way your organization operates, innovates, and grows.</p>
+    </div>
+    <div class="feat-grid">
+
+      <!-- 01 Business Diagnostic -->
+      <div class="feat-cell reveal" style="transition-delay:0s">
+        <div class="feat-icon-row">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+          <h3 class="feat-title">Business Diagnostic</h3>
+        </div>
+        <p class="feat-desc">We interview your management and operational teams to understand how the organization works today. We analyze the data, identify gaps, and deliver a comprehensive report with findings and actionable recommendations.</p>
+      </div>
+
+      <!-- 02 Digital Innovation -->
+      <div class="feat-cell reveal" style="transition-delay:0.08s">
+        <div class="feat-icon-row">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          <h3 class="feat-title">Digital Innovation</h3>
+        </div>
+        <p class="feat-desc">We identify and apply cutting-edge technology to your business processes. We search for the most advanced solutions in the market and adapt them to your company's specific context to generate competitive advantage.</p>
+      </div>
+
+      <!-- 03 Operational Optimization -->
+      <div class="feat-cell reveal" style="transition-delay:0.16s">
+        <div class="feat-icon-row">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          <h3 class="feat-title">Operational Optimization</h3>
+        </div>
+        <p class="feat-desc">We detect gaps and opportunities in your processes to ensure you're operating at peak performance. We install a culture of continuous improvement that remains active long after the engagement ends.</p>
+      </div>
+
+      <!-- 04 Fractional CTO -->
+      <div class="feat-cell reveal" style="transition-delay:0.24s">
+        <div class="feat-icon-row">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          <h3 class="feat-title">Fractional CTO</h3>
+        </div>
+        <p class="feat-desc">You don't need to hire a full-time CTO. We put at your disposal a senior consultant with the experience to lead your technology strategy, improve your IT stack, and align technology with your business objectives.</p>
+      </div>
+
+      <!-- 05 Project Strategy -->
+      <div class="feat-cell reveal" style="transition-delay:0.32s">
+        <div class="feat-icon-row">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="8" y1="14" x2="8" y2="14" stroke-linecap="round" stroke-width="2"/><line x1="12" y1="14" x2="12" y2="14" stroke-linecap="round" stroke-width="2"/></svg>
+          <h3 class="feat-title">Project Strategy</h3>
+        </div>
+        <p class="feat-desc">We implement the most effective process to manage and prioritize your innovation projects. We teach you how to properly funnel initiatives so that resources always flow toward what generates the most impact.</p>
+      </div>
+
+      <!-- 06 AI for Your Business -->
+      <div class="feat-cell reveal" style="transition-delay:0.4s">
+        <div class="feat-icon-row">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18"/></svg>
+          <h3 class="feat-title">AI for Your Business</h3>
+        </div>
+        <p class="feat-desc">We identify AI use cases in your organization to automate processes and extract maximum value from this technology. One objective: higher revenue and operational efficiency.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     §3 FORGE FRAMEWORK
+════════════════════════════════════════════ -->
+<section id="framework" class="section" data-section>
+  <div class="section-inner">
+    <div class="forge-header reveal">
+      <p class="eyebrow">02 · Our Framework</p>
+      <h2 class="section-title">The FORGE Methodology</h2>
+      <div class="section-rule"></div>
+      <p class="section-lead" style="margin:0 auto">A proven five-step process designed to deliver measurable results without disrupting your operations.</p>
+    </div>
+    <div class="forge-row">
+
+      <div class="forge-card reveal" style="transition-delay:0s">
+        <div class="forge-letter">F</div>
+        <p class="forge-phase">F · Frame</p>
+        <h3 class="forge-name">Frame</h3>
+        <p class="forge-name-es">We understand your business</p>
+        <p class="forge-desc">We talk with you and your team to understand how they work today, what works and what doesn't. No assumptions, no shortcuts — we listen first.</p>
+      </div>
+
+      <div class="forge-card reveal" style="transition-delay:0.1s">
+        <div class="forge-letter">O</div>
+        <p class="forge-phase">O · Orchestrate</p>
+        <h3 class="forge-name">Orchestrate</h3>
+        <p class="forge-name-es">We design the solution</p>
+        <p class="forge-desc">We create a specific plan for your company with clear options and transparent costs. Nothing generic — every solution is built for your context.</p>
+      </div>
+
+      <div class="forge-card reveal" style="transition-delay:0.2s">
+        <div class="forge-letter">R</div>
+        <p class="forge-phase">R · Rapid Deploy</p>
+        <h3 class="forge-name">Rapid Deploy</h3>
+        <p class="forge-name-es">Results without stopping</p>
+        <p class="forge-desc">We execute in short phases so you see results fast, without interrupting your day-to-day. We implement without stopping your operation.</p>
+      </div>
+
+      <div class="forge-card reveal" style="transition-delay:0.3s">
+        <div class="forge-letter">G</div>
+        <p class="forge-phase">G · Governance</p>
+        <h3 class="forge-name">Governance</h3>
+        <p class="forge-name-es">We ensure quality</p>
+        <p class="forge-desc">We validate that everything works as it should and that your team knows how to use it. Adoption is part of success — we make sure no one is left behind.</p>
+      </div>
+
+      <div class="forge-card reveal" style="transition-delay:0.4s">
+        <div class="forge-letter">E</div>
+        <p class="forge-phase">E · Evolve</p>
+        <h3 class="forge-name">Evolve</h3>
+        <p class="forge-name-es">Continuous improvement</p>
+        <p class="forge-desc">We measure results, adjust as needed, and keep optimizing. Technology changes — we make sure your company evolves too.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     §4 OUR PROCESS
+════════════════════════════════════════════ -->
+<section id="engagement" class="section section--alt" data-section>
+  <div class="section-inner">
+    <div class="eng-header reveal">
+      <p class="eyebrow">03 · Our Process</p>
+      <h2 class="section-title">Our Process</h2>
+      <div class="section-rule"></div>
+      <p class="section-lead">A three-phase model designed to build progressive confidence — you only move forward when results justify it.</p>
+    </div>
+
+    <div class="process-steps reveal">
+      <div class="process-step active" data-step="0">
+        <div class="process-step-num">01</div>
+        <div class="process-step-title">Analysis &amp;<br>Discovery</div>
+      </div>
+      <div class="process-step" data-step="1">
+        <div class="process-step-num">02</div>
+        <div class="process-step-title">Implementation</div>
+      </div>
+      <div class="process-step" data-step="2">
+        <div class="process-step-num">03</div>
+        <div class="process-step-title">Continuous<br>Improvement &amp; Support</div>
+      </div>
+    </div>
+
+    <div class="process-panels reveal">
+      <div class="process-panel active" data-panel="0">
+        <p class="process-panel-eyebrow">Phase 01 · Analysis &amp; Discovery</p>
+        <h3>We understand your organization before proposing any solution</h3>
+        <p class="process-panel-desc">We begin with a deep diagnostic: we interview all levels of your organization, collect operational data, map key processes, and identify gaps and opportunities. We make no assumptions — we listen first, analyze next, and only then build a clear picture of the current state and the path to where you want to go. This analysis is the foundation that ensures every subsequent action has real impact.</p>
+        <span class="process-deliverable">↳ Deliverable: Executive report with findings, gaps, and prioritized opportunities</span>
+      </div>
+      <div class="process-panel" data-panel="1">
+        <p class="process-panel-eyebrow">Phase 02 · Implementation</p>
+        <h3>We execute with precision, tied to results — not effort</h3>
+        <p class="process-panel-desc">With the analysis as a map, we execute prioritized initiatives in short, measurable phases. KPIs are defined before we begin, and our fees are directly tied to the results that materialize — if the savings don't materialize, neither does our invoice. We work alongside your team without disrupting operations, ensuring every change is properly adopted and generates the expected impact from the first sprint.</p>
+        <span class="process-deliverable">↳ Deliverable: Implemented solutions, validated KPIs, and team adopting the changes</span>
+      </div>
+      <div class="process-panel" data-panel="2">
+        <p class="process-panel-eyebrow">Phase 03 · Continuous Improvement &amp; Support</p>
+        <h3>We stay with you until you reach the operational excellence you seek</h3>
+        <p class="process-panel-desc">The work doesn't end when a solution is installed — it ends when your organization masters it and keeps improving on its own. We offer continuous accompaniment for as long as your company needs: iterative refinement, knowledge transfer, results monitoring, and real-time strategic adjustments. We remain as your operational shadow until you reach the standards of excellence set as the objective — and beyond.</p>
+        <span class="process-deliverable">↳ Deliverable: Autonomous team, improvement culture installed, and sustained results</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     §5 ALLIANCES
+════════════════════════════════════════════ -->
+<section id="alliances" class="section" data-section>
+  <div class="section-inner">
+    <div class="allia-header reveal">
+      <p class="eyebrow">04 · Alliances</p>
+      <h2 class="section-title">Our Strategic Partners</h2>
+      <div class="section-rule"></div>
+      <p class="section-lead" style="margin:0 auto">Best-in-class in the Latin American market — partners that complement our value proposition with specialized capabilities.</p>
+    </div>
+    <div class="allia-grid">
+
+      <div class="allia-card reveal" style="transition-delay:0s">
+        <img src="assets/images/logo-burobd.png" alt="BuroDB" class="allia-logo" />
+        <span class="allia-badge">Marketing &amp; Campaigns</span>
+        <h3 class="allia-name">BuroDB</h3>
+        <p class="allia-desc">Strategic partner for digital marketing and high-impact campaigns. Specialists in brand positioning and growth strategies for the Latin American market. When your business needs visibility and qualified traffic, BuroDB joins the team.</p>
+        <a href="https://burobd.com" class="allia-link" target="_blank" rel="noopener noreferrer">burobd.com ↗</a>
+      </div>
+
+      <div class="allia-card reveal" style="transition-delay:0.1s">
+        <img src="assets/images/logo-feuerluft.png" alt="Feuerluft" class="allia-logo" />
+        <span class="allia-badge">Product Development</span>
+        <h3 class="allia-name">FEUERLUFT</h3>
+        <p class="allia-desc">Partner in product development and digital solutions for the Latin American market. Experts in building products that connect with consumers and generate real adoption. When strategy needs to become code, FEUERLUFT delivers.</p>
+        <a href="https://feuerluft.com" class="allia-link" target="_blank" rel="noopener noreferrer">feuerluft.com ↗</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     §6 INVESTMENT
+════════════════════════════════════════════ -->
+<section id="pricing" class="section section--alt" data-section>
+  <div class="section-inner">
+    <div class="pricing-header reveal">
+      <p class="eyebrow">05 · Investment</p>
+      <h2 class="section-title">Transparency at Every Step</h2>
+      <div class="section-rule"></div>
+      <p class="section-lead">No hidden fees, no surprises. Every proposal is customized — the price reflects the scope and expected results.</p>
+    </div>
+    <div class="pricing-grid">
+
+      <div class="pricing-card reveal" style="transition-delay:0s">
+        <p class="pricing-tier">Tier 01</p>
+        <h3 class="pricing-name">Diagnostic</h3>
+        <p class="pricing-best">Ideal for companies that want to clearly understand where they stand today before committing resources.</p>
+        <ul class="pricing-features">
+          <li>Fixed project fee</li>
+          <li>Interviews at all levels</li>
+          <li>Process and data analysis</li>
+          <li>Complete findings report</li>
+          <li>Executive presentation session</li>
+        </ul>
+      </div>
+
+      <div class="pricing-card featured reveal" style="transition-delay:0.1s">
+        <span class="pricing-badge">Most Requested</span>
+        <p class="pricing-tier">Tier 02</p>
+        <h3 class="pricing-name">Project</h3>
+        <p class="pricing-best">For initiatives with defined scope and clear objectives. You pay for results — not hours.</p>
+        <ul class="pricing-features">
+          <li>Fee tied to agreed KPIs</li>
+          <li>Implementation in short phases</li>
+          <li>Weekly progress follow-up</li>
+          <li>Knowledge transfer</li>
+          <li>Results guarantee or adjustment</li>
+        </ul>
+      </div>
+
+      <div class="pricing-card reveal" style="transition-delay:0.2s">
+        <p class="pricing-tier">Tier 03</p>
+        <h3 class="pricing-name">Retainer / Fractional CTO</h3>
+        <p class="pricing-best">For companies that need continuous technology leadership without the cost of a full-time hire.</p>
+        <ul class="pricing-features">
+          <li>Fixed monthly retainer</li>
+          <li>Strategy + implementation + monitoring</li>
+          <li>Direct access to the senior consultant</li>
+          <li>Updated technology roadmap</li>
+          <li>On-demand consultant network</li>
+        </ul>
+      </div>
+
+    </div>
+    <div style="text-align:center;margin-bottom:2.5rem">
+      <a href="#contact" class="btn btn-primary">Request a Proposal</a>
+    </div>
+    <div class="pricing-callouts reveal">
+      <div class="pricing-callout">
+        <p>"In optimization projects, we don't charge until you see results. Your savings finance our fees."</p>
+      </div>
+      <div class="pricing-callout">
+        <p>"For specialized projects, we have a network of senior consultants available on demand — we extend capabilities without you managing additional vendors."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     §7 ABOUT
+════════════════════════════════════════════ -->
+<section id="about" class="section" data-section>
+  <div class="section-inner">
+    <div class="reveal" style="margin-bottom:3.5rem">
+      <p class="eyebrow">06 · About</p>
+      <h2 class="section-title">Who We Are</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="about-grid">
+
+      <div class="about-left">
+        <div class="about-mv reveal">
+          <div class="about-mv-block">
+            <p class="about-mv-label">Mission</p>
+            <p class="about-mv-text">To transform our clients' organizations into growth machines: more efficient, more profitable, and ready for what's next.</p>
+          </div>
+          <div class="about-mv-block">
+            <p class="about-mv-label">Vision</p>
+            <p class="about-mv-text">To be the reference fractional technology consulting firm in Mexico and Latin America — recognized for converting technology into the primary driver of profitability for our clients.</p>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <p class="about-mv-label" style="margin-bottom:1rem">Support Pillars</p>
+          <div class="pillars-grid">
+            <div class="pillar-card">
+              <p>Personalized Attention from a Senior Engineer</p>
+            </div>
+            <div class="pillar-card">
+              <p>Clarity and Transparency at Every Step</p>
+            </div>
+            <div class="pillar-card">
+              <p>Specialized Education</p>
+            </div>
+            <div class="pillar-card">
+              <p>Information Security</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-right reveal">
+        <div class="founder-card">
+          <h3 class="founder-name">Álvaro García</h3>
+          <p class="founder-title">IT Senior Director · Co-Founder &amp; Principal Consultant</p>
+          <p class="founder-bio">Álvaro García is a senior executive with over 25 years of experience in the technology industry, with deep specialization in the global financial sector. Throughout his career he has led high-impact digital transformation initiatives at Fortune 500 companies — from international-grade IT governance and cybersecurity to cloud solution architecture and leadership of distributed teams across multiple markets. He has managed and optimized multimillion-dollar P&amp;L portfolios, turning financial visibility into a strategic tool that enables executive leaders to make decisions based on real data. His approach combines technical rigor with business thinking, with a proven track record of sustained growth and measurable results in every organization he has served.</p>
+          <div class="founder-stats">
+            <div class="founder-stat">
+              <span class="founder-stat-val">25+</span>
+              <span class="founder-stat-lbl">Years in IT</span>
+            </div>
+            <div class="founder-stat">
+              <span class="founder-stat-val">5+</span>
+              <span class="founder-stat-lbl">Fortune 500</span>
+            </div>
+            <div class="founder-stat">
+              <span class="founder-stat-val">100%</span>
+              <span class="founder-stat-lbl">Implementation Success</span>
+            </div>
+            <div class="founder-stat">
+              <span class="founder-stat-val">20%</span>
+              <span class="founder-stat-lbl">YoY Growth</span>
+            </div>
+            <div class="founder-stat">
+              <span class="founder-stat-val">P&amp;L</span>
+              <span class="founder-stat-lbl">Strategic Financial Control</span>
+            </div>
+          </div>
+          <div class="founder-career">
+            <p class="founder-career-label">Career Track</p>
+            <div class="career-item">Hewlett-Packard — 13 years, progressive LATAM leadership</div>
+            <div class="career-item">Morgan Stanley — IT Director, Fortune 500</div>
+            <div class="career-item">Payclip — Digital transformation, fintech Mexico</div>
+            <div class="career-item">Rackspace — Enterprise cloud strategy</div>
+            <div class="career-item">The Credit Pros — IT Senior Director, 20% sustained growth</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     §8 CONTACT
+════════════════════════════════════════════ -->
+<section id="contact" class="section" data-section>
+  <div class="section-inner">
+    <div class="reveal" style="margin-bottom:3.5rem">
+      <p class="eyebrow">07 · Contact</p>
+      <h2 class="section-title">Let's Talk About Your Project</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="contact-grid">
+
+      <div class="contact-info reveal">
+        <div class="contact-item">
+          <span class="contact-item-label">WhatsApp</span>
+          <a href="https://wa.me/523331288999" class="contact-item-val" target="_blank" rel="noopener">+52 333 128 8999 ↗</a>
+        </div>
+        <div class="contact-item">
+          <span class="contact-item-label">Email</span>
+          <a href="mailto:ventas@grupoalista.com" class="contact-item-val">ventas@grupoalista.com</a>
+        </div>
+        <div class="contact-item">
+          <span class="contact-item-label">Address</span>
+          <p class="contact-item-val" style="cursor:default">Lázaro Cárdenas Pte. 2953<br>Col. Chapalita, Guadalajara<br>Jalisco, México C.P. 44500</p>
+        </div>
+      </div>
+
+      <form class="contact-form reveal" id="contact-form" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="cf-nombre">Name</label>
+            <input type="text" id="cf-nombre" name="name" class="form-input" placeholder="Your name" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="cf-empresa">Company</label>
+            <input type="text" id="cf-empresa" name="company" class="form-input" placeholder="Your company" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="cf-email">Email</label>
+            <input type="email" id="cf-email" name="email" class="form-input" placeholder="you@email.com" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="cf-tel">Phone</label>
+            <input type="tel" id="cf-tel" name="phone" class="form-input" placeholder="+52 33 1234 5678" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="cf-servicio">Service of Interest</label>
+          <select id="cf-servicio" name="service" class="form-select">
+            <option value="">Select a service…</option>
+            <option>Business Diagnostic</option>
+            <option>Digital Innovation</option>
+            <option>Operational Optimization</option>
+            <option>Fractional CTO</option>
+            <option>Project Strategy</option>
+            <option>AI for Your Business</option>
+            <option>Other / Not sure yet</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="cf-msg">Message</label>
+          <textarea id="cf-msg" name="message" class="form-textarea" placeholder="Tell us briefly about your company and the challenge you'd like to solve…"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Send Message</button>
+        <p class="form-note">We respond within 24 business hours.</p>
+        <div id="cf-success" style="display:none;margin-top:0.75rem;padding:0.75rem 1rem;border-radius:4px;font-size:0.82rem;border:1px solid transparent;"></div>
+      </form>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════ -->
+<footer id="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+
+      <div class="footer-brand">
+        <img src="assets/images/logo-consulting.png" alt="Alista Consulting" />
+        <p class="footer-tagline">IT, business, and finance consulting to transform your organization. We know how to make technology work for the business.</p>
+        <div class="footer-socials">
+          <a href="https://www.facebook.com/grupo.alista.54" class="footer-social" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/grupo.alista/" class="footer-social" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="https://wa.me/523331288999" class="footer-social" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <p class="footer-col-title">Sections</p>
+        <nav class="footer-nav">
+          <a href="#servicios">Services</a>
+          <a href="#framework">Our Framework</a>
+          <a href="#engagement">Our Process</a>
+          <a href="#alliances">Alliances</a>
+          <a href="#pricing">Investment</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+
+      <div>
+        <p class="footer-col-title">Company</p>
+        <nav class="footer-nav">
+          <a href="index.html">Grupo Alista ↗</a>
+          <a href="consulting-privacy-en.html">Privacy Notice</a>
+          <a href="consulting-terms-en.html">Terms of Service</a>
+        </nav>
+        <a class="ppt-link" title="Coming soon — deck in preparation" aria-disabled="true">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Kick-off Deck
+        </a>
+      </div>
+
+    </div>
+    <div class="footer-bottom">
+      <a href="index.html" class="footer-ga-link">
+        <img src="assets/images/logo-main.png" alt="Grupo Alista" />
+        Part of Grupo Alista
+      </a>
+      <p class="footer-copy">© 2026 Alista Consulting · All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp FAB -->
+<a class="wa-fab" href="https://wa.me/523331288999" target="_blank" rel="noopener" aria-label="Message us on WhatsApp">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+</a>
+
+<script>
+  /* ── Navbar scroll ────────────────────────── */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  /* ── Mobile menu ──────────────────────────── */
+  const hamburger = document.getElementById('hamburger');
+  const drawer    = document.getElementById('mobile-drawer');
+  hamburger.addEventListener('click', () => {
+    const open = drawer.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', String(open));
+  });
+  function closeDrawer() {
+    drawer.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+  }
+  document.getElementById('drawer-close').addEventListener('click', closeDrawer);
+
+  /* ── Smooth scroll with nav offset ───────── */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href').slice(1);
+      const target = document.getElementById(id);
+      if (!target) return;
+      e.preventDefault();
+      closeDrawer();
+      const offset = nav.offsetHeight + 16;
+      window.scrollTo({ top: target.offsetTop - offset, behavior: 'smooth' });
+    });
+  });
+
+  /* ── Active nav highlighting ──────────────── */
+  const sections  = document.querySelectorAll('[data-section]');
+  const navLinks  = document.querySelectorAll('.nav-links a[data-nav]');
+  const sectionObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const id = e.target.id;
+        navLinks.forEach(l => l.classList.toggle('active', l.dataset.nav === id));
+      }
+    });
+  }, { rootMargin: '-35% 0px -55% 0px', threshold: 0 });
+  sections.forEach(s => sectionObs.observe(s));
+
+  /* ── Scroll reveal ───────────────────────── */
+  const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); revealObs.unobserve(e.target); }
+    });
+  }, { threshold: 0.07 });
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+  /* ── Our Process tabs ────────────────────── */
+  document.querySelectorAll('.process-step').forEach(function(step) {
+    step.addEventListener('click', function() {
+      const idx = this.dataset.step;
+      document.querySelectorAll('.process-step').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.process-panel').forEach(p => p.classList.remove('active'));
+      this.classList.add('active');
+      document.querySelector('.process-panel[data-panel="' + idx + '"]').classList.add('active');
+    });
+  });
+
+  /* ── Contact form → EmailJS ───────────────── */
+  emailjs.init('NAbz4ZYSbxQfKC5fw');
+
+  const contactForm = document.getElementById('contact-form');
+  const cfSuccess   = document.getElementById('cf-success');
+  const cfSubmitBtn = contactForm.querySelector('button[type="submit"]');
+
+  contactForm.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const name    = contactForm.elements['name'].value.trim();
+    const email   = contactForm.elements['email'].value.trim();
+    const message = contactForm.elements['message'].value.trim();
+    if (!name || !email || !message) return;
+
+    const originalText = cfSubmitBtn.textContent;
+    cfSubmitBtn.disabled    = true;
+    cfSubmitBtn.textContent = 'Sending…';
+    cfSubmitBtn.style.opacity = '0.65';
+
+    try {
+      await emailjs.sendForm('service_zv8sxis', 'template_ouzukio', contactForm);
+      cfSuccess.style.color       = '#25d366';
+      cfSuccess.style.borderColor = 'rgba(37,211,102,0.28)';
+      cfSuccess.style.background  = 'rgba(37,211,102,0.07)';
+      cfSuccess.textContent = '✓ Message sent. We\'ll be in touch soon.';
+      contactForm.reset();
+    } catch (_) {
+      cfSuccess.style.color       = '#e74c3c';
+      cfSuccess.style.borderColor = 'rgba(231,76,60,0.28)';
+      cfSuccess.style.background  = 'rgba(231,76,60,0.07)';
+      cfSuccess.textContent = '✗ Failed to send. Write to us directly at ventas@grupoalista.com';
+    } finally {
+      cfSuccess.style.display = 'block';
+      cfSubmitBtn.disabled    = false;
+      cfSubmitBtn.textContent = originalText;
+      cfSubmitBtn.style.opacity = '1';
+      setTimeout(function () { cfSuccess.style.display = 'none'; }, 8000);
+    }
+  });
+</script>
+</body>
+</html>

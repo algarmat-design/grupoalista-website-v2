@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alista Hotels — Premium Hotel Supplies & Hospitality Solutions</title>
+  <meta name="description" content="Premium hotel supplies and hospitality solutions. Cleaning products, towels, linens and bathroom amenities for hotels, resorts and events." />
+  <link rel="icon" type="image/png" href="assets/images/logo-hotels.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;500&family=Montserrat:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Design Tokens: Monochrome Luxury — Light Edition ─────────── */
+    :root {
+      --bg:            #ffffff;
+      --bg-elevated:   #f5f5f2;
+      --bg-card:       #ededea;
+      --bg-card-hover: #e4e4e0;
+      --silver:        #2a2a2a;
+      --silver-bright: #0a0a0a;
+      --silver-dim:    #888880;
+      --gold:          #8a6030;
+      --gold-dark:     #6a4820;
+      --white:         #0a0a0a;
+      --text:          #282826;
+      --text-muted:    #666660;
+      --border:        rgba(0,0,0,0.10);
+      --border-soft:   rgba(0,0,0,0.05);
+      --shadow:        rgba(0,0,0,0.12);
+      --metallic-grad: linear-gradient(135deg, #3a3a3a 0%, #0a0a0a 40%, #4a4a4a 60%, #1a1a1a 100%);
+      --metallic-dark: linear-gradient(135deg, #e8e8e4 0%, #f0f0ec 50%, #e8e8e4 100%);
+    }
+
+    /* ─── Reset & Base ────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: 'Lato', sans-serif; font-weight: 400; background: var(--bg); color: var(--text); line-height: 1.65; overflow-x: hidden; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-elevated); }
+    ::-webkit-scrollbar-thumb { background: var(--silver-dim); border-radius: 3px; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ─── Typography ─────────────────────────────────────────────── */
+    h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; font-weight: 700; line-height: 1.1; letter-spacing: 0.01em; color: var(--white); }
+    .eyebrow { font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--silver-dim); display: block; margin-bottom: 0.75rem; }
+    .section-rule { width: 48px; height: 1px; background: var(--metallic-grad); margin: 1.25rem 0 2rem; }
+
+    /* ─── Nav ────────────────────────────────────────────────────── */
+    #nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 0 2.5rem; height: 80px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: transparent;
+      transition: background 0.4s, backdrop-filter 0.4s, box-shadow 0.4s;
+    }
+    /* Initial state: transparent over dark hero — use white text */
+    #nav:not(.scrolled) .nav-links a { color: rgba(255,255,255,0.90); }
+    #nav:not(.scrolled) .nav-links a:hover { color: #ffffff; }
+    #nav:not(.scrolled) .nav-lang { color: rgba(255,255,255,0.55); border-color: rgba(255,255,255,0.25); }
+    #nav:not(.scrolled) .nav-lang:hover { color: #ffffff; border-color: rgba(255,255,255,0.6); }
+    #nav:not(.scrolled) .nav-cta { color: #0a0a0a; opacity: 0.95; }
+    #nav:not(.scrolled) .nav-hamburger span { background: rgba(255,255,255,0.9); }
+    /* Scrolled: white frosted bg, dark text */
+    #nav.scrolled {
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 1px 0 var(--border);
+    }
+    #nav.scrolled .nav-links a { color: var(--text); }
+    #nav.scrolled .nav-links a:hover { color: var(--silver-bright); }
+    #nav.scrolled .nav-lang { color: var(--silver-dim); border-color: var(--border); }
+    #nav.scrolled .nav-lang:hover { color: var(--silver-bright); border-color: rgba(0,0,0,0.4); }
+    #nav.scrolled .nav-hamburger span { background: var(--silver); }
+
+    .nav-logo img { height: 56px; width: auto; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; font-family: 'Montserrat', sans-serif; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; }
+    .nav-right { display: flex; align-items: center; gap: 1rem; }
+    .nav-lang { font-family: 'Montserrat', sans-serif; font-size: 0.65rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; border: 1px solid; border-radius: 3px; padding: 0.3rem 0.7rem; transition: border-color 0.2s, color 0.2s; }
+    .nav-cta { font-family: 'Montserrat', sans-serif; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: #0a0a0a; background: linear-gradient(135deg, #c8c8c8 0%, #e8e8e0 40%, #a0a0a0 60%, #d0d0c8 100%); border: none; border-radius: 3px; padding: 0.55rem 1.2rem; transition: opacity 0.2s, transform 0.2s; cursor: pointer; }
+    .nav-cta:hover { opacity: 0.85; transform: translateY(-1px); }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+    .nav-hamburger span { display: block; width: 24px; height: 1.5px; border-radius: 1px; transition: transform 0.3s, opacity 0.3s; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* ─── Mobile Drawer ──────────────────────────────────────────── */
+    .nav-drawer { display: none; position: fixed; top: 80px; left: 0; right: 0; z-index: 99; background: rgba(255,255,255,0.98); backdrop-filter: blur(16px); padding: 2rem 2.5rem; flex-direction: column; gap: 1.5rem; transform: translateY(-100%); transition: transform 0.3s; border-bottom: 1px solid var(--border); }
+    .nav-drawer.open { transform: translateY(0); }
+    .nav-drawer a { font-family: 'Montserrat', sans-serif; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text); padding: 0.5rem 0; border-bottom: 1px solid var(--border-soft); }
+    .nav-drawer .nav-cta { text-align: center; margin-top: 0.5rem; }
+    .nav-drawer .nav-lang { display: inline-block; align-self: flex-start; color: var(--silver-dim); border-color: var(--border); }
+
+    /* ─── Hero ───────────────────────────────────────────────────── */
+    #inicio { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; text-align: center; padding: 140px 2rem 80px; }
+    .hero-bg { position: absolute; inset: 0; z-index: 0; background-image: url('https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=1920&q=80'); background-size: cover; background-position: center 30%; }
+    .hero-overlay { position: absolute; inset: 0; z-index: 1; background: linear-gradient(to bottom, rgba(5,5,5,0.90) 0%, rgba(5,5,5,0.65) 40%, rgba(5,5,5,0.70) 70%, rgba(5,5,5,0.95) 100%); }
+    .hero-overlay::after { content: ''; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E"); opacity: 0.4; }
+    .hero-content { position: relative; z-index: 3; max-width: 900px; animation: heroFade 1.2s ease both; }
+    @keyframes heroFade { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    .hero-logo { height: clamp(260px, 28vw, 400px); width: auto; margin: 0 auto 2.5rem; filter: drop-shadow(0 4px 32px rgba(255,255,255,0.15)) drop-shadow(0 0 80px rgba(200,200,200,0.12)); }
+    .hero-eyebrow { font-family: 'Montserrat', sans-serif; font-size: 0.65rem; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(255,255,255,0.65); margin-bottom: 1.25rem; display: block; }
+    .hero-rule { width: 60px; height: 1px; background: linear-gradient(to right, transparent, rgba(255,255,255,0.5), transparent); margin: 0 auto 1.5rem; }
+    .hero-h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3.2rem, 7vw, 6.5rem); font-weight: 700; color: #f5f5f0; letter-spacing: 0.02em; margin-bottom: 1.5rem; line-height: 1.0; }
+    .hero-h1 em { font-style: italic; background: linear-gradient(135deg, #c8c8c8 0%, #e8e8e0 40%, #a0a0a0 60%, #d0d0c8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-sub { font-family: 'Lato', sans-serif; font-weight: 300; font-size: clamp(1rem, 1.8vw, 1.2rem); color: rgba(255,255,255,0.6); max-width: 560px; margin: 0 auto 3rem; line-height: 1.75; }
+    .hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; font-family: 'Montserrat', sans-serif; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #0a0a0a; background: linear-gradient(135deg, #c8c8c8 0%, #e8e8e0 40%, #a0a0a0 60%, #d0d0c8 100%); border: none; border-radius: 3px; padding: 0.9rem 2.2rem; cursor: pointer; transition: opacity 0.2s, transform 0.2s; }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-2px); }
+    .btn-ghost { display: inline-flex; align-items: center; gap: 0.5rem; font-family: 'Montserrat', sans-serif; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.85); background: transparent; border: 1px solid rgba(255,255,255,0.35); border-radius: 3px; padding: 0.9rem 2.2rem; cursor: pointer; transition: background 0.2s, border-color 0.2s, transform 0.2s; }
+    .btn-ghost:hover { background: rgba(255,255,255,0.10); border-color: rgba(255,255,255,0.6); transform: translateY(-2px); }
+    .hero-scroll { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 0.6rem; color: rgba(255,255,255,0.4); opacity: 0.6; }
+    .hero-scroll span { font-family: 'Montserrat', sans-serif; font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; }
+    .hero-scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent); animation: scrollPulse 2s ease-in-out infinite; }
+    @keyframes scrollPulse { 0%, 100% { opacity: 0.4; transform: scaleY(1); } 50% { opacity: 1; transform: scaleY(1.2); } }
+
+    /* ─── Section Wrapper ────────────────────────────────────────── */
+    section { position: relative; }
+    .section-inner { max-width: 1200px; margin: 0 auto; padding: 7rem 2.5rem; }
+    .section-header { margin-bottom: 4rem; }
+    #servicios { background: var(--bg-elevated); }
+    #catalogo  { background: var(--bg); }
+    #contacto  { background: var(--bg-elevated); }
+    .divider { width: 100%; height: 1px; background: var(--metallic-grad); opacity: 0.12; }
+
+    /* ─── Scroll Reveal ──────────────────────────────────────────── */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ─── Services ───────────────────────────────────────────────── */
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .service-card { background: var(--bg-card); border-top: 2px solid transparent; border-image: var(--metallic-grad) 1; border-radius: 0 0 6px 6px; padding: 2.5rem 2rem; transition: background 0.25s, transform 0.25s, box-shadow 0.25s; }
+    .service-card:hover { background: var(--bg-card-hover); transform: translateY(-4px); box-shadow: 0 20px 50px var(--shadow); }
+    .service-icon { width: 48px; height: 48px; margin-bottom: 1.5rem; color: var(--silver); opacity: 0.7; }
+    .service-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 700; color: var(--white); margin-bottom: 1rem; }
+    .service-card p { font-family: 'Lato', sans-serif; font-size: 0.92rem; font-weight: 300; color: var(--text-muted); line-height: 1.75; margin-bottom: 1.75rem; }
+    .service-link { font-family: 'Montserrat', sans-serif; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--silver); transition: color 0.2s; }
+    .service-link:hover { color: var(--silver-bright); }
+
+    /* ─── Catalog Overview ──────────────────────────────────────── */
+    .cat-overview { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; margin-bottom: 1.5rem; }
+    .cat-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 6px; padding: 2rem 1.75rem;
+      display: flex; flex-direction: column; align-items: flex-start; gap: 0.75rem;
+      transition: background 0.22s, transform 0.22s, box-shadow 0.22s, border-color 0.22s;
+      text-decoration: none;
+    }
+    .cat-card:hover { background: var(--bg-card-hover); border-color: rgba(0,0,0,0.2); transform: translateY(-3px); box-shadow: 0 12px 36px var(--shadow); }
+    .cat-card-icon {
+      width: 52px; height: 52px; display: flex; align-items: center; justify-content: center;
+      background: var(--bg); border: 1px solid var(--border); border-radius: 6px;
+      color: var(--gold); margin-bottom: 0.25rem;
+    }
+    .cat-card-icon svg { width: 24px; height: 24px; }
+    .cat-card-name { font-family: 'Cormorant Garamond', serif; font-size: 1.45rem; font-weight: 700; color: var(--white); line-height: 1.15; }
+    .cat-card-sub { font-family: 'Lato', sans-serif; font-size: 0.82rem; font-weight: 300; color: var(--text-muted); line-height: 1.6; }
+    .cat-card-count { font-family: 'Montserrat', sans-serif; font-size: 0.58rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-top: auto; padding-top: 0.5rem; }
+    .cat-card-arrow { font-size: 1rem; color: var(--silver-dim); transition: color 0.2s, transform 0.2s; align-self: flex-end; margin-top: -1.5rem; }
+    .cat-card:hover .cat-card-arrow { color: var(--gold); transform: translateX(3px); }
+
+    /* ─── Catalog Bottom (CTA + Note) ───────────────────────────── */
+    .catalog-bottom { display: grid; grid-template-columns: 3fr 2fr; gap: 1.25rem; }
+    .catalog-cta-card {
+      background: var(--metallic-grad); border-radius: 6px;
+      padding: 2.5rem 2.5rem;
+      display: flex; align-items: center; justify-content: space-between; gap: 2rem;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .catalog-cta-card:hover { opacity: 0.92; transform: translateY(-3px); box-shadow: 0 16px 48px rgba(0,0,0,0.18); }
+    .catalog-cta-eyebrow { font-family: 'Montserrat', sans-serif; font-size: 0.58rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.45); display: block; margin-bottom: 0.6rem; }
+    .catalog-cta-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem,3vw,2.8rem); font-weight: 700; color: #ffffff; line-height: 1.1; }
+    .catalog-cta-meta { font-family: 'Lato', sans-serif; font-size: 0.82rem; font-weight: 300; color: rgba(255,255,255,0.5); margin-top: 0.85rem; }
+    .catalog-cta-arrow { width: 64px; height: 64px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; color: #fff; flex-shrink: 0; font-size: 1.5rem; transition: background 0.2s, border-color 0.2s; }
+    .catalog-cta-card:hover .catalog-cta-arrow { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.6); }
+    .catalog-note {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-left: 3px solid var(--gold); border-radius: 6px;
+      padding: 2rem 1.75rem; display: flex; flex-direction: column; gap: 1rem;
+    }
+    .catalog-note-icon { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg,var(--gold-dark),var(--gold)); border-radius: 4px; color: #fff; flex-shrink: 0; }
+    .catalog-note-icon svg { width: 20px; height: 20px; }
+    .catalog-note-title { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 700; color: var(--white); line-height: 1.25; }
+    .catalog-note-text { font-family: 'Lato', sans-serif; font-size: 0.86rem; font-weight: 300; color: var(--text-muted); line-height: 1.7; }
+    .catalog-note-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.25rem; }
+    .catalog-note-btn { display: inline-flex; align-items: center; gap: 0.4rem; font-family: 'Montserrat', sans-serif; font-size: 0.62rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; border-radius: 3px; padding: 0.5rem 1rem; transition: opacity 0.2s, transform 0.2s; text-decoration: none; }
+    .catalog-note-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+    .catalog-note-btn svg { width: 14px; height: 14px; }
+    .catalog-note-btn--wa { background: #25d366; color: #fff; }
+    .catalog-note-btn--email { background: var(--bg); border: 1px solid var(--border); color: var(--silver); }
+
+    /* ─── Contact ────────────────────────────────────────────────── */
+    .contacto-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .contacto-info h2 { font-size: clamp(2.4rem, 4vw, 3.5rem); margin-bottom: 1.5rem; }
+    .contacto-info p { font-weight: 300; color: var(--text-muted); line-height: 1.8; margin-bottom: 2rem; }
+    .contacto-cards { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-card { display: flex; align-items: center; gap: 1.25rem; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 1.25rem 1.5rem; transition: background 0.2s, border-color 0.2s, transform 0.2s; cursor: pointer; }
+    .contact-card:hover { background: var(--bg-card); border-color: rgba(0,0,0,0.22); transform: translateX(4px); }
+    .contact-card--silver { border-left: 3px solid var(--silver); }
+    .contact-card--gold   { border-left: 3px solid var(--gold); }
+    .contact-card-icon { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .contact-card--silver .contact-card-icon { color: var(--silver); }
+    .contact-card--gold   .contact-card-icon { color: var(--gold); }
+    .contact-card-icon svg { width: 22px; height: 22px; }
+    .contact-card-body { display: flex; flex-direction: column; gap: 0.2rem; }
+    .contact-card-label { font-family: 'Montserrat', sans-serif; font-size: 0.6rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); }
+    .contact-card-value { font-family: 'Lato', sans-serif; font-weight: 400; font-size: 1rem; color: var(--white); }
+    .contacto-address { display: flex; align-items: flex-start; gap: 0.75rem; color: var(--text-muted); font-size: 0.9rem; font-weight: 300; margin-top: 0.5rem; }
+    .contacto-address svg { flex-shrink: 0; margin-top: 2px; color: var(--silver-dim); }
+
+    /* Why choose us */
+    .why-icon { width: 32px; height: 32px; flex-shrink: 0; background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; display: flex; align-items: center; justify-content: center; }
+    .why-label { font-family: 'Montserrat', sans-serif; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--silver); margin-bottom: 0.35rem; }
+
+    /* ─── Footer ─────────────────────────────────────────────────── */
+    #footer { background: #0a0a0a; border-top: 1px solid rgba(255,255,255,0.06); padding: 5rem 2.5rem 0; }
+    .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 4rem; padding-bottom: 4rem; }
+    .footer-brand img { height: 52px; width: auto; margin-bottom: 1.25rem; opacity: 0.45; }
+    .footer-tagline { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1rem; color: rgba(255,255,255,0.4); line-height: 1.65; margin-bottom: 1.75rem; }
+    .footer-socials { display: flex; gap: 0.75rem; }
+    .footer-social-btn { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; color: rgba(255,255,255,0.4); transition: background 0.2s, color 0.2s, border-color 0.2s; }
+    .footer-social-btn:hover { background: rgba(255,255,255,0.10); color: rgba(255,255,255,0.8); border-color: rgba(255,255,255,0.2); }
+    .footer-social-btn svg { width: 15px; height: 15px; }
+    .footer-col h5 { font-family: 'Montserrat', sans-serif; font-size: 0.62rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 1.25rem; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+    .footer-col ul li a { font-size: 0.88rem; font-weight: 300; color: rgba(255,255,255,0.35); transition: color 0.2s; }
+    .footer-col ul li a:hover { color: rgba(255,255,255,0.75); }
+    .footer-bottom { max-width: 1200px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.06); padding: 1.5rem 0 2.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    .footer-bottom-left { display: flex; align-items: center; gap: 0.75rem; }
+    .footer-bottom-left img { height: 22px; width: auto; opacity: 0.3; }
+    .footer-bottom-left a { font-family: 'Montserrat', sans-serif; font-size: 0.62rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.3); transition: color 0.2s; }
+    .footer-bottom-left a:hover { color: rgba(255,255,255,0.65); }
+    .footer-copyright { font-size: 0.78rem; color: rgba(255,255,255,0.25); }
+
+    /* ─── WhatsApp FAB ───────────────────────────────────────────── */
+    .wa-fab { position: fixed; bottom: 2rem; right: 2rem; z-index: 90; width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; background: #0a0a0a; border-radius: 50%; box-shadow: 0 4px 20px rgba(0,0,0,0.25); transition: transform 0.2s, box-shadow 0.2s; }
+    .wa-fab:hover { transform: scale(1.08); box-shadow: 0 6px 28px rgba(0,0,0,0.35); }
+    .wa-fab svg { width: 28px; height: 28px; color: #25D366; }
+
+    /* ─── Responsive ─────────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .footer-grid   { grid-template-columns: 1fr 1fr; }
+      .catalog-bottom { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-links, .nav-right { display: none; }
+      .nav-hamburger { display: flex; }
+      .nav-drawer { display: flex; }
+      .services-grid { grid-template-columns: 1fr; }
+      .cat-overview  { grid-template-columns: 1fr; }
+      .catalog-bottom { grid-template-columns: 1fr; }
+      .contacto-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .footer-grid   { grid-template-columns: 1fr; gap: 2.5rem; }
+      .section-inner { padding: 5rem 1.5rem; }
+      #nav { padding: 0 1.5rem; }
+    }
+    @media (max-width: 640px) {
+      .cat-overview { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ──────────────────────────────────────────────────── -->
+  <nav id="nav" role="navigation" aria-label="Main navigation">
+    <a class="nav-logo" href="#inicio" aria-label="Alista Hotels home">
+      <img src="assets/images/logo-hotels.png" alt="Alista Hotels" />
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="#inicio">Home</a></li>
+      <li><a href="#servicios">Services</a></li>
+      <li><a href="#catalogo">Catalog</a></li>
+      <li><a href="#contacto">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <a class="nav-lang" href="hotels.html" aria-label="Cambiar a Español">ES</a>
+      <a class="nav-cta" href="https://wa.me/523331288999?text=Hello,%20I%27m%20interested%20in%20Alista%20Hotels%20products" target="_blank" rel="noopener noreferrer">Chat with Us</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="nav-drawer" id="nav-drawer" role="dialog" aria-label="Mobile navigation">
+    <a href="#inicio" class="nav-drawer-link">Home</a>
+    <a href="#servicios" class="nav-drawer-link">Services</a>
+    <a href="#catalogo" class="nav-drawer-link">Catalog</a>
+    <a href="#contacto" class="nav-drawer-link">Contact</a>
+    <a class="nav-lang" href="hotels.html">ES — Español</a>
+    <a class="nav-cta" href="https://wa.me/523331288999?text=Hello,%20I%27m%20interested%20in%20Alista%20Hotels%20products" target="_blank" rel="noopener noreferrer">Chat with Us →</a>
+  </div>
+
+  <!-- ── Hero ────────────────────────────────────────────────────────── -->
+  <section id="inicio" aria-label="Hero">
+    <div class="hero-bg" role="img" aria-label="Luxury hotel corridor"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <img class="hero-logo" src="assets/images/logo-hotels.png" alt="Alista Hotels" />
+      <div class="hero-rule"></div>
+      <span class="hero-eyebrow">Hotel Supplies &amp; Hospitality Solutions</span>
+      <h1 class="hero-h1">We Equip <em>Luxury</em></h1>
+      <p class="hero-sub">Premium hotel products sourced, curated and delivered — from amenities to linens, cleaning essentials to custom branded experiences.</p>
+      <div class="hero-ctas">
+        <a class="btn-primary" href="#catalogo">Explore Catalog →</a>
+        <a class="btn-ghost" href="#contacto">Request Quote</a>
+      </div>
+    </div>
+    <div class="hero-scroll" aria-hidden="true">
+      <div class="hero-scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── Services ────────────────────────────────────────────────────── -->
+  <section id="servicios">
+    <div class="section-inner">
+      <div class="section-header">
+        <span class="eyebrow reveal">What we do</span>
+        <h2 class="reveal" style="font-size:clamp(2.2rem,4vw,3.2rem);">Services Tailored<br/><em style="font-style:italic;background:var(--metallic-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">to Your Hotel</em></h2>
+        <div class="section-rule reveal"></div>
+        <p class="reveal" style="max-width:560px;font-weight:300;color:var(--text-muted);line-height:1.8;">From initial quotations to full project procurement and event supply, we are your dedicated hospitality partner.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card reveal reveal-delay-1">
+          <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="12" y2="17"/><line x1="9" y1="9" x2="9.01" y2="9"/></svg>
+          <h3>Quotations</h3>
+          <p>We analyze your hotel's requirements and deliver detailed quotes from best-in-class suppliers — optimizing cost without compromising the quality your guests deserve.</p>
+          <a class="service-link" href="mailto:ventas@grupoalista.com?subject=Quote%20Request%20-%20Alista%20Hotels&body=Hello%2C%20I%20am%20interested%20in%20requesting%20a%20quote%20for%20hotel%20supplies.">Request a Quote →</a>
+        </div>
+        <div class="service-card reveal reveal-delay-2">
+          <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          <h3>Projects</h3>
+          <p>From hotel openings to full room renovations, we coordinate complete supply procurement at any scale — managing timelines, logistics and quality control end to end.</p>
+          <a class="service-link" href="https://wa.me/523331288999?text=Hello%2C%20I%20am%20interested%20in%20starting%20a%20supply%20project%20with%20Alista%20Hotels" target="_blank" rel="noopener noreferrer">Start a Project →</a>
+        </div>
+        <div class="service-card reveal reveal-delay-3">
+          <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <h3>Events</h3>
+          <p>We supply corporate events, weddings and galas with first-class amenities. Custom brand presentations, special setups and guaranteed on-time delivery.</p>
+          <a class="service-link" href="https://wa.me/523331288999?text=Hello%2C%20I%20am%20interested%20in%20event%20supplies%20through%20Alista%20Hotels" target="_blank" rel="noopener noreferrer">Plan an Event →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── Catalog ──────────────────────────────────────────────────────── -->
+  <section id="catalogo">
+    <div class="section-inner">
+      <div class="section-header">
+        <span class="eyebrow reveal">Product Catalog</span>
+        <h2 class="reveal" style="font-size:clamp(2.2rem,4vw,3.2rem);">Everything Your<br/><em style="font-style:italic;background:var(--metallic-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Hotel Needs</em></h2>
+        <div class="section-rule reveal"></div>
+        <p class="reveal" style="max-width:560px;font-weight:300;color:var(--text-muted);line-height:1.8;">126 products across three essential categories. From professional cleaning to luxury amenities.</p>
+      </div>
+
+      <!-- Category cards -->
+      <div class="cat-overview reveal">
+        <a class="cat-card" href="hotels/catalogo.html?cat=limpieza" aria-label="View Cleaning category">
+          <div class="cat-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l1 6H8L9 3z"/><path d="M8 9v11a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V9"/><path d="M11 13v4"/></svg>
+          </div>
+          <div class="cat-card-name">Cleaning</div>
+          <p class="cat-card-sub">Paper towels · Toilet tissue · Hand soaps · Cleaners · Mops & brooms · Trash bags · Microfiber</p>
+          <div class="cat-card-count">80 products</div>
+          <span class="cat-card-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="cat-card" href="hotels/catalogo.html?cat=toallas" aria-label="View Towels & Amenities category">
+          <div class="cat-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/><path d="M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2"/></svg>
+          </div>
+          <div class="cat-card-name">Towels &amp; Amenities</div>
+          <p class="cat-card-sub">Hotel supplies · Bath & hand towels · Custom embroidered luxury sets</p>
+          <div class="cat-card-count">24 products</div>
+          <span class="cat-card-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="cat-card" href="hotels/catalogo.html?cat=banos" aria-label="View Bathrooms & Safety category">
+          <div class="cat-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6V3.5a1.5 1.5 0 0 1 3 0V6"/><path d="M3 11h18v2a6 6 0 0 1-6 6H9a6 6 0 0 1-6-6v-2z"/><path d="M6 19v2"/><path d="M18 19v2"/></svg>
+          </div>
+          <div class="cat-card-name">Bathrooms &amp; Safety</div>
+          <p class="cat-card-sub">Bath accessories · Air fresheners · Spill kits · Industrial absorbents</p>
+          <div class="cat-card-count">22 products</div>
+          <span class="cat-card-arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+
+      <!-- CTA + Note -->
+      <div class="catalog-bottom reveal">
+        <a class="catalog-cta-card" href="hotels/catalogo.html" aria-label="Explore full catalog">
+          <div>
+            <span class="catalog-cta-eyebrow">Full catalog</span>
+            <div class="catalog-cta-title">Explore<br/>Catalog</div>
+            <div class="catalog-cta-meta">126 products · 3 categories · 11 subcategories</div>
+          </div>
+          <div class="catalog-cta-arrow" aria-hidden="true">→</div>
+        </a>
+        <div class="catalog-note">
+          <div class="catalog-note-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+          </div>
+          <div class="catalog-note-title">Can't find what you need?</div>
+          <p class="catalog-note-text">If a product isn't listed in our catalog, we can source it for you. We work with hundreds of suppliers and can quote any hotel supply item.</p>
+          <div class="catalog-note-actions">
+            <a class="catalog-note-btn catalog-note-btn--wa" href="https://wa.me/523331288999?text=Hello%2C+I+need+to+quote+a+product+not+listed+in+the+Alista+Hotels+catalog." target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+              WhatsApp
+            </a>
+            <a class="catalog-note-btn catalog-note-btn--email" href="mailto:ventas@grupoalista.com?subject=Product%20not%20in%20catalog%20inquiry">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              Email
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── Contact ──────────────────────────────────────────────────────── -->
+  <section id="contacto">
+    <div class="section-inner">
+      <div class="contacto-grid">
+        <div class="contacto-info">
+          <span class="eyebrow reveal">Contact</span>
+          <h2 class="reveal">Ready to Supply<br/><em style="font-style:italic;">Your Hotel?</em></h2>
+          <div class="section-rule reveal"></div>
+          <p class="reveal">Tell us about your property and needs. Our specialists will respond within 24 business hours with a tailored proposal — product options, pricing and delivery timeline included.</p>
+          <div class="contacto-cards reveal">
+            <a class="contact-card contact-card--silver" href="https://wa.me/523331288999?text=Hello,%20I%27m%20interested%20in%20Alista%20Hotels%20products" target="_blank" rel="noopener noreferrer">
+              <div class="contact-card-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+              </div>
+              <div class="contact-card-body">
+                <span class="contact-card-label">WhatsApp</span>
+                <span class="contact-card-value">+52 333 128 8999</span>
+              </div>
+            </a>
+            <a class="contact-card contact-card--gold" href="mailto:ventas@grupoalista.com">
+              <div class="contact-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              </div>
+              <div class="contact-card-body">
+                <span class="contact-card-label">Email</span>
+                <span class="contact-card-value">ventas@grupoalista.com</span>
+              </div>
+            </a>
+            <div class="contacto-address">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              <p>Lázaro Cárdenas Pte. 2953, Col. Chapalita<br/>Guadalajara, Jalisco, México C.P. 44500</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Why Choose Us -->
+        <div class="reveal" style="padding-top:1rem;">
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:600;color:var(--white);margin-bottom:2rem;line-height:1.2;">Why Choose<br/><em style="font-style:italic;">Alista Hotels?</em></h3>
+          <div style="display:flex;flex-direction:column;gap:1.5rem;">
+            <div style="display:flex;gap:1.25rem;align-items:flex-start;">
+              <div class="why-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></div>
+              <div><div class="why-label">Curated Suppliers</div><p style="font-size:0.9rem;font-weight:300;color:var(--text-muted);line-height:1.7;">We source exclusively from certified, high-quality suppliers to ensure every product meets hospitality standards.</p></div>
+            </div>
+            <div style="display:flex;gap:1.25rem;align-items:flex-start;">
+              <div class="why-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></div>
+              <div><div class="why-label">End-to-End Service</div><p style="font-size:0.9rem;font-weight:300;color:var(--text-muted);line-height:1.7;">From quote to delivery, we manage the entire supply chain so you can focus on running your hotel.</p></div>
+            </div>
+            <div style="display:flex;gap:1.25rem;align-items:flex-start;">
+              <div class="why-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></div>
+              <div><div class="why-label">Custom Branding</div><p style="font-size:0.9rem;font-weight:300;color:var(--text-muted);line-height:1.7;">Logo embroidery, custom amenity labels and branded packaging help reinforce your hotel's identity with every guest.</p></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ───────────────────────────────────────────────────────── -->
+  <footer id="footer" role="contentinfo">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="assets/images/logo-hotels.png" alt="Alista Hotels" />
+        <p class="footer-tagline">Premium hotel products. Exceptional guest experiences.</p>
+        <div class="footer-socials">
+          <a class="footer-social-btn" href="https://www.facebook.com/grupo.alista.54" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a class="footer-social-btn" href="https://www.instagram.com/grupo.alista/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a class="footer-social-btn" href="https://wa.me/523331288999" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <ul role="list">
+          <li><a href="#servicios">Quotations</a></li>
+          <li><a href="#servicios">Projects</a></li>
+          <li><a href="#servicios">Events</a></li>
+          <li><a href="#catalogo">Product Catalog</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul role="list">
+          <li><a href="#contacto">Contact</a></li>
+          <li><a href="hotels/terminos.html">Terms &amp; Conditions</a></li>
+          <li><a href="hotels/privacidad.html">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-left">
+        <img src="assets/images/logo-main.png" alt="Grupo Alista" />
+        <a href="index.html">Part of Grupo Alista</a>
+      </div>
+      <span class="footer-copyright">© 2026 Alista Hotels. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <a class="wa-fab" href="https://wa.me/523331288999?text=Hello,%20I%27m%20interested%20in%20Alista%20Hotels%20products" target="_blank" rel="noopener noreferrer" aria-label="Contact via WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+  </a>
+
+  <script>
+    const nav = document.getElementById('nav');
+    const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 30);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    const hamburger = document.getElementById('hamburger');
+    const drawer = document.getElementById('nav-drawer');
+    hamburger.addEventListener('click', () => {
+      const open = hamburger.classList.toggle('open');
+      drawer.classList.toggle('open', open);
+      hamburger.setAttribute('aria-expanded', String(open));
+    });
+    document.querySelectorAll('.nav-drawer-link, .nav-drawer .nav-cta').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        drawer.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', e => {
+        const target = document.querySelector(anchor.getAttribute('href'));
+        if (!target) return;
+        e.preventDefault();
+        window.scrollTo({ top: target.offsetTop - nav.offsetHeight - 16, behavior: 'smooth' });
+      });
+    });
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); revealObserver.unobserve(e.target); } });
+    }, { threshold: 0.10, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  </script>
+</body>
+</html>

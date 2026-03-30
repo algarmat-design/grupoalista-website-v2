@@ -598,8 +598,14 @@
     .pm-qty-btn:hover { border-color: var(--wine); color: var(--wine); }
     .pm-qty-val {
       font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 700;
-      min-width: 2.2rem; text-align: center; color: var(--ink);
+      width: 3.8rem; text-align: center; color: var(--ink);
+      border: 1.5px solid var(--border); border-radius: 5px;
+      padding: 0.3rem 0.3rem; outline: none; background: var(--ivory);
+      -moz-appearance: textfield;
     }
+    .pm-qty-val::-webkit-inner-spin-button,
+    .pm-qty-val::-webkit-outer-spin-button { opacity: 0; }
+    .pm-qty-val:focus { border-color: var(--wine); }
     .pm-add-btn {
       width: 100%; padding: 0.9rem;
       font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 800;
@@ -814,12 +820,12 @@
   <ul class="nav-links">
     <li><a href="#nosotros">Nosotros</a></li>
     <li><a href="#servicios">Servicios</a></li>
-    <li><a href="#catalogo">Catálogo</a></li>
+    <li><a href="marketing/catalogo.html">Catálogo</a></li>
     <li><a href="#proceso">Proceso</a></li>
     <li><a href="#cta-final">Contacto</a></li>
   </ul>
   <div class="nav-right">
-    <a class="cart-trigger" href="cotizar.html" aria-label="Ver cotización">
+    <a class="cart-trigger" href="marketing/cotizar.html" aria-label="Ver cotización">
       <!-- Quotation document icon -->
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
       Cotizar
@@ -835,10 +841,10 @@
 <div id="mkt-mob-drawer">
   <a href="#nosotros" onclick="closeMenu()">Nosotros</a>
   <a href="#servicios" onclick="closeMenu()">Servicios</a>
-  <a href="#catalogo" onclick="closeMenu()">Catálogo</a>
+  <a href="marketing/catalogo.html" onclick="closeMenu()">Catálogo</a>
   <a href="#proceso" onclick="closeMenu()">Proceso</a>
   <a href="#cta-final" onclick="closeMenu()">Contacto</a>
-  <a href="cotizar.html" onclick="closeMenu()">Ver cotización</a>
+  <a href="marketing/cotizar.html" onclick="closeMenu()">Ver cotización</a>
 </div>
 
 <!-- ── HERO ───────────────────────────────────────────────── -->
@@ -866,7 +872,7 @@
     </h1>
     <p class="hero-sub">Más de 1,300 productos personalizados con la identidad de tu empresa. Desde textiles hasta tecnología, cada artículo es una oportunidad para que tu marca esté presente donde importa.</p>
     <div class="hero-ctas">
-      <a href="#catalogo" class="btn-wine">Explorar catálogo →</a>
+      <a href="marketing/catalogo.html" class="btn-wine">Explorar catálogo →</a>
       <a href="#proceso" class="btn-outline">Cómo funciona</a>
     </div>
   </div>
@@ -926,87 +932,6 @@
   </div>
 </section>
 
-<!-- ── CATALOG ─────────────────────────────────────────────── -->
-<section id="catalogo">
-  <div class="section-wrap">
-    <div class="cat-header">
-      <div class="cat-title-wrap reveal">
-        <span class="section-eyebrow">Catálogo completo</span>
-        <h2 class="section-title" style="margin-bottom:0">
-          Productos
-          <span class="cat-count-badge" id="total-badge"></span>
-        </h2>
-      </div>
-    </div>
-
-    <!-- Search -->
-    <div class="cat-search-wrap reveal">
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input type="search" id="cat-search" placeholder="Buscar por nombre o categoría…" autocomplete="off">
-    </div>
-
-    <!-- Category pills -->
-    <div class="cat-pills reveal" id="cat-pills">
-      <button class="cat-pill active" data-cat="todos">Todos</button>
-      <!-- Pills injected by JS from CATEGORIES array -->
-    </div>
-
-    <!-- Toolbar -->
-    <div class="cat-toolbar">
-      <span class="cat-result-label" id="result-label"></span>
-    </div>
-
-    <!-- Grid -->
-    <div id="cat-grid">
-      <div id="cat-empty">Sin resultados para tu búsqueda. <a onclick="clearSearch()">Limpiar filtros</a></div>
-    </div>
-
-    <!-- Pagination -->
-    <div id="cat-pagination"></div>
-  </div>
-</section>
-
-<!-- ── PRODUCT MODAL BACKDROP ─────────────────────────────── -->
-<div class="modal-backdrop" id="modal-backdrop" onclick="closeModal()"></div>
-
-<!-- ── PRODUCT MODAL ──────────────────────────────────────── -->
-<div id="product-modal" role="dialog" aria-modal="true" aria-label="Agregar a cotización">
-  <button class="pm-close" onclick="closeModal()" aria-label="Cerrar">
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
-  </button>
-  <div class="pm-img-row">
-    <img class="pm-img" id="pm-img" src="" alt="">
-    <div class="pm-info">
-      <span class="pm-cat-badge" id="pm-cat"></span>
-      <div class="pm-name" id="pm-name"></div>
-      <div class="pm-sku" id="pm-sku"></div>
-    </div>
-  </div>
-  <div class="pm-form">
-    <div class="pm-field">
-      <label>Cantidad aproximada</label>
-      <div class="pm-qty-row">
-        <button class="pm-qty-btn" type="button" onclick="modalQty(-1)">−</button>
-        <span class="pm-qty-val" id="pm-qty">1</span>
-        <button class="pm-qty-btn" type="button" onclick="modalQty(1)">+</button>
-      </div>
-    </div>
-    <div class="pm-field">
-      <label for="pm-specs">Color / especificaciones (opcional)</label>
-      <textarea id="pm-specs" placeholder="Ej. Azul marino, logo a 1 tinta, talla L…"></textarea>
-    </div>
-    <button class="pm-add-btn" id="pm-add-btn" type="button" onclick="confirmAddToCart()">
-      + Añadir a cotización
-    </button>
-  </div>
-</div>
-
-<!-- ── MOBILE COTIZAR FAB ─────────────────────────────────── -->
-<a class="cart-fab" id="cart-fab" href="cotizar.html" aria-label="Ver cotización">
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
-  <span class="cart-fab-badge" id="fab-badge"></span>
-</a>
-
 <!-- ── SERVICIOS ──────────────────────────────────────────── -->
 <section id="servicios">
   <div class="section-wrap">
@@ -1022,7 +947,7 @@
         </div>
         <div class="serv-title">Productos promocionales personalizados</div>
         <p class="serv-desc">Tu logo en artículos que la gente realmente usa y conserva. Trabajamos con más de 1,300 productos en 18 categorías — textiles, tecnología, escritura, bebidas y más. Tú eliges, nosotros personalizamos con tu imagen.</p>
-        <a href="#catalogo" class="serv-link">Ver catálogo <span>→</span></a>
+        <a href="marketing/catalogo.html" class="serv-link">Ver catálogo <span>→</span></a>
       </div>
       <div class="serv-card reveal" style="transition-delay:0.15s">
         <div class="serv-icon">
@@ -1059,7 +984,7 @@
       <h2 class="cta-title">¿Listo para llevar tu marca a las manos de tus clientes?</h2>
       <p class="cta-sub">Cotiza sin compromiso. Nuestro equipo te asesora en menos de 24 horas con precios, tiempos y opciones de personalización.</p>
       <div class="cta-btns">
-        <a href="#catalogo" class="btn-wine">Explorar catálogo →</a>
+        <a href="marketing/catalogo.html" class="btn-wine">Explorar catálogo →</a>
         <a href="https://wa.me/523331288999" class="btn-outline" target="_blank" rel="noopener">Contactar por WhatsApp</a>
       </div>
     </div>
@@ -1098,7 +1023,15 @@
       <div>
         <div class="footer-col-title">Catálogo</div>
         <nav class="footer-nav" id="footer-cat-links">
-          <!-- injected by JS -->
+          <a href="marketing/catalogo.html">Bebidas</a>
+          <a href="marketing/catalogo.html">Textiles</a>
+          <a href="marketing/catalogo.html">Tecnología</a>
+          <a href="marketing/catalogo.html">Escritura</a>
+          <a href="marketing/catalogo.html">Mochilas</a>
+          <a href="marketing/catalogo.html">Bolsas</a>
+          <a href="marketing/catalogo.html">Libretas</a>
+          <a href="marketing/catalogo.html">Oficina</a>
+          <a href="marketing/catalogo.html">Ver todo →</a>
         </nav>
       </div>
 
@@ -1108,9 +1041,9 @@
         <nav class="footer-nav">
           <a href="#nosotros">Nosotros</a>
           <a href="#servicios">Servicios</a>
-          <a href="#catalogo">Catálogo</a>
+          <a href="marketing/catalogo.html">Catálogo</a>
           <a href="#proceso">Proceso</a>
-          <a href="cotizar.html">Cotizar</a>
+          <a href="marketing/cotizar.html">Cotizar</a>
           <a href="privacy.html">Privacidad</a>
           <a href="terms.html">Términos de uso</a>
         </nav>
@@ -1142,315 +1075,24 @@
   <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
-<!-- ── DATA ───────────────────────────────────────────────── -->
-<script src="assets/js/marketing-catalog.js"></script>
-
 <!-- ── APP JS ─────────────────────────────────────────────── -->
 <script>
 (function () {
   'use strict';
 
-  // ── State ─────────────────────────────────────────────────
-  const PAGE_SIZE = 48;
-  let state = { category: 'todos', search: '', page: 1 };
-  let cart = [];
-
-  // ── Cart persistence ──────────────────────────────────────
-  try { cart = JSON.parse(localStorage.getItem('mkt-cart') || '[]'); } catch (e) { cart = []; }
-  function saveCart() {
-    try { localStorage.setItem('mkt-cart', JSON.stringify(cart)); } catch (e) {}
-  }
-
-  // ── Category pills injection ───────────────────────────────
-  var pillsWrap = document.getElementById('cat-pills');
-  CATEGORIES.forEach(function (cat) {
-    var btn = document.createElement('button');
-    btn.className = 'cat-pill';
-    btn.dataset.cat = cat.slug;
-    btn.textContent = cat.icon + ' ' + cat.label;
-    pillsWrap.appendChild(btn);
-  });
-
-  // Footer category links (first 9 categories)
-  var footerCatLinks = document.getElementById('footer-cat-links');
-  CATEGORIES.slice(0, 9).forEach(function (cat) {
-    var a = document.createElement('a');
-    a.href = '#catalogo';
-    a.textContent = cat.label;
-    a.addEventListener('click', function () {
-      setCategory(cat.slug);
-      document.getElementById('catalogo').scrollIntoView({ behavior: 'smooth' });
-    });
-    footerCatLinks.appendChild(a);
-  });
-  var viewAll = document.createElement('a');
-  viewAll.href = '#catalogo';
-  viewAll.textContent = 'Ver todo →';
-  viewAll.addEventListener('click', function () { setCategory('todos'); });
-  footerCatLinks.appendChild(viewAll);
-
-  // ── Lazy image IntersectionObserver ───────────────────────
-  var imgObs = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (e.isIntersecting) {
-        var img = e.target;
-        if (img.dataset.src) { img.src = img.dataset.src; }
-        imgObs.unobserve(img);
-      }
-    });
-  }, { rootMargin: '300px' });
-
-  // ── Filtering ─────────────────────────────────────────────
-  function getFiltered() {
-    var q = state.search;
-    return CATALOG.filter(function (p) {
-      var matchCat = state.category === 'todos' || p.category === state.category;
-      var matchSearch = !q || p.name.toLowerCase().indexOf(q) !== -1 || p.sku.toLowerCase().indexOf(q) !== -1;
-      return matchCat && matchSearch;
-    });
-  }
-
-  // ── Category label lookup ─────────────────────────────────
-  var catLabelMap = {};
-  CATEGORIES.forEach(function (c) { catLabelMap[c.slug] = c.label; });
-
-  // ── Render catalog ────────────────────────────────────────
-  function renderCatalog() {
-    var filtered = getFiltered();
-    var totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
-    if (state.page > totalPages) state.page = totalPages;
-    var start = (state.page - 1) * PAGE_SIZE;
-    var items = filtered.slice(start, start + PAGE_SIZE);
-
-    var grid = document.getElementById('cat-grid');
-    var empty = document.getElementById('cat-empty');
-
-    if (items.length === 0) {
-      grid.innerHTML = '';
-      grid.appendChild(empty);
-      empty.style.display = 'block';
-      document.getElementById('cat-pagination').innerHTML = '';
-      document.getElementById('result-label').innerHTML = '<strong>0</strong> resultados';
-      return;
-    }
-    empty.style.display = 'none';
-
-    var html = '';
-    items.forEach(function (p) {
-      var imgPath = 'assets/images/marketing/' + p.category + '/' + p.img;
-      var catLabel = catLabelMap[p.category] || p.category;
-      var inCart = cart.some(function (c) { return c.id === p.id; });
-      html += '<div class="prod-card">' +
-        '<div class="prod-img-wrap">' +
-        '<img data-src="' + imgPath + '" alt="' + escHtml(p.name) + '" loading="lazy">' +
-        '<span class="prod-cat-badge">' + escHtml(catLabel) + '</span>' +
-        '</div>' +
-        '<div class="prod-body">' +
-        '<div class="prod-name">' + escHtml(p.name) + '</div>' +
-        '<div class="prod-sku">' + escHtml(p.sku) + '</div>' +
-        '<div class="prod-action">' +
-        '<button class="prod-quote-btn' + (inCart ? ' added' : '') + '" ' +
-        'onclick="addToCart(' + JSON.stringify(p.id) + ')" ' +
-        'data-pid="' + escHtml(p.id) + '">' +
-        (inCart ? '✓ Agregado' : '+ Cotizar') +
-        '</button>' +
-        '</div></div></div>';
-    });
-    grid.innerHTML = html;
-    grid.appendChild(empty);
-
-    // Observe lazy images
-    grid.querySelectorAll('img[data-src]').forEach(function (img) { imgObs.observe(img); });
-
-    // Result label
-    var label = document.getElementById('result-label');
-    var catName = state.category === 'todos' ? 'todos los productos' : (catLabelMap[state.category] || state.category);
-    label.innerHTML = '<strong>' + filtered.length + '</strong> productos · Página ' + state.page + ' de ' + totalPages;
-
-    // Pagination
-    renderPagination(totalPages);
-  }
-
-  // ── Render pagination ─────────────────────────────────────
-  function renderPagination(totalPages) {
-    var pg = document.getElementById('cat-pagination');
-    if (totalPages <= 1) { pg.innerHTML = ''; return; }
-
-    var cur = state.page;
-    var html = '';
-
-    // Prev
-    html += '<button class="pg-btn" onclick="goPage(' + (cur - 1) + ')"' + (cur === 1 ? ' disabled' : '') + '>←</button>';
-
-    // Page numbers with ellipsis
-    var pages = getPageRange(cur, totalPages);
-    pages.forEach(function (p) {
-      if (p === '…') {
-        html += '<span class="pg-ellipsis">…</span>';
-      } else {
-        html += '<button class="pg-btn' + (p === cur ? ' active' : '') + '" onclick="goPage(' + p + ')">' + p + '</button>';
-      }
-    });
-
-    // Next
-    html += '<button class="pg-btn" onclick="goPage(' + (cur + 1) + ')"' + (cur === totalPages ? ' disabled' : '') + '>→</button>';
-
-    pg.innerHTML = html;
-  }
-
-  function getPageRange(cur, total) {
-    if (total <= 7) {
-      var r = [];
-      for (var i = 1; i <= total; i++) r.push(i);
-      return r;
-    }
-    var pages = [1];
-    if (cur > 3) pages.push('…');
-    var start = Math.max(2, cur - 1);
-    var end = Math.min(total - 1, cur + 1);
-    for (var j = start; j <= end; j++) pages.push(j);
-    if (cur < total - 2) pages.push('…');
-    pages.push(total);
-    return pages;
-  }
-
-  window.goPage = function (n) {
-    var filtered = getFiltered();
-    var totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
-    state.page = Math.max(1, Math.min(n, totalPages));
-    renderCatalog();
-    document.getElementById('catalogo').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
-
-  function escHtml(s) {
-    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-  }
-
-  // ── Modal state ───────────────────────────────────────────
-  var modalProduct = null;
-  var modalQtyVal = 1;
-
-  // ── Open product modal ────────────────────────────────────
-  window.addToCart = function (productId) {
-    var product = CATALOG.find(function (p) { return p.id === productId; });
-    if (!product) return;
-    modalProduct = product;
-    modalQtyVal = 1;
-
-    var catLabel = catLabelMap[product.category] || product.category;
-    var imgPath = 'assets/images/marketing/' + product.category + '/' + product.img;
-
-    document.getElementById('pm-img').src = imgPath;
-    document.getElementById('pm-img').alt = product.name;
-    document.getElementById('pm-cat').textContent = catLabel;
-    document.getElementById('pm-name').textContent = product.name;
-    document.getElementById('pm-sku').textContent = product.sku;
-    document.getElementById('pm-qty').textContent = '1';
-    document.getElementById('pm-specs').value = '';
-    var addBtn = document.getElementById('pm-add-btn');
-    addBtn.textContent = '+ Añadir a cotización';
-    addBtn.classList.remove('added');
-
-    document.getElementById('product-modal').classList.add('open');
-    document.getElementById('modal-backdrop').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  };
-
-  window.closeModal = function () {
-    document.getElementById('product-modal').classList.remove('open');
-    document.getElementById('modal-backdrop').classList.remove('open');
-    document.body.style.overflow = '';
-    modalProduct = null;
-  };
-
-  window.modalQty = function (delta) {
-    modalQtyVal = Math.max(1, modalQtyVal + delta);
-    document.getElementById('pm-qty').textContent = modalQtyVal;
-  };
-
-  window.confirmAddToCart = function () {
-    if (!modalProduct) return;
-    var specs = document.getElementById('pm-specs').value.trim();
-    var existing = cart.find(function (c) { return c.id === modalProduct.id; });
-    if (existing) {
-      existing.qty += modalQtyVal;
-      if (specs) existing.specs = specs;
-    } else {
-      cart.push({
-        id: modalProduct.id, category: modalProduct.category,
-        name: modalProduct.name, sku: modalProduct.sku, img: modalProduct.img,
-        qty: modalQtyVal, specs: specs
-      });
-    }
-    saveCart();
-    updateBadge();
-
-    // Visual feedback on button
-    var addBtn = document.getElementById('pm-add-btn');
-    addBtn.textContent = '✓ Agregado a cotización';
-    addBtn.classList.add('added');
-
-    // Update grid button if visible
-    document.querySelectorAll('.prod-quote-btn[data-pid="' + modalProduct.id + '"]').forEach(function (btn) {
-      btn.textContent = '✓ Agregado'; btn.classList.add('added');
-    });
-
-    setTimeout(function () { closeModal(); }, 900);
-  };
-
+  // ── Cart badge (read from localStorage) ───────────────────
   function updateBadge() {
+    var cart = [];
+    try { cart = JSON.parse(localStorage.getItem('mkt-cart') || '[]'); } catch (e) {}
     var total = cart.reduce(function (s, c) { return s + c.qty; }, 0);
     var badge = document.getElementById('nav-badge');
-    var fabBadge = document.getElementById('fab-badge');
-    if (total > 0) {
-      badge.textContent = total; badge.classList.add('visible');
-      fabBadge.textContent = total; fabBadge.style.display = 'flex';
-    } else {
-      badge.classList.remove('visible');
-      fabBadge.style.display = 'none';
+    if (badge) {
+      if (total > 0) { badge.textContent = total; badge.classList.add('visible'); }
+      else { badge.classList.remove('visible'); }
     }
   }
 
-  // ── Category filter ───────────────────────────────────────
-  window.setCategory = function (slug) {
-    state.category = slug;
-    state.page = 1;
-    document.querySelectorAll('.cat-pill').forEach(function (p) {
-      p.classList.toggle('active', p.dataset.cat === slug);
-    });
-    renderCatalog();
-  };
-
-  document.querySelectorAll('.cat-pill').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      setCategory(this.dataset.cat);
-    });
-  });
-
-  // ── Search ────────────────────────────────────────────────
-  var searchTimer;
-  document.getElementById('cat-search').addEventListener('input', function (e) {
-    clearTimeout(searchTimer);
-    var val = e.target.value;
-    searchTimer = setTimeout(function () {
-      state.search = val.toLowerCase().trim();
-      state.page = 1;
-      renderCatalog();
-    }, 260);
-  });
-
-  window.clearSearch = function () {
-    document.getElementById('cat-search').value = '';
-    state.search = '';
-    state.category = 'todos';
-    state.page = 1;
-    document.querySelectorAll('.cat-pill').forEach(function (p) {
-      p.classList.toggle('active', p.dataset.cat === 'todos');
-    });
-    renderCatalog();
-  };
-
-  // ── Navbar ────────────────────────────────────────────────
+  // ── Navbar scroll ─────────────────────────────────────────
   window.addEventListener('scroll', function () {
     document.getElementById('mkt-nav').classList.toggle('scrolled', window.scrollY > 60);
   }, { passive: true });
@@ -1478,9 +1120,6 @@
   document.querySelectorAll('.reveal').forEach(function (el) { revealObs.observe(el); });
 
   // ── Init ──────────────────────────────────────────────────
-  var totalBadge = document.getElementById('total-badge');
-  if (totalBadge) totalBadge.textContent = CATALOG.length.toLocaleString('es-MX') + ' artículos';
-  renderCatalog();
   updateBadge();
 
 })();

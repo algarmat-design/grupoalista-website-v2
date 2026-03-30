@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Canonical redirect: always run from grupoalista.com so EmailJS origin check passes -->
+  <script>
+    (function () {
+      var h = window.location.hostname;
+      if (h !== 'grupoalista.com' && h !== 'www.grupoalista.com' && h !== 'localhost' && h !== '127.0.0.1') {
+        window.location.replace('https://grupoalista.com' + window.location.pathname + window.location.search + window.location.hash);
+      }
+    }());
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cotización | Alista Marketing Services</title>
+  <meta name="description" content="Revisa y envía tu cotización de productos promocionales personalizados.">
+  <link rel="icon" type="image/png" href="../assets/images/logo-marketing.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&family=Playfair+Display:ital,wght@1,700&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <!-- jsPDF + autotable CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+  <!-- EmailJS SDK — used first; REST API is fallback if this doesn't load -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <style>
+    :root {
+      --ob:     #1C1C2E;
+      --wine:   #8B1A2B;
+      --wine-l: #A62D42;
+      --wine-d: #5C0E1F;
+      --gold:   #C9A84C;
+      --gold-l: #DFC16A;
+      --ivory:  #FAF7F2;
+      --pearl:  #F0EDE8;
+      --cream:  #F5F0E8;
+      --slate:  #6B6B7B;
+      --grey:   #A8A3A0;
+      --charcoal:#2E2E3A;
+      --ink:    #111111;
+      --border: rgba(17,17,17,0.09);
+      --success:#10B981;
+      --r:      8px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--ivory); color: var(--ink); overflow-x: hidden; }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+    /* ── NAV ── */
+    #cot-nav {
+      position: sticky; top: 0; z-index: 100;
+      height: 64px;
+      background: rgba(250,247,242,0.96);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+    }
+    .cot-nav-logo { display: flex; align-items: center; gap: 0.75rem; }
+    .cot-nav-logo img { height: 38px; width: auto; }
+    .cot-back {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--wine);
+      transition: gap 0.2s;
+    }
+    .cot-back:hover { gap: 0.65rem; }
+
+    /* ── PAGE LAYOUT ── */
+    .cot-page {
+      max-width: 1180px; margin: 0 auto;
+      padding: clamp(2.5rem, 6vw, 4rem) clamp(1.5rem, 5vw, 4rem);
+      display: grid; grid-template-columns: 1fr 420px;
+      gap: 3rem; align-items: start;
+    }
+    @media (max-width: 900px) {
+      .cot-page { grid-template-columns: 1fr; }
+    }
+
+    /* ── CART PANEL (left) ── */
+    .cot-cart-panel {}
+    .cot-panel-title {
+      font-family: 'Inter', sans-serif; font-weight: 900;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      letter-spacing: -0.02em; color: var(--ink);
+      margin-bottom: 0.4rem;
+    }
+    .cot-panel-sub {
+      font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+      color: var(--slate); margin-bottom: 2rem;
+    }
+    .cot-count {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.7rem;
+      color: var(--wine); border: 1.5px solid var(--wine);
+      padding: 0.2rem 0.65rem; border-radius: 20px;
+      display: inline-block; margin-left: 0.8rem; vertical-align: middle;
+    }
+    /* Items */
+    #cot-items { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.5rem; }
+    .cot-item {
+      display: grid; grid-template-columns: 72px 1fr auto;
+      gap: 1rem; align-items: center;
+      background: #fff; border: 1px solid var(--border);
+      border-radius: var(--r); padding: 1rem;
+    }
+    .cot-item-img {
+      width: 72px; height: 72px; border-radius: 6px;
+      object-fit: cover; background: var(--cream);
+    }
+    .cot-item-info { display: flex; flex-direction: column; gap: 3px; }
+    .cot-item-name { font-size: 0.88rem; font-weight: 600; color: var(--ink); line-height: 1.4; }
+    .cot-item-sku { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: var(--slate); }
+    .cot-item-specs { font-size: 0.75rem; color: var(--slate); font-style: italic; margin-top: 2px; }
+    .cot-item-qty-row { display: flex; align-items: center; gap: 0.4rem; margin-top: 0.4rem; }
+    .cot-qty-btn {
+      width: 26px; height: 26px; border-radius: 4px;
+      border: 1.5px solid var(--border);
+      font-size: 1rem; display: flex; align-items: center; justify-content: center;
+      color: var(--slate); transition: border-color 0.15s, color 0.15s;
+    }
+    .cot-qty-btn:hover { border-color: var(--wine); color: var(--wine); }
+    .cot-qty-val { font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 700; min-width: 1.5rem; text-align: center; }
+    .cot-item-del {
+      color: var(--grey); font-size: 0.85rem; padding: 4px;
+      border-radius: 4px; transition: color 0.15s, background 0.15s;
+      align-self: flex-start;
+    }
+    .cot-item-del:hover { color: var(--wine); background: rgba(139,26,43,0.06); }
+    /* Empty state */
+    .cot-empty {
+      text-align: center; padding: 4rem 1rem;
+      color: var(--slate);
+    }
+    .cot-empty svg { margin: 0 auto 1.2rem; opacity: 0.25; }
+    .cot-empty h3 { font-family: 'Inter', sans-serif; font-size: 1.05rem; font-weight: 700; color: var(--ink); margin-bottom: 0.5rem; }
+    .cot-empty p { font-size: 0.9rem; line-height: 1.7; }
+    .cot-empty a { color: var(--wine); text-decoration: underline; }
+
+    /* ── FORM PANEL (right) ── */
+    .cot-form-panel {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: 12px; padding: 2rem;
+      position: sticky; top: 80px;
+    }
+    .cot-form-title {
+      font-family: 'Inter', sans-serif; font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--slate); margin-bottom: 1.4rem;
+    }
+    .cot-field { margin-bottom: 1rem; }
+    .cot-field label {
+      display: block; font-size: 0.72rem; font-weight: 600;
+      color: var(--slate); margin-bottom: 0.3rem; letter-spacing: 0.03em;
+    }
+    .cot-field input,
+    .cot-field textarea {
+      width: 100%; padding: 0.7rem 0.9rem;
+      font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+      color: var(--ink); background: var(--ivory);
+      border: 1.5px solid var(--border); border-radius: 6px;
+      outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .cot-field textarea { resize: vertical; min-height: 80px; }
+    .cot-field input:focus, .cot-field textarea:focus {
+      border-color: var(--wine);
+      box-shadow: 0 0 0 3px rgba(139,26,43,0.09);
+    }
+    .cot-field input.error { border-color: #e53e3e; }
+    /* Logo upload */
+    .logo-upload-wrap { display: flex; align-items: center; gap: 0.6rem; }
+    .logo-upload-btn {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.45rem 0.85rem;
+      font-family: 'Inter', sans-serif; font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--wine); border: 1.5px solid var(--wine); border-radius: 5px;
+      cursor: pointer; white-space: nowrap;
+      transition: background 0.15s, color 0.15s;
+    }
+    .logo-upload-btn:hover { background: var(--wine); color: #fff; }
+    .logo-filename { font-size: 0.78rem; color: var(--slate); }
+    .cot-submit {
+      width: 100%; padding: 1rem;
+      font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 800;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: #fff; background: var(--wine); border-radius: 7px;
+      transition: background 0.2s, transform 0.15s;
+      margin-top: 0.5rem;
+    }
+    .cot-submit:hover { background: var(--wine-l); transform: translateY(-1px); }
+    .cot-submit:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+    .cot-form-note {
+      font-size: 0.72rem; color: var(--grey); text-align: center;
+      margin-top: 0.9rem; line-height: 1.6;
+    }
+
+    /* ── SUCCESS OVERLAY ── */
+    #success-overlay {
+      display: none;
+      position: fixed; inset: 0; z-index: 500;
+      background: rgba(28,28,46,0.65);
+      align-items: center; justify-content: center;
+      padding: 1.5rem;
+    }
+    #success-overlay.show { display: flex; }
+    .success-card {
+      background: #fff; border-radius: 16px;
+      padding: 3rem 2.5rem; max-width: 480px; width: 100%;
+      text-align: center;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.2);
+      animation: popIn 0.4s cubic-bezier(0.22,1,0.36,1);
+    }
+    @keyframes popIn {
+      from { transform: scale(0.88); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .success-icon {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: rgba(16,185,129,0.1); border: 2px solid var(--success);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.5rem;
+    }
+    .success-title {
+      font-family: 'Inter', sans-serif; font-weight: 900;
+      font-size: 1.4rem; color: var(--ink); margin-bottom: 0.6rem;
+    }
+    .success-sub {
+      font-size: 0.9rem; color: var(--slate); line-height: 1.75; margin-bottom: 1.8rem;
+    }
+    .success-steps {
+      text-align: left; background: var(--pearl);
+      border-radius: 8px; padding: 1.2rem 1.4rem;
+      margin-bottom: 1.8rem;
+    }
+    .success-step {
+      display: flex; gap: 0.75rem; align-items: flex-start;
+      font-size: 0.85rem; color: var(--ink); line-height: 1.55;
+      padding: 0.35rem 0;
+    }
+    .success-step + .success-step { border-top: 1px solid var(--border); }
+    .success-step-num {
+      font-family: 'Playfair Display', serif; font-style: italic;
+      font-size: 1.2rem; color: var(--gold); line-height: 1;
+      flex-shrink: 0; padding-top: 1px;
+    }
+    .success-btn {
+      display: inline-block; padding: 0.85rem 2rem;
+      font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: #fff; background: var(--wine); border-radius: 6px;
+      transition: background 0.2s;
+    }
+    .success-btn:hover { background: var(--wine-l); }
+    .success-btn-outline {
+      display: inline-block; padding: 0.85rem 2rem;
+      font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--wine); background: transparent;
+      border: 2px solid var(--wine); border-radius: 6px;
+      cursor: pointer; font-family: inherit;
+      transition: background 0.2s, color 0.2s;
+    }
+    .success-btn-outline:hover { background: var(--wine); color: #fff; }
+    .success-actions { display: flex; flex-direction: column; gap: 0.75rem; align-items: center; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .cot-item { grid-template-columns: 60px 1fr auto; }
+      .cot-item-img { width: 60px; height: 60px; }
+      .cot-form-panel { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ──────────────────────────────────────────────── -->
+<nav id="cot-nav">
+  <div class="cot-nav-logo">
+    <img src="../assets/images/logo-marketing.png" alt="Alista Marketing Services">
+  </div>
+  <a href="catalogo.html" class="cot-back">
+    ← Regresar al catálogo
+  </a>
+</nav>
+
+<!-- ── MAIN ─────────────────────────────────────────────── -->
+<main class="cot-page">
+
+  <!-- LEFT: Cart items -->
+  <div class="cot-cart-panel">
+    <h1 class="cot-panel-title">
+      Tu cotización
+      <span class="cot-count" id="cot-count">0 artículos</span>
+    </h1>
+    <p class="cot-panel-sub">Revisa los productos seleccionados. Puedes ajustar cantidades o eliminar artículos antes de enviar.</p>
+    <div id="cot-items"></div>
+  </div>
+
+  <!-- RIGHT: Contact form -->
+  <div class="cot-form-panel">
+    <p class="cot-form-title">Datos de contacto</p>
+    <form id="cot-form" novalidate>
+      <div class="cot-field">
+        <label for="cf-name">Nombre completo *</label>
+        <input type="text" id="cf-name" name="nombre" required placeholder="Tu nombre">
+      </div>
+      <div class="cot-field">
+        <label for="cf-company">Empresa</label>
+        <input type="text" id="cf-company" name="empresa" placeholder="Nombre de tu empresa (opcional)">
+      </div>
+      <div class="cot-field">
+        <label for="cf-email">Correo electrónico *</label>
+        <input type="email" id="cf-email" name="email" required placeholder="correo@empresa.com">
+      </div>
+      <div class="cot-field">
+        <label for="cf-phone">Teléfono</label>
+        <input type="tel" id="cf-phone" name="telefono" placeholder="+52 (333) 000-0000">
+      </div>
+      <div class="cot-field">
+        <label for="cf-logo">Logo / branding (opcional)</label>
+        <div class="logo-upload-wrap">
+          <label class="logo-upload-btn" for="cf-logo">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            Subir logo
+          </label>
+          <span class="logo-filename" id="logo-filename">PNG, JPG o SVG</span>
+          <input type="file" id="cf-logo" name="logo" accept="image/*" style="display:none">
+        </div>
+        <div id="logo-preview-wrap" style="display:none;margin-top:0.6rem;">
+          <img id="logo-preview" style="max-height:56px;max-width:140px;border-radius:4px;border:1px solid var(--border);padding:4px;background:#fff;">
+        </div>
+        <p style="font-size:0.68rem;color:var(--grey);margin-top:0.3rem;line-height:1.5;">Tu logo se incluirá en el PDF de cotización. Para personalización de productos, también envíalo en alta resolución a <strong>ventas@grupoalista.com</strong></p>
+      </div>
+      <div class="cot-field">
+        <label for="cf-notes">Notas adicionales</label>
+        <textarea id="cf-notes" name="notas" placeholder="Fecha estimada de entrega, colores específicos…"></textarea>
+      </div>
+      <button type="submit" class="cot-submit" id="cot-submit-btn">
+        Enviar Cotización
+      </button>
+      <p class="cot-form-note">Recibirás una copia en tu correo. Nuestro equipo te responde en menos de 24 horas.</p>
+    </form>
+  </div>
+
+</main>
+
+<!-- ── SUCCESS OVERLAY ──────────────────────────────────── -->
+<div id="success-overlay">
+  <div class="success-card">
+    <div class="success-icon">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h2 class="success-title">¡Cotización enviada!</h2>
+    <p class="success-sub">Hemos recibido tu solicitud y te hemos enviado una copia al correo proporcionado. ¿Qué sigue?</p>
+    <div class="success-steps">
+      <div class="success-step">
+        <span class="success-step-num">01</span>
+        <span>Nuestro equipo revisa tu cotización y verifica disponibilidad de stock.</span>
+      </div>
+      <div class="success-step">
+        <span class="success-step-num">02</span>
+        <span>Te contactamos en menos de 24 horas con precios, tiempos de entrega y opciones de personalización.</span>
+      </div>
+      <div class="success-step">
+        <span class="success-step-num">03</span>
+        <span>Tú apruebas la propuesta, nosotros ejecutamos la producción y entrega.</span>
+      </div>
+    </div>
+    <div class="success-actions">
+      <a href="catalogo.html" class="success-btn">Seguir explorando el catálogo</a>
+      <button type="button" id="success-download-btn" class="success-btn-outline" onclick="downloadQuotePDF()" style="display:none;">⬇ Descargar PDF</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── DATA ─────────────────────────────────────────────── -->
+<script src="../assets/js/marketing-catalog.js"></script>
+
+<!-- ── APP JS ────────────────────────────────────────────── -->
+<script>
+(function () {
+  'use strict';
+
+  // ── EmailJS config (REST API — no SDK needed) ──────────────
+  var EMAILJS_PUBLIC_KEY  = 'NAbz4ZYSbxQfKC5fw';
+  var EMAILJS_SERVICE_ID  = 'service_c61vipp';
+  var EMAILJS_TEMPLATE_ID = 'template_9pax14g';
+
+  // Module-level PDF state
+  var lastDoc = null;
+  var lastQuoteNumber = '';
+
+  // Pre-load Alista Marketing logo for PDF header
+  var alistaLogoDataUrl = null;
+  fetch('../assets/images/logo-marketing.png')
+    .then(function (r) { return r.blob(); })
+    .then(function (blob) {
+      var reader = new FileReader();
+      reader.onload = function (ev) { alistaLogoDataUrl = ev.target.result; };
+      reader.readAsDataURL(blob);
+    })
+    .catch(function () {});
+
+  // ── Cart load ──────────────────────────────────────────────
+  var cart = [];
+  try { cart = JSON.parse(localStorage.getItem('mkt-cart') || '[]'); } catch (e) { cart = []; }
+
+  function saveCart() {
+    try { localStorage.setItem('mkt-cart', JSON.stringify(cart)); } catch (e) {}
+  }
+
+  // ── Category label map ─────────────────────────────────────
+  var catLabelMap = {};
+  if (typeof CATEGORIES !== 'undefined') {
+    CATEGORIES.forEach(function (c) { catLabelMap[c.slug] = c.label; });
+  }
+
+  function escHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  // ── Render cart ───────────────────────────────────────────
+  function renderCart() {
+    var container = document.getElementById('cot-items');
+    var count = cart.reduce(function (s, c) { return s + c.qty; }, 0);
+    document.getElementById('cot-count').textContent = count + (count === 1 ? ' artículo' : ' artículos');
+
+    if (cart.length === 0) {
+      container.innerHTML =
+        '<div class="cot-empty">' +
+        '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>' +
+        '<h3>Tu cotización está vacía</h3>' +
+        '<p>Agrega productos desde el <a href="catalogo.html">catálogo</a> y regresa aquí para enviar tu solicitud.</p>' +
+        '</div>';
+      document.getElementById('cot-submit-btn').disabled = true;
+      return;
+    }
+
+    document.getElementById('cot-submit-btn').disabled = false;
+    var html = '';
+    cart.forEach(function (item) {
+      var imgPath = '../assets/images/marketing/' + item.category + '/' + item.img;
+      html += '<div class="cot-item">' +
+        '<img class="cot-item-img" src="' + imgPath + '" alt="' + escHtml(item.name) + '">' +
+        '<div class="cot-item-info">' +
+        '<div class="cot-item-name">' + escHtml(item.name) + '</div>' +
+        '<div class="cot-item-sku">' + escHtml(item.sku) + '</div>' +
+        (item.color ? '<div class="cot-item-specs"><strong>Color:</strong> ' + escHtml(item.color) + '</div>' : '') +
+        (item.specs ? '<div class="cot-item-specs">' + escHtml(item.specs) + '</div>' : '') +
+        '<div class="cot-item-qty-row">' +
+        "<button class=\"cot-qty-btn\" type=\"button\" onclick=\"cotQty('" + item.id + "',-1)\">−</button>" +
+        '<span class="cot-qty-val">' + item.qty + '</span>' +
+        "<button class=\"cot-qty-btn\" type=\"button\" onclick=\"cotQty('" + item.id + "',1)\">+</button>" +
+        '</div></div>' +
+        "<button class=\"cot-item-del\" type=\"button\" onclick=\"cotRemove('" + item.id + "')\" aria-label=\"Eliminar\">✕</button>" +
+        '</div>';
+    });
+    container.innerHTML = html;
+  }
+
+  window.cotQty = function (id, delta) {
+    var item = cart.find(function (c) { return c.id === id; });
+    if (!item) return;
+    item.qty = Math.max(1, item.qty + delta);
+    saveCart(); renderCart();
+  };
+
+  window.cotRemove = function (id) {
+    cart = cart.filter(function (c) { return c.id !== id; });
+    saveCart(); renderCart();
+  };
+
+  window.downloadQuotePDF = function () {
+    if (lastDoc) lastDoc.save('cotizacion-alista-' + lastQuoteNumber + '.pdf');
+  };
+
+  // ── Quote number (COT-YYYYMMDD-HHMMSS) ──────────────────────
+  function getQuoteNumber() {
+    var now = new Date();
+    var pad = function (n) { return String(n).padStart(2, '0'); };
+    return 'COT-' +
+      now.getFullYear() +
+      pad(now.getMonth() + 1) +
+      pad(now.getDate()) +
+      '-' +
+      pad(now.getHours()) +
+      pad(now.getMinutes()) +
+      pad(now.getSeconds());
+  }
+
+  // ── Generate PDF ──────────────────────────────────────────
+  function generatePDF(formData, quoteNumber, logoUrl) {
+    var doc = new window.jspdf.jsPDF({ unit: 'mm', format: 'a4' });
+    var W = 210;
+    var margin = 18;
+
+    // Header bar
+    doc.setFillColor(139, 26, 43);
+    doc.rect(0, 0, W, 38, 'F');
+
+    // Alista Marketing logo (pre-fetched) or text fallback
+    if (alistaLogoDataUrl) {
+      try {
+        doc.addImage(alistaLogoDataUrl, 'PNG', margin, 6, 52, 22, '', 'FAST');
+      } catch (e) {
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(15);
+        doc.setTextColor(250, 247, 242);
+        doc.text('ALISTA MARKETING SERVICES', margin, 17);
+      }
+    } else {
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(15);
+      doc.setTextColor(250, 247, 242);
+      doc.text('ALISTA MARKETING SERVICES', margin, 17);
+    }
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(8.5);
+    doc.setTextColor(201, 168, 76);
+    doc.text('Tu marca en cada detalle.', margin, 32);
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(11);
+    doc.setTextColor(250, 247, 242);
+    doc.text(quoteNumber, W - margin, 16, { align: 'right' });
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+    var today = new Date();
+    var dateStr = today.getDate().toString().padStart(2,'0') + '/' +
+      (today.getMonth()+1).toString().padStart(2,'0') + '/' + today.getFullYear();
+    doc.text(dateStr, W - margin, 24, { align: 'right' });
+
+    var y = 50;
+
+    // Client info section
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(9);
+    doc.setTextColor(28, 28, 46);
+    doc.text('DATOS DEL CLIENTE', margin, y);
+    y += 6;
+
+    var clientFields = [
+      ['Nombre', formData.nombre],
+      ['Empresa', formData.empresa],
+      ['Correo', formData.email],
+      ['Teléfono', formData.telefono || '—'],
+    ];
+    doc.setFontSize(9);
+    clientFields.forEach(function (f) {
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(80, 80, 90);
+      doc.text(f[0] + ':', margin, y);
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(17, 17, 17);
+      doc.text(String(f[1]), margin + 26, y);
+      y += 6;
+    });
+
+    // Customer logo (if uploaded)
+    if (logoUrl) {
+      try {
+        doc.addImage(logoUrl, 'AUTO', W - margin - 36, 44, 36, 18, '', 'FAST');
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(7);
+        doc.setTextColor(140, 135, 128);
+        doc.text('Logo del cliente', W - margin - 36, 64, { baseline: 'top' });
+      } catch (e) { /* skip logo if format not supported */ }
+    }
+
+    y += 4;
+
+    // Products table using autotable
+    var tableRows = cart.map(function (item) {
+      return [
+        item.name,
+        item.sku,
+        String(item.qty),
+        item.color || '—',
+        item.specs || '—',
+      ];
+    });
+
+    doc.autoTable({
+      startY: y,
+      head: [['Producto', 'SKU', 'Cant.', 'Color', 'Especificaciones']],
+      body: tableRows,
+      margin: { left: margin, right: margin },
+      headStyles: {
+        fillColor: [28, 28, 46],
+        textColor: [250, 247, 242],
+        fontStyle: 'bold',
+        fontSize: 8.5,
+      },
+      bodyStyles: {
+        fontSize: 8,
+        textColor: [17, 17, 17],
+      },
+      alternateRowStyles: { fillColor: [250, 247, 242] },
+      columnStyles: {
+        0: { cellWidth: 65 },   // Producto
+        1: { cellWidth: 28 },   // SKU
+        2: { cellWidth: 14, halign: 'center' }, // Cant.
+        3: { cellWidth: 28 },   // Color
+        4: { cellWidth: 'auto' }, // Especificaciones
+      },
+      didDrawPage: function (data) {
+        // Re-draw footer on each page
+        var pageH = doc.internal.pageSize.getHeight();
+        doc.setFillColor(28, 28, 46);
+        doc.rect(0, pageH - 20, W, 20, 'F');
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(7.5);
+        doc.setTextColor(180, 175, 168);
+        doc.text('ventas@grupoalista.com  |  +52 333 128 8999  |  grupoalista.com', W / 2, pageH - 13, { align: 'center' });
+        doc.setTextColor(120, 115, 108);
+        doc.text('Lázaro Cárdenas Pte. 2953, Col. Chapalita, Guadalajara, Jalisco, México', W / 2, pageH - 7.5, { align: 'center' });
+      },
+    });
+
+    y = doc.lastAutoTable.finalY + 8;
+
+    // Notes
+    if (formData.notas) {
+      var pageH2 = doc.internal.pageSize.getHeight();
+      if (y > pageH2 - 50) { doc.addPage(); y = margin; }
+      doc.setFillColor(240, 237, 232);
+      var notesLines = doc.splitTextToSize(formData.notas, W - margin * 2 - 6);
+      doc.rect(margin, y - 3, W - margin * 2, 8 + notesLines.length * 5.5, 'F');
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(9);
+      doc.setTextColor(50, 50, 60);
+      doc.text('Notas adicionales:', margin + 3, y + 2);
+      y += 8;
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(80, 80, 90);
+      doc.text(notesLines, margin + 3, y);
+    }
+
+    return doc;
+  }
+
+  // ── Form submit ───────────────────────────────────────────
+  document.getElementById('cot-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    if (cart.length === 0) {
+      alert('Agrega al menos un producto antes de enviar.');
+      return;
+    }
+
+    var nombre   = document.getElementById('cf-name').value.trim();
+    var empresa  = document.getElementById('cf-company').value.trim();
+    var email    = document.getElementById('cf-email').value.trim();
+    var telefono = document.getElementById('cf-phone').value.trim();
+    var notas    = document.getElementById('cf-notes').value.trim();
+
+    // Basic validation — only email is required
+    var valid = true;
+    ['cf-name','cf-email'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (!el.value.trim()) { el.classList.add('error'); valid = false; }
+      else el.classList.remove('error');
+    });
+    if (!valid) return;
+
+    var btn = document.getElementById('cot-submit-btn');
+    btn.disabled = true;
+    btn.textContent = 'Enviando cotización…';
+
+    var quoteNumber = getQuoteNumber();
+    var formData = { nombre: nombre, empresa: empresa, email: email, telefono: telefono, notas: notas };
+
+    // Generate PDF — wrapped so a PDF error never blocks the email send
+    var doc = null;
+    try {
+      doc = generatePDF(formData, quoteNumber, logoDataUrl);
+    } catch (pdfErr) {
+      console.warn('PDF generation failed:', pdfErr);
+    }
+
+    // Build cart summary string for email (plain text, one product per line)
+    var cartSummary = cart.map(function (i) {
+      var line = '• ' + i.name + ' (' + i.sku + ') x' + i.qty;
+      if (i.color) line += ' | Color: ' + i.color;
+      if (i.specs) line += ' | Espec: ' + i.specs;
+      return line;
+    }).join('\n');
+
+    var totalItems = cart.reduce(function (s, c) { return s + c.qty; }, 0);
+    var logoFileName = document.getElementById('cf-logo').files[0]
+      ? document.getElementById('cf-logo').files[0].name : '—';
+
+    var templateParams = {
+      quote_number: quoteNumber,
+      date: new Date().toLocaleDateString('es-MX'),
+      nombre: nombre,
+      empresa: empresa || '—',
+      email_cliente: email,
+      to_email: email,        // alias used by many EmailJS templates
+      reply_to: email,        // reply-to standard field
+      telefono: telefono || '—',
+      notas: notas || '—',
+      cart_summary: cartSummary,
+      total_items: String(totalItems),
+      logo_archivo: logoFileName,
+    };
+
+    function onSuccess() {
+      if (doc) {
+        lastDoc = doc;
+        lastQuoteNumber = quoteNumber;
+        document.getElementById('success-download-btn').style.display = 'inline-block';
+      } else {
+        document.getElementById('success-download-btn').style.display = 'none';
+      }
+      cart = [];
+      saveCart();
+      document.getElementById('success-overlay').classList.add('show');
+    }
+
+    function onError(err) {
+      console.error('[Cotizar] send error:', err);
+      btn.disabled = false;
+      btn.textContent = 'Enviar Cotización';
+      var msg = err && err.message ? err.message : 'error de red';
+      var note = document.querySelector('.cot-form-note');
+      if (note) {
+        note.style.color = '#c0392b';
+        note.innerHTML = '⚠ No se pudo enviar: <em>' + msg + '</em>. Escríbenos directamente a <a href="mailto:ventas@grupoalista.com" style="color:#8B1A2B;font-weight:600">ventas@grupoalista.com</a>';
+      }
+    }
+
+    // ── Send: SDK primary, REST API fallback ─────────────────
+    function sendViaRestAPI() {
+      console.log('[Cotizar] sending via REST API, params:', JSON.stringify(templateParams));
+      fetch('https://api.emailjs.com/api/v1.0/email/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          service_id: EMAILJS_SERVICE_ID,
+          template_id: EMAILJS_TEMPLATE_ID,
+          user_id: EMAILJS_PUBLIC_KEY,
+          template_params: templateParams,
+        }),
+      })
+        .then(function (res) {
+          if (!res.ok) {
+            return res.text().then(function (body) {
+              throw new Error('HTTP ' + res.status + ': ' + body);
+            });
+          }
+          onSuccess();
+        })
+        .catch(onError);
+    }
+
+    if (typeof emailjs !== 'undefined') {
+      console.log('[Cotizar] sending via EmailJS sendForm (with file attachment)');
+      try { emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY }); } catch (e) {}
+      // Inject hidden inputs for custom params so sendForm picks them up alongside the file input
+      var form = document.getElementById('cot-form');
+      var customFields = [
+        { name: 'quote_number',  value: quoteNumber },
+        { name: 'date',          value: new Date().toLocaleDateString('es-MX') },
+        { name: 'email_cliente', value: email },
+        { name: 'to_email',      value: email },
+        { name: 'reply_to',      value: email },
+        { name: 'cart_summary',  value: cartSummary },
+        { name: 'total_items',   value: String(totalItems) },
+        { name: 'logo_archivo',  value: logoFileName },
+      ];
+      var tempInputs = customFields.map(function (f) {
+        var inp = document.createElement('input');
+        inp.type = 'hidden';
+        inp.name = f.name;
+        inp.value = f.value;
+        form.appendChild(inp);
+        return inp;
+      });
+      function cleanupTempInputs() {
+        tempInputs.forEach(function (el) { el.parentNode && el.parentNode.removeChild(el); });
+      }
+      emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, form)
+        .then(function () {
+          cleanupTempInputs();
+          onSuccess();
+        })
+        .catch(function (sdkErr) {
+          cleanupTempInputs();
+          console.warn('[Cotizar] sendForm failed, trying REST API:', sdkErr);
+          sendViaRestAPI();
+        });
+    } else {
+      sendViaRestAPI();
+    }
+  });
+
+  // ── Logo upload preview ───────────────────────────────────
+  var logoDataUrl = null;
+  document.getElementById('cf-logo').addEventListener('change', function (e) {
+    var file = e.target.files[0];
+    if (!file) { logoDataUrl = null; document.getElementById('logo-filename').textContent = 'PNG, JPG o SVG'; document.getElementById('logo-preview-wrap').style.display = 'none'; return; }
+    document.getElementById('logo-filename').textContent = file.name;
+    var reader = new FileReader();
+    reader.onload = function (ev) {
+      logoDataUrl = ev.target.result;
+      document.getElementById('logo-preview').src = logoDataUrl;
+      document.getElementById('logo-preview-wrap').style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+  });
+
+  // ── Input error clear ──────────────────────────────────────
+  ['cf-name','cf-email'].forEach(function (id) {
+    document.getElementById(id).addEventListener('input', function () {
+      this.classList.remove('error');
+    });
+  });
+
+  // ── Init ──────────────────────────────────────────────────
+  renderCart();
+
+})();
+</script>
+</body>
+</html>

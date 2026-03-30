@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Política de Privacidad — Alista Salud</title>
+  <meta name="description" content="Política de privacidad de Alista Salud. Conoce cómo protegemos y tratamos tus datos personales conforme a la LFPDPPP." />
+  <link rel="icon" type="image/png" href="../assets/images/logo-salud.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Open+Sans:wght@300;400;500&family=Space+Mono:wght@400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:         #ffffff;
+      --bg-soft:    #edf9f7;
+      --teal:       #00a896;
+      --teal-dark:  #007a6e;
+      --teal-light: #4dc9bc;
+      --teal-rgb:   0, 168, 150;
+      --ink:        #0f2b28;
+      --ink-footer: #0a1f1d;
+      --slate:      #4a7772;
+      --slate-light:#8ab5b0;
+      --border:     rgba(0,168,150,0.14);
+      --shadow:     rgba(0,100,90,0.10);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Open Sans', Arial, sans-serif;
+      font-size: 14px; font-weight: 400; line-height: 1.8;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg-soft); }
+    ::-webkit-scrollbar-thumb { background: var(--teal); border-radius: 2px; }
+
+    /* ── Top bar ── */
+    .topbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar-inner {
+      max-width: 820px; margin: 0 auto; padding: 0 2rem;
+      height: 64px; display: flex; align-items: center; gap: 1rem;
+    }
+    .topbar-logo { height: 32px; }
+    .topbar-divider { width: 1px; height: 24px; background: var(--border); }
+    .back-link {
+      display: flex; align-items: center; gap: 0.4rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--slate); transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--teal); }
+    .back-link svg { width: 12px; height: 12px; }
+    .topbar-title {
+      margin-left: auto;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--slate-light);
+    }
+
+    /* ── Hero banner ── */
+    .doc-hero {
+      background: var(--bg-soft);
+      padding: 3.5rem 2rem 3rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .doc-hero-inner { max-width: 820px; margin: 0 auto; }
+    .eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--teal); margin-bottom: 0.6rem;
+    }
+    .doc-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 700;
+      color: var(--ink); line-height: 1.2; margin-bottom: 0.75rem;
+    }
+    .doc-rule {
+      width: 36px; height: 3px; background: var(--teal);
+      border-radius: 2px; margin-bottom: 1rem;
+    }
+    .doc-meta {
+      font-size: 0.8rem; color: var(--slate); font-weight: 300;
+    }
+    .doc-meta strong { font-weight: 500; color: var(--ink); }
+
+    /* ── ARCO highlight box ── */
+    .arco-box {
+      background: rgba(var(--teal-rgb), 0.06);
+      border: 1px solid rgba(var(--teal-rgb), 0.20);
+      border-left: 3px solid var(--teal);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      margin: 2.5rem 0;
+    }
+    .arco-box p {
+      font-size: 0.88rem; color: var(--slate);
+      margin: 0 !important;
+      line-height: 1.7;
+    }
+    .arco-box strong { color: var(--ink); font-weight: 600; }
+    .arco-box a { color: var(--teal); }
+    .arco-box a:hover { text-decoration: underline; }
+
+    /* ── Content ── */
+    .doc-body {
+      max-width: 820px; margin: 0 auto;
+      padding: 3rem 2rem 5rem;
+    }
+    .doc-section { margin-bottom: 2.8rem; }
+    .doc-section h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.05rem; font-weight: 700;
+      color: var(--ink); margin-bottom: 0.75rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .doc-section h2 .num {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem; letter-spacing: 0.08em;
+      color: var(--teal);
+      background: rgba(var(--teal-rgb), 0.08);
+      padding: 0.15rem 0.45rem; border-radius: 4px;
+    }
+    .doc-section p {
+      font-size: 0.9rem; color: var(--slate);
+      font-weight: 400; margin-bottom: 0.9rem; line-height: 1.8;
+    }
+    .doc-section p:last-child { margin-bottom: 0; }
+    .doc-section ul {
+      list-style: none; padding: 0;
+      margin: 0.5rem 0 0.9rem;
+    }
+    .doc-section ul li {
+      font-size: 0.9rem; color: var(--slate);
+      padding: 0.35rem 0 0.35rem 1.4rem;
+      position: relative; line-height: 1.7;
+    }
+    .doc-section ul li::before {
+      content: '';
+      position: absolute; left: 0; top: 0.75rem;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--teal);
+    }
+    .doc-section strong { color: var(--ink); font-weight: 600; }
+
+    /* Rights grid */
+    .rights-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem; margin: 1rem 0;
+    }
+    .right-card {
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: 8px; padding: 1rem 1.25rem;
+    }
+    .right-card-letter {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.5rem; font-weight: 700;
+      color: var(--teal); line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+    .right-card-name {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.82rem; font-weight: 600;
+      color: var(--ink); margin-bottom: 0.3rem;
+    }
+    .right-card-desc {
+      font-size: 0.8rem; color: var(--slate);
+      line-height: 1.6; margin: 0 !important;
+    }
+
+    /* Contact box */
+    .contact-box {
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: 10px; padding: 1.5rem 2rem;
+      margin-top: 2.5rem;
+      display: flex; align-items: flex-start; gap: 1rem;
+    }
+    .contact-box-icon {
+      flex-shrink: 0; width: 36px; height: 36px;
+      background: rgba(var(--teal-rgb), 0.12);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--teal);
+    }
+    .contact-box-icon svg { width: 18px; height: 18px; }
+    .contact-box-text p {
+      font-size: 0.85rem; color: var(--slate);
+      margin-bottom: 0.25rem !important;
+    }
+    .contact-box-text a { color: var(--teal); }
+    .contact-box-text a:hover { text-decoration: underline; }
+
+    /* ── Footer ── */
+    .doc-footer { background: var(--ink-footer); padding: 2rem; }
+    .doc-footer-inner {
+      max-width: 820px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .doc-footer-brand { display: flex; align-items: center; gap: 0.6rem; }
+    .doc-footer-brand img { height: 28px; opacity: 0.55; }
+    .doc-footer-brand span {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.55rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+    }
+    .doc-footer-links { display: flex; gap: 1.25rem; align-items: center; }
+    .doc-footer-link {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.52rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(255,255,255,0.3); transition: color 0.2s;
+    }
+    .doc-footer-link:hover { color: var(--teal-light); }
+    .doc-footer-link.active { color: rgba(255,255,255,0.55); }
+    .doc-footer-copy {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.52rem; letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.2);
+    }
+
+    @media (max-width: 600px) {
+      .topbar-title { display: none; }
+      .doc-body { padding: 2rem 1.25rem 4rem; }
+      .rights-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Top bar ── -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a href="../salud.html" aria-label="Inicio Alista Salud">
+        <img src="../assets/images/logo-salud.png" alt="Alista Salud" class="topbar-logo" />
+      </a>
+      <div class="topbar-divider" aria-hidden="true"></div>
+      <a href="../salud.html" class="back-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+        Alista Salud
+      </a>
+      <span class="topbar-title">Política de Privacidad</span>
+    </div>
+  </header>
+
+  <!-- ── Hero ── -->
+  <div class="doc-hero">
+    <div class="doc-hero-inner">
+      <p class="eyebrow">Legal · Alista Salud</p>
+      <h1 class="doc-title">Política de Privacidad</h1>
+      <div class="doc-rule"></div>
+      <p class="doc-meta">Última actualización: <strong>26 de marzo de 2026</strong> · Cumplimiento con la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP).</p>
+    </div>
+  </div>
+
+  <!-- ── Body ── -->
+  <main class="doc-body">
+
+    <div class="doc-section">
+      <h2><span class="num">01</span> Identidad y Domicilio del Responsable</h2>
+      <p><strong>Alista Salud</strong>, división de Grupo Alista (en adelante "el Responsable"), con domicilio en <strong>Lázaro Cárdenas Pte. 2953, Col. Chapalita, Guadalajara, Jalisco, México, C.P. 44500</strong>, es el responsable del uso y protección de sus datos personales.</p>
+      <p>Para cualquier asunto relacionado con el tratamiento de sus datos personales puede contactarnos en: <a href="mailto:salud@grupoalista.com" style="color:var(--teal)">salud@grupoalista.com</a></p>
+    </div>
+
+    <div class="doc-section">
+      <h2><span class="num">02</span> Datos Personales que Recabamos</h2>
+      <p>Para llevar a cabo las finalidades descritas en esta política, Alista Salud puede recabar los siguientes datos personales:</p>
+      <ul>
+        <li><strong>Datos de identificación:</strong> nombre completo, razón social, RFC.</li>
+        <li><strong>Datos de contacto:</strong> correo electrónico, número de teléfono o WhatsApp, dirección de entrega.</li>
+        <li><strong>Datos fiscales:</strong> RFC, régimen fiscal, domicilio fiscal (para emisión de CFDI).</li>
+        <li><strong>Datos de la operación:</strong> productos solicitados, historial de pedidos, preferencias de compra.</li>
+      </ul>
+      <p>Alista Salud <strong>no recaba datos personales sensibles</strong> (como datos de salud, biométricos, genéticos, ideología, religión o afiliación sindical) en ninguno de sus procesos comerciales.</p>
+    </div>
+
+    <div class="doc-section">
+      <h2><span class="num">03</span> Finalidades del Tratamiento</h2>
+      <p>Los datos personales que recabamos se utilizarán para las siguientes <strong>finalidades primarias</strong>, necesarias para la relación comercial:</p>
+      <ul>
+        <li>Procesar y gestionar pedidos, cotizaciones y solicitudes de información.</li>
+        <li>Emitir facturas electrónicas (CFDI) y dar cumplimiento a obligaciones fiscales.</li>
+        <li>Coordinar envíos y gestionar la entrega de productos.</li>
+        <li>Brindar atención al cliente y seguimiento posventa.</li>
+        <li>Dar cumplimiento a obligaciones legales y regulatorias aplicables a la distribución de insumos médicos.</li>
+      </ul>
+      <p>De manera adicional, y siempre con su consentimiento expreso cuando así lo exija la ley, podríamos utilizar sus datos para las siguientes <strong>finalidades secundarias</strong>:</p>
+      <ul>
+        <li>Informarle sobre nuevos productos, promociones o actualizaciones del catálogo.</li>
+        <li>Invitarle a participar en encuestas de satisfacción.</li>
+      </ul>
+      <p>Si no desea que sus datos sean utilizados para estas finalidades secundarias, puede manifestarlo en cualquier momento a través de los canales de contacto indicados en esta política.</p>
+    </div>
+
+    <div class="doc-section">
+      <h2><span class="num">04</span> Transferencia de Datos</h2>
+      <p>Alista Salud podrá transferir sus datos personales a terceros en los siguientes casos, sin requerir su consentimiento cuando así lo permite la ley:</p>
+      <ul>
+        <li><strong>Empresas de mensajería y logística:</strong> exclusivamente los datos necesarios para coordinar la entrega de sus pedidos (nombre, dirección, teléfono de contacto).</li>
+        <li><strong>Autoridades competentes:</strong> cuando sea requerido por ley, orden judicial o disposición regulatoria, incluyendo el SAT y COFEPRIS.</li>
+        <li><strong>Grupo Alista:</strong> para efectos de consolidación administrativa interna, bajo los mismos estándares de protección de datos.</li>
+      </ul>
+      <p>Alista Salud <strong>no vende, arrienda ni cede</strong> sus datos personales a terceros con fines comerciales o publicitarios.</p>
+    </div>
+
+    <div class="doc-section">
+      <h2><span class="num">05</span> Derechos ARCO</h2>
+      <p>Conforme a la <strong>Ley Federal de Protección de Datos Personales en Posesión de los Particulares</strong>, usted tiene derecho a:</p>
+      <div class="rights-grid">
+        <div class="right-card">
+          <div class="right-card-letter">A</div>
+          <div class="right-card-name">Acceso</div>
+          <p class="right-card-desc">Conocer qué datos personales tenemos de usted, para qué los usamos y las condiciones del tratamiento.</p>
+        </div>
+        <div class="right-card">
+          <div class="right-card-letter">R</div>
+          <div class="right-card-name">Rectificación</div>
+          <p class="right-card-desc">Solicitar la corrección de sus datos cuando sean inexactos, incompletos o desactualizados.</p>
+        </div>
+        <div class="right-card">
+          <div class="right-card-letter">C</div>
+          <div class="right-card-name">Cancelación</div>
+          <p class="right-card-desc">Pedir que sus datos sean eliminados de nuestros registros cuando ya no sean necesarios para las finalidades que justificaron su tratamiento.</p>
+        </div>
+        <div class="right-card">
+          <div class="right-card-letter">O</div>
+          <div class="right-card-name">Oposición</div>
+          <p class="right-card-desc">Oponerse al tratamiento de sus datos para finalidades específicas, en particular las de carácter secundario.</p>
+        </div>
+      </div>
+      <p>Para ejercer cualquiera de estos derechos, envíe su solicitud por escrito a <a href="mailto:salud@grupoalista.com" style="color:var(--teal)">salud@grupoalista.com</a>, indicando su nombre completo, los datos que desea ejercer y, en su caso, documentación que acredite su identidad. Daremos respuesta en un plazo máximo de <strong>20 días hábiles</strong>.</p>
+    </div>
+
+    <!-- ARCO highlight -->
+    <div class="arco-box">
+      <p><strong>Revocación del consentimiento:</strong> en todo momento puede revocar el consentimiento otorgado para el tratamiento de sus datos, siempre que el tratamiento no sea necesario para el cumplimiento de una obligación legal. Para ello, contáctenos en <a href="mailto:salud@grupoalista.com">salud@grupoalista.com</a>. La revocación no tendrá efectos retroactivos.</p>
+    </div>
+
+    <div class="doc-section">
+      <h2><span class="num">06</span> Seguridad de los Datos</h2>
+      <p>Alista Salud ha implementado medidas administrativas, técnicas y físicas para proteger sus datos personales contra daño, pérdida, alteración, destrucción o acceso no autorizado, de conformidad con lo establecido en la LFPDPPP y su Reglamento.</p>
+      <p>El acceso a los datos personales está restringido al personal interno que necesita conocerlos para llevar a cabo sus funciones y que ha asumido compromisos de confidencialidad.</p>
+    </div>
+
+    <div class="doc-section">
+      <h2><span class="num">07</span> Uso de Cookies y Tecnologías de Rastreo</h2>
+      <p>El sitio web de Alista Salud (<strong>grupoalista.com/salud.html</strong>) es un sitio estático informativo. <strong>No utiliza cookies de rastreo, herramientas de analítica de terceros ni píxeles de seguimiento</strong> que recopilen información personal de los visitantes.</p>
+      <p>El sitio no requiere registro ni inicio de sesión, por lo que no se almacena ningún dato del usuario en el servidor al navegar por él.</p>
+    </div>
+
+    <div class="doc-section">
+      <h2><span class="num">08</span> Cambios a esta Política</h2>
+      <p>Alista Salud se reserva el derecho de actualizar esta Política de Privacidad en cualquier momento para reflejar cambios en sus prácticas de tratamiento de datos, nuevos requisitos legales o mejoras en sus procesos. Cualquier modificación será publicada en este sitio web con la fecha de entrada en vigor actualizada.</p>
+      <p>Se recomienda revisar esta política periódicamente. El uso continuado de los servicios de Alista Salud implica la aceptación de la versión vigente.</p>
+    </div>
+
+    <div class="doc-section">
+      <h2><span class="num">09</span> Autoridad Competente</h2>
+      <p>Si considera que sus derechos de protección de datos no han sido debidamente atendidos, tiene derecho a presentar una queja ante el <strong>Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales (INAI)</strong>, en su portal <a href="https://www.inai.org.mx" target="_blank" rel="noopener" style="color:var(--teal)">www.inai.org.mx</a>.</p>
+    </div>
+
+    <!-- Contact box -->
+    <div class="contact-box">
+      <div class="contact-box-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+      </div>
+      <div class="contact-box-text">
+        <p><strong>¿Deseas ejercer tus derechos ARCO o tienes dudas sobre tu privacidad?</strong></p>
+        <p>Escríbenos a <a href="mailto:salud@grupoalista.com">salud@grupoalista.com</a> — respondemos en un máximo de 20 días hábiles.</p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ── Footer ── -->
+  <footer class="doc-footer">
+    <div class="doc-footer-inner">
+      <a href="../salud.html" class="doc-footer-brand" aria-label="Alista Salud">
+        <img src="../assets/images/logo-salud.png" alt="Alista Salud" />
+        <span>Alista Salud</span>
+      </a>
+      <div class="doc-footer-links">
+        <a href="terminos.html" class="doc-footer-link">Términos</a>
+        <a href="privacidad.html" class="doc-footer-link active">Privacidad</a>
+        <a href="../salud.html" class="doc-footer-link">Inicio</a>
+        <a href="catalogo.html" class="doc-footer-link">Catálogo</a>
+      </div>
+      <span class="doc-footer-copy">© 2026 Alista Salud</span>
+    </div>
+  </footer>
+
+</body>
+</html>

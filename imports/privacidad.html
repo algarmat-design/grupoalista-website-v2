@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aviso de Privacidad — Alista Imports</title>
+  <meta name="description" content="Aviso de privacidad de Alista Imports conforme a la LFPDPPP. Conoce cómo protegemos tus datos personales." />
+  <link rel="icon" type="image/png" href="../assets/images/logo-imports.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700&family=Lato:wght@300;400;500&family=Space+Mono:wght@400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:          #0c1e16;
+      --bg-elevated: #112318;
+      --bg-card:     #162c1e;
+      --green:       #4a9161;
+      --green-light: #6db884;
+      --copper:      #c07940;
+      --text:        #e8f0ec;
+      --text-muted:  #7d9e8d;
+      --slate:       #8aa89c;
+      --border:      rgba(74,145,97,0.20);
+      --border-soft: rgba(74,145,97,0.10);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'Lato', sans-serif;
+      font-weight: 400;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-elevated); }
+    ::-webkit-scrollbar-thumb { background: var(--green); border-radius: 3px; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Topbar ── */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(17,35,24,0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .topbar-back {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+    .topbar-back:hover { color: var(--green-light); }
+    .topbar-back svg { width: 16px; height: 16px; }
+    .topbar-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--slate);
+    }
+
+    /* ── Page Header ── */
+    .page-header {
+      background: var(--bg-elevated);
+      padding: 5rem 2rem 4rem;
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .page-header-inner { max-width: 840px; margin: 0 auto; }
+    .page-eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--green);
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .page-header h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: clamp(2.5rem, 5vw, 3.8rem);
+      color: var(--text);
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+    .page-meta {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+    .page-meta span { display: flex; align-items: center; gap: 0.4rem; }
+
+    /* ── Content ── */
+    .content-wrap {
+      max-width: 840px;
+      margin: 0 auto;
+      padding: 4rem 2rem 6rem;
+    }
+    .toc {
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      border-left: 4px solid var(--green);
+      border-radius: 8px;
+      padding: 1.75rem 2rem;
+      margin-bottom: 3.5rem;
+    }
+    .toc h3 {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 1rem;
+    }
+    .toc ol {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      counter-reset: toc;
+    }
+    .toc ol li { counter-increment: toc; }
+    .toc ol li a {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      transition: color 0.2s;
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
+    .toc ol li a::before {
+      content: counter(toc, decimal-leading-zero);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--copper);
+      flex-shrink: 0;
+      min-width: 28px;
+    }
+    .toc ol li a:hover { color: var(--text); }
+
+    .legal-section {
+      margin-bottom: 3rem;
+      scroll-margin-top: 80px;
+    }
+    .legal-section h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.6rem;
+      color: var(--text);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+    }
+    .section-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--copper);
+      letter-spacing: 0.1em;
+    }
+    .legal-section p {
+      font-size: 0.93rem;
+      font-weight: 300;
+      color: var(--text-muted);
+      line-height: 1.85;
+      margin-bottom: 0.85rem;
+    }
+    .legal-section p:last-child { margin-bottom: 0; }
+    .legal-section ul {
+      list-style: none;
+      padding: 0;
+      margin: 0.75rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .legal-section ul li {
+      font-size: 0.92rem;
+      font-weight: 300;
+      color: var(--text-muted);
+      line-height: 1.7;
+      padding-left: 1.25rem;
+      position: relative;
+    }
+    .legal-section ul li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--copper);
+      font-size: 0.7rem;
+    }
+    .divider {
+      height: 1px;
+      background: var(--border-soft);
+      margin: 2.5rem 0;
+    }
+
+    /* ARCO cards */
+    .arco-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .arco-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      border-top: 3px solid var(--green);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+    }
+    .arco-card:nth-child(2) { border-top-color: var(--copper); }
+    .arco-card:nth-child(3) { border-top-color: var(--green-light); }
+    .arco-card:nth-child(4) { border-top-color: var(--slate); }
+    .arco-letter {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--copper);
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+    .arco-card:nth-child(2) .arco-letter { color: var(--copper); }
+    .arco-card:nth-child(3) .arco-letter { color: var(--green-light); }
+    .arco-card:nth-child(4) .arco-letter { color: var(--slate); }
+    .arco-title {
+      font-weight: 500;
+      font-size: 0.92rem;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+    .arco-desc {
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Highlight box */
+    .highlight-box {
+      background: rgba(192,121,64,0.08);
+      border: 1px solid rgba(192,121,64,0.25);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1rem 0;
+    }
+    .highlight-box p {
+      font-size: 0.9rem;
+      color: rgba(232,200,160,0.9) !important;
+      margin: 0 !important;
+    }
+    .highlight-box strong { color: var(--copper); }
+
+    .inai-box {
+      background: rgba(74,145,97,0.08);
+      border: 1px solid rgba(74,145,97,0.25);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1rem 0;
+    }
+    .inai-box p {
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: var(--text-muted) !important;
+      margin: 0 !important;
+      line-height: 1.7;
+    }
+    .inai-box strong { color: var(--green-light); }
+
+    /* ── Legal Footer ── */
+    .legal-footer {
+      background: #050f09;
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--border-soft);
+    }
+    .legal-footer-inner {
+      max-width: 840px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .legal-footer-links {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .legal-footer-links a {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      opacity: 0.7;
+      transition: opacity 0.2s, color 0.2s;
+    }
+    .legal-footer-links a:hover { opacity: 1; color: var(--green-light); }
+    .legal-footer-copy {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      opacity: 0.4;
+    }
+
+    @media (max-width: 768px) {
+      .topbar-title { display: none; }
+      .content-wrap { padding: 3rem 1.25rem 5rem; }
+      .page-header { padding: 4rem 1.25rem 3rem; }
+      .arco-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Topbar ── -->
+  <div class="topbar">
+    <a class="topbar-back" href="../imports.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M19 12H5M12 5l-7 7 7 7"/>
+      </svg>
+      Alista Imports
+    </a>
+    <span class="topbar-title">Aviso de Privacidad</span>
+  </div>
+
+  <!-- ── Page Header ── -->
+  <header class="page-header">
+    <div class="page-header-inner">
+      <span class="page-eyebrow">Legal · LFPDPPP</span>
+      <h1>Aviso de Privacidad</h1>
+      <p style="font-size:0.95rem;font-weight:300;color:var(--text-muted);line-height:1.8;max-width:600px;margin-top:1rem;">
+        En Alista Imports tomamos muy en serio la protección de tus datos personales. Este aviso
+        describe cómo recabamos, utilizamos y protegemos tu información, conforme a la
+        Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP).
+      </p>
+      <div class="page-meta">
+        <span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Última actualización: 26 de marzo de 2026
+        </span>
+        <span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          Aplicable en toda la República Mexicana
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Content ── -->
+  <main class="content-wrap">
+    <!-- TOC -->
+    <nav class="toc" aria-label="Índice">
+      <h3>Índice</h3>
+      <ol>
+        <li><a href="#sec1">Identidad y Domicilio del Responsable</a></li>
+        <li><a href="#sec2">Datos Personales Recabados</a></li>
+        <li><a href="#sec3">Finalidades del Tratamiento</a></li>
+        <li><a href="#sec4">Transferencias de Datos</a></li>
+        <li><a href="#sec5">Derechos ARCO</a></li>
+        <li><a href="#sec6">Mecanismo de Revocación del Consentimiento</a></li>
+        <li><a href="#sec7">Seguridad de la Información</a></li>
+        <li><a href="#sec8">Uso de Cookies y Tecnologías de Rastreo</a></li>
+        <li><a href="#sec9">Cambios al Aviso de Privacidad</a></li>
+      </ol>
+    </nav>
+
+    <!-- Sección 1 -->
+    <div class="legal-section" id="sec1">
+      <h2><span class="section-num">01</span> Identidad y Domicilio del Responsable</h2>
+      <p>
+        <strong style="color:var(--text);">Grupo Alista S.A. de C.V.</strong>, a través de su división
+        <strong style="color:var(--green-light);">Alista Imports</strong>, con domicilio en
+        Lázaro Cárdenas Pte. 2953, Col. Chapalita, Guadalajara, Jalisco, México, C.P. 44500,
+        es el responsable del tratamiento de sus datos personales conforme a lo dispuesto
+        en la LFPDPPP y su Reglamento.
+      </p>
+      <p>
+        Para ejercer sus derechos ARCO o presentar cualquier solicitud relacionada con sus datos personales,
+        puede contactarnos a través de:
+      </p>
+      <ul>
+        <li>Correo electrónico: <strong style="color:var(--text);">privacidad@grupoalista.com</strong></li>
+        <li>Teléfono: +52 333 128 8999</li>
+        <li>Correo postal: Lázaro Cárdenas Pte. 2953, Col. Chapalita, Guadalajara, Jalisco, C.P. 44500</li>
+      </ul>
+    </div>
+    <div class="divider"></div>
+
+    <!-- Sección 2 -->
+    <div class="legal-section" id="sec2">
+      <h2><span class="section-num">02</span> Datos Personales Recabados</h2>
+      <p>
+        Para la prestación de nuestros servicios de importación, agencia aduanal y logística internacional,
+        recabamos los siguientes datos personales:
+      </p>
+      <ul>
+        <li><strong style="color:var(--text);">Datos de identificación:</strong> nombre completo, RFC, CURP, número de identificación oficial</li>
+        <li><strong style="color:var(--text);">Datos de contacto:</strong> correo electrónico, número de teléfono fijo y móvil, dirección postal</li>
+        <li><strong style="color:var(--text);">Datos fiscales y comerciales:</strong> razón social, domicilio fiscal, giro mercantil, datos bancarios para facturación</li>
+        <li><strong style="color:var(--text);">Datos aduanales:</strong> patente de importador, poder notarial, inscripción en padrón de importadores</li>
+        <li><strong style="color:var(--text);">Datos de la operación:</strong> descripción y valor de mercancías, país de origen, proveedores internacionales</li>
+      </ul>
+      <p>
+        No recabamos datos personales sensibles (datos de salud, creencias religiosas, origen étnico,
+        preferencias sexuales, datos genéticos) en el desarrollo ordinario de nuestros servicios.
+      </p>
+    </div>
+    <div class="divider"></div>
+
+    <!-- Sección 3 -->
+    <div class="legal-section" id="sec3">
+      <h2><span class="section-num">03</span> Finalidades del Tratamiento</h2>
+      <p>Sus datos personales son utilizados para las siguientes <strong style="color:var(--text);">finalidades primarias</strong> (necesarias para la prestación del servicio):</p>
+      <ul>
+        <li>Tramitación de pedimentos de importación y despacho aduanal ante el SAT</li>
+        <li>Cumplimiento de obligaciones fiscales, contables y aduaneras</li>
+        <li>Emisión de facturas electrónicas (CFDI) y documentos de transporte</li>
+        <li>Coordinación logística con navieras, aerolíneas y transportistas</li>
+        <li>Comunicación sobre el estatus de sus operaciones</li>
+        <li>Gestión de cobros y pagos relacionados con sus importaciones</li>
+      </ul>
+      <p style="margin-top:1.25rem;">Las <strong style="color:var(--text);">finalidades secundarias</strong> (no necesarias pero que mejoran la experiencia) incluyen:</p>
+      <ul>
+        <li>Envío de información comercial sobre nuestros servicios y novedades en comercio exterior</li>
+        <li>Realización de encuestas de satisfacción</li>
+        <li>Elaboración de estadísticas internas y análisis de tendencias de importación</li>
+      </ul>
+      <p>
+        Si no desea que sus datos sean tratados para las finalidades secundarias, puede manifestarlo
+        enviando un correo a <strong style="color:var(--text);">privacidad@grupoalista.com</strong>.
+      </p>
+    </div>
+    <div class="divider"></div>
+
+    <!-- Sección 4 -->
+    <div class="legal-section" id="sec4">
+      <h2><span class="section-num">04</span> Transferencias de Datos</h2>
+      <p>
+        Para el cumplimiento de las finalidades descritas, Alista Imports podrá transferir sus datos
+        personales a las siguientes entidades, <strong style="color:var(--text);">sin requerir su consentimiento</strong>
+        conforme al artículo 37 de la LFPDPPP, al ser necesarias para el cumplimiento de obligaciones legales:
+      </p>
+      <ul>
+        <li><strong style="color:var(--text);">Servicio de Administración Tributaria (SAT):</strong> para tramitación de pedimentos y cumplimiento fiscal</li>
+        <li><strong style="color:var(--text);">Agencia Nacional de Aduanas de México (ANAM):</strong> para reconocimiento y despacho de mercancías</li>
+        <li><strong style="color:var(--text);">Navieras, aerolíneas y transportistas:</strong> para coordinación del flete internacional y nacional</li>
+        <li><strong style="color:var(--text);">Autoridades sanitarias (COFEPRIS, SENASICA):</strong> cuando la mercancía requiera permisos previos</li>
+        <li><strong style="color:var(--text);">Instituciones bancarias:</strong> para procesamiento de pagos y transferencias</li>
+      </ul>
+      <p>
+        Cualquier otra transferencia de datos a terceros no listados anteriormente requerirá su
+        consentimiento expreso previo.
+      </p>
+    </div>
+    <div class="divider"></div>
+
+    <!-- Sección 5 -->
+    <div class="legal-section" id="sec5">
+      <h2><span class="section-num">05</span> Derechos ARCO</h2>
+      <p>
+        Usted tiene derecho a Acceder, Rectificar, Cancelar u Oponerse al tratamiento de sus datos
+        personales (derechos ARCO), conforme a lo establecido en la LFPDPPP:
+      </p>
+      <div class="arco-grid">
+        <div class="arco-card">
+          <div class="arco-letter">A</div>
+          <div class="arco-title">Acceso</div>
+          <p class="arco-desc">Conocer qué datos personales tenemos sobre usted, para qué los utilizamos y las condiciones de su tratamiento.</p>
+        </div>
+        <div class="arco-card">
+          <div class="arco-letter">R</div>
+          <div class="arco-title">Rectificación</div>
+          <p class="arco-desc">Solicitar la corrección de sus datos si son inexactos, incompletos o están desactualizados.</p>
+        </div>
+        <div class="arco-card">
+          <div class="arco-letter">C</div>
+          <div class="arco-title">Cancelación</div>
+          <p class="arco-desc">Pedir la supresión de sus datos de nuestras bases, salvo que exista obligación legal de conservarlos.</p>
+        </div>
+        <div class="arco-card">
+          <div class="arco-letter">O</div>
+          <div class="arco-title">Oposición</div>
+          <p class="arco-desc">Oponerse al uso de sus datos para finalidades secundarias o cuando tenga causa legítima para ello.</p>
+        </div>
+      </div>
+      <p>
+        Para ejercer cualquiera de estos derechos, envíe su solicitud a <strong style="color:var(--text);">privacidad@grupoalista.com</strong>
+        indicando: nombre completo, descripción clara del derecho que desea ejercer, documentación que acredite su identidad
+        y, en su caso, los datos o documentos que fundamenten su solicitud.
+      </p>
+      <p>
+        Daremos respuesta a su solicitud en un plazo máximo de 20 días hábiles, conforme a lo dispuesto en el
+        artículo 32 de la LFPDPPP.
+      </p>
+    </div>
+    <div class="divider"></div>
+
+    <!-- Sección 6 -->
+    <div class="legal-section" id="sec6">
+      <h2><span class="section-num">06</span> Mecanismo de Revocación del Consentimiento</h2>
+      <p>
+        Usted puede revocar en cualquier momento el consentimiento que haya otorgado para el
+        tratamiento de sus datos personales, siempre y cuando no exista impedimento legal o contractual
+        que lo impida (por ejemplo, si existe una operación aduanal en curso que requiera el tratamiento
+        de sus datos para su conclusión).
+      </p>
+      <div class="highlight-box">
+        <p>
+          Para revocar su consentimiento, envíe un correo a
+          <strong>privacidad@grupoalista.com</strong> con el asunto
+          <strong>"Revocación de Consentimiento"</strong> indicando su nombre completo y los datos
+          cuyo tratamiento desea revocar. Procesaremos su solicitud en un máximo de 20 días hábiles.
+        </p>
+      </div>
+      <p>
+        Tenga en cuenta que la revocación del consentimiento no tendrá efectos retroactivos sobre
+        tratamientos ya realizados conforme al consentimiento previamente otorgado.
+      </p>
+    </div>
+    <div class="divider"></div>
+
+    <!-- Sección 7 -->
+    <div class="legal-section" id="sec7">
+      <h2><span class="section-num">07</span> Seguridad de la Información</h2>
+      <p>
+        Alista Imports implementa medidas de seguridad administrativas, técnicas y físicas para
+        proteger sus datos personales contra daño, pérdida, alteración, destrucción o acceso
+        no autorizado, incluyendo:
+      </p>
+      <ul>
+        <li>Control de acceso a bases de datos con autenticación y autorización por roles</li>
+        <li>Encriptación de información sensible en tránsito y en reposo</li>
+        <li>Acuerdos de confidencialidad con el personal que tiene acceso a datos personales</li>
+        <li>Procedimientos de respaldo y recuperación de información</li>
+        <li>Revisión periódica de políticas y controles de seguridad</li>
+      </ul>
+      <p>
+        En caso de que ocurra una vulneración de seguridad que afecte de forma significativa sus derechos
+        patrimoniales o morales, se lo notificaremos de manera inmediata conforme a la legislación aplicable.
+      </p>
+    </div>
+    <div class="divider"></div>
+
+    <!-- Sección 8 -->
+    <div class="legal-section" id="sec8">
+      <h2><span class="section-num">08</span> Uso de Cookies y Tecnologías de Rastreo</h2>
+      <p>
+        Nuestros canales de contacto (correo electrónico, WhatsApp) no utilizan cookies ni tecnologías
+        de rastreo para la identificación de usuarios.
+      </p>
+      <p>
+        En caso de que en el futuro habilitemos un sitio web con funcionalidades que impliquen el uso de
+        cookies o tecnologías similares, actualizaremos este aviso y le informaremos sobre:
+      </p>
+      <ul>
+        <li>El tipo de cookies utilizadas (funcionales, analíticas, publicitarias)</li>
+        <li>Los datos que recaban y su finalidad</li>
+        <li>El mecanismo para deshabilitarlas</li>
+      </ul>
+      <p>
+        Por el momento, no realizamos rastreo de comportamiento en línea ni utilizamos herramientas
+        de análisis de tráfico web que impliquen el tratamiento de datos personales.
+      </p>
+    </div>
+    <div class="divider"></div>
+
+    <!-- Sección 9 -->
+    <div class="legal-section" id="sec9">
+      <h2><span class="section-num">09</span> Cambios al Aviso de Privacidad</h2>
+      <p>
+        El presente Aviso de Privacidad puede ser modificado en cualquier momento para atender
+        cambios legislativos, regulatorios o en nuestras prácticas de negocio. Cualquier modificación
+        será comunicada a través del correo electrónico registrado por el Cliente y/o publicada en
+        nuestros medios de comunicación oficiales.
+      </p>
+      <p>
+        Le recomendamos revisar periódicamente este aviso para estar al tanto de cualquier cambio.
+        La fecha de última actualización siempre estará visible en el encabezado de este documento.
+      </p>
+      <div class="inai-box">
+        <p>
+          Si considera que su derecho de protección de datos personales ha sido vulnerado por alguna
+          conducta de nuestra parte, puede acudir al
+          <strong>Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales (INAI)</strong>,
+          con domicilio en Insurgentes Sur 3211, Col. Insurgentes Cuicuilco, Alcaldía Coyoacán, CDMX,
+          o a través de su sitio web oficial. Tel. 800-835-4324.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <!-- ── Legal Footer ── -->
+  <footer class="legal-footer">
+    <div class="legal-footer-inner">
+      <div class="legal-footer-links">
+        <a href="terminos.html">Términos y Condiciones</a>
+        <a href="../imports.html">Inicio Alista Imports</a>
+        <a href="../index.html">Grupo Alista</a>
+      </div>
+      <span class="legal-footer-copy">© 2026 Alista Imports — Grupo Alista S.A. de C.V.</span>
+    </div>
+  </footer>
+
+</body>
+</html>

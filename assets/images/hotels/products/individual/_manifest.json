@@ -1,0 +1,758 @@
+[
+  {
+    "file": "tdp-01-toallas-dobladas.png",
+    "category": "limpieza",
+    "name_es": "Toallas de Papel Dobladas y Despachadores",
+    "name_en": "Folded Paper Towels & Dispensers"
+  },
+  {
+    "file": "tdp-02-toallas-rollo.png",
+    "category": "limpieza",
+    "name_es": "Toallas de Papel en Rollo y Despachadores",
+    "name_en": "Roll Paper Towels & Dispensers"
+  },
+  {
+    "file": "tdp-03-toallas-papel.png",
+    "category": "limpieza",
+    "name_es": "Toallas de Papel",
+    "name_en": "Paper Towels"
+  },
+  {
+    "file": "tdp-04-tork-xpress-cubierto.png",
+    "category": "limpieza",
+    "name_es": "Tork® Xpress® Cubierto",
+    "name_en": "Tork® Xpress® Countertop"
+  },
+  {
+    "file": "tdp-05-kimberly-mesa.png",
+    "category": "limpieza",
+    "name_es": "Kimberly-Clark® De Mesa",
+    "name_en": "Kimberly-Clark® Countertop"
+  },
+  {
+    "file": "tdp-06-toallas-mano.png",
+    "category": "limpieza",
+    "name_es": "Toallas de Mano",
+    "name_en": "Hand Towels"
+  },
+  {
+    "file": "tdp-07-portarollos.png",
+    "category": "limpieza",
+    "name_es": "Portarollos para Toallas",
+    "name_en": "Towel Roll Holders"
+  },
+  {
+    "file": "tdp-08-tork-xpress-pared.png",
+    "category": "limpieza",
+    "name_es": "Tork® Xpress® para Pared",
+    "name_en": "Tork® Xpress® Wall-Mount"
+  },
+  {
+    "file": "tdp-09-tork-peakserve.png",
+    "category": "limpieza",
+    "name_es": "Tork® Peakserve®",
+    "name_en": "Tork® Peakserve®"
+  },
+  {
+    "file": "tdp-10-tork-slimroll.png",
+    "category": "limpieza",
+    "name_es": "Tork® Control™ Slimroll®",
+    "name_en": "Tork® Control™ Slimroll®"
+  },
+  {
+    "file": "tdp-11-sistemas-toallas.png",
+    "category": "limpieza",
+    "name_es": "Sistemas para Toallas",
+    "name_en": "Towel Systems"
+  },
+  {
+    "file": "ph-01-ph-despachadores.png",
+    "category": "limpieza",
+    "name_es": "Papel Higiénico y Despachadores",
+    "name_en": "Toilet Tissue & Dispensers"
+  },
+  {
+    "file": "ph-02-ph-tubo.png",
+    "category": "limpieza",
+    "name_es": "Papel Higiénico en Tubo y Despachadores",
+    "name_en": "Coreless Toilet Tissue & Dispensers"
+  },
+  {
+    "file": "ph-03-tork-ultra-jumbo.png",
+    "category": "limpieza",
+    "name_es": "Tork® Ultra Papel Higiénico Jumbo",
+    "name_en": "Tork® Ultra Jumbo Toilet Tissue"
+  },
+  {
+    "file": "ph-04-ph-estandar.png",
+    "category": "limpieza",
+    "name_es": "Papel Higiénico Estándar",
+    "name_en": "Standard Toilet Tissue"
+  },
+  {
+    "file": "ph-05-ph-premium.png",
+    "category": "limpieza",
+    "name_es": "Papel Higiénico Premium",
+    "name_en": "Premium Toilet Tissue"
+  },
+  {
+    "file": "ph-06-tork-opticore.png",
+    "category": "limpieza",
+    "name_es": "Tork® Ópticore® Papel Higiénico",
+    "name_en": "Tork® Ópticore® Toilet Tissue"
+  },
+  {
+    "file": "ph-07-ph-rollo-grande.png",
+    "category": "limpieza",
+    "name_es": "Papel Higiénico en Rollo Grande",
+    "name_en": "Large Roll Toilet Tissue"
+  },
+  {
+    "file": "ph-08-uline-ultra.png",
+    "category": "limpieza",
+    "name_es": "Uline Ultra Papel Higiénico",
+    "name_en": "Uline Ultra Toilet Tissue"
+  },
+  {
+    "file": "ph-09-angel-soft.png",
+    "category": "limpieza",
+    "name_es": "Angel Soft® Papel Higiénico",
+    "name_en": "Angel Soft® Toilet Tissue"
+  },
+  {
+    "file": "jab-01-jabon-liquido.png",
+    "category": "limpieza",
+    "name_es": "Jabón Líquido para Manos",
+    "name_en": "Liquid Hand Soap"
+  },
+  {
+    "file": "jab-02-jabon-espuma.png",
+    "category": "limpieza",
+    "name_es": "Jabón en Espuma para Manos",
+    "name_en": "Foam Hand Soap"
+  },
+  {
+    "file": "jab-03-uline-tuff.png",
+    "category": "limpieza",
+    "name_es": "Uline Tuff Espuma",
+    "name_en": "Uline Tuff Foam Soap"
+  },
+  {
+    "file": "jab-04-industrial.png",
+    "category": "limpieza",
+    "name_es": "Jabón Industrial para Manos",
+    "name_en": "Industrial Hand Soap"
+  },
+  {
+    "file": "jab-05-gojo-2000.png",
+    "category": "limpieza",
+    "name_es": "GOJO® 2000 ml",
+    "name_en": "GOJO® 2000 ml Dispenser"
+  },
+  {
+    "file": "jab-06-gojo-5000.png",
+    "category": "limpieza",
+    "name_es": "GOJO® 5000 ml",
+    "name_en": "GOJO® 5000 ml Dispenser"
+  },
+  {
+    "file": "jab-07-mop-palmas.png",
+    "category": "limpieza",
+    "name_es": "Mop® Limpiador de Palmas",
+    "name_en": "Mop® Palm Cleaner"
+  },
+  {
+    "file": "jab-08-barra-industrial.png",
+    "category": "limpieza",
+    "name_es": "Lavado en Barra Industrial",
+    "name_en": "Industrial Bar Soap"
+  },
+  {
+    "file": "lim-01-multiuso.png",
+    "category": "limpieza",
+    "name_es": "Jabón y Detergente Multiuso",
+    "name_en": "Multi-Purpose Cleaner"
+  },
+  {
+    "file": "lim-02-desinfectante.png",
+    "category": "limpieza",
+    "name_es": "Desinfectante para Superficies",
+    "name_en": "Surface Disinfectant"
+  },
+  {
+    "file": "lim-03-vidrio.png",
+    "category": "limpieza",
+    "name_es": "Limpiador para Vidrio",
+    "name_en": "Glass Cleaner"
+  },
+  {
+    "file": "lim-04-banos.png",
+    "category": "limpieza",
+    "name_es": "Detergente para Baños",
+    "name_en": "Bathroom Detergent"
+  },
+  {
+    "file": "lim-05-desengrasante.png",
+    "category": "limpieza",
+    "name_es": "Desengrasante Industrial",
+    "name_en": "Industrial Degreaser"
+  },
+  {
+    "file": "lim-06-pisos.png",
+    "category": "limpieza",
+    "name_es": "Limpiador para Pisos",
+    "name_en": "Floor Cleaner"
+  },
+  {
+    "file": "lim-07-aromatico.png",
+    "category": "limpieza",
+    "name_es": "Limpiador Aromático",
+    "name_en": "Aromatic Cleaner"
+  },
+  {
+    "file": "lim-08-especializado.png",
+    "category": "limpieza",
+    "name_es": "Limpiador Especializado",
+    "name_en": "Specialized Cleaner"
+  },
+  {
+    "file": "lim-09-alfombras.png",
+    "category": "limpieza",
+    "name_es": "Limpiador para Alfombras",
+    "name_en": "Carpet Cleaner"
+  },
+  {
+    "file": "lim-10-acero.png",
+    "category": "limpieza",
+    "name_es": "Limpiador para Acero Inoxidable",
+    "name_en": "Stainless Steel Cleaner"
+  },
+  {
+    "file": "lim-11-automotriz.png",
+    "category": "limpieza",
+    "name_es": "Limpiador Automotriz",
+    "name_en": "Automotive Cleaner"
+  },
+  {
+    "file": "trap-01-trapeadores.png",
+    "category": "limpieza",
+    "name_es": "Trapeadores",
+    "name_en": "Wet Mops"
+  },
+  {
+    "file": "trap-02-polvo.png",
+    "category": "limpieza",
+    "name_es": "Trapeadores para Polvo",
+    "name_en": "Dust Mops"
+  },
+  {
+    "file": "trap-03-jaladores.png",
+    "category": "limpieza",
+    "name_es": "Jaladores",
+    "name_en": "Floor Squeegees"
+  },
+  {
+    "file": "trap-04-baspadores.png",
+    "category": "limpieza",
+    "name_es": "Baspadores para Piso",
+    "name_en": "Floor Scrapers"
+  },
+  {
+    "file": "trap-05-soporte.png",
+    "category": "limpieza",
+    "name_es": "Soporte para Trapeador y Escoba",
+    "name_en": "Mop & Broom Holder"
+  },
+  {
+    "file": "trap-06-soporte-ayuda.png",
+    "category": "limpieza",
+    "name_es": "Soporte de Ayuda para Trapeador",
+    "name_en": "Mop Aid Holder"
+  },
+  {
+    "file": "trap-07-solucion.png",
+    "category": "limpieza",
+    "name_es": "Solución de Limpieza 10 Pasos",
+    "name_en": "10-Step Cleaning Solution"
+  },
+  {
+    "file": "esc-01-cocinistas.png",
+    "category": "limpieza",
+    "name_es": "Escobas para Cocinistas",
+    "name_en": "Kitchen Brooms"
+  },
+  {
+    "file": "esc-02-alto-calidad.png",
+    "category": "limpieza",
+    "name_es": "Escobas de Alto Calidad",
+    "name_en": "Premium Brooms"
+  },
+  {
+    "file": "esc-03-cocheras.png",
+    "category": "limpieza",
+    "name_es": "Escobas para Cocheras",
+    "name_en": "Garage Brooms"
+  },
+  {
+    "file": "esc-04-maximizer.png",
+    "category": "limpieza",
+    "name_es": "Maximizer™ Escobas",
+    "name_en": "Maximizer™ Brooms"
+  },
+  {
+    "file": "esc-05-angostas.png",
+    "category": "limpieza",
+    "name_es": "Escobas Angostas",
+    "name_en": "Narrow Brooms"
+  },
+  {
+    "file": "esc-06-colores.png",
+    "category": "limpieza",
+    "name_es": "Escobas Angostas de Colores",
+    "name_en": "Colored Narrow Brooms"
+  },
+  {
+    "file": "esc-07-color-coded.png",
+    "category": "limpieza",
+    "name_es": "Escobas de Colores",
+    "name_en": "Color-Coded Brooms"
+  },
+  {
+    "file": "esc-08-colas.png",
+    "category": "limpieza",
+    "name_es": "Escobas para Colas",
+    "name_en": "Queue Brooms"
+  },
+  {
+    "file": "esc-09-mijo.png",
+    "category": "limpieza",
+    "name_es": "Escobas de Mijo",
+    "name_en": "Corn Brooms"
+  },
+  {
+    "file": "esc-10-combo.png",
+    "category": "limpieza",
+    "name_es": "Combo Escoba y Recogedor",
+    "name_en": "Broom & Dustpan Combo"
+  },
+  {
+    "file": "esc-11-recogedor.png",
+    "category": "limpieza",
+    "name_es": "Recogedor y Escoba de Colores",
+    "name_en": "Colored Dustpan & Broom"
+  },
+  {
+    "file": "esc-12-barredoras.png",
+    "category": "limpieza",
+    "name_es": "Barredoras",
+    "name_en": "Push Sweepers"
+  },
+  {
+    "file": "bol-01-economicas.png",
+    "category": "limpieza",
+    "name_es": "Bolsas Económicas para Basura",
+    "name_en": "Economy Trash Bags"
+  },
+  {
+    "file": "bol-02-industriales.png",
+    "category": "limpieza",
+    "name_es": "Bolsas Industriales para Basura",
+    "name_en": "Industrial Trash Bags"
+  },
+  {
+    "file": "bol-03-strentuf.png",
+    "category": "limpieza",
+    "name_es": "Bolsas StrenTuf® para Basura",
+    "name_en": "StrenTuf® Trash Bags"
+  },
+  {
+    "file": "bol-04-nucleo-eco.png",
+    "category": "limpieza",
+    "name_es": "Bolsas en Núcleo Económicas",
+    "name_en": "Economy Core Trash Bags"
+  },
+  {
+    "file": "bol-05-nucleo-ind.png",
+    "category": "limpieza",
+    "name_es": "Bolsas en Núcleo Industriales",
+    "name_en": "Industrial Core Trash Bags"
+  },
+  {
+    "file": "bol-06-colores.png",
+    "category": "limpieza",
+    "name_es": "Bolsas de Colores para Basura",
+    "name_en": "Color-Coded Trash Bags"
+  },
+  {
+    "file": "bol-07-contenedores.png",
+    "category": "limpieza",
+    "name_es": "Bolsas para Contenedores",
+    "name_en": "Container Trash Bags"
+  },
+  {
+    "file": "bol-08-estandar.png",
+    "category": "limpieza",
+    "name_es": "Bolsas para Basura Estándar",
+    "name_en": "Standard Trash Bags"
+  },
+  {
+    "file": "bol-09-premium.png",
+    "category": "limpieza",
+    "name_es": "Bolsas para Basura Premium",
+    "name_en": "Premium Trash Bags"
+  },
+  {
+    "file": "bol-10-glad.png",
+    "category": "limpieza",
+    "name_es": "Glad® Bolsas para Basura",
+    "name_en": "Glad® Trash Bags"
+  },
+  {
+    "file": "bol-11-glad-arom.png",
+    "category": "limpieza",
+    "name_es": "Glad® Bolsas Aromalizadas",
+    "name_en": "Glad® Scented Trash Bags"
+  },
+  {
+    "file": "tyt-01-cotonero.png",
+    "category": "limpieza",
+    "name_es": "Trapos Tipo Cotonero",
+    "name_en": "Cotton Wiping Rags"
+  },
+  {
+    "file": "tyt-02-terry.png",
+    "category": "limpieza",
+    "name_es": "Toallas de Tela Terry",
+    "name_en": "Terry Cloth Towels"
+  },
+  {
+    "file": "tyt-03-talleres.png",
+    "category": "limpieza",
+    "name_es": "Toallas para Talleres",
+    "name_en": "Shop Towels"
+  },
+  {
+    "file": "tyt-04-cotonero-colores.png",
+    "category": "limpieza",
+    "name_es": "Trapos Cotonero de Colores",
+    "name_en": "Colored Cotton Rags"
+  },
+  {
+    "file": "tyt-05-absorbentes.png",
+    "category": "limpieza",
+    "name_es": "Toallas Absorbentes",
+    "name_en": "Absorbent Towels"
+  },
+  {
+    "file": "tyt-06-microfibra-caja.png",
+    "category": "limpieza",
+    "name_es": "Trapos de Microfibra en Caja",
+    "name_en": "Microfiber Cloths Box"
+  },
+  {
+    "file": "tyt-07-microfibra-bolsa.png",
+    "category": "limpieza",
+    "name_es": "Trapos de Microfibra en Bolsa",
+    "name_en": "Microfiber Cloths Bag"
+  },
+  {
+    "file": "tyt-08-microfibra.png",
+    "category": "limpieza",
+    "name_es": "Toallas de Microfibra",
+    "name_en": "Microfiber Towels"
+  },
+  {
+    "file": "tyt-09-texturizadas.png",
+    "category": "limpieza",
+    "name_es": "Toallas de Microfibra Texturizadas",
+    "name_en": "Textured Microfiber Towels"
+  },
+  {
+    "file": "tyt-10-restaurantes.png",
+    "category": "limpieza",
+    "name_es": "Toallas de Microfibra Restaurantes",
+    "name_en": "Restaurant Microfiber Towels"
+  },
+  {
+    "file": "tyt-11-terry-rest.png",
+    "category": "limpieza",
+    "name_es": "Toallas Terry para Restaurantes",
+    "name_en": "Restaurant Terry Towels"
+  },
+  {
+    "file": "sum-01-toallas-blancas.png",
+    "category": "toallas",
+    "name_es": "Toallas Blancas para Baño y Manos",
+    "name_en": "White Bath & Hand Towels"
+  },
+  {
+    "file": "sum-02-toallas-negras.png",
+    "category": "toallas",
+    "name_es": "Toallas Negras para Baño y Manos",
+    "name_en": "Black Bath & Hand Towels"
+  },
+  {
+    "file": "sum-03-sillones.png",
+    "category": "toallas",
+    "name_es": "Sillones y Fundas",
+    "name_en": "Pillow Cases & Covers"
+  },
+  {
+    "file": "sum-04-protecciones.png",
+    "category": "toallas",
+    "name_es": "Protecciones de Cojín y Almohada",
+    "name_en": "Pillow & Cushion Protectors"
+  },
+  {
+    "file": "sum-05-tapete-bano.png",
+    "category": "toallas",
+    "name_es": "Tapete Antideslizante para Baños",
+    "name_en": "Non-Slip Bath Mat"
+  },
+  {
+    "file": "sum-06-cortinas.png",
+    "category": "toallas",
+    "name_es": "Cortinas de Baño y Accesorios",
+    "name_en": "Shower Curtains & Accessories"
+  },
+  {
+    "file": "sum-07-jabon-hotel.png",
+    "category": "toallas",
+    "name_es": "Jabón y Despachadores Hoteleros",
+    "name_en": "Hotel Soap & Dispensers"
+  },
+  {
+    "file": "sum-08-tocador.png",
+    "category": "toallas",
+    "name_es": "Artículos de Tocador Hoteleros",
+    "name_en": "Hotel Toiletry Items"
+  },
+  {
+    "file": "sum-09-higiene-bucal.png",
+    "category": "toallas",
+    "name_es": "Artículos de Higiene Bucal",
+    "name_en": "Oral Hygiene Products"
+  },
+  {
+    "file": "sum-10-secadora.png",
+    "category": "toallas",
+    "name_es": "Secadora de Cabello",
+    "name_en": "Hair Dryer"
+  },
+  {
+    "file": "kit-01-universales.png",
+    "category": "banos",
+    "name_es": "Absorbentes Universales",
+    "name_en": "Universal Absorbents"
+  },
+  {
+    "file": "kit-02-aceite.png",
+    "category": "banos",
+    "name_es": "Absorbentes Solo para Aceite",
+    "name_en": "Oil-Only Absorbents"
+  },
+  {
+    "file": "kit-03-hazmat.png",
+    "category": "banos",
+    "name_es": "Absorbentes Materiales Peligrosos",
+    "name_en": "Hazmat Absorbents"
+  },
+  {
+    "file": "kit-04-kit-universal.png",
+    "category": "banos",
+    "name_es": "Kits Universales para Derrames",
+    "name_en": "Universal Spill Kits"
+  },
+  {
+    "file": "kit-05-kit-aceite.png",
+    "category": "banos",
+    "name_es": "Kits Solo para Derrames de Aceite",
+    "name_en": "Oil Spill Kits"
+  },
+  {
+    "file": "kit-06-kit-hazmat.png",
+    "category": "banos",
+    "name_es": "Kits para Derrames Materiales Peligrosos",
+    "name_en": "Hazmat Spill Kits"
+  },
+  {
+    "file": "kit-07-alta-visib.png",
+    "category": "banos",
+    "name_es": "Absorbentes de Alto Visibilidad",
+    "name_en": "High-Visibility Absorbents"
+  },
+  {
+    "file": "kit-08-kit-aceite-s.png",
+    "category": "banos",
+    "name_es": "Kit para Derrames de Aceite",
+    "name_en": "Oil Spill Kit"
+  },
+  {
+    "file": "kit-09-mercurio.png",
+    "category": "banos",
+    "name_es": "Kit para Derrames de Mercurio",
+    "name_en": "Mercury Spill Kit"
+  },
+  {
+    "file": "kit-10-bolsas-desecho.png",
+    "category": "banos",
+    "name_es": "Bolsas para Desechos de Absorbentes",
+    "name_en": "Absorbent Waste Bags"
+  },
+  {
+    "file": "kit-11-otspill.png",
+    "category": "banos",
+    "name_es": "Over-The-Spill™ Pufas",
+    "name_en": "Over-The-Spill™ Pads"
+  },
+  {
+    "file": "pb-01-ambientadores.png",
+    "category": "banos",
+    "name_es": "Ambientadores para Baños",
+    "name_en": "Bathroom Air Fresheners"
+  },
+  {
+    "file": "pb-02-tapetes-inodoro.png",
+    "category": "banos",
+    "name_es": "Tapetes para Inodoro y Mingitorio",
+    "name_en": "Toilet & Urinal Mats"
+  },
+  {
+    "file": "pb-03-cubresientos.png",
+    "category": "banos",
+    "name_es": "Cubresientos para Inodoro",
+    "name_en": "Toilet Seat Covers"
+  },
+  {
+    "file": "pb-04-bolsas-ming.png",
+    "category": "banos",
+    "name_es": "Bolsas para Mingitorio",
+    "name_en": "Urinal Bags"
+  },
+  {
+    "file": "pb-05-pastillas-ming.png",
+    "category": "banos",
+    "name_es": "Pastillas y Gránulos para Mingitorio",
+    "name_en": "Urinal Blocks & Granules"
+  },
+  {
+    "file": "pb-06-tapete-antidesl.png",
+    "category": "banos",
+    "name_es": "Tapete Antideslizante para Baños",
+    "name_en": "Non-Slip Bath Mat"
+  },
+  {
+    "file": "pb-07-mamparas.png",
+    "category": "banos",
+    "name_es": "Mamparas para Mingitorio",
+    "name_en": "Urinal Screens"
+  },
+  {
+    "file": "pb-08-secadoras-manos.png",
+    "category": "banos",
+    "name_es": "Secadoras de Manos",
+    "name_en": "Hand Dryers"
+  },
+  {
+    "file": "pb-09-higiene-personal.png",
+    "category": "banos",
+    "name_es": "Higiene Personal y Despachadores",
+    "name_en": "Personal Hygiene Dispensers"
+  },
+  {
+    "file": "pb-10-pallets.png",
+    "category": "banos",
+    "name_es": "Soluciones para Combinar Pallets",
+    "name_en": "Pallet Combination Solutions"
+  },
+  {
+    "file": "pb-11-asientos.png",
+    "category": "banos",
+    "name_es": "Asientos de Inodoro Santa®",
+    "name_en": "Santa® Toilet Seats"
+  },
+  {
+    "file": "tp-01-luxury-clasico.png",
+    "category": "toallas",
+    "name_es": "Set de Toallas Hoteleras de Lujo — Bordado Clásico",
+    "name_en": "Luxury Hotel Towel Set — Classic Embroidery"
+  },
+  {
+    "file": "tp-02-luxury-logo.png",
+    "category": "toallas",
+    "name_es": "Set de Toallas Hoteleras de Lujo — Logo Hotel",
+    "name_en": "Luxury Hotel Towel Set — Hotel Logo"
+  },
+  {
+    "file": "tp-03-luxury-mono.png",
+    "category": "toallas",
+    "name_es": "Set de Toallas Hoteleras de Lujo — Monograma",
+    "name_en": "Luxury Hotel Towel Set — Monogram"
+  },
+  {
+    "file": "tp-04-luxury-bordado.png",
+    "category": "toallas",
+    "name_es": "Set de Toallas Hoteleras de Lujo — Bordado Premium",
+    "name_en": "Luxury Hotel Towel Set — Premium Embroidery"
+  },
+  {
+    "file": "tp-05-luxury-floral.png",
+    "category": "toallas",
+    "name_es": "Set de Toallas Hoteleras de Lujo — Diseño Floral",
+    "name_en": "Luxury Hotel Towel Set — Floral Design"
+  },
+  {
+    "file": "tp-06-luxury-moderno.png",
+    "category": "toallas",
+    "name_es": "Set de Toallas Hoteleras de Lujo — Estilo Moderno",
+    "name_en": "Luxury Hotel Towel Set — Modern Style"
+  },
+  {
+    "file": "tp-07-luxury-suite.png",
+    "category": "toallas",
+    "name_es": "Set de Toallas Hoteleras de Lujo — Suite Premium",
+    "name_en": "Luxury Hotel Towel Set — Premium Suite"
+  },
+  {
+    "file": "tp-08-luxury-gran.png",
+    "category": "toallas",
+    "name_es": "Set de Toallas Hoteleras de Lujo — Gran Clase",
+    "name_en": "Luxury Hotel Towel Set — Grand Class"
+  },
+  {
+    "file": "tp2-01-golf.png",
+    "category": "toallas",
+    "name_es": "Pack 3 Toallas de Golf Premium 100% Algodón Egipcio",
+    "name_en": "Pack 3 Premium Golf Towels 100% Egyptian Cotton"
+  },
+  {
+    "file": "tp2-02-hydrangea.png",
+    "category": "toallas",
+    "name_es": "Set de Toallas Hydrangea",
+    "name_en": "Hydrangea Towel Set"
+  },
+  {
+    "file": "tp2-03-delhicott.png",
+    "category": "toallas",
+    "name_es": "Toalla de Baño Delhicott",
+    "name_en": "Delhicott Bath Towel"
+  },
+  {
+    "file": "tp2-04-leblanc-diamond.png",
+    "category": "toallas",
+    "name_es": "Toalla Le Blanc Diamond",
+    "name_en": "Le Blanc Diamond Towel"
+  },
+  {
+    "file": "tp2-05-leblanc-rubi.png",
+    "category": "toallas",
+    "name_es": "Toalla Le Blanc Rubi",
+    "name_en": "Le Blanc Rubi Towel"
+  },
+  {
+    "file": "tp2-06-leblanc-amatista.png",
+    "category": "toallas",
+    "name_es": "Toalla Le Blanc Amatista",
+    "name_en": "Le Blanc Amatista Towel"
+  }
+]

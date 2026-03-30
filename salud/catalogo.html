@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catálogo de Productos — Alista Salud</title>
+  <meta name="description" content="Explora el catálogo completo de insumos médicos y productos de salud de Alista Salud. Jeringas, catéteres, guantes, material hospitalario y más." />
+  <link rel="icon" type="image/png" href="../assets/images/logo-salud.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Open+Sans:wght@300;400;500&family=Space+Mono:wght@400&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Tokens ───────────────────────────────────────── */
+    :root {
+      --bg:          #ffffff;
+      --bg-soft:     #edf9f7;
+      --bg-card:     #ffffff;
+      --teal:        #00a896;
+      --teal-dark:   #007a6e;
+      --teal-light:  #4dc9bc;
+      --teal-rgb:    0, 168, 150;
+      --ink:         #0f2b28;
+      --ink-footer:  #0a1f1d;
+      --slate:       #4a7772;
+      --slate-light: #8ab5b0;
+      --border:      rgba(0,168,150,0.14);
+      --border-soft: rgba(0,168,150,0.08);
+      --shadow:      rgba(0,100,90,0.10);
+      --shadow-md:   rgba(0,100,90,0.16);
+    }
+
+    /* ── Reset ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Open Sans', Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.7em;
+      overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+    /* ── Scrollbar ──────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg-soft); }
+    ::-webkit-scrollbar-thumb { background: var(--teal); border-radius: 2px; }
+
+    /* ══════════════════════════════════════════════════════
+       NAV
+    ══════════════════════════════════════════════════════ */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto;
+      padding: 0 2rem;
+      height: 68px;
+      display: flex; align-items: center; gap: 1.5rem;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 0.5rem;
+      flex-shrink: 0;
+    }
+    .nav-logo img { height: 36px; width: auto; }
+    .nav-divider {
+      width: 1px; height: 28px;
+      background: var(--border);
+      flex-shrink: 0;
+    }
+    .nav-back {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--slate);
+      display: flex; align-items: center; gap: 0.4rem;
+      transition: color 0.2s;
+      flex-shrink: 0;
+    }
+    .nav-back:hover { color: var(--teal); }
+    .nav-back svg { width: 12px; height: 12px; }
+
+    /* Search */
+    .nav-search {
+      flex: 1;
+      position: relative;
+      max-width: 520px;
+    }
+    .nav-search input {
+      width: 100%;
+      padding: 0.55rem 1rem 0.55rem 2.6rem;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg-soft);
+      color: var(--ink);
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.88rem;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .nav-search input:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(var(--teal-rgb),0.10);
+    }
+    .nav-search input::placeholder { color: var(--slate-light); }
+    .nav-search-icon {
+      position: absolute; left: 0.85rem; top: 50%; transform: translateY(-50%);
+      color: var(--slate-light); pointer-events: none;
+    }
+    .nav-search-icon svg { width: 15px; height: 15px; display: block; }
+
+    /* Result count */
+    .nav-count {
+      margin-left: auto;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem; letter-spacing: 0.08em;
+      color: var(--slate);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .nav-count strong { color: var(--teal); }
+
+    /* ══════════════════════════════════════════════════════
+       FILTER BAR
+    ══════════════════════════════════════════════════════ */
+    .filter-bar {
+      position: sticky; top: 68px; z-index: 90;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .filter-inner {
+      max-width: 1200px; margin: 0 auto;
+      padding: 0.85rem 2rem;
+      display: flex; align-items: center; gap: 0.5rem;
+      overflow-x: auto; overflow-y: hidden;
+      scrollbar-width: none;
+    }
+    .filter-inner::-webkit-scrollbar { display: none; }
+    .filter-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--slate-light);
+      flex-shrink: 0;
+      margin-right: 0.25rem;
+    }
+    .pill {
+      padding: 0.38rem 1rem;
+      border-radius: 999px;
+      border: 1.5px solid var(--border);
+      background: transparent;
+      color: var(--slate);
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.8rem; font-weight: 500;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: background 0.18s, border-color 0.18s, color 0.18s;
+      cursor: pointer;
+    }
+    .pill:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+    }
+    .pill.active {
+      background: var(--teal);
+      border-color: var(--teal);
+      color: #fff;
+    }
+    .pill .pill-count {
+      display: inline-block;
+      margin-left: 0.3rem;
+      padding: 0.02rem 0.36rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.25);
+      font-size: 0.68rem;
+      vertical-align: middle;
+    }
+    .pill:not(.active) .pill-count {
+      background: rgba(0,168,150,0.12);
+      color: var(--teal);
+    }
+
+    /* ══════════════════════════════════════════════════════
+       CATALOG CONTENT
+    ══════════════════════════════════════════════════════ */
+    .catalog-wrap {
+      max-width: 1200px; margin: 0 auto;
+      padding: 2.5rem 2rem 6rem;
+    }
+
+    /* No results */
+    .no-results {
+      display: none;
+      text-align: center;
+      padding: 5rem 2rem;
+      color: var(--slate);
+    }
+    .no-results.visible { display: block; }
+    .no-results svg { width: 48px; height: 48px; color: var(--teal-light); margin: 0 auto 1rem; }
+    .no-results p { font-size: 1rem; font-weight: 300; }
+    .no-results strong { font-weight: 600; color: var(--ink); }
+
+    /* Grid */
+    .prod-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+    @media (max-width: 1024px) {
+      .prod-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 720px) {
+      .prod-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    }
+    @media (max-width: 400px) {
+      .prod-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Product card */
+    .prod-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s;
+      cursor: default;
+    }
+    .prod-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px var(--shadow-md);
+      border-color: var(--border);
+    }
+    .prod-img-wrap {
+      position: relative;
+      aspect-ratio: 1;
+      background: var(--bg-soft);
+      overflow: hidden;
+    }
+    .prod-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: contain;
+      padding: 1rem;
+      transition: transform 0.35s ease;
+    }
+    .prod-card:hover .prod-img-wrap img {
+      transform: scale(1.04);
+    }
+    /* Placeholder shimmer while lazy loading */
+    .prod-img-wrap img.loading {
+      background: linear-gradient(90deg, var(--bg-soft) 25%, #d4f0eb 50%, var(--bg-soft) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite;
+    }
+    @keyframes shimmer {
+      0%   { background-position: -200% 0; }
+      100% { background-position:  200% 0; }
+    }
+    .prod-cat-badge {
+      position: absolute; top: 0.6rem; left: 0.6rem;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      background: var(--teal);
+      color: #fff;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.55rem; letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    .prod-body {
+      padding: 0.85rem 1rem 1rem;
+      border-top: 1px solid var(--border-soft);
+    }
+    .prod-name {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.82rem; font-weight: 600;
+      color: var(--ink);
+      line-height: 1.35;
+      margin-bottom: 0.3rem;
+    }
+    .prod-sku {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem; letter-spacing: 0.06em;
+      color: var(--slate-light);
+    }
+
+    /* ══════════════════════════════════════════════════════
+       PAGINATION
+    ══════════════════════════════════════════════════════ */
+    .pagination {
+      display: flex; align-items: center; justify-content: center;
+      gap: 0.4rem;
+      padding: 2.5rem 0 0;
+    }
+    .page-btn {
+      width: 34px; height: 34px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 8px;
+      border: 1.5px solid var(--border);
+      background: transparent;
+      color: var(--slate);
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.82rem; font-weight: 500;
+      transition: background 0.18s, border-color 0.18s, color 0.18s;
+      cursor: pointer;
+    }
+    .page-btn:hover { border-color: var(--teal); color: var(--teal); }
+    .page-btn.active { background: var(--teal); border-color: var(--teal); color: #fff; }
+    .page-btn:disabled { opacity: 0.35; cursor: default; pointer-events: none; }
+    .page-btn svg { width: 14px; height: 14px; }
+    .page-ellipsis {
+      font-size: 0.82rem; color: var(--slate-light);
+      padding: 0 0.25rem;
+    }
+
+    /* ══════════════════════════════════════════════════════
+       FLOATING CONTACT BAR
+    ══════════════════════════════════════════════════════ */
+    .fab {
+      position: fixed; bottom: 1.75rem; right: 1.75rem;
+      display: flex; flex-direction: column; gap: 0.65rem;
+      z-index: 200;
+    }
+    .fab-btn {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 18px var(--shadow-md);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .fab-btn:hover {
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 8px 28px var(--shadow-md);
+    }
+    .fab-btn svg { width: 24px; height: 24px; }
+    .fab-btn--wa  { background: #25D366; }
+    .fab-btn--email { background: var(--teal); }
+    .fab-btn--wa svg  { fill: #fff; }
+    .fab-btn--email svg { fill: #fff; }
+
+    /* Tooltip labels */
+    .fab-btn {
+      position: relative;
+    }
+    .fab-btn::before {
+      content: attr(data-tip);
+      position: absolute; right: calc(100% + 0.75rem);
+      top: 50%; transform: translateY(-50%);
+      white-space: nowrap;
+      padding: 0.3rem 0.65rem;
+      border-radius: 6px;
+      background: var(--ink);
+      color: #fff;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.72rem;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.18s;
+    }
+    .fab-btn:hover::before { opacity: 1; }
+
+    /* ══════════════════════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════════════════════ */
+    .footer {
+      background: var(--ink-footer);
+      padding: 3rem 2rem 2rem;
+      margin-top: auto;
+    }
+    .footer-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .footer-brand {
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .footer-brand img { height: 32px; opacity: 0.6; }
+    .footer-brand-name {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.82rem; font-weight: 600;
+      color: rgba(255,255,255,0.5);
+    }
+    .footer-bottom-links {
+      display: flex; align-items: center; gap: 1.5rem;
+    }
+    .footer-link {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      transition: color 0.2s;
+    }
+    .footer-link:hover { color: var(--teal-light); }
+    .footer-copy {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem; letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.2);
+    }
+    .footer-grupo {
+      display: flex; align-items: center; gap: 0.4rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem; letter-spacing: 0.08em; text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      transition: color 0.2s;
+    }
+    .footer-grupo:hover { color: var(--teal-light); }
+    .footer-grupo img { height: 16px; opacity: 0.4; }
+
+    /* ══════════════════════════════════════════════════════
+       RESPONSIVE — nav adjustments
+    ══════════════════════════════════════════════════════ */
+    @media (max-width: 600px) {
+      .nav-inner { gap: 0.75rem; padding: 0 1rem; }
+      .nav-back span { display: none; }
+      .nav-divider { display: none; }
+      .nav-count { display: none; }
+      .nav-search { max-width: 100%; }
+      .catalog-wrap { padding: 1.5rem 1rem 5rem; }
+      .filter-inner { padding: 0.7rem 1rem; }
+      .fab { bottom: 1.25rem; right: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════════
+       NAV
+  ══════════════════════════════════════════════════ -->
+  <nav class="nav" role="navigation" aria-label="Navegación principal">
+    <div class="nav-inner">
+      <a href="../salud.html" class="nav-logo" aria-label="Inicio Alista Salud">
+        <img src="../assets/images/logo-salud.png" alt="Alista Salud" />
+      </a>
+      <div class="nav-divider" aria-hidden="true"></div>
+      <a href="../salud.html" class="nav-back" aria-label="Regresar a Alista Salud">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+        <span>Alista Salud</span>
+      </a>
+
+      <!-- Search -->
+      <div class="nav-search" role="search">
+        <span class="nav-search-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+        </span>
+        <input
+          id="search-input"
+          type="search"
+          placeholder="Buscar productos…"
+          aria-label="Buscar productos"
+          autocomplete="off"
+        />
+      </div>
+
+      <div class="nav-count" id="result-count" aria-live="polite">
+        <strong id="count-num">44</strong> productos
+      </div>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════════════════════════
+       FILTER BAR
+  ══════════════════════════════════════════════════ -->
+  <div class="filter-bar" role="toolbar" aria-label="Filtrar por categoría">
+    <div class="filter-inner">
+      <span class="filter-label" aria-hidden="true">Categoría</span>
+      <div id="pill-container" role="group" aria-label="Categorías de productos">
+        <!-- Pills rendered by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       CATALOG GRID
+  ══════════════════════════════════════════════════ -->
+  <main class="catalog-wrap" id="catalog-main">
+    <!-- No results state -->
+    <div class="no-results" id="no-results" role="status">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <path d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"/>
+      </svg>
+      <p>No se encontraron productos para <strong id="no-results-term"></strong></p>
+    </div>
+
+    <!-- Product grid -->
+    <div class="prod-grid" id="prod-grid" aria-label="Catálogo de productos"></div>
+
+    <!-- Pagination -->
+    <nav class="pagination" id="pagination" aria-label="Paginación del catálogo"></nav>
+  </main>
+
+  <!-- ══════════════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <a href="../salud.html" class="footer-brand" aria-label="Alista Salud">
+        <img src="../assets/images/logo-salud.png" alt="Alista Salud" />
+        <span class="footer-brand-name">Catálogo de Productos</span>
+      </a>
+      <a href="../index.html" class="footer-grupo" aria-label="Grupo Alista">
+        <img src="../assets/images/logo-main.png" alt="Grupo Alista" />
+        Parte de Grupo Alista
+      </a>
+      <span class="footer-copy">© 2025 Alista Salud</span>
+    </div>
+  </footer>
+
+  <!-- ══════════════════════════════════════════════════
+       FLOATING CONTACT BAR
+  ══════════════════════════════════════════════════ -->
+  <div class="fab" aria-label="Contacto rápido">
+    <a
+      href="https://wa.me/523331288999?text=Hola%2C+me+interesa+conocer+m%C3%A1s+sobre+sus+productos+de+salud."
+      class="fab-btn fab-btn--wa"
+      target="_blank" rel="noopener noreferrer"
+      aria-label="Contactar por WhatsApp"
+      data-tip="WhatsApp"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+        <path d="M12.004 2C6.477 2 2.001 6.477 2.001 12c0 1.989.58 3.842 1.579 5.396L2 22l4.734-1.542A9.956 9.956 0 0 0 12.004 22C17.532 22 22 17.523 22 12S17.532 2 12.004 2zm0 18.18c-1.707 0-3.303-.47-4.668-1.287l-.334-.198-3.46 1.127 1.154-3.351-.217-.344A8.162 8.162 0 0 1 3.82 12c0-4.508 3.673-8.18 8.183-8.18 4.509 0 8.183 3.672 8.183 8.18 0 4.509-3.674 8.18-8.183 8.18z"/>
+      </svg>
+    </a>
+    <a
+      href="mailto:salud@grupoalista.com?subject=Consulta%20sobre%20productos"
+      class="fab-btn fab-btn--email"
+      aria-label="Enviar correo a salud@grupoalista.com"
+      data-tip="salud@grupoalista.com"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+      </svg>
+    </a>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       SCRIPTS
+  ══════════════════════════════════════════════════ -->
+  <script src="../assets/js/salud-catalog.js"></script>
+  <script>
+    (function () {
+      'use strict';
+
+      const PER_PAGE = 48;
+      const IMG_BASE = '../assets/images/salud/';
+
+      /* ── Category label map ─────────────────────────── */
+      const CAT_LABELS = {};
+      CATEGORIES.forEach(c => { CAT_LABELS[c.slug] = c.label; });
+
+      /* ── State ──────────────────────────────────────── */
+      let activeSlug = 'todos';
+      let searchTerm = '';
+      let currentPage = 1;
+
+      /* ── DOM refs ───────────────────────────────────── */
+      const pillContainer = document.getElementById('pill-container');
+      const grid          = document.getElementById('prod-grid');
+      const pagination    = document.getElementById('pagination');
+      const countNum      = document.getElementById('count-num');
+      const noResults     = document.getElementById('no-results');
+      const noResultsTerm = document.getElementById('no-results-term');
+      const searchInput   = document.getElementById('search-input');
+
+      /* ── Read initial ?cat= param ───────────────────── */
+      const urlParams = new URLSearchParams(window.location.search);
+      const initCat   = urlParams.get('cat');
+      if (initCat && CATEGORIES.some(c => c.slug === initCat)) {
+        activeSlug = initCat;
+      }
+
+      /* ── Build filter pills ─────────────────────────── */
+      function buildPills() {
+        pillContainer.innerHTML = '';
+        CATEGORIES.forEach(cat => {
+          const btn = document.createElement('button');
+          btn.className = 'pill' + (cat.slug === activeSlug ? ' active' : '');
+          btn.setAttribute('aria-pressed', cat.slug === activeSlug ? 'true' : 'false');
+          btn.dataset.slug = cat.slug;
+          btn.innerHTML = `${cat.label}<span class="pill-count">${cat.count}</span>`;
+          btn.addEventListener('click', () => {
+            activeSlug  = cat.slug;
+            currentPage = 1;
+            buildPills();
+            render();
+          });
+          pillContainer.appendChild(btn);
+        });
+      }
+
+      /* ── Filter logic ───────────────────────────────── */
+      function filtered() {
+        return CATALOG.filter(p => {
+          const matchCat  = activeSlug === 'todos' || p.category === activeSlug;
+          const q         = searchTerm.toLowerCase();
+          const matchText = !q || p.name.toLowerCase().includes(q) || p.id.toLowerCase().includes(q);
+          return matchCat && matchText;
+        });
+      }
+
+      /* ── Lazy image observer ────────────────────────── */
+      let imgObserver = null;
+      function setupLazyObserver() {
+        if (imgObserver) imgObserver.disconnect();
+        imgObserver = new IntersectionObserver((entries, obs) => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const img = entry.target;
+            img.src = img.dataset.src;
+            img.classList.remove('loading');
+            obs.unobserve(img);
+          });
+        }, { rootMargin: '200px' });
+        grid.querySelectorAll('img[data-src]').forEach(img => imgObserver.observe(img));
+      }
+
+      /* ── Render cards ───────────────────────────────── */
+      function render() {
+        const items = filtered();
+        const total = items.length;
+        const pages = Math.max(1, Math.ceil(total / PER_PAGE));
+        if (currentPage > pages) currentPage = pages;
+
+        /* Update count */
+        countNum.textContent = total;
+
+        /* No results */
+        if (total === 0) {
+          grid.innerHTML = '';
+          noResults.classList.add('visible');
+          noResultsTerm.textContent = '"' + (searchTerm || CAT_LABELS[activeSlug] || activeSlug) + '"';
+          pagination.innerHTML = '';
+          return;
+        }
+        noResults.classList.remove('visible');
+
+        /* Slice for current page */
+        const start = (currentPage - 1) * PER_PAGE;
+        const slice = items.slice(start, start + PER_PAGE);
+
+        /* Render cards */
+        grid.innerHTML = slice.map(p => `
+          <article class="prod-card" data-id="${p.id}">
+            <div class="prod-img-wrap">
+              <img
+                class="loading"
+                data-src="${IMG_BASE}${p.img}"
+                alt="${p.name}"
+                width="300" height="300"
+              />
+              <span class="prod-cat-badge">${CAT_LABELS[p.category] || p.category}</span>
+            </div>
+            <div class="prod-body">
+              <div class="prod-name">${p.name}</div>
+              <div class="prod-sku">${p.id}</div>
+            </div>
+          </article>
+        `).join('');
+
+        setupLazyObserver();
+        renderPagination(total, pages);
+      }
+
+      /* ── Render pagination ──────────────────────────── */
+      function renderPagination(total, pages) {
+        if (pages <= 1) { pagination.innerHTML = ''; return; }
+
+        const range = [];
+        for (let i = 1; i <= pages; i++) {
+          if (
+            i === 1 || i === pages ||
+            (i >= currentPage - 1 && i <= currentPage + 1)
+          ) {
+            range.push(i);
+          } else if (range[range.length - 1] !== '…') {
+            range.push('…');
+          }
+        }
+
+        pagination.innerHTML = '';
+
+        /* Prev */
+        const prev = makePageBtn('prev');
+        prev.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>`;
+        prev.setAttribute('aria-label', 'Página anterior');
+        if (currentPage === 1) prev.disabled = true;
+        prev.addEventListener('click', () => { currentPage--; render(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+        pagination.appendChild(prev);
+
+        /* Page buttons */
+        range.forEach(r => {
+          if (r === '…') {
+            const el = document.createElement('span');
+            el.className = 'page-ellipsis';
+            el.textContent = '…';
+            pagination.appendChild(el);
+          } else {
+            const btn = makePageBtn(r);
+            btn.textContent = r;
+            btn.setAttribute('aria-label', `Página ${r}`);
+            if (r === currentPage) { btn.classList.add('active'); btn.setAttribute('aria-current', 'page'); }
+            btn.addEventListener('click', () => { currentPage = r; render(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+            pagination.appendChild(btn);
+          }
+        });
+
+        /* Next */
+        const next = makePageBtn('next');
+        next.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>`;
+        next.setAttribute('aria-label', 'Página siguiente');
+        if (currentPage === pages) next.disabled = true;
+        next.addEventListener('click', () => { currentPage++; render(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+        pagination.appendChild(next);
+      }
+
+      function makePageBtn(key) {
+        const btn = document.createElement('button');
+        btn.className = 'page-btn';
+        btn.dataset.page = key;
+        return btn;
+      }
+
+      /* ── Search (debounced) ─────────────────────────── */
+      let searchTimer = null;
+      searchInput.addEventListener('input', () => {
+        clearTimeout(searchTimer);
+        searchTimer = setTimeout(() => {
+          searchTerm  = searchInput.value.trim();
+          currentPage = 1;
+          render();
+        }, 260);
+      });
+
+      /* ── Init ───────────────────────────────────────── */
+      buildPills();
+      render();
+
+    })();
+  </script>
+
+</body>
+</html>

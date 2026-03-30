@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Términos y Condiciones — Alista Imports</title>
+  <meta name="description" content="Términos y condiciones de los servicios de importación, agencia aduanal y logística internacional de Alista Imports." />
+  <link rel="icon" type="image/png" href="../assets/images/logo-imports.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700&family=Lato:wght@300;400;500&family=Space+Mono:wght@400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:          #0c1e16;
+      --bg-elevated: #112318;
+      --bg-card:     #162c1e;
+      --green:       #4a9161;
+      --green-light: #6db884;
+      --copper:      #c07940;
+      --text:        #e8f0ec;
+      --text-muted:  #7d9e8d;
+      --slate:       #8aa89c;
+      --border:      rgba(74,145,97,0.20);
+      --border-soft: rgba(74,145,97,0.10);
+      --shadow:      rgba(0,40,20,0.50);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'Lato', sans-serif;
+      font-weight: 400;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-elevated); }
+    ::-webkit-scrollbar-thumb { background: var(--green); border-radius: 3px; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Topbar ── */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(17,35,24,0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .topbar-back {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+    .topbar-back:hover { color: var(--green-light); }
+    .topbar-back svg { width: 16px; height: 16px; }
+    .topbar-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--slate);
+    }
+
+    /* ── Page Header ── */
+    .page-header {
+      background: var(--bg-elevated);
+      padding: 5rem 2rem 4rem;
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .page-header-inner {
+      max-width: 840px;
+      margin: 0 auto;
+    }
+    .page-eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--green);
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .page-header h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: clamp(2.5rem, 5vw, 3.8rem);
+      color: var(--text);
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+    .page-meta {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+    .page-meta span { display: flex; align-items: center; gap: 0.4rem; }
+
+    /* ── Content ── */
+    .content-wrap {
+      max-width: 840px;
+      margin: 0 auto;
+      padding: 4rem 2rem 6rem;
+    }
+    .toc {
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      border-left: 4px solid var(--green);
+      border-radius: 8px;
+      padding: 1.75rem 2rem;
+      margin-bottom: 3.5rem;
+    }
+    .toc h3 {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 1rem;
+    }
+    .toc ol {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      counter-reset: toc;
+    }
+    .toc ol li { counter-increment: toc; }
+    .toc ol li a {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      transition: color 0.2s;
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
+    .toc ol li a::before {
+      content: counter(toc, decimal-leading-zero);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--copper);
+      flex-shrink: 0;
+      min-width: 28px;
+    }
+    .toc ol li a:hover { color: var(--text); }
+
+    .legal-section {
+      margin-bottom: 3rem;
+      scroll-margin-top: 80px;
+    }
+    .legal-section h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.6rem;
+      color: var(--text);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+    }
+    .section-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--copper);
+      letter-spacing: 0.1em;
+    }
+    .legal-section p {
+      font-size: 0.93rem;
+      font-weight: 300;
+      color: var(--text-muted);
+      line-height: 1.85;
+      margin-bottom: 0.85rem;
+    }
+    .legal-section p:last-child { margin-bottom: 0; }
+    .legal-section ul {
+      list-style: none;
+      padding: 0;
+      margin: 0.75rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .legal-section ul li {
+      font-size: 0.92rem;
+      font-weight: 300;
+      color: var(--text-muted);
+      line-height: 1.7;
+      padding-left: 1.25rem;
+      position: relative;
+    }
+    .legal-section ul li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--copper);
+      font-size: 0.7rem;
+    }
+    .divider {
+      height: 1px;
+      background: var(--border-soft);
+      margin: 2.5rem 0;
+    }
+    .highlight-box {
+      background: rgba(192,121,64,0.08);
+      border: 1px solid rgba(192,121,64,0.25);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1rem 0;
+    }
+    .highlight-box p {
+      font-size: 0.9rem;
+      color: rgba(192,121,64,0.9) !important;
+      margin: 0 !important;
+    }
+
+    /* ── Legal Footer ── */
+    .legal-footer {
+      background: #050f09;
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--border-soft);
+    }
+    .legal-footer-inner {
+      max-width: 840px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .legal-footer-links {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .legal-footer-links a {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      opacity: 0.7;
+      transition: opacity 0.2s, color 0.2s;
+    }
+    .legal-footer-links a:hover { opacity: 1; color: var(--green-light); }
+    .legal-footer-copy {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      opacity: 0.4;
+    }
+
+    @media (max-width: 768px) {
+      .topbar-title { display: none; }
+      .content-wrap { padding: 3rem 1.25rem 5rem; }
+      .page-header { padding: 4rem 1.25rem 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Topbar ── -->
+  <div class="topbar">
+    <a class="topbar-back" href="../imports.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M19 12H5M12 5l-7 7 7 7"/>
+      </svg>
+      Alista Imports
+    </a>
+    <span class="topbar-title">Términos y Condiciones</span>
+  </div>
+
+  <!-- ── Page Header ── -->
+  <header class="page-header">
+    <div class="page-header-inner">
+      <span class="page-eyebrow">Legal</span>
+      <h1>Términos y Condiciones</h1>
+      <p style="font-size:0.95rem;font-weight:300;color:var(--text-muted);line-height:1.8;max-width:600px;margin-top:1rem;">
+        Condiciones que rigen la contratación y prestación de los servicios de importación,
+        agencia aduanal y logística internacional de Alista Imports, división de Grupo Alista.
+      </p>
+      <div class="page-meta">
+        <span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Última actualización: 26 de marzo de 2026
+        </span>
+        <span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          Guadalajara, Jalisco, México
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Content ── -->
+  <main class="content-wrap">
+    <!-- Table of contents -->
+    <nav class="toc" aria-label="Índice">
+      <h3>Índice</h3>
+      <ol>
+        <li><a href="#sec1">Generalidades y Aceptación</a></li>
+        <li><a href="#sec2">Descripción del Servicio Aduanal</a></li>
+        <li><a href="#sec3">Obligaciones del Cliente</a></li>
+        <li><a href="#sec4">Clasificación Arancelaria</a></li>
+        <li><a href="#sec5">Precios, Facturación y Pagos</a></li>
+        <li><a href="#sec6">Plazos y Demoras</a></li>
+        <li><a href="#sec7">Responsabilidad Limitada</a></li>
+        <li><a href="#sec8">Propiedad Intelectual y Confidencialidad</a></li>
+        <li><a href="#sec9">Modificaciones a los Términos</a></li>
+        <li><a href="#sec10">Jurisdicción y Legislación Aplicable</a></li>
+      </ol>
+    </nav>
+
+    <!-- Sección 1 -->
+    <div class="legal-section" id="sec1">
+      <h2><span class="section-num">01</span> Generalidades y Aceptación</h2>
+      <p>
+        Los presentes Términos y Condiciones (en adelante "los Términos") regulan la relación contractual
+        entre Alista Imports, división de Grupo Alista S.A. de C.V. (en adelante "Alista Imports" o "la Empresa"),
+        con domicilio en Lázaro Cárdenas Pte. 2953, Col. Chapalita, Guadalajara, Jalisco, México, C.P. 44500,
+        y cualquier persona física o moral que contrate o solicite sus servicios de importación, agencia aduanal
+        y logística internacional (en adelante "el Cliente").
+      </p>
+      <p>
+        La contratación de cualquier servicio ofrecido por Alista Imports, ya sea de forma verbal, escrita,
+        electrónica o mediante el inicio de una operación, implica la aceptación plena e incondicional de los
+        presentes Términos. En caso de discrepancia entre estos Términos y cualquier cotización o propuesta
+        específica, prevalecerá el documento más reciente suscrito entre las partes.
+      </p>
+      <p>
+        Alista Imports se reserva el derecho de modificar estos Términos en cualquier momento,
+        comunicando los cambios con al menos 15 días naturales de anticipación a través de los medios
+        de contacto registrados por el Cliente.
+      </p>
+    </div>
+    <div class="divider"></div>
+
+    <!-- Sección 2 -->
+    <div class="legal-section" id="sec2">
+      <h2><span class="section-num">02</span> Descripción del Servicio Aduanal</h2>
+      <p>
+        Alista Imports actúa como Agente Aduanal certificado ante el Servicio de Administración
+        Tributaria (SAT) de México, con patente aduanal vigente. Los servicios comprenden, sin limitarse a:
+      </p>
+      <ul>
+        <li>Tramitación de pedimentos de importación definitiva, temporal, reposición de mercancías o regímenes especiales</li>
+        <li>Clasificación y determinación de la fracción arancelaria aplicable conforme a la Tarifa de la LIGIE</li>
+        <li>Determinación y pago de impuestos al comercio exterior (IGI, IVA, cuotas compensatorias)</li>
+        <li>Coordinación con autoridades aduaneras, reconocimiento de mercancías y liberación de carga</li>
+        <li>Gestión de permisos previos, NOM y demás regulaciones no arancelarias aplicables</li>
+        <li>Coordinación de transporte internacional (marítimo, aéreo y terrestre)</li>
+        <li>Contratación de seguros de carga bajo instrucción expresa del Cliente</li>
+      </ul>
+      <p>
+        Los servicios se prestarán conforme a las disposiciones de la Ley Aduanera, el Código Fiscal
+        de la Federación y demás legislación aplicable vigente en México.
+      </p>
+    </div>
+    <div class="divider"></div>
+
+    <!-- Sección 3 -->
+    <div class="legal-section" id="sec3">
+      <h2><span class="section-num">03</span> Obligaciones del Cliente</h2>
+      <p>
+        Para la correcta prestación del servicio, el Cliente se obliga a:
+      </p>
+      <ul>
+        <li>Proporcionar información veraz, completa y oportuna sobre la naturaleza, valor, origen y características de las mercancías</li>
+        <li>Entregar en tiempo y forma la documentación requerida: factura comercial, lista de empaque, documento de transporte (B/L, AWB o carta porte), certificado de origen (cuando aplique) y permisos previos</li>
+        <li>Mantener actualizados sus datos fiscales, RFC y poder notarial ante Alista Imports</li>
+        <li>Realizar los pagos correspondientes a impuestos, fletes, honorarios y gastos derivados de la operación en los plazos acordados</li>
+        <li>Notificar de inmediato cualquier cambio en las condiciones de la mercancía que pudiera afectar su clasificación arancelaria o régimen de importación</li>
+      </ul>
+      <div class="highlight-box">
+        <p>
+          <strong>Importante:</strong> El Cliente es responsable de la exactitud de la información proporcionada.
+          Alista Imports no asume responsabilidad por errores, multas o recargos derivados de datos incorrectos
+          o incompletos suministrados por el Cliente.
+        </p>
+      </div>
+    </div>
+    <div class="divider"></div>
+
+    <!-- Sección 4 -->
+    <div class="legal-section" id="sec4">
+      <h2><span class="section-num">04</span> Clasificación Arancelaria</h2>
+      <p>
+        La determinación de la fracción arancelaria se realizará con base en la información y documentación
+        proporcionada por el Cliente, aplicando las Reglas Generales para la Interpretación del Sistema
+        Armonizado y los criterios del SAT.
+      </p>
+      <p>
+        La responsabilidad sobre la clasificación arancelaria recae en el importador (el Cliente) conforme
+        al artículo 59-A de la Ley Aduanera. Alista Imports, en su carácter de Agente Aduanal, brinda
+        asesoría profesional; sin embargo, cualquier resolución de autoridad que modifique la clasificación
+        propuesta y genere contribuciones adicionales será cubierta por el Cliente, salvo negligencia
+        comprobada de la Empresa.
+      </p>
+      <p>
+        En caso de duda fundada sobre la clasificación, Alista Imports podrá solicitar consulta de
+        clasificación ante el SAT o emitir opinión técnica previa, conforme a los honorarios vigentes.
+      </p>
+    </div>
+    <div class="divider"></div>
+
+    <!-- Sección 5 -->
+    <div class="legal-section" id="sec5">
+      <h2><span class="section-num">05</span> Precios, Facturación y Pagos</h2>
+      <p>
+        Los honorarios por los servicios de agencia aduanal, flete internacional y gestión logística
+        serán los establecidos en la cotización formal emitida por Alista Imports para cada operación.
+        Dichas cotizaciones tienen una vigencia de 5 días hábiles a partir de su emisión.
+      </p>
+      <ul>
+        <li>Los precios están expresados en pesos mexicanos (MXN) o dólares estadounidenses (USD) según se indique en la cotización</li>
+        <li>Los importes en moneda extranjera se facturarán al tipo de cambio publicado por el Banco de México (DOF) en la fecha de liquidación</li>
+        <li>Se podrá requerir un anticipo de entre el 50% y el 100% de los impuestos estimados antes del inicio del despacho</li>
+        <li>El pago de honorarios de agencia es exigible al momento de la presentación del pedimento</li>
+        <li>Las facturas se emitirán conforme a los datos fiscales proporcionados por el Cliente y de acuerdo con la legislación fiscal mexicana vigente (CFDI 4.0)</li>
+        <li>En caso de mora, se generarán intereses del 2% mensual sobre el saldo insoluto, más los gastos de cobranza que resulten necesarios</li>
+      </ul>
+    </div>
+    <div class="divider"></div>
+
+    <!-- Sección 6 -->
+    <div class="legal-section" id="sec6">
+      <h2><span class="section-num">06</span> Plazos y Demoras</h2>
+      <p>
+        Los tiempos de tránsito y liberación aduanal son estimados y están sujetos a las condiciones
+        propias del comercio internacional. Alista Imports no será responsable por demoras ocasionadas por:
+      </p>
+      <ul>
+        <li>Reconocimiento aduanero, semáforo rojo, muestreo o dictamen de laboratorio ordenados por las autoridades</li>
+        <li>Congestionamiento en puertos, aeropuertos o puntos fronterizos</li>
+        <li>Huelgas, paros, siniestros o causas de fuerza mayor</li>
+        <li>Documentación incompleta, incorrecta o entregada fuera de tiempo por el Cliente o su proveedor</li>
+        <li>Contingencias sanitarias, cuarentenas o restricciones gubernamentales de cualquier país involucrado</li>
+        <li>Retención de mercancía por parte de autoridades aduaneras, sanitarias, de propiedad intelectual u otras</li>
+      </ul>
+      <p>
+        Los gastos adicionales por demoras atribuibles a las circunstancias anteriores (almacenaje, estadía,
+        re-despacho) serán cubiertos por el Cliente.
+      </p>
+    </div>
+    <div class="divider"></div>
+
+    <!-- Sección 7 -->
+    <div class="legal-section" id="sec7">
+      <h2><span class="section-num">07</span> Responsabilidad Limitada</h2>
+      <p>
+        La responsabilidad máxima de Alista Imports ante el Cliente, por cualquier causa, no excederá
+        el monto de los honorarios cobrados por la operación específica que origina la reclamación.
+      </p>
+      <p>
+        Alista Imports no asumirá responsabilidad por pérdida o daño a la mercancía durante el transporte
+        internacional. Se recomienda enfáticamente contratar un seguro de carga integral que cubra el valor
+        de las mercancías desde origen hasta destino. Alista Imports puede gestionar dicho seguro bajo
+        instrucción expresa y escrita del Cliente.
+      </p>
+      <ul>
+        <li>En ningún caso Alista Imports será responsable por lucro cesante, pérdida de negocio o daños indirectos</li>
+        <li>El valor declarado en el pedimento determina la base de cualquier reclamación ante las autoridades aduaneras</li>
+        <li>Para reclamaciones por faltante o daño, el Cliente deberá notificar por escrito dentro de las 48 horas siguientes a la recepción de la mercancía</li>
+      </ul>
+    </div>
+    <div class="divider"></div>
+
+    <!-- Sección 8 -->
+    <div class="legal-section" id="sec8">
+      <h2><span class="section-num">08</span> Propiedad Intelectual y Confidencialidad</h2>
+      <p>
+        Toda la información comercial, operativa y financiera que las partes compartan en el marco de la
+        relación contractual se considerará confidencial y no podrá ser divulgada a terceros sin
+        consentimiento previo y por escrito de la parte propietaria, salvo requerimiento expreso de
+        autoridad competente.
+      </p>
+      <p>
+        Los materiales, logotipos, marcas y contenidos de Alista Imports son propiedad de Grupo Alista S.A. de C.V.
+        y están protegidos por las leyes de propiedad intelectual aplicables en México. El Cliente no adquiere
+        ningún derecho sobre dichos elementos por el hecho de contratar los servicios.
+      </p>
+      <p>
+        La obligación de confidencialidad permanecerá vigente durante tres años posteriores a la terminación
+        de la relación contractual.
+      </p>
+    </div>
+    <div class="divider"></div>
+
+    <!-- Sección 9 -->
+    <div class="legal-section" id="sec9">
+      <h2><span class="section-num">09</span> Modificaciones a los Términos</h2>
+      <p>
+        Alista Imports podrá actualizar estos Términos y Condiciones cuando lo considere necesario.
+        Las modificaciones serán comunicadas al Cliente a través del correo electrónico registrado
+        y/o publicadas en nuestros medios de contacto oficiales, con al menos 15 días naturales de anticipación
+        a su entrada en vigor.
+      </p>
+      <p>
+        La continuación en el uso de los servicios de Alista Imports posterior a la comunicación de cambios
+        implica la aceptación de los nuevos términos. Si el Cliente no está de acuerdo con las modificaciones,
+        podrá solicitar la cancelación de los servicios activos antes de la fecha de vigencia, sin penalización,
+        siempre que no existan operaciones en curso o compromisos financieros pendientes.
+      </p>
+    </div>
+    <div class="divider"></div>
+
+    <!-- Sección 10 -->
+    <div class="legal-section" id="sec10">
+      <h2><span class="section-num">10</span> Jurisdicción y Legislación Aplicable</h2>
+      <p>
+        Los presentes Términos y Condiciones se rigen por las leyes de los Estados Unidos Mexicanos,
+        en particular por la Ley Aduanera, el Código Fiscal de la Federación, el Código de Comercio
+        y el Código Civil Federal, en lo que resulte aplicable.
+      </p>
+      <p>
+        Para cualquier controversia derivada de la interpretación, cumplimiento o incumplimiento de
+        estos Términos, las partes se someten a la jurisdicción de los tribunales competentes de la
+        ciudad de Guadalajara, Jalisco, México, renunciando expresamente a cualquier otro fuero que
+        pudiera corresponderles en razón de su domicilio presente o futuro.
+      </p>
+      <div class="highlight-box">
+        <p>
+          Para preguntas sobre estos Términos, contáctenos en:
+          <strong>ventas@grupoalista.com</strong> o al <strong>+52 333 128 8999</strong>.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <!-- ── Legal Footer ── -->
+  <footer class="legal-footer">
+    <div class="legal-footer-inner">
+      <div class="legal-footer-links">
+        <a href="privacidad.html">Política de Privacidad</a>
+        <a href="../imports.html">Inicio Alista Imports</a>
+        <a href="../index.html">Grupo Alista</a>
+      </div>
+      <span class="legal-footer-copy">© 2026 Alista Imports — Grupo Alista S.A. de C.V.</span>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Grupo Alista — Grupo Empresarial</title>
   <meta name="description" content="Grupo Alista es un conglomerado empresarial mexicano con filiales en consultoría, marketing, salud, hotelería e importaciones." />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <link rel="icon" type="image/png" href="assets/images/logo-main.png" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -1540,36 +1539,6 @@
       line-height: 1.7;
     }
 
-    /* ══════════════════════════════════════
-       LEAFLET DARK THEME
-    ══════════════════════════════════════ */
-    .leaflet-container {
-      background: #0a1820 !important;
-      font-family: 'Roboto Mono', monospace !important;
-    }
-    .leaflet-popup-content-wrapper {
-      background: var(--bg-card) !important;
-      border: 1px solid rgba(186,106,69,0.2) !important;
-      border-radius: 4px !important;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.55) !important;
-      color: var(--text-primary) !important;
-    }
-    .leaflet-popup-tip { background: var(--bg-card) !important; }
-    .leaflet-popup-content { font-size: 0.76rem; line-height: 1.65; color: var(--text-muted); margin: 0.6rem 0.8rem; }
-    .leaflet-popup-content strong { color: var(--text-primary); display: block; margin-bottom: 0.2rem; font-family: 'Roboto Mono', monospace; letter-spacing: 0.05em; }
-    .leaflet-popup-close-button { color: var(--text-muted) !important; }
-    .leaflet-control-zoom a {
-      background: var(--bg-card) !important;
-      border-color: var(--border) !important;
-      color: var(--text-muted) !important;
-    }
-    .leaflet-control-zoom a:hover { color: var(--copper) !important; background: var(--bg-elevated) !important; }
-    .leaflet-control-attribution {
-      background: rgba(6,13,20,0.8) !important;
-      color: rgba(127,160,178,0.45) !important;
-      font-size: 0.5rem !important;
-    }
-    .leaflet-control-attribution a { color: rgba(127,160,178,0.6) !important; }
   </style>
 </head>
 <body>
@@ -1808,7 +1777,7 @@
              data-en="Health and wellness solutions for individuals and companies, combining cutting-edge technology with personalized care and preventive programs.">
             Soluciones de salud y bienestar para individuos y empresas, combinando tecnología de punta con atención personalizada y programas preventivos.
           </p>
-          <a href="#contact" class="company-link" data-es="Más información →" data-en="Learn more →">Más información →</a>
+          <a href="salud.html" class="company-link" data-es="Más información →" data-en="Learn more →">Más información →</a>
         </div>
 
         <!-- Card 4: Hotels -->
@@ -1827,7 +1796,7 @@
              data-en="Hospitality products and solutions to elevate every guest's experience, from premium amenities to specialized equipment.">
             Productos y soluciones de hotelería para elevar la experiencia de cada huésped, desde amenidades premium hasta equipamiento especializado.
           </p>
-          <a href="#contact" class="company-link" data-es="Más información →" data-en="Learn more →">Más información →</a>
+          <a href="hotels-es.html" class="company-link" data-es="Más información →" data-en="Learn more →">Más información →</a>
         </div>
 
         <!-- Card 5: Imports -->
@@ -1846,7 +1815,7 @@
              data-en="Import, export and customs clearance with coverage at Manzanillo, Veracruz, Tampico and Altamira to access global markets.">
             Importación, exportación y nacionalización con cobertura en Manzanillo, Veracruz, Tampico y Altamira para acceder a mercados globales.
           </p>
-          <a href="#contact" class="company-link" data-es="Más información →" data-en="Learn more →">Más información →</a>
+          <a href="imports.html" class="company-link" data-es="Más información →" data-en="Learn more →">Más información →</a>
         </div>
 
       </div><!-- /companies-grid -->
@@ -1867,7 +1836,7 @@
         <!-- Left col: map + address + social -->
         <div class="reveal" style="transition-delay:0.1s">
           <!-- Leaflet interactive map -->
-          <div id="leaflet-map" style="height:280px;width:100%;border-radius:8px;border:1px solid var(--border);overflow:hidden;margin-bottom:1.5rem;position:relative;z-index:1;"></div>
+          <img src="assets/images/maps/grupoalista-hq-map.png" alt="Ubicación Grupo Alista — Lázaro Cárdenas Pte. 2953, Guadalajara" style="height:280px;width:100%;border-radius:8px;border:1px solid var(--border);object-fit:cover;display:block;margin-bottom:1.5rem;" />
 
           <div class="addr-box">
             <span class="addr-lbl" data-es="Dirección" data-en="Address">Dirección</span>
@@ -2026,9 +1995,9 @@
           <nav style="display:flex;flex-direction:column;">
             <a href="#" class="footer-nav-link" data-es="Alista Consulting"         data-en="Alista Consulting">Alista Consulting</a>
             <a href="marketing.html" class="footer-nav-link" data-es="Alista Marketing Services" data-en="Alista Marketing Services">Alista Marketing Services</a>
-            <a href="#" class="footer-nav-link" data-es="Alista Salud"              data-en="Alista Salud">Alista Salud</a>
-            <a href="#" class="footer-nav-link" data-es="Alista Hotels"             data-en="Alista Hotels">Alista Hotels</a>
-            <a href="#" class="footer-nav-link" data-es="Alista Imports"            data-en="Alista Imports">Alista Imports</a>
+            <a href="salud.html" class="footer-nav-link" data-es="Alista Salud"              data-en="Alista Salud">Alista Salud</a>
+            <a href="hotels-es.html" class="footer-nav-link" data-es="Alista Hotels"             data-en="Alista Hotels">Alista Hotels</a>
+            <a href="imports.html" class="footer-nav-link" data-es="Alista Imports"            data-en="Alista Imports">Alista Imports</a>
           </nav>
         </div>
 
@@ -2303,57 +2272,6 @@
       item.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     }
 
-    // ── Leaflet Map (lazy-init on scroll-into-view) ──────────────────
-    (function () {
-      var mapEl = document.getElementById('leaflet-map');
-      if (!mapEl || typeof L === 'undefined') return;
-
-      var initialized = false;
-
-      function initMap() {
-        if (initialized) return;
-        initialized = true;
-
-        var lat = 20.6620, lng = -103.3894;
-        var map = L.map(mapEl, { scrollWheelZoom: false, zoomControl: true })
-                   .setView([lat, lng], 15);
-
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-          maxZoom: 19
-        }).addTo(map);
-
-        var markerHtml = '<div style="width:18px;height:18px;background:#BA6A45;border-radius:50%;border:2.5px solid rgba(255,255,255,0.6);box-shadow:0 0 0 5px rgba(186,106,69,0.22),0 0 16px rgba(186,106,69,0.65);"></div>';
-        var icon = L.divIcon({
-          html: markerHtml,
-          className: '',
-          iconSize: [18, 18],
-          iconAnchor: [9, 9],
-          popupAnchor: [0, -14]
-        });
-
-        L.marker([lat, lng], { icon: icon })
-          .addTo(map)
-          .bindPopup(
-            '<strong>Grupo Alista</strong>' +
-            'Lázaro Cárdenas Pte. 2953<br>Col. Chapalita<br>Guadalajara, Jalisco'
-          )
-          .openPopup();
-
-        // Re-calculate tile layout after reveal animation completes (0.75s)
-        setTimeout(function () { map.invalidateSize(); }, 850);
-      }
-
-      // Init only when the map element enters the viewport
-      var mapObserver = new IntersectionObserver(function (entries) {
-        if (entries[0].isIntersecting) {
-          initMap();
-          mapObserver.disconnect();
-        }
-      }, { threshold: 0.1 });
-
-      mapObserver.observe(mapEl);
-    })();
   </script>
 </body>
 </html>

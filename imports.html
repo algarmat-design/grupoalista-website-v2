@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alista Imports — Customs Broker & International Logistics</title>
+  <meta name="description" content="Import to Mexico with a certified customs broker. International freight, tariff classification, and full-service trade consulting. Textile & Steel Sectoral Registry. 10+ years connecting businesses with the world." />
+  <link rel="icon" type="image/png" href="assets/images/logo-imports.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700&family=Lato:wght@300;400;500&family=Space+Mono:wght@400&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>emailjs.init('NAbz4ZYSbxQfKC5fw');</script>
+  <!-- EmailJS service: service_yufgzg8 | template: template_e7cixha -->
+  <style>
+    /* ─── Design Tokens: Global Forest ─────────────────────────────── */
+    :root {
+      --bg:            #0c1e16;
+      --bg-elevated:   #112318;
+      --bg-card:       #162c1e;
+      --bg-card-hover: #1c3526;
+      --green:         #4a9161;
+      --green-light:   #6db884;
+      --green-glow:    rgba(74,145,97,0.15);
+      --copper:        #c07940;
+      --copper-dark:   #9d5f2a;
+      --copper-glow:   rgba(192,121,64,0.15);
+      --text:          #e8f0ec;
+      --text-muted:    #7d9e8d;
+      --slate:         #8aa89c;
+      --border:        rgba(74,145,97,0.20);
+      --border-soft:   rgba(74,145,97,0.10);
+      --shadow:        rgba(0,40,20,0.50);
+    }
+
+    /* ─── Reset & Base ───────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'Lato', sans-serif;
+      font-weight: 400;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-elevated); }
+    ::-webkit-scrollbar-thumb { background: var(--green); border-radius: 3px; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ─── Typography ─────────────────────────────────────────────────── */
+    h1, h2, h3, h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: 0.01em;
+    }
+    .eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    .section-rule {
+      width: 48px; height: 3px;
+      background: linear-gradient(90deg, var(--copper), transparent);
+      margin: 1.25rem 0 2rem;
+      border-radius: 2px;
+    }
+
+    /* ─── Nav ────────────────────────────────────────────────────────── */
+    #nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 0 2rem;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: transparent;
+      transition: background 0.3s, backdrop-filter 0.3s, box-shadow 0.3s;
+    }
+    #nav.scrolled {
+      background: rgba(17,35,24,0.96);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 var(--border);
+    }
+    .nav-logo img { height: 72px; width: auto; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--green-light); }
+    .nav-actions { display: flex; align-items: center; gap: 0.75rem; }
+    .nav-lang {
+      padding: 0.4rem 0.85rem;
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .nav-lang:hover { border-color: var(--green); color: var(--green-light); }
+    .nav-cta {
+      padding: 0.5rem 1.25rem;
+      border: 1.5px solid var(--copper);
+      border-radius: 24px;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: var(--copper);
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-cta:hover { background: var(--copper); color: #fff; }
+    .nav-hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 6px;
+      background: none; border: none;
+    }
+    .nav-hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--text); border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav-drawer {
+      display: none; position: fixed;
+      top: 80px; left: 0; right: 0;
+      background: rgba(17,35,24,0.98);
+      backdrop-filter: blur(16px);
+      padding: 2rem; flex-direction: column; gap: 1.25rem;
+      z-index: 99; border-top: 1px solid var(--border);
+      transform: translateY(-100%); transition: transform 0.3s;
+    }
+    .nav-drawer.open { transform: translateY(0); }
+    .nav-drawer a { font-size: 1.1rem; font-weight: 500; color: var(--text-muted); padding: 0.5rem 0; border-bottom: 1px solid var(--border-soft); }
+    .nav-drawer a:hover { color: var(--green-light); }
+    .nav-drawer .nav-cta { display: inline-block; margin-top: 0.5rem; align-self: flex-start; }
+    .nav-drawer .nav-lang { display: inline-block; align-self: flex-start; }
+
+    /* ─── Hero ───────────────────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+      text-align: center;
+      padding: 140px 2rem 80px;
+      gap: 0;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=1920&q=80');
+      background-size: cover; background-position: center;
+      z-index: 0;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(150deg, rgba(8,24,14,0.92) 0%, rgba(12,30,22,0.82) 60%, rgba(6,16,10,0.90) 100%);
+      z-index: 1;
+    }
+    .hero-globe-texture {
+      position: absolute; inset: 0; z-index: 2; overflow: hidden; opacity: 0.035;
+    }
+    .hero-globe-texture svg { width: 100%; height: 100%; }
+    .hero-content { position: relative; z-index: 3; max-width: 820px; }
+    .hero-logo {
+      margin: 0 auto 1.75rem;
+      height: clamp(200px, 28vw, 360px);
+      width: auto;
+      filter: drop-shadow(0 12px 48px rgba(74,145,97,0.35));
+    }
+    .hero-locations {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .hero-locations span {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--copper);
+    }
+    .hero-locations .dot {
+      width: 3px; height: 3px;
+      background: rgba(192,121,64,0.4);
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .hero-eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--green-light);
+      display: block;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-size: clamp(3.5rem, 8vw, 6.5rem);
+      color: var(--text); margin-bottom: 1.5rem;
+    }
+    .hero h1 span { color: var(--copper); }
+    .hero-desc {
+      font-size: 1.05rem; font-weight: 300;
+      color: rgba(232,240,236,0.80);
+      max-width: 580px; margin: 0 auto 2.5rem; line-height: 1.75;
+    }
+    .hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem; }
+    .btn-primary {
+      padding: 0.85rem 2rem;
+      background: var(--green); color: #fff;
+      border-radius: 4px;
+      font-family: 'Lato', sans-serif; font-weight: 500; font-size: 0.9rem; letter-spacing: 0.05em;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { background: var(--green-light); transform: translateY(-2px); }
+    .btn-ghost {
+      padding: 0.85rem 2rem;
+      border: 1.5px solid var(--copper); color: var(--copper);
+      border-radius: 4px;
+      font-family: 'Lato', sans-serif; font-weight: 500; font-size: 0.9rem; letter-spacing: 0.05em;
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+    }
+    .btn-ghost:hover { background: var(--copper); color: #fff; transform: translateY(-2px); }
+
+    /* ─── Hero Ticker ────────────────────────────────────────────────── */
+    .hero-ticker {
+      position: relative; z-index: 3;
+      overflow: hidden;
+      width: 100%;
+      margin-top: 2rem;
+      padding: 1.1rem 0;
+      border-top: 1px solid rgba(74,145,97,0.25);
+      border-bottom: 1px solid rgba(74,145,97,0.25);
+      background: rgba(6,16,10,0.50);
+    }
+    .hero-ticker-track {
+      display: flex;
+      gap: 0;
+      width: max-content;
+      animation: tickerScroll 30s linear infinite;
+    }
+    .hero-ticker-track:hover { animation-play-state: paused; }
+    @keyframes tickerScroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .ticker-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0 2.5rem;
+      white-space: nowrap;
+    }
+    .ticker-icon {
+      width: 22px; height: 22px;
+      color: var(--copper); flex-shrink: 0;
+    }
+    .ticker-stat {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--copper);
+    }
+    .ticker-label {
+      font-family: 'Lato', sans-serif;
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
+    .ticker-sep {
+      width: 1px; height: 22px;
+      background: rgba(74,145,97,0.3);
+      margin: 0 0.5rem;
+    }
+    .hero-scroll {
+      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; opacity: 0.45;
+    }
+    .hero-scroll span { font-family: 'Space Mono', monospace; font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; }
+    .hero-scroll-line { width: 1px; height: 36px; background: linear-gradient(to bottom, var(--green), transparent); animation: scrollPulse 2s ease-in-out infinite; }
+    @keyframes scrollPulse { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+
+    /* ─── Section Layout ─────────────────────────────────────────────── */
+    section { padding: 7rem 2rem; }
+    .section-inner { max-width: 1160px; margin: 0 auto; }
+    .section-header { margin-bottom: 3.5rem; }
+    .section-header h2 { font-size: clamp(1.4rem, 2.5vw, 2rem); color: var(--text-muted); font-weight: 400; }
+
+    /* ─── Services ───────────────────────────────────────────────────── */
+    #services { background: var(--bg-elevated); }
+    .servicios-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .servicio-card {
+      background: var(--bg-card); border-radius: 8px; padding: 2.5rem 2rem;
+      border: 1px solid var(--border-soft); border-left: 4px solid var(--green);
+      transition: background 0.25s, border-left-color 0.25s, transform 0.25s, box-shadow 0.25s;
+    }
+    .servicio-card:hover { background: var(--bg-card-hover); border-left-color: var(--copper); transform: translateY(-4px); box-shadow: 0 16px 40px var(--shadow); }
+    .servicio-icon { width: 52px; height: 52px; color: var(--copper); margin-bottom: 1.5rem; }
+    .servicio-card h3 { font-size: 1.6rem; color: var(--text); margin-bottom: 0.75rem; }
+    .servicio-card p { font-size: 0.92rem; font-weight: 300; color: var(--text-muted); line-height: 1.75; }
+
+    /* ─── About ──────────────────────────────────────────────────────── */
+    #about {
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+    }
+    .nosotros-bg {
+      position: absolute; inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1494412651409-8963ce7935a7?w=1920&q=80');
+      background-size: cover; background-position: center;
+      z-index: 0;
+    }
+    .nosotros-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(8,20,12,0.93) 0%, rgba(10,24,14,0.88) 50%, rgba(8,20,12,0.80) 100%);
+      z-index: 1;
+    }
+    .nosotros-inner {
+      position: relative; z-index: 2;
+      max-width: 1160px; margin: 0 auto;
+    }
+    .nosotros-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: center;
+    }
+    .nosotros-text h2 { font-size: clamp(2.4rem, 4vw, 3.5rem); color: var(--text); margin-bottom: 0.75rem; }
+    .nosotros-brand-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.75rem;
+      letter-spacing: 0.08em;
+      color: var(--copper);
+      display: block;
+      margin: 0.5rem 0 1.25rem;
+    }
+    .nosotros-text p { font-size: 0.95rem; font-weight: 300; color: var(--text-muted); line-height: 1.85; margin-bottom: 1rem; }
+    .padron-badges {
+      display: flex; gap: 0.75rem; flex-wrap: wrap; margin: 1.5rem 0;
+    }
+    .padron-badge {
+      display: flex; align-items: center; gap: 0.6rem;
+      padding: 0.65rem 1rem;
+      background: rgba(192,121,64,0.10);
+      border: 1px solid rgba(192,121,64,0.30);
+      border-radius: 6px;
+    }
+    .padron-badge svg { color: var(--copper); flex-shrink: 0; }
+    .padron-badge-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.52rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--text-muted); display: block;
+    }
+    .padron-badge-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 0.95rem; color: var(--copper);
+    }
+    .nosotros-visual {
+      display: flex; flex-direction: column; align-items: center; gap: 2rem;
+    }
+    .nosotros-logo-wrap img {
+      height: clamp(140px, 20vw, 220px); width: auto;
+      filter: drop-shadow(0 16px 48px rgba(74,145,97,0.30));
+    }
+
+    /* ─── Process ────────────────────────────────────────────────────── */
+    #process { background: var(--bg-elevated); }
+    .proceso-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+    .proceso-step { padding: 2rem 1.5rem; border-top: 2px solid var(--border); transition: border-top-color 0.25s; }
+    .proceso-step:hover { border-top-color: var(--copper); }
+    .proceso-num { font-family: 'Barlow Condensed', sans-serif; font-size: 4rem; font-weight: 700; color: var(--copper); opacity: 0.25; line-height: 1; margin-bottom: 0.75rem; transition: opacity 0.25s; }
+    .proceso-step:hover .proceso-num { opacity: 0.7; }
+    .proceso-step h3 { font-size: 1.3rem; color: var(--text); margin-bottom: 0.5rem; }
+    .proceso-step p { font-size: 0.88rem; font-weight: 300; color: var(--text-muted); line-height: 1.7; }
+
+    /* ─── Industries ─────────────────────────────────────────────────── */
+    #industries { background: var(--bg); }
+    .sectores-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border-soft); border-radius: 8px; overflow: hidden; }
+    .sector-tile { background: var(--bg-card); padding: 2rem 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; transition: background 0.25s; }
+    .sector-tile:hover { background: var(--bg-card-hover); }
+    .sector-icon { width: 36px; height: 36px; color: var(--green); transition: color 0.25s; }
+    .sector-tile:hover .sector-icon { color: var(--copper); }
+    .sector-tile h4 { font-size: 1.1rem; color: var(--text); transition: color 0.25s; }
+    .sector-tile:hover h4 { color: var(--copper); }
+    .sector-tile p { font-size: 0.8rem; font-weight: 300; color: var(--text-muted); line-height: 1.6; }
+
+    /* ─── Locations ──────────────────────────────────────────────────── */
+    #locations { background: var(--bg-elevated); }
+    .ubicaciones-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .ubicacion-card {
+      background: var(--bg-card); border-radius: 8px;
+      border: 1px solid var(--border-soft); overflow: hidden;
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+    .ubicacion-card:hover { border-color: var(--green); box-shadow: 0 12px 32px var(--shadow); }
+    .ubicacion-map {
+      height: 200px; overflow: hidden;
+      background: var(--bg-elevated);
+      position: relative;
+    }
+    .ubicacion-map-el {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .ubicacion-type {
+      position: absolute; top: 0.75rem; left: 0.75rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.52rem; letter-spacing: 0.14em; text-transform: uppercase;
+      background: rgba(12,30,22,0.85); color: var(--green);
+      padding: 0.3rem 0.6rem; border-radius: 3px;
+      backdrop-filter: blur(4px);
+    }
+    .ubicacion-body { padding: 1.25rem 1.5rem; }
+    .ubicacion-body h4 { font-family: 'Barlow Condensed', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--text); margin-bottom: 0.3rem; }
+    .ubicacion-body p { font-size: 0.82rem; font-weight: 300; color: var(--text-muted); line-height: 1.6; }
+
+    /* ─── Partners ───────────────────────────────────────────────────── */
+    #partners { background: var(--bg); }
+    .colab-intro {
+      font-size: 0.95rem; font-weight: 300;
+      color: var(--text-muted); max-width: 560px; line-height: 1.8;
+      margin-bottom: 3rem;
+    }
+    .colab-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1px;
+      background: var(--border-soft);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .colab-card {
+      background: var(--bg-card);
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      min-height: 160px;
+      transition: background 0.25s;
+    }
+    .colab-card:hover { background: var(--bg-card-hover); }
+    .colab-logo-wrap {
+      width: 140px; height: 64px;
+      display: flex; align-items: center; justify-content: center;
+      filter: grayscale(1) brightness(1.5);
+      transition: filter 0.25s;
+    }
+    .colab-card:hover .colab-logo-wrap { filter: grayscale(0) brightness(1); }
+    .colab-logo-wrap img { width: 140px; height: 64px; object-fit: contain; }
+    .colab-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--text); text-align: center;
+    }
+    .colab-card a { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+
+    /* ─── Contact / Form ─────────────────────────────────────────────── */
+    #contact { background: var(--bg-elevated); }
+    .contacto-grid {
+      display: grid; grid-template-columns: 1fr 1.2fr;
+      gap: 5rem; align-items: start;
+    }
+    .contacto-info h2 { font-size: clamp(2.2rem, 4vw, 3.2rem); color: var(--text); margin-bottom: 0.75rem; }
+    .contacto-info p { font-size: 0.93rem; font-weight: 300; color: var(--text-muted); line-height: 1.8; margin-bottom: 1.5rem; }
+    .contacto-cards { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.5rem; }
+    .contact-card {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1rem 1.25rem;
+      border-radius: 8px; border: 1px solid var(--border-soft);
+      transition: border-color 0.2s, background 0.2s, transform 0.2s;
+    }
+    .contact-card:hover { border-color: var(--green); background: var(--bg-card); transform: translateX(4px); }
+    .contact-card--wa { border-left: 4px solid #25d366; }
+    .contact-card--wa:hover { border-color: #25d366; }
+    .contact-card--email { border-left: 4px solid var(--green); }
+    .contact-card-icon { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .contact-card--wa .contact-card-icon { background: rgba(37,211,102,0.12); color: #25d366; }
+    .contact-card--email .contact-card-icon { background: var(--green-glow); color: var(--green-light); }
+    .contact-card-icon svg { width: 18px; height: 18px; }
+    .contact-card-body { flex: 1; }
+    .contact-card-label { font-family: 'Space Mono', monospace; font-size: 0.55rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 0.15rem; }
+    .contact-card-value { font-size: 0.9rem; font-weight: 500; color: var(--text); }
+    .contacto-address {
+      display: flex; gap: 0.75rem; align-items: flex-start;
+      padding: 1rem 1.25rem;
+      background: var(--bg-card); border-radius: 8px; border: 1px solid var(--border-soft);
+      margin-top: 0.75rem;
+    }
+    .contacto-address svg { color: var(--green); flex-shrink: 0; margin-top: 3px; }
+    .contacto-address p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+
+    /* ── Contact Form ── */
+    .contact-form-wrap {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 2.5rem;
+    }
+    .contact-form-wrap h3 {
+      font-size: 1.4rem; color: var(--text); margin-bottom: 0.4rem;
+    }
+    .contact-form-wrap .form-subtitle {
+      font-size: 0.82rem; font-weight: 300; color: var(--text-muted); margin-bottom: 1.75rem; line-height: 1.6;
+    }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-grid .form-full { grid-column: 1 / -1; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.55rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--slate);
+    }
+    .form-required { color: var(--copper); }
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.7rem 0.9rem;
+      color: var(--text);
+      font-family: 'Lato', sans-serif;
+      font-size: 0.88rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+      -webkit-appearance: none;
+    }
+    .form-input::placeholder, .form-textarea::placeholder { color: rgba(125,158,141,0.5); }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(74,145,97,0.12);
+    }
+    .form-select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%238aa89c' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.9rem center;
+      padding-right: 2.5rem;
+      cursor: pointer;
+    }
+    .form-select option { background: var(--bg-card); }
+    .form-textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
+    .status-pills {
+      display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center;
+    }
+    .status-pill {
+      padding: 0.55rem 1.25rem;
+      border: 1.5px solid var(--border);
+      border-radius: 24px;
+      font-size: 0.85rem; font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s, color 0.2s;
+      user-select: none;
+    }
+    .status-pill.active {
+      border-color: var(--green-light);
+      background: var(--green-light);
+      color: #fff;
+      font-weight: 700;
+    }
+    .status-pill:hover:not(.active) { border-color: var(--green); color: var(--text); }
+    .file-upload-wrap {
+      position: relative;
+      border: 1.5px dashed var(--border);
+      border-radius: 6px;
+      padding: 1.25rem;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .file-upload-wrap:hover { border-color: var(--green); background: rgba(74,145,97,0.04); }
+    .file-upload-wrap.has-file { border-color: var(--green); border-style: solid; background: rgba(74,145,97,0.06); }
+    .file-upload-wrap input[type="file"] {
+      position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
+    }
+    .file-upload-icon { color: var(--slate); margin: 0 auto 0.5rem; }
+    .file-upload-text { font-size: 0.82rem; color: var(--text-muted); }
+    .file-upload-text strong { color: var(--green-light); }
+    .file-upload-name { font-size: 0.8rem; color: var(--green-light); margin-top: 0.3rem; display: none; }
+    .file-info-note {
+      background: rgba(74,145,97,0.06);
+      border-left: 3px solid var(--green);
+      border-radius: 4px;
+      padding: 0.8rem 1rem;
+      font-size: 0.8rem; font-weight: 300;
+      color: var(--text-muted); line-height: 1.65;
+      margin-top: 0.5rem;
+    }
+    .file-info-note strong { color: var(--green-light); }
+    .form-submit-btn {
+      width: 100%;
+      padding: 0.9rem 2rem;
+      background: var(--green); color: #fff;
+      border: none; border-radius: 6px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 1.15rem; letter-spacing: 0.06em;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      margin-top: 0.5rem;
+    }
+    .form-submit-btn:hover:not(:disabled) { background: var(--green-light); transform: translateY(-1px); }
+    .form-submit-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+    .form-feedback {
+      display: none;
+      margin-top: 1rem;
+      padding: 0.9rem 1.25rem;
+      border-radius: 6px;
+      border: 1px solid;
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+
+    /* ─── Footer ─────────────────────────────────────────────────────── */
+    #footer { background: #050f09; padding: 5rem 2rem 0; border-top: 1px solid var(--border-soft); }
+    .footer-grid {
+      max-width: 1160px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr;
+      gap: 4rem; padding-bottom: 4rem;
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .footer-brand img { height: 64px; width: auto; opacity: 0.5; margin-bottom: 1rem; }
+    .footer-tagline { font-size: 0.88rem; font-weight: 300; color: var(--text-muted); line-height: 1.7; margin-bottom: 1.5rem; max-width: 280px; }
+    .footer-socials { display: flex; gap: 0.75rem; }
+    .footer-social-btn {
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-muted);
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .footer-social-btn:hover { border-color: var(--green); color: var(--green-light); background: var(--green-glow); }
+    .footer-col h5 { font-family: 'Space Mono', monospace; font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green); margin-bottom: 1.25rem; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .footer-col ul li a { font-size: 0.88rem; color: var(--text-muted); transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--text); }
+    .footer-col ul li a.footer-nav-legal { font-size: 0.8rem; opacity: 0.65; }
+    .footer-col ul li a.footer-nav-legal:hover { opacity: 1; color: var(--copper); }
+    .footer-bottom {
+      max-width: 1160px; margin: 0 auto; padding: 1.5rem 0;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    }
+    .footer-bottom-left { display: flex; align-items: center; gap: 0.75rem; }
+    .footer-bottom-left img { height: 22px; width: auto; opacity: 0.4; }
+    .footer-bottom-left a { font-size: 0.78rem; color: var(--text-muted); opacity: 0.6; transition: opacity 0.2s; }
+    .footer-bottom-left a:hover { opacity: 1; }
+    .footer-copyright { font-size: 0.75rem; color: var(--text-muted); opacity: 0.4; }
+
+    /* ─── WhatsApp FAB ───────────────────────────────────────────────── */
+    .wa-fab {
+      position: fixed; bottom: 2rem; right: 2rem;
+      width: 54px; height: 54px; border-radius: 50%;
+      background: #25d366;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px rgba(37,211,102,0.4);
+      z-index: 200; transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .wa-fab:hover { transform: scale(1.1); box-shadow: 0 8px 24px rgba(37,211,102,0.5); }
+    .wa-fab svg { color: #fff; width: 26px; height: 26px; }
+
+    /* ─── Scroll Reveal ──────────────────────────────────────────────── */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+
+    /* ─── Responsive ─────────────────────────────────────────────────── */
+    @media (max-width: 1200px) {
+      .colab-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 1024px) {
+      .servicios-grid { grid-template-columns: 1fr; }
+      .sectores-grid { grid-template-columns: repeat(2, 1fr); }
+      .proceso-grid { grid-template-columns: repeat(2, 1fr); }
+      .ubicaciones-grid { grid-template-columns: repeat(2, 1fr); }
+      .colab-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .nav-links, .nav-actions { display: none; }
+      .nav-hamburger { display: flex; }
+      .nav-drawer { display: flex; }
+      .nosotros-grid, .contacto-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+      .ubicaciones-grid { grid-template-columns: 1fr; }
+      .colab-grid { grid-template-columns: repeat(2, 1fr); }
+      .form-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      section { padding: 5rem 1.25rem; }
+      .sectores-grid, .proceso-grid { grid-template-columns: 1fr; }
+      .colab-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Nav ──────────────────────────────────────────────────────────── -->
+  <nav id="nav" role="navigation" aria-label="Main navigation">
+    <a class="nav-logo" href="imports.html" aria-label="Alista Imports — home">
+      <img src="assets/images/logo-imports.png" alt="Alista Imports" />
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#industries">Industries</a></li>
+      <li><a href="#locations">Locations</a></li>
+      <li><a href="#partners">Partners</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a class="nav-lang" href="imports-es.html" aria-label="Cambiar a Español">ES</a>
+      <a class="nav-cta" href="https://wa.me/523331288999?text=Hello,%20I%27m%20interested%20in%20Alista%20Imports%20services" target="_blank" rel="noopener noreferrer">
+        Chat with Us
+      </a>
+    </div>
+    <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile drawer -->
+  <div class="nav-drawer" role="dialog" aria-label="Mobile menu">
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#process">Process</a>
+    <a href="#industries">Industries</a>
+    <a href="#locations">Locations</a>
+    <a href="#partners">Partners</a>
+    <a href="#contact">Contact</a>
+    <a class="nav-lang" href="imports-es.html">ES — Español</a>
+    <a class="nav-cta" href="https://wa.me/523331288999?text=Hello,%20I%27m%20interested%20in%20Alista%20Imports%20services" target="_blank" rel="noopener noreferrer">Chat with Us →</a>
+  </div>
+
+  <!-- ── Hero ─────────────────────────────────────────────────────────── -->
+  <section id="hero" aria-label="Main header">
+    <div class="hero-bg" role="presentation" aria-hidden="true"></div>
+    <div class="hero-overlay" role="presentation" aria-hidden="true"></div>
+    <div class="hero-globe-texture" aria-hidden="true">
+      <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <line x1="0" y1="150" x2="1440" y2="150" stroke="white" stroke-width="1"/>
+        <line x1="0" y1="300" x2="1440" y2="300" stroke="white" stroke-width="1"/>
+        <line x1="0" y1="450" x2="1440" y2="450" stroke="white" stroke-width="1"/>
+        <line x1="0" y1="600" x2="1440" y2="600" stroke="white" stroke-width="1"/>
+        <line x1="0" y1="750" x2="1440" y2="750" stroke="white" stroke-width="1"/>
+        <line x1="180" y1="0" x2="180" y2="900" stroke="white" stroke-width="1"/>
+        <line x1="360" y1="0" x2="360" y2="900" stroke="white" stroke-width="1"/>
+        <line x1="540" y1="0" x2="540" y2="900" stroke="white" stroke-width="1"/>
+        <line x1="720" y1="0" x2="720" y2="900" stroke="white" stroke-width="1"/>
+        <line x1="900" y1="0" x2="900" y2="900" stroke="white" stroke-width="1"/>
+        <line x1="1080" y1="0" x2="1080" y2="900" stroke="white" stroke-width="1"/>
+        <line x1="1260" y1="0" x2="1260" y2="900" stroke="white" stroke-width="1"/>
+        <path d="M0,450 Q360,200 720,450 Q1080,700 1440,450" fill="none" stroke="white" stroke-width="1"/>
+        <path d="M0,300 Q360,80 720,300 Q1080,520 1440,300" fill="none" stroke="white" stroke-width="1"/>
+        <path d="M0,600 Q360,380 720,600 Q1080,820 1440,600" fill="none" stroke="white" stroke-width="1"/>
+      </svg>
+    </div>
+    <div class="hero-content">
+      <img class="hero-logo" src="assets/images/logo-imports.png" alt="Alista Imports" />
+      <div class="hero-locations" aria-label="Entry points">
+        <span>Manzanillo</span>
+        <span class="dot"></span>
+        <span>Veracruz</span>
+        <span class="dot"></span>
+        <span>Guadalajara</span>
+        <span class="dot"></span>
+        <span>Mexico City</span>
+        <span class="dot"></span>
+        <span>Laredo</span>
+        <span class="dot"></span>
+        <span>Altamira</span>
+      </div>
+      <span class="hero-eyebrow">Customs Broker · International Logistics · International Trade Consulting</span>
+      <h1>Your bridge to <span>the world</span></h1>
+      <p class="hero-desc">
+        We import what your business needs. From any country, to your warehouse —
+        with agility, traceability, and the guarantee of a certified customs broker.
+      </p>
+    </div>
+    <!-- Metrics Ticker -->
+    <div class="hero-ticker" aria-hidden="true">
+      <div class="hero-ticker-track">
+        <!-- Set A -->
+        <div class="ticker-item">
+          <svg class="ticker-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+          <span class="ticker-stat">10+</span>
+          <span class="ticker-label">Years of Experience</span>
+        </div>
+        <div class="ticker-sep"></div>
+        <div class="ticker-item">
+          <svg class="ticker-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><circle cx="10" cy="14" r="2"/><path d="m20 20-3-3"/></svg>
+          <span class="ticker-stat">REGISTRY</span>
+          <span class="ticker-label">Sectoral Textile</span>
+        </div>
+        <div class="ticker-sep"></div>
+        <div class="ticker-item">
+          <svg class="ticker-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+          <span class="ticker-stat">REGISTRY</span>
+          <span class="ticker-label">Sectoral Steel</span>
+        </div>
+        <div class="ticker-sep"></div>
+        <div class="ticker-item">
+          <svg class="ticker-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <span class="ticker-stat">5</span>
+          <span class="ticker-label">Continents</span>
+        </div>
+        <div class="ticker-sep"></div>
+        <div class="ticker-item">
+          <svg class="ticker-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span class="ticker-stat">6</span>
+          <span class="ticker-label">Entry Points to Mexico</span>
+        </div>
+        <div class="ticker-sep"></div>
+        <!-- Set B (duplicate for seamless loop) -->
+        <div class="ticker-item">
+          <svg class="ticker-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+          <span class="ticker-stat">10+</span>
+          <span class="ticker-label">Years of Experience</span>
+        </div>
+        <div class="ticker-sep"></div>
+        <div class="ticker-item">
+          <svg class="ticker-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><circle cx="10" cy="14" r="2"/><path d="m20 20-3-3"/></svg>
+          <span class="ticker-stat">REGISTRY</span>
+          <span class="ticker-label">Sectoral Textile</span>
+        </div>
+        <div class="ticker-sep"></div>
+        <div class="ticker-item">
+          <svg class="ticker-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+          <span class="ticker-stat">REGISTRY</span>
+          <span class="ticker-label">Sectoral Steel</span>
+        </div>
+        <div class="ticker-sep"></div>
+        <div class="ticker-item">
+          <svg class="ticker-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <span class="ticker-stat">5</span>
+          <span class="ticker-label">Continents</span>
+        </div>
+        <div class="ticker-sep"></div>
+        <div class="ticker-item">
+          <svg class="ticker-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span class="ticker-stat">6</span>
+          <span class="ticker-label">Entry Points to Mexico</span>
+        </div>
+        <div class="ticker-sep"></div>
+      </div>
+    </div>
+    <div class="hero-ctas">
+      <a class="btn-primary" href="#services">View Services →</a>
+      <a class="btn-ghost" href="#contact">Request a Quote</a>
+    </div>
+    <div class="hero-scroll" aria-hidden="true">
+      <span>Scroll</span>
+      <div class="hero-scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ── Services ──────────────────────────────────────────────────────── -->
+  <section id="services">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <span class="eyebrow">Services</span>
+        <h2>What we do</h2>
+        <div class="section-rule"></div>
+        <p style="font-size:0.95rem;font-weight:300;color:var(--text-muted);max-width:560px;line-height:1.8;">
+          Comprehensive foreign trade solutions. Every operation managed by experts with our own customs license.
+        </p>
+      </div>
+      <div class="servicios-grid">
+        <div class="servicio-card reveal">
+          <svg class="servicio-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 10V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l2-1.14"/>
+            <path d="M16.5 9.4 7.55 4.24"/><polyline points="3.29 7 12 12 20.71 7"/>
+            <line x1="12" y1="22" x2="12" y2="12"/>
+            <circle cx="18.5" cy="15.5" r="2.5"/><path d="M20.27 17.27 22 19"/>
+          </svg>
+          <h3>Import to Mexico</h3>
+          <p>We manage the entire process from origin: tariff classification, SAT filings, and carrier coordination. You focus on your business, we handle the operation.</p>
+        </div>
+        <div class="servicio-card reveal">
+          <svg class="servicio-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
+            <polyline points="10 9 9 9 8 9"/>
+            <circle cx="17" cy="19" r="3"/><path d="m19.5 21.5-1-1"/>
+          </svg>
+          <h3>Customs Broker</h3>
+          <p>Our own customs license. We process clearances at every port in the country with the most competitive timelines in the market, ensuring full regulatory compliance on every declaration.</p>
+        </div>
+        <div class="servicio-card reveal">
+          <svg class="servicio-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+          <h3>International Freight</h3>
+          <p>Maritime, air, and land freight from anywhere in the world. Partnerships with top-tier shipping lines, airlines, and logistics operators for the best transit times and rates.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── About ─────────────────────────────────────────────────────────── -->
+  <section id="about">
+    <div class="nosotros-bg" role="presentation" aria-hidden="true"></div>
+    <div class="nosotros-overlay" role="presentation" aria-hidden="true"></div>
+    <div class="nosotros-inner">
+      <div class="nosotros-grid">
+        <div class="nosotros-text">
+          <span class="eyebrow reveal">About Us</span>
+          <h2 class="reveal">A decade crossing borders</h2>
+          <span class="nosotros-brand-name reveal">ALISTA IMPORTS</span>
+          <div class="section-rule reveal"></div>
+          <p class="reveal">
+            Born with the mission of connecting Mexican businesses with the world.
+            Over a decade operating imports has given us the knowledge, partnerships, and
+            experience to make every clearance punctual, safe, and free of surprises.
+          </p>
+          <p class="reveal">
+            We serve manufacturing, distribution, and commercial companies throughout Mexico,
+            with a comprehensive service that spans from international supplier negotiation
+            to delivery at your warehouse.
+          </p>
+          <div class="padron-badges reveal">
+            <div class="padron-badge">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><circle cx="10" cy="14" r="2"/><path d="m20 20-3-3"/></svg>
+              <div>
+                <span class="padron-badge-label">SAT Certification</span>
+                <span class="padron-badge-name">Textile Sectoral Registry</span>
+              </div>
+            </div>
+            <div class="padron-badge">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+              <div>
+                <span class="padron-badge-label">SAT Certification</span>
+                <span class="padron-badge-name">Steel Sectoral Registry</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="nosotros-visual reveal">
+          <div class="nosotros-logo-wrap">
+            <img src="assets/images/logo-imports.png" alt="Alista Imports" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Process ───────────────────────────────────────────────────────── -->
+  <section id="process">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <span class="eyebrow">Process</span>
+        <h2>How does it work?</h2>
+        <div class="section-rule"></div>
+        <p style="font-size:0.95rem;font-weight:300;color:var(--text-muted);max-width:500px;line-height:1.8;">
+          From first contact to warehouse delivery, we accompany you every step of the way.
+        </p>
+      </div>
+      <div class="proceso-grid">
+        <div class="proceso-step reveal">
+          <div class="proceso-num">01</div>
+          <h3>Document Review</h3>
+          <p>We verify you have the necessary documents: commercial invoice, packing list, BL or airway bill, certificates of origin, and product technical sheets to begin operations.</p>
+        </div>
+        <div class="proceso-step reveal">
+          <div class="proceso-num">02</div>
+          <h3>Tariff Classification</h3>
+          <p>We determine the correct tariff code under the TIGIE schedule, identifying the import regime, restrictions, non-tariff regulations (NOM, ISAN, IEPS), and the applicable duty rate.</p>
+        </div>
+        <div class="proceso-step reveal">
+          <div class="proceso-num">03</div>
+          <h3>Quotation</h3>
+          <p>We prepare an accurate quote covering all items: freight, insurance, import duties, countervailing duties, import VAT, customs fees, and handling charges.</p>
+        </div>
+        <div class="proceso-step reveal">
+          <div class="proceso-num">04</div>
+          <h3>Tax Payment</h3>
+          <p>We manage the payment of contributions to the SAT: tariff, VAT, DTA, countervailing duties, and any special tax (IEPS, ISAN) applicable to your goods.</p>
+        </div>
+        <div class="proceso-step reveal">
+          <div class="proceso-num">05</div>
+          <h3>Customs Clearance</h3>
+          <p>We process the import declaration at customs, manage the inspection lane (red, orange, or green), and obtain official release of the goods in the shortest time possible.</p>
+        </div>
+        <div class="proceso-step reveal">
+          <div class="proceso-num">06</div>
+          <h3>Cost Statement</h3>
+          <p>We issue a detailed breakdown of all incurred expenses: freight, handling, storage, fees, and paid contributions. Full transparency in every operation.</p>
+        </div>
+        <div class="proceso-step reveal">
+          <div class="proceso-num">07</div>
+          <h3>Goods Delivery</h3>
+          <p>We coordinate the transport of cleared goods to your warehouse anywhere in the country, with last-mile tracking and delivery confirmation.</p>
+        </div>
+        <div class="proceso-step reveal">
+          <div class="proceso-num">08</div>
+          <h3>Project Closure</h3>
+          <p>We deliver the complete digital file: customs declaration, invoices, BL/airway bills, tax receipts, and all customs documents for your fiscal and accounting records.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Industries ────────────────────────────────────────────────────── -->
+  <section id="industries">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <span class="eyebrow">Industries</span>
+        <h2>Sectors we serve</h2>
+        <div class="section-rule"></div>
+        <p style="font-size:0.95rem;font-weight:300;color:var(--text-muted);max-width:560px;line-height:1.8;">
+          Proven experience in Mexico's most demanding industries.
+        </p>
+      </div>
+      <div class="sectores-grid">
+        <div class="sector-tile reveal">
+          <svg class="sector-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="15" rx="2"/><polyline points="16 2 12 7 8 2"/><line x1="12" y1="12" x2="12" y2="17"/><line x1="9" y1="14.5" x2="15" y2="14.5"/></svg>
+          <h4>Manufacturing</h4><p>Parts, components, and industrial raw materials</p>
+        </div>
+        <div class="sector-tile reveal">
+          <svg class="sector-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+          <h4>Metallurgy</h4><p>Steel, aluminum, and specialty metals</p>
+        </div>
+        <div class="sector-tile reveal">
+          <svg class="sector-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21 4 19 4c-2 0-4.5 2-4.5 2L10 8.2l-8.3 1.7a.5.5 0 0 0-.1.9l6.4 4.1 2 5.8a.5.5 0 0 0 .8.2l3-2.5z"/></svg>
+          <h4>Aviation</h4><p>Spare parts and aeronautical components</p>
+        </div>
+        <div class="sector-tile reveal">
+          <svg class="sector-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2M15 20v2M2 15h2M2 9h2M20 15h2M20 9h2M9 2v2M9 20v2"/></svg>
+          <h4>Electronics</h4><p>Circuits, equipment, and computing components</p>
+        </div>
+        <div class="sector-tile reveal">
+          <svg class="sector-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m2 20 2-2 4 4 4-4 4 4 2-2M3 8l4-4 4 4 4-4 4 4"/><line x1="3" y1="14" x2="21" y2="14"/></svg>
+          <h4>Construction</h4><p>Materials, machinery, and tools</p>
+        </div>
+        <div class="sector-tile reveal">
+          <svg class="sector-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+          <h4>Agriculture</h4><p>Agricultural and veterinary inputs</p>
+        </div>
+        <div class="sector-tile reveal">
+          <svg class="sector-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          <h4>Technology</h4><p>IT equipment, telecommunications, and software</p>
+        </div>
+        <div class="sector-tile reveal">
+          <svg class="sector-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          <h4>Healthcare</h4><p>Medical devices and hospital supplies</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Locations ─────────────────────────────────────────────────────── -->
+  <section id="locations">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <span class="eyebrow">Locations</span>
+        <h2>Entry Points to Mexico</h2>
+        <div class="section-rule"></div>
+        <p style="font-size:0.95rem;font-weight:300;color:var(--text-muted);max-width:600px;line-height:1.8;">
+          We operate at the main ports, borders, and distribution centers in the country,
+          guaranteeing national coverage from the first meters of Mexican soil.
+        </p>
+      </div>
+      <div class="ubicaciones-grid">
+        <div class="ubicacion-card reveal">
+          <div class="ubicacion-map">
+            <img src="assets/images/maps/manzanillo-map.png" class="ubicacion-map-el" alt="Map of Manzanillo Port" loading="lazy" />
+            <span class="ubicacion-type">Seaport</span>
+          </div>
+          <div class="ubicacion-body">
+            <h4>Manzanillo</h4>
+            <p>Mexico's principal Pacific port. Ideal for imports from Asia and South America.</p>
+          </div>
+        </div>
+        <div class="ubicacion-card reveal">
+          <div class="ubicacion-map">
+            <img src="assets/images/maps/veracruz-map.png" class="ubicacion-map-el" alt="Map of Veracruz Port" loading="lazy" />
+            <span class="ubicacion-type">Seaport</span>
+          </div>
+          <div class="ubicacion-body">
+            <h4>Veracruz</h4>
+            <p>Most important port on the Gulf of Mexico. Receives cargo from Europe, the United States, and the Caribbean.</p>
+          </div>
+        </div>
+        <div class="ubicacion-card reveal">
+          <div class="ubicacion-map">
+            <img src="assets/images/maps/guadalajara-map.png" class="ubicacion-map-el" alt="Map of Guadalajara" loading="lazy" />
+            <span class="ubicacion-type">Distribution Center</span>
+          </div>
+          <div class="ubicacion-body">
+            <h4>Guadalajara</h4>
+            <p>Logistics hub for western Mexico. Alista Imports headquarters and regional distribution center.</p>
+          </div>
+        </div>
+        <div class="ubicacion-card reveal">
+          <div class="ubicacion-map">
+            <img src="assets/images/maps/cdmx-map.png" class="ubicacion-map-el" alt="Map of Mexico City" loading="lazy" />
+            <span class="ubicacion-type">Distribution Center</span>
+          </div>
+          <div class="ubicacion-body">
+            <h4>Mexico City</h4>
+            <p>Largest consumer market in the country. Air cargo entry point via AICM and AIFA airports.</p>
+          </div>
+        </div>
+        <div class="ubicacion-card reveal">
+          <div class="ubicacion-map">
+            <img src="assets/images/maps/laredo-map.png" class="ubicacion-map-el" alt="Map of Laredo Border Customs" loading="lazy" />
+            <span class="ubicacion-type">Border Customs</span>
+          </div>
+          <div class="ubicacion-body">
+            <h4>Laredo</h4>
+            <p>Most active land border crossing in North America. Main gateway for imports from the United States.</p>
+          </div>
+        </div>
+        <div class="ubicacion-card reveal">
+          <div class="ubicacion-map">
+            <img src="assets/images/maps/altamira-map.png" class="ubicacion-map-el" alt="Map of Altamira Port" loading="lazy" />
+            <span class="ubicacion-type">Seaport</span>
+          </div>
+          <div class="ubicacion-body">
+            <h4>Altamira</h4>
+            <p>Industrial port in the northeast. Specialized in bulk cargo, petrochemicals, and steel.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Partners ──────────────────────────────────────────────────────── -->
+  <section id="partners">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <span class="eyebrow">Partners</span>
+        <h2>Our Allies</h2>
+        <div class="section-rule"></div>
+      </div>
+      <p class="colab-intro reveal">
+        We work with the best logistics, transportation, and customs service companies in the country
+        to guarantee seamless operations at every link in the import chain.
+      </p>
+      <div class="colab-grid">
+        <div class="colab-card reveal">
+          <a href="https://aoll.com.mx" target="_blank" rel="noopener noreferrer" aria-label="AOL Logistics">
+            <div class="colab-logo-wrap">
+              <img src="../assets/images/collaborations/aol-logo.png" alt="AOL Logistics" loading="lazy" />
+            </div>
+            <span class="colab-name">AOL Logistics</span>
+          </a>
+        </div>
+        <div class="colab-card reveal">
+          <a href="https://www.tavilogistics.com" target="_blank" rel="noopener noreferrer" aria-label="TAVI Logistics">
+            <div class="colab-logo-wrap">
+              <img src="../assets/images/collaborations/tavi-logo.png" alt="TAVI Logistics" loading="lazy" />
+            </div>
+            <span class="colab-name">TAVI Logistics</span>
+          </a>
+        </div>
+        <div class="colab-card reveal">
+          <a href="https://morenoymoreno.mx" target="_blank" rel="noopener noreferrer" aria-label="Moreno y Moreno">
+            <div class="colab-logo-wrap">
+              <img src="../assets/images/collaborations/moreno-logo.png" alt="Moreno y Moreno" loading="lazy" />
+            </div>
+            <span class="colab-name">Moreno y Moreno</span>
+          </a>
+        </div>
+        <div class="colab-card reveal">
+          <a href="https://www.daiweb.mx" target="_blank" rel="noopener noreferrer" aria-label="Grupo DAI">
+            <div class="colab-logo-wrap">
+              <img src="../assets/images/collaborations/dai-logo.png" alt="Grupo DAI" loading="lazy" />
+            </div>
+            <span class="colab-name">Grupo DAI</span>
+          </a>
+        </div>
+        <div class="colab-card reveal">
+          <a href="https://www.dhl.com" target="_blank" rel="noopener noreferrer" aria-label="DHL">
+            <div class="colab-logo-wrap">
+              <img src="../assets/images/collaborations/dhl-logo.png" alt="DHL" loading="lazy" />
+            </div>
+            <span class="colab-name">DHL Imports</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Contact ───────────────────────────────────────────────────────── -->
+  <section id="contact">
+    <div class="section-inner">
+      <div class="contacto-grid">
+        <div class="contacto-info">
+          <span class="eyebrow reveal">Contact</span>
+          <h2 class="reveal">Ready to import to Mexico?</h2>
+          <div class="section-rule reveal"></div>
+          <p class="reveal">
+            Tell us about your operation and we'll respond in less than 24 business hours.
+            Our specialists will analyze your case and provide guidance on tariff classification,
+            estimated timelines, and costs.
+          </p>
+          <div class="contacto-cards reveal">
+            <a class="contact-card contact-card--wa" href="https://wa.me/523331288999?text=Hello,%20I%27m%20interested%20in%20Alista%20Imports%20services" target="_blank" rel="noopener noreferrer">
+              <div class="contact-card-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+              </div>
+              <div class="contact-card-body">
+                <span class="contact-card-label">WhatsApp (urgent)</span>
+                <span class="contact-card-value">+52 333 128 8999</span>
+              </div>
+            </a>
+            <a class="contact-card contact-card--email" href="mailto:ventas@grupoalista.com">
+              <div class="contact-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              </div>
+              <div class="contact-card-body">
+                <span class="contact-card-label">Email</span>
+                <span class="contact-card-value">ventas@grupoalista.com</span>
+              </div>
+            </a>
+            <div class="contacto-address">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              <p>Lázaro Cárdenas Pte. 2953, Col. Chapalita<br/>Guadalajara, Jalisco, México C.P. 44500</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form-wrap reveal">
+          <h3>Request information</h3>
+          <p class="form-subtitle">Fill out the form and a specialist will contact you within 24 business hours.</p>
+          <form id="imports-contact-form" novalidate>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label" for="imp-name">Name <span class="form-required">*</span></label>
+                <input class="form-input" type="text" id="imp-name" name="imp_name" placeholder="Your full name" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="imp-email">Email <span class="form-required">*</span></label>
+                <input class="form-input" type="email" id="imp-email" name="imp_email" placeholder="you@company.com" required />
+              </div>
+              <div class="form-group form-full">
+                <label class="form-label" for="imp-product">Product to import <span class="form-required">*</span></label>
+                <input class="form-input" type="text" id="imp-product" name="imp_product" placeholder="e.g. Textile machinery, coil steel, electronics…" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="imp-value">Estimated purchase value</label>
+                <input class="form-input" type="number" id="imp-value" name="imp_value" placeholder="e.g. 15000" min="0" step="any" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="imp-location">Current location / origin</label>
+                <input class="form-input" type="text" id="imp-location" name="imp_location" placeholder="Country or city of origin" />
+              </div>
+              <div class="form-group form-full">
+                <label class="form-label">Shipment status <span class="form-required">*</span></label>
+                <div class="status-pills" id="status-pills" role="group" aria-label="Shipment status">
+                  <button type="button" class="status-pill" data-value="At origin">At origin</button>
+                  <button type="button" class="status-pill" data-value="In transit">In transit</button>
+                  <button type="button" class="status-pill" data-value="Already in Mexico">Already in Mexico</button>
+                </div>
+                <input type="hidden" id="imp-status" name="imp_status" required />
+              </div>
+              <div class="form-group form-full">
+                <label class="form-label">Attach document (optional)</label>
+                <div class="file-upload-wrap" id="file-upload-wrap">
+                  <input type="file" id="imp-file" name="imp_file" accept=".pdf,.jpg,.jpeg,.png,.gif,.webp,.xlsx,.xls,.doc,.docx" aria-label="Attach file" />
+                  <svg class="file-upload-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                  <p class="file-upload-text"><strong>Drag a file</strong> or click to select</p>
+                  <p class="file-upload-text" style="font-size:0.72rem;opacity:0.6;">PDF, images, Excel, Word — max. 10 MB</p>
+                  <p class="file-upload-name" id="file-upload-name"></p>
+                </div>
+              </div>
+              <div class="form-group form-full">
+                <label class="form-label" for="imp-notes">Additional notes</label>
+                <textarea class="form-textarea" id="imp-notes" name="imp_notes" rows="5" placeholder="Product specifications, delivery conditions, urgency, BL number, courier tracking number, or any other relevant information…"></textarea>
+                <div class="file-info-note">
+                  <strong>What information helps us classify your goods?</strong> Pro forma or commercial invoice, technical data sheet, photos, packing list, BL (Bill of Lading), or courier tracking number. You can include that here or send it directly to <strong>ventas@grupoalista.com</strong> or via WhatsApp at <strong>+52 333 128 8999</strong>. This allows us to determine the correct <em>tariff classification</em> and applicable import duties.
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="form-submit-btn" id="imp-submit-btn">
+              Send Request →
+            </button>
+            <div class="form-feedback" id="imp-feedback" role="alert"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ────────────────────────────────────────────────────────── -->
+  <footer id="footer" role="contentinfo">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="assets/images/logo-imports.png" alt="Alista Imports" />
+        <p class="footer-tagline">
+          Imports that move businesses.<br />
+          Certified customs broker. Textile &amp; Steel Sectoral Registry.
+        </p>
+        <div class="footer-socials">
+          <a class="footer-social-btn" href="https://www.facebook.com/grupo.alista.54" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a class="footer-social-btn" href="https://www.instagram.com/grupo.alista/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a class="footer-social-btn" href="https://wa.me/523331288999" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <ul role="list">
+          <li><a href="#services">Import to Mexico</a></li>
+          <li><a href="#services">Customs Broker</a></li>
+          <li><a href="#services">International Freight</a></li>
+          <li><a href="#locations">Locations</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul role="list">
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#industries">Industries</a></li>
+          <li><a href="#partners">Partners</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="imports/terminos.html" class="footer-nav-legal">Terms &amp; Conditions</a></li>
+          <li><a href="imports/privacidad.html" class="footer-nav-legal">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-left">
+        <img src="assets/images/logo-main.png" alt="Grupo Alista" />
+        <a href="index.html">Part of Grupo Alista</a>
+      </div>
+      <span class="footer-copyright">© 2026 Alista Imports. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <!-- ── WhatsApp FAB ──────────────────────────────────────────────────── -->
+  <a class="wa-fab" href="https://wa.me/523331288999?text=Hello,%20I%27m%20interested%20in%20Alista%20Imports%20services" target="_blank" rel="noopener noreferrer" aria-label="Contact via WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+  </a>
+
+  <script>
+    /* ── Nav scroll ── */
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    /* ── Hamburger ── */
+    const hamburger = document.querySelector('.nav-hamburger');
+    const drawer    = document.querySelector('.nav-drawer');
+    hamburger.addEventListener('click', () => {
+      const isOpen = drawer.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', isOpen);
+    });
+    drawer.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        drawer.classList.remove('open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    /* ── Smooth scroll with nav offset ── */
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', e => {
+        const target = document.querySelector(anchor.getAttribute('href'));
+        if (!target) return;
+        e.preventDefault();
+        const top = target.getBoundingClientRect().top + window.scrollY - 88;
+        window.scrollTo({ top, behavior: 'smooth' });
+      });
+    });
+
+    /* ── Scroll reveal ── */
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); revealObserver.unobserve(e.target); } });
+    }, { threshold: 0.10, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    /* ── Status pills ── */
+    const statusPills = document.querySelectorAll('.status-pill');
+    const statusInput = document.getElementById('imp-status');
+    statusPills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        statusPills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        statusInput.value = pill.dataset.value;
+      });
+    });
+
+    /* ── File upload display ── */
+    const fileInput  = document.getElementById('imp-file');
+    const fileWrap   = document.getElementById('file-upload-wrap');
+    const fileNameEl = document.getElementById('file-upload-name');
+    fileInput.addEventListener('change', () => {
+      if (fileInput.files.length > 0) {
+        const f = fileInput.files[0];
+        fileWrap.classList.add('has-file');
+        fileNameEl.textContent = '✓ ' + f.name;
+        fileNameEl.style.display = 'block';
+      }
+    });
+
+    /* ── Contact form submit ── */
+    const form      = document.getElementById('imports-contact-form');
+    const submitBtn = document.getElementById('imp-submit-btn');
+    const feedback  = document.getElementById('imp-feedback');
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const name    = document.getElementById('imp-name').value.trim();
+      const email   = document.getElementById('imp-email').value.trim();
+      const product = document.getElementById('imp-product').value.trim();
+      const status  = statusInput.value;
+
+      if (!name || !email || !product) {
+        showFeedback('error', '✗ Please fill in the required fields: Name, Email, and Product.');
+        return;
+      }
+      if (!status) {
+        showFeedback('error', '✗ Please select your shipment status.');
+        return;
+      }
+
+      const valueRaw = document.getElementById('imp-value').value.trim();
+      if (valueRaw !== '' && isNaN(Number(valueRaw))) {
+        showFeedback('error', '✗ Estimated value must be a number. Example: 15000');
+        return;
+      }
+      const value    = valueRaw ? 'USD ' + Number(valueRaw).toLocaleString('en-US') : '—';
+      const location = document.getElementById('imp-location').value.trim();
+      const notes    = document.getElementById('imp-notes').value.trim();
+
+      const originalText = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+      submitBtn.style.opacity = '0.6';
+
+      const messageBody =
+        'IMPORT INQUIRY — ALISTA IMPORTS (EN)\n' +
+        '==========================================\n' +
+        'Name: ' + name + '\n' +
+        'Email: ' + email + '\n' +
+        'Product to import: ' + product + '\n' +
+        'Estimated value: ' + (value || '—') + '\n' +
+        'Shipment status: ' + status + '\n' +
+        'Location / Origin: ' + (location || '—') + '\n' +
+        'Additional notes: ' + (notes || '—') + '\n' +
+        (fileInput.files.length > 0 ? 'Attached file: ' + fileInput.files[0].name : '');
+
+      try {
+        await emailjs.send('service_yufgzg8', 'template_e7cixha', {
+          from_name: name,
+          from_email: email,
+          producto:  product,
+          valor:     value,
+          estatus:   status,
+          ubicacion: location || '—',
+          notas:     notes || '—',
+          archivo:   fileInput.files.length > 0 ? fileInput.files[0].name : '—',
+          message:   messageBody
+        });
+        showFeedback('success',
+          '✓ Request sent successfully. We will contact you within 24 business hours.\n' +
+          'For urgent matters, message us on WhatsApp at +52 333 128 8999.');
+        form.reset();
+        statusPills.forEach(p => p.classList.remove('active'));
+        statusInput.value = '';
+        fileWrap.classList.remove('has-file');
+        fileNameEl.style.display = 'none';
+      } catch (_) {
+        showFeedback('error',
+          '✗ Error sending. Please try again or email us directly at ventas@grupoalista.com');
+      } finally {
+        submitBtn.disabled    = false;
+        submitBtn.textContent = originalText;
+        submitBtn.style.opacity = '1';
+      }
+    });
+
+    function showFeedback(type, msg) {
+      feedback.style.display    = 'block';
+      feedback.style.whiteSpace = 'pre-line';
+      if (type === 'success') {
+        feedback.style.color       = '#4dc9a0';
+        feedback.style.borderColor = 'rgba(74,145,97,0.35)';
+        feedback.style.background  = 'rgba(74,145,97,0.08)';
+      } else {
+        feedback.style.color       = '#e57373';
+        feedback.style.borderColor = 'rgba(231,76,60,0.28)';
+        feedback.style.background  = 'rgba(231,76,60,0.07)';
+      }
+      feedback.textContent = msg;
+      feedback.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      if (type === 'success') setTimeout(() => { feedback.style.display = 'none'; }, 10000);
+    }
+  </script>
+</body>
+</html>

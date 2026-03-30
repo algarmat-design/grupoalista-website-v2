@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Términos y Condiciones — Alista Hotels</title>
+  <link rel="icon" type="image/png" href="../assets/images/logo-hotels.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;500&family=Montserrat:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:          #090909;
+      --bg-elevated: #131313;
+      --bg-card:     #1a1a1a;
+      --silver:      #c8c8c8;
+      --silver-dim:  #888880;
+      --gold:        #c9a96e;
+      --white:       #f5f5f0;
+      --text:        #d0d0c8;
+      --text-muted:  #787870;
+      --border:      rgba(200,200,200,0.10);
+      --metallic-grad: linear-gradient(135deg, #c8c8c8 0%, #e8e8e0 40%, #a0a0a0 60%, #d0d0c8 100%);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body { font-family: 'Lato', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+    a { color: inherit; text-decoration: none; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-elevated); }
+    ::-webkit-scrollbar-thumb { background: var(--silver-dim); border-radius: 3px; }
+
+    /* Topbar */
+    .topbar {
+      background: var(--bg-elevated);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 10;
+    }
+    .topbar-back {
+      display: flex; align-items: center; gap: 0.6rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.65rem; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--silver-dim);
+      transition: color 0.2s;
+    }
+    .topbar-back:hover { color: var(--silver); }
+    .topbar-back svg { width: 14px; height: 14px; }
+    .topbar-logo img { height: 36px; opacity: 0.5; }
+
+    /* Layout */
+    .legal-wrap {
+      max-width: 820px; margin: 0 auto;
+      padding: 5rem 2.5rem 6rem;
+    }
+    .legal-header { margin-bottom: 4rem; }
+    .legal-eyebrow {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.62rem; font-weight: 500;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--silver-dim);
+      display: block; margin-bottom: 1rem;
+    }
+    .legal-header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.05;
+      margin-bottom: 1.25rem;
+    }
+    .legal-meta {
+      font-size: 0.84rem; font-weight: 300;
+      color: var(--text-muted);
+    }
+    .legal-rule { width: 48px; height: 1px; background: var(--metallic-grad); margin: 1.5rem 0; }
+
+    /* Sections */
+    .legal-section { margin-bottom: 3.5rem; }
+    .legal-section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.55rem; font-weight: 700;
+      color: var(--white);
+      margin-bottom: 1rem;
+      display: flex; align-items: baseline; gap: 0.75rem;
+    }
+    .legal-section h2 .num {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.65rem; font-weight: 500;
+      letter-spacing: 0.12em;
+      color: var(--silver-dim);
+      flex-shrink: 0;
+    }
+    .legal-section p { font-weight: 300; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.8; }
+    .legal-section ul { margin: 0.75rem 0 1rem 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; }
+    .legal-section ul li { font-weight: 300; color: var(--text-muted); line-height: 1.75; }
+
+    /* Callout */
+    .callout {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--silver);
+      border-radius: 0 6px 6px 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .callout p { margin: 0; font-size: 0.92rem; }
+
+    /* Footer */
+    .legal-footer {
+      border-top: 1px solid var(--border);
+      padding-top: 3rem; margin-top: 4rem;
+    }
+    .legal-footer p { font-size: 0.84rem; color: var(--text-muted); font-weight: 300; margin-bottom: 1rem; }
+    .legal-footer-links { display: flex; flex-wrap: wrap; gap: 1.5rem; }
+    .legal-footer-links a {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.62rem; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--silver-dim);
+      transition: color 0.2s;
+    }
+    .legal-footer-links a:hover { color: var(--silver); }
+
+    @media (max-width: 768px) {
+      .legal-wrap { padding: 3rem 1.5rem 4rem; }
+      .topbar { padding: 1rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <a class="topbar-back" href="../hotels-es.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+      Alista Hotels
+    </a>
+    <div class="topbar-logo">
+      <img src="../assets/images/logo-hotels.png" alt="Alista Hotels" />
+    </div>
+  </div>
+
+  <main class="legal-wrap">
+    <header class="legal-header">
+      <span class="legal-eyebrow">Documento Legal</span>
+      <h1>Términos y Condiciones</h1>
+      <div class="legal-rule"></div>
+      <p class="legal-meta">Alista Hotels — División de Grupo Alista · Última actualización: enero 2026 · Versión 1.0</p>
+    </header>
+
+    <section class="legal-section">
+      <h2><span class="num">01</span> Generalidades y Aceptación</h2>
+      <p>Los presentes Términos y Condiciones regulan la relación comercial entre <strong style="color:var(--white)">Alista Hotels</strong>, división de Grupo Alista (en adelante "nosotros", "la empresa"), y cualquier persona física o moral (en adelante "el Cliente") que solicite información, cotizaciones, o adquiera productos o servicios a través de nuestros canales de contacto, incluyendo WhatsApp, correo electrónico y el sitio web.</p>
+      <p>Al solicitar una cotización, confirmar un pedido o realizar cualquier transacción con Alista Hotels, el Cliente acepta expresamente los presentes Términos y Condiciones en su totalidad.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2><span class="num">02</span> Descripción del Servicio</h2>
+      <p>Alista Hotels ofrece los siguientes servicios relacionados con suministros hoteleros y de hospitalidad:</p>
+      <ul>
+        <li><strong style="color:var(--white)">Abastecimiento de productos:</strong> selección, cotización y gestión de compra de artículos de limpieza, blancos, toallas, amenidades de baño y otros suministros hoteleros.</li>
+        <li><strong style="color:var(--white)">Proyectos de equipamiento:</strong> coordinación integral del suministro para aperturas, renovaciones o expansiones de establecimientos hoteleros.</li>
+        <li><strong style="color:var(--white)">Abastecimiento para eventos:</strong> provisión de amenidades y suministros especiales para eventos corporativos, bodas y galas.</li>
+        <li><strong style="color:var(--white)">Personalización de marca:</strong> gestión de bordados, etiquetas personalizadas y packaging de marca para productos textiles y de amenidades.</li>
+      </ul>
+      <p>Los productos mostrados en el catálogo de nuestro sitio web son referenciales. La disponibilidad, características y precios pueden variar según el proveedor y el momento de la solicitud.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2><span class="num">03</span> Cotizaciones y Precios</h2>
+      <p>Todas las cotizaciones emitidas por Alista Hotels son estimadas y están sujetas a los siguientes lineamientos:</p>
+      <ul>
+        <li>Las cotizaciones tienen una vigencia de <strong style="color:var(--white)">15 días naturales</strong> a partir de su fecha de emisión, salvo indicación expresa en contrario.</li>
+        <li>Los precios se expresan en pesos mexicanos (MXN) o dólares estadounidenses (USD) según se indique. En caso de cotizaciones en USD, el tipo de cambio aplicable será el del día hábil bancario anterior a la fecha de confirmación del pedido.</li>
+        <li>Los precios no incluyen IVA, gastos de envío, ni costos de aduana o importación, a menos que se especifique lo contrario en la cotización.</li>
+        <li>Los precios pueden ajustarse sin previo aviso ante variaciones significativas en el costo de materiales, fletes o tipo de cambio.</li>
+      </ul>
+      <div class="callout">
+        <p>Para obtener una cotización personalizada con precios actualizados, contáctenos directamente vía WhatsApp al <strong style="color:var(--white)">+52 333 128 8999</strong> o a <strong style="color:var(--white)">ventas@grupoalista.com</strong>.</p>
+      </div>
+    </section>
+
+    <section class="legal-section">
+      <h2><span class="num">04</span> Confirmación de Pedido y Mínimos</h2>
+      <p>Un pedido se considera confirmado únicamente cuando:</p>
+      <ul>
+        <li>El Cliente acepta expresamente la cotización por escrito (correo electrónico o mensaje de WhatsApp).</li>
+        <li>Se recibe el anticipo correspondiente según lo acordado en la cotización.</li>
+      </ul>
+      <p>Ciertos productos, especialmente los de personalización (bordados, etiquetas, packaging), pueden tener cantidades mínimas de pedido (MOQ). Estas serán indicadas en la cotización respectiva.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2><span class="num">05</span> Pagos y Facturación</h2>
+      <p>Las condiciones de pago son las siguientes:</p>
+      <ul>
+        <li><strong style="color:var(--white)">Anticipo:</strong> mínimo del 50% del valor total del pedido al momento de confirmación, salvo acuerdo distinto.</li>
+        <li><strong style="color:var(--white)">Liquidación:</strong> el saldo restante se cubre previo a la entrega o despacho del pedido.</li>
+        <li>Para clientes con historial comercial, se podrán negociar condiciones de crédito adicionales.</li>
+        <li>La factura electrónica (CFDI) se emite a nombre de los datos fiscales proporcionados por el Cliente al confirmar el pedido. No se realizan modificaciones fiscales una vez emitida.</li>
+      </ul>
+    </section>
+
+    <section class="legal-section">
+      <h2><span class="num">06</span> Plazos, Entrega y Logística</h2>
+      <p>Los tiempos de entrega son estimados y dependen de la disponibilidad del proveedor, la complejidad del pedido y la ubicación del destino final. Los plazos indicados en cotización no son vinculantes en los siguientes casos:</p>
+      <ul>
+        <li>Retrasos atribuibles al proveedor o transportista.</li>
+        <li>Situaciones de fuerza mayor (desastres naturales, huelgas, contingencias sanitarias, bloqueos).</li>
+        <li>Pedidos que requieran personalización, fabricación especial o importación.</li>
+        <li>Pagos no recibidos en tiempo y forma.</li>
+      </ul>
+      <p>Alista Hotels no se hace responsable por pérdidas o daños consecuentes derivados de retrasos en la entrega fuera de nuestro control directo.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2><span class="num">07</span> Devoluciones y Reclamaciones de Calidad</h2>
+      <p>Para reportar un problema de calidad o defecto en los productos recibidos:</p>
+      <ul>
+        <li>El Cliente tiene <strong style="color:var(--white)">5 días hábiles</strong> a partir de la recepción para notificar cualquier inconformidad por escrito.</li>
+        <li>La notificación deberá incluir evidencia fotográfica o de video del producto defectuoso.</li>
+        <li>No se aceptan devoluciones de productos personalizados (bordados, packaging a la medida) una vez fabricados, salvo que el defecto sea atribuible directamente a Alista Hotels.</li>
+        <li>Los reemplazos o notas de crédito están sujetos a evaluación y aprobación por parte de Alista Hotels.</li>
+      </ul>
+    </section>
+
+    <section class="legal-section">
+      <h2><span class="num">08</span> Responsabilidad Limitada</h2>
+      <p>Alista Hotels actúa como intermediario entre el Cliente y los proveedores de productos hoteleros. En consecuencia:</p>
+      <ul>
+        <li>Nuestra responsabilidad máxima ante cualquier reclamación se limita al valor del pedido en disputa.</li>
+        <li>No somos responsables por daños indirectos, incidentales, especiales o consecuentes derivados del uso de los productos suministrados.</li>
+        <li>La empresa no garantiza que los productos cumplirán con especificaciones técnicas no declaradas expresamente en la cotización aceptada.</li>
+      </ul>
+    </section>
+
+    <section class="legal-section">
+      <h2><span class="num">09</span> Propiedad Intelectual y Confidencialidad</h2>
+      <p>Al solicitar servicios de personalización de marca (bordados, etiquetas, packaging), el Cliente declara:</p>
+      <ul>
+        <li>Ser titular o contar con los derechos necesarios sobre las marcas, logos y diseños proporcionados.</li>
+        <li>Que el uso de dichos elementos no infringe derechos de terceros.</li>
+      </ul>
+      <p>Alista Hotels se compromete a mantener en estricta confidencialidad los diseños, especificaciones y requerimientos comerciales compartidos por el Cliente, y no los divulgará a terceros sin autorización expresa.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2><span class="num">10</span> Modificaciones y Jurisdicción</h2>
+      <p>Alista Hotels se reserva el derecho de modificar los presentes Términos y Condiciones en cualquier momento. Las modificaciones entrarán en vigor a partir de su publicación en el sitio web.</p>
+      <p>Para cualquier controversia derivada de estos Términos, las partes se someten expresamente a la jurisdicción de los <strong style="color:var(--white)">Tribunales Competentes de la Ciudad de Guadalajara, Jalisco, México</strong>, renunciando a cualquier otro fuero que pudiera corresponderles.</p>
+      <div class="callout">
+        <p>¿Dudas sobre nuestros términos? Escríbenos a <strong style="color:var(--white)">ventas@grupoalista.com</strong> o contáctanos vía WhatsApp.</p>
+      </div>
+    </section>
+
+    <footer class="legal-footer">
+      <p>© 2026 Alista Hotels — División de Grupo Alista. Todos los derechos reservados.</p>
+      <div class="legal-footer-links">
+        <a href="privacidad.html">Política de Privacidad</a>
+        <a href="../hotels-es.html">Inicio Alista Hotels</a>
+        <a href="../index.html">Grupo Alista</a>
+      </div>
+    </footer>
+  </main>
+
+</body>
+</html>
