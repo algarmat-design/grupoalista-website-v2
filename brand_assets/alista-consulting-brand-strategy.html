@@ -1,0 +1,2228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALISTA CONSULTING — Brand Strategy 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --midnight: #0A1628;
+  --deep-navy: #0F2440;
+  --sapphire: #2563EB;
+  --cyan: #06B6D4;
+  --gold: #D4A843;
+  --green: #10B981;
+  --platinum: #E8ECF1;
+  --warm-white: #F8F9FB;
+  --text-muted: rgba(232,236,241,0.55);
+  --border: rgba(232,236,241,0.10);
+  --border-mid: rgba(232,236,241,0.18);
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+  --sidebar-w: 260px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--midnight);
+  color: var(--platinum);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── GRAIN OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.032;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+}
+
+/* ─────────────────────────────────
+   COVER
+───────────────────────────────── */
+.cover {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 10vh 10vw;
+  overflow: hidden;
+}
+
+.cover-glow-1 {
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(ellipse, rgba(37,99,235,0.18) 0%, transparent 65%);
+  pointer-events: none;
+}
+.cover-glow-2 {
+  position: absolute;
+  bottom: -20%;
+  left: -5%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(ellipse, rgba(6,182,212,0.12) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.cover-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  color: var(--cyan);
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+
+.cover-title {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 8vw, 7.5rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--warm-white);
+  margin-bottom: 0.6rem;
+}
+
+.cover-title span {
+  color: var(--sapphire);
+}
+
+.cover-sub {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  margin-bottom: 3rem;
+}
+
+.cover-rule {
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--sapphire), var(--cyan));
+  margin-bottom: 2.5rem;
+}
+
+.cover-meta {
+  display: flex;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.cover-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.cover-meta-item .label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.cover-meta-item .value {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--platinum);
+}
+
+.cover-scroll {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0.4;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+.cover-scroll span {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--platinum);
+}
+
+.cover-scroll svg { color: var(--platinum); }
+
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+
+/* ─────────────────────────────────
+   LAYOUT
+───────────────────────────────── */
+.layout {
+  display: flex;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: var(--sidebar-w);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 3rem 2rem;
+  border-right: 1px solid var(--border);
+  background: rgba(10,22,40,0.85);
+  backdrop-filter: blur(12px);
+  z-index: 100;
+  overflow: hidden;
+}
+
+.sidebar-brand {
+  margin-bottom: 3rem;
+}
+
+.sidebar-brand-name {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--warm-white);
+  letter-spacing: 0.05em;
+  display: block;
+}
+
+.sidebar-brand-sub {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.sidebar-nav {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.sidebar-nav a {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.6rem 0;
+  text-decoration: none;
+  transition: color 0.2s;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  border-left: 2px solid transparent;
+  padding-left: 0.75rem;
+  margin-left: -0.75rem;
+}
+
+.sidebar-nav a:hover { color: var(--platinum); }
+
+.sidebar-nav a.active {
+  color: var(--cyan);
+  border-left-color: var(--cyan);
+  font-weight: 600;
+}
+
+.sidebar-nav a .num {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--gold);
+  font-weight: 500;
+  min-width: 18px;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+}
+
+/* ── MAIN ── */
+.main {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ─────────────────────────────────
+   SECTION BASE
+───────────────────────────────── */
+.section {
+  padding: 6rem 5vw 6rem 4rem;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.section-header {
+  display: flex;
+  align-items: flex-end;
+  gap: 1.5rem;
+  margin-bottom: 4rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-num {
+  font-family: var(--font-display);
+  font-size: 5rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--gold);
+  opacity: 0.2;
+  letter-spacing: -0.04em;
+  user-select: none;
+}
+
+.section-title-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.section-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  font-weight: 400;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 800;
+  color: var(--warm-white);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+/* ─────────────────────────────────
+   TYPOGRAPHY SYSTEM
+───────────────────────────────── */
+h2.block-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--warm-white);
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.01em;
+}
+
+p.body-text {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.85;
+  max-width: 680px;
+}
+
+.label-tag {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  font-weight: 500;
+  display: inline-block;
+  margin-bottom: 0.6rem;
+}
+
+/* ─────────────────────────────────
+   CARDS
+───────────────────────────────── */
+.card {
+  background: var(--deep-navy);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.75rem;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover {
+  border-color: var(--border-mid);
+  transform: translateY(-2px);
+}
+
+.card-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.card-label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.4rem;
+}
+
+.card-title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--warm-white);
+  margin-bottom: 0.6rem;
+}
+
+.card-desc {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* ─────────────────────────────────
+   GRIDS
+───────────────────────────────── */
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
+.grid-2-3 { display: grid; grid-template-columns: 2fr 3fr; gap: 2rem; }
+
+@media (max-width: 900px) {
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-2-3 { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .sidebar { display: none; }
+  .section { padding: 4rem 1.5rem; }
+}
+
+/* ─────────────────────────────────
+   SECTION 01: BRAND FOUNDATION
+───────────────────────────────── */
+.mission-block {
+  background: linear-gradient(135deg, rgba(37,99,235,0.08) 0%, rgba(6,182,212,0.05) 100%);
+  border: 1px solid rgba(37,99,235,0.25);
+  border-radius: 16px;
+  padding: 2.5rem;
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.mission-block::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--sapphire), var(--cyan), transparent);
+}
+
+.mission-text {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 2vw, 1.45rem);
+  font-weight: 600;
+  color: var(--warm-white);
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+}
+
+.mission-es {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  font-style: italic;
+  line-height: 1.65;
+}
+
+.tone-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.tone-item {
+  background: var(--deep-navy);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  position: relative;
+}
+
+.tone-item::before {
+  content: '✓';
+  position: absolute;
+  top: 1rem; right: 1rem;
+  color: var(--green);
+  font-size: 0.75rem;
+  opacity: 0.6;
+}
+
+.tone-is {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--warm-white);
+  margin-bottom: 0.2rem;
+}
+
+.tone-not {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.tone-not span {
+  color: rgba(239,68,68,0.65);
+  text-decoration: line-through;
+}
+
+.positioning-hero {
+  margin-top: 3rem;
+  padding: 3rem 2.5rem;
+  background: linear-gradient(135deg, var(--deep-navy) 0%, rgba(15,36,64,0.5) 100%);
+  border: 1px solid var(--border-mid);
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.positioning-hero::after {
+  content: '"';
+  position: absolute;
+  top: -1rem; right: 2rem;
+  font-family: var(--font-display);
+  font-size: 12rem;
+  font-weight: 800;
+  color: var(--sapphire);
+  opacity: 0.05;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.positioning-hero .en {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 2.1rem);
+  font-weight: 800;
+  color: var(--warm-white);
+  line-height: 1.3;
+  margin-bottom: 1rem;
+}
+
+.positioning-hero .en em {
+  color: var(--gold);
+  font-style: normal;
+}
+
+.positioning-hero .es {
+  font-size: 1rem;
+  color: var(--text-muted);
+  font-style: italic;
+  line-height: 1.6;
+}
+
+/* ─────────────────────────────────
+   SECTION 02: VISUAL IDENTITY
+───────────────────────────────── */
+.color-swatch {
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--deep-navy);
+  border: 1px solid var(--border);
+}
+
+.swatch-color {
+  height: 100px;
+  width: 100%;
+}
+
+.swatch-info {
+  padding: 1rem;
+}
+
+.swatch-name {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--warm-white);
+  margin-bottom: 0.2rem;
+}
+
+.swatch-hex {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--cyan);
+  letter-spacing: 0.06em;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.swatch-role {
+  font-size: 0.73rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.palette-section {
+  margin-bottom: 2.5rem;
+}
+
+.palette-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.type-specimen {
+  background: var(--deep-navy);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 1.25rem;
+}
+
+.type-specimen-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.75rem;
+}
+
+.type-specimen-label span {
+  color: var(--cyan);
+}
+
+.mood-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.mood-tag {
+  font-family: var(--font-display);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--warm-white);
+  background: var(--deep-navy);
+  border: 1px solid var(--border-mid);
+  padding: 0.5rem 1.1rem;
+  border-radius: 100px;
+  letter-spacing: 0.02em;
+}
+
+.anti-rule {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: rgba(239,68,68,0.04);
+  border: 1px solid rgba(239,68,68,0.15);
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+}
+
+.anti-rule-num {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: rgba(239,68,68,0.6);
+  font-weight: 500;
+  min-width: 24px;
+  margin-top: 0.1rem;
+}
+
+.anti-rule-text {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.anti-rule-text strong {
+  color: var(--platinum);
+  font-weight: 600;
+}
+
+/* ─────────────────────────────────
+   SECTION 03: LOGO CONCEPTS
+───────────────────────────────── */
+.logo-concept {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 2.5rem;
+  margin-bottom: 3rem;
+  padding: 2.5rem;
+  background: var(--deep-navy);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.25s;
+}
+
+.logo-concept:hover { border-color: var(--border-mid); }
+
+.logo-concept.featured {
+  border-color: rgba(37,99,235,0.35);
+  background: linear-gradient(135deg, rgba(37,99,235,0.06) 0%, var(--deep-navy) 50%);
+}
+
+.logo-concept.featured::before {
+  content: '★ RECOMMENDED';
+  position: absolute;
+  top: 1.25rem; right: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.18em;
+  color: var(--gold);
+  font-weight: 500;
+}
+
+.logo-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--midnight);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2.5rem;
+  min-height: 220px;
+  gap: 1.5rem;
+}
+
+.logo-preview.light {
+  background: var(--warm-white);
+}
+
+.logo-detail h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--warm-white);
+  margin-bottom: 0.3rem;
+}
+
+.logo-detail .concept-type {
+  font-family: var(--font-mono);
+  font-size: 0.63rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 1.25rem;
+}
+
+.logo-detail-row {
+  margin-bottom: 1rem;
+}
+
+.logo-detail-row .row-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.logo-detail-row .row-text {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+  .logo-concept { grid-template-columns: 1fr; }
+  .logo-preview { min-height: 180px; }
+}
+
+/* ─────────────────────────────────
+   SECTION 04: PREMIUM PERCEPTION
+───────────────────────────────── */
+.color-psychology-row {
+  display: grid;
+  grid-template-columns: 14px 160px 1fr;
+  align-items: start;
+  gap: 1.25rem;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.color-psychology-row:last-child { border-bottom: none; }
+
+.cp-dot { width: 14px; height: 14px; border-radius: 50%; margin-top: 4px; flex-shrink: 0; }
+
+.cp-name {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--warm-white);
+}
+
+.cp-hex {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--text-muted);
+  margin-top: 0.1rem;
+}
+
+.cp-desc { font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; }
+.cp-desc strong { color: var(--platinum); font-weight: 600; }
+
+.visual-rule {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  padding: 1.25rem;
+  border-radius: 10px;
+  background: var(--deep-navy);
+  border: 1px solid var(--border);
+  margin-bottom: 0.75rem;
+}
+
+.rule-number {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--gold);
+  min-width: 28px;
+  margin-top: 2px;
+}
+
+.rule-content strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--warm-white);
+  margin-bottom: 0.25rem;
+}
+
+.rule-content p { font-size: 0.83rem; color: var(--text-muted); line-height: 1.6; }
+
+.vocab-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.vocab-col h4 {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.vocab-col.power h4 { color: var(--green); }
+.vocab-col.forbidden h4 { color: rgba(239,68,68,0.7); }
+
+.vocab-pill {
+  display: inline-block;
+  font-size: 0.8rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 100px;
+  margin: 0.25rem 0.2rem;
+}
+
+.vocab-col.power .vocab-pill {
+  background: rgba(16,185,129,0.12);
+  color: var(--green);
+  border: 1px solid rgba(16,185,129,0.25);
+}
+
+.vocab-col.forbidden .vocab-pill {
+  background: rgba(239,68,68,0.08);
+  color: rgba(239,68,68,0.8);
+  border: 1px solid rgba(239,68,68,0.18);
+  text-decoration: line-through;
+}
+
+/* ─────────────────────────────────
+   SECTION 05: BRAND SYSTEM
+───────────────────────────────── */
+.logo-var-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.logo-var-card {
+  background: var(--midnight);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  text-align: center;
+}
+
+.logo-var-card.on-light {
+  background: var(--warm-white);
+}
+
+.logo-var-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.logo-var-card.on-light .logo-var-label { color: #666; }
+
+.type-scale-row {
+  display: flex;
+  align-items: baseline;
+  gap: 1.5rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.type-scale-meta {
+  min-width: 130px;
+  flex-shrink: 0;
+}
+
+.type-scale-meta .meta-name {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  display: block;
+}
+
+.type-scale-meta .meta-spec {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  color: var(--text-muted);
+}
+
+.color-usage-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.83rem;
+}
+
+.color-usage-table th {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-mid);
+  background: var(--deep-navy);
+}
+
+.color-usage-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-muted);
+  vertical-align: top;
+}
+
+.color-usage-table td:first-child {
+  color: var(--warm-white);
+  font-weight: 500;
+}
+
+.use-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+.app-card {
+  background: var(--deep-navy);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border-top: 3px solid var(--sapphire);
+}
+
+.app-card h4 {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--warm-white);
+  margin-bottom: 1rem;
+}
+
+.app-card ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.app-card ul li {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  padding-left: 1rem;
+  position: relative;
+  line-height: 1.5;
+}
+
+.app-card ul li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--cyan);
+  font-size: 0.7rem;
+  top: 0.1rem;
+}
+
+/* ─────────────────────────────────
+   DIVIDER
+───────────────────────────────── */
+.block-spacer { margin-top: 3rem; }
+.block-spacer-sm { margin-top: 1.75rem; }
+
+.horizontal-rule {
+  height: 1px;
+  background: var(--border);
+  margin: 2.5rem 0;
+}
+
+/* ─────────────────────────────────
+   BILINGUAL BADGE
+───────────────────────────────── */
+.bilingual-badge {
+  display: inline-flex;
+  gap: 0.4rem;
+  align-items: center;
+  background: rgba(6,182,212,0.08);
+  border: 1px solid rgba(6,182,212,0.2);
+  border-radius: 100px;
+  padding: 0.25rem 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  color: var(--cyan);
+  margin-bottom: 1rem;
+}
+
+/* ─────────────────────────────────
+   HIGHLIGHT CALLOUT
+───────────────────────────────── */
+.callout {
+  background: linear-gradient(135deg, rgba(212,168,67,0.07) 0%, rgba(212,168,67,0.03) 100%);
+  border: 1px solid rgba(212,168,67,0.2);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  padding: 1.25rem 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.callout p { font-size: 0.9rem; color: var(--platinum); line-height: 1.7; }
+.callout p strong { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════
+     COVER
+══════════════════════════════════ -->
+<section class="cover">
+  <div class="cover-glow-1"></div>
+  <div class="cover-glow-2"></div>
+
+  <div class="cover-label">Brand Strategy &amp; Identity System · 2026</div>
+
+  <h1 class="cover-title">
+    ALISTA<br>
+    <span>CONSULTING</span>
+  </h1>
+
+  <p class="cover-sub">Complete Brand Foundation — Visual Identity — Logo System</p>
+
+  <div class="cover-rule"></div>
+
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <span class="label">Document Type</span>
+      <span class="value">Brand Strategy</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="label">Pillars</span>
+      <span class="value">Foundation · Identity · Logos · Perception · System</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="label">Language</span>
+      <span class="value">English (ES equivalents)</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="label">Version</span>
+      <span class="value">1.0 — March 2026</span>
+    </div>
+  </div>
+
+  <div class="cover-scroll">
+    <span>Scroll</span>
+    <svg width="16" height="22" viewBox="0 0 16 22" fill="none">
+      <rect x="1" y="1" width="14" height="20" rx="7" stroke="currentColor" stroke-width="1.5"/>
+      <circle cx="8" cy="7" r="2" fill="currentColor"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     LAYOUT
+══════════════════════════════════ -->
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <span class="sidebar-brand-name">ALISTA CONSULTING</span>
+      <span class="sidebar-brand-sub">Brand Strategy 2026</span>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="#s01" class="active"><span class="num">01</span> Brand Foundation</a></li>
+      <li><a href="#s02"><span class="num">02</span> Visual Identity</a></li>
+      <li><a href="#s03"><span class="num">03</span> Logo Concepts</a></li>
+      <li><a href="#s04"><span class="num">04</span> Perception Rules</a></li>
+      <li><a href="#s05"><span class="num">05</span> Brand System</a></li>
+    </ul>
+
+    <div class="sidebar-footer">Confidential · Grupo Alista ©2026</div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- ══════════════════════════════
+         01 — BRAND FOUNDATION
+    ══════════════════════════════ -->
+    <section class="section" id="s01">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div class="section-title-block">
+          <span class="section-eyebrow">Pillar One</span>
+          <h2 class="section-title">Brand Foundation</h2>
+        </div>
+      </div>
+
+      <!-- Mission -->
+      <div class="bilingual-badge">🌐 Bilingual — EN / ES</div>
+      <span class="label-tag">Mission Statement</span>
+      <div class="mission-block">
+        <p class="mission-text">We transform how family businesses and mid-sized companies operate — deploying AI-powered systems and fractional IT leadership that eliminate manual work, reduce costs, and compound efficiency. We start by earning your trust through Discovery. We finish by sharing your savings.</p>
+        <p class="mission-es">Transformamos la forma en que operan las empresas familiares y medianas — implementando sistemas de inteligencia artificial y liderazgo tecnológico fraccionado que eliminan el trabajo manual, reducen costos y multiplican la eficiencia. Empezamos ganándonos tu confianza con un Discovery. Terminamos compartiendo tus ahorros.</p>
+      </div>
+
+      <!-- Vision -->
+      <span class="label-tag">Vision Statement</span>
+      <div class="mission-block" style="background: linear-gradient(135deg, rgba(16,185,129,0.06) 0%, rgba(16,185,129,0.02) 100%); border-color: rgba(16,185,129,0.2);">
+        <div style="background: linear-gradient(90deg, var(--green), transparent); height: 2px; position: absolute; top: 0; left: 0; right: 0;"></div>
+        <p class="mission-text">To become Latin America's most trusted AI transformation partner for owner-operated businesses — the firm that proves premium strategy can coexist with zero risk for the client.</p>
+        <p class="mission-es">Convertirnos en el socio de transformación con IA más confiable de Latinoamérica para empresas familiares — la firma que demuestra que la estrategia premium puede coexistir con riesgo cero para el cliente.</p>
+      </div>
+
+      <!-- Values -->
+      <div class="block-spacer"></div>
+      <span class="label-tag">Core Values</span>
+      <h2 class="block-title">Five Values That Cannot Be Faked</h2>
+      <div class="grid-3" style="gap: 1rem;">
+
+        <div class="card">
+          <div class="card-label">Value 01</div>
+          <div class="card-title">Skin in the Game</div>
+          <p class="card-desc">We earn when you save. Phase 2 fees are tied directly to measurable results. If savings don't materialize, neither does our invoice.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-label">Value 02</div>
+          <div class="card-title">Radical Clarity</div>
+          <p class="card-desc">We translate AI and technology into plain business outcomes. No jargon. No slide decks that avoid the question. Every recommendation connects to a number.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-label">Value 03</div>
+          <div class="card-title">Systems Over Heroics</div>
+          <p class="card-desc">We build processes that run without us. Our goal is a business that doesn't need us next year — not one that depends on us indefinitely.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-label">Value 04</div>
+          <div class="card-title">Owner's Logic</div>
+          <p class="card-desc">We think like shareholders, not consultants. ROI is the only KPI that earns our attention. We ask "does this make the business more money?" before every recommendation.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-label">Value 05</div>
+          <div class="card-title">Earned Trust</div>
+          <p class="card-desc">We prove value before we deepen engagement. Discovery is gated. Implementation requires a green light from the client. We don't push; we earn permission.</p>
+        </div>
+
+        <div class="card" style="background: transparent; border-style: dashed; display: flex; align-items: center; justify-content: center; padding: 1rem;">
+          <p style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); text-align: center; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.6;">These values are<br>visible in every client<br>interaction</p>
+        </div>
+
+      </div>
+
+      <!-- Personality -->
+      <div class="block-spacer"></div>
+      <span class="label-tag">Personality Traits</span>
+      <h2 class="block-title">How ALISTA CONSULTING Behaves</h2>
+      <div class="grid-2" style="gap: 1rem;">
+
+        <div class="card" style="border-left: 3px solid var(--sapphire);">
+          <div class="card-label" style="color: var(--sapphire);">Decisive</div>
+          <div class="card-title">We give one recommendation — not a menu.</div>
+          <p class="card-desc">When a client needs direction, we pick the path. We explain our reasoning, but we don't hedge to avoid accountability.</p>
+        </div>
+
+        <div class="card" style="border-left: 3px solid var(--cyan);">
+          <div class="card-label" style="color: var(--cyan);">Grounded</div>
+          <div class="card-title">We skip the theater. Go straight to the boardroom.</div>
+          <p class="card-desc">No 60-page decks before the first savings are identified. We move from diagnosis to recommendation at the speed business owners respect.</p>
+        </div>
+
+        <div class="card" style="border-left: 3px solid var(--gold);">
+          <div class="card-label" style="color: var(--gold);">Sharp</div>
+          <div class="card-title">We find in 90 minutes what others miss in 3-month audits.</div>
+          <p class="card-desc">Pattern recognition trained across industries. We've seen the same operational inefficiencies enough times to spot them before lunch.</p>
+        </div>
+
+        <div class="card" style="border-left: 3px solid var(--green);">
+          <div class="card-label" style="color: var(--green);">Relentless</div>
+          <div class="card-title">We don't declare victory at delivery.</div>
+          <p class="card-desc">We stay until the metric moves. Delivery is a milestone, not an exit. The engagement ends when the savings are confirmed — not when the report is filed.</p>
+        </div>
+
+      </div>
+
+      <div class="block-spacer-sm"></div>
+      <div class="card" style="border-left: 3px solid var(--platinum);">
+        <div class="card-label">Human</div>
+        <div class="card-title">We translate complexity without condescension.</div>
+        <p class="card-desc">We speak to business owners like adults who are smart about their industry, not like students who need a primer on cloud computing. Every conversation respects the owner's time and intelligence.</p>
+      </div>
+
+      <!-- Tone of Voice -->
+      <div class="block-spacer"></div>
+      <span class="label-tag">Tone of Voice</span>
+      <h2 class="block-title">Four Axes That Define the Brand Voice</h2>
+      <div class="tone-grid">
+        <div class="tone-item">
+          <div class="tone-is">Confident</div>
+          <div class="tone-not">Not <span>arrogant or dismissive</span></div>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.6rem; line-height: 1.5;">We assert our expertise without needing to diminish others. Confidence comes from track record, not ego.</p>
+        </div>
+        <div class="tone-item">
+          <div class="tone-is">Expert</div>
+          <div class="tone-not">Not <span>academic or jargon-heavy</span></div>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.6rem; line-height: 1.5;">Depth is demonstrated through clarity, not complexity. If a concept requires a dictionary, we reframe it.</p>
+        </div>
+        <div class="tone-item">
+          <div class="tone-is">Direct</div>
+          <div class="tone-not">Not <span>cold or transactional</span></div>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.6rem; line-height: 1.5;">Brevity is a courtesy. We respect the owner's attention. But directness is always paired with human warmth.</p>
+        </div>
+        <div class="tone-item">
+          <div class="tone-is">Premium</div>
+          <div class="tone-not">Not <span>exclusive or elitist</span></div>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.6rem; line-height: 1.5;">Premium signals quality and seriousness — not a club with a velvet rope. Our services are premium in outcome, not in gatekeeping.</p>
+        </div>
+      </div>
+
+      <!-- Positioning -->
+      <div class="block-spacer"></div>
+      <span class="label-tag">Unique Positioning Statement</span>
+      <div class="positioning-hero">
+        <p class="en">The fractional IT executive who only gets paid when your business <em>saves money</em> — starting with a paid Discovery that proves the opportunity exists.</p>
+        <p class="es">El director de tecnología fraccionado que solo cobra cuando tu empresa <em>ahorra</em> — comenzando con un Discovery pagado que demuestra que la oportunidad existe.</p>
+      </div>
+
+      <div class="callout">
+        <p><strong>Why this is ownable:</strong> No competitor in the regional market can claim performance-based implementation + paid discovery without changing their business model. The two-phase structure (Discovery first, savings-share second) is both a business model and a brand message.</p>
+      </div>
+
+    </section>
+
+    <!-- ══════════════════════════════
+         02 — VISUAL IDENTITY
+    ══════════════════════════════ -->
+    <section class="section" id="s02">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div class="section-title-block">
+          <span class="section-eyebrow">Pillar Two</span>
+          <h2 class="section-title">Visual Identity Direction</h2>
+        </div>
+      </div>
+
+      <!-- Logo Style Recommendation -->
+      <span class="label-tag">Logo Style Recommendation</span>
+      <h2 class="block-title">Combination Mark — Abstract Symbol + Wordmark</h2>
+      <p class="body-text">A combination mark is the strategic choice for a consulting firm targeting owner-operators. The abstract symbol builds recognition and works at favicon/embossed scale. The wordmark ensures instant legibility for cold introductions. Together they establish both authority and approachability — essential for a brand where trust is the primary conversion mechanism.</p>
+
+      <div class="callout" style="margin-top: 1.5rem;">
+        <p><strong>Against monogram only:</strong> A two-letter mark (AC) works only after brand recognition is established. At this stage, name clarity beats symbol elegance. <br><strong>Against wordmark only:</strong> Without a mark, the brand loses scalability at small sizes (business cards, social avatars, stamps). A mark anchors the brand at every touchpoint.</p>
+      </div>
+
+      <!-- Typography -->
+      <div class="block-spacer"></div>
+      <span class="label-tag">Typography System</span>
+      <h2 class="block-title">Two Fonts. Zero Compromise.</h2>
+
+      <div class="type-specimen">
+        <div class="type-specimen-label">
+          <span>Primary Display — SYNE</span>
+          <span>Headings · Brand Name · Display · Callouts</span>
+        </div>
+        <div style="font-family: 'Syne', sans-serif; font-size: 2.8rem; font-weight: 800; color: var(--warm-white); line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 0.5rem;">ALISTA CONSULTING</div>
+        <div style="font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--platinum); margin-bottom: 0.4rem;">Strategy. Systems. Savings.</div>
+        <div style="font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 500; color: var(--text-muted);">AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz</div>
+        <div style="margin-top: 1rem; font-family: var(--font-mono); font-size: 0.65rem; color: var(--cyan); letter-spacing: 0.12em;">Google Fonts · Free · Weights: 400 500 600 700 800</div>
+      </div>
+
+      <div class="type-specimen">
+        <div class="type-specimen-label">
+          <span>Body / UI — DM SANS</span>
+          <span>Body · UI Labels · Descriptions · Buttons</span>
+        </div>
+        <div style="font-family: 'DM Sans', sans-serif; font-size: 1.05rem; font-weight: 400; color: var(--platinum); line-height: 1.8; margin-bottom: 0.75rem; max-width: 600px;">We diagnose inefficiencies in your operations, identify automation opportunities powered by AI, and implement solutions that compound savings over time. Discovery is where it starts. Measurable results are where it ends.</div>
+        <div style="font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 500; color: var(--text-muted);">AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz 0123456789</div>
+        <div style="margin-top: 1rem; font-family: var(--font-mono); font-size: 0.65rem; color: var(--cyan); letter-spacing: 0.12em;">Google Fonts · Free · Weights: 300 400 500 600 700</div>
+      </div>
+
+      <div class="type-specimen">
+        <div class="type-specimen-label">
+          <span>Data / Accent — IBM PLEX MONO</span>
+          <span>Metrics · Labels · Technical Copy · Tags</span>
+        </div>
+        <div style="display: flex; gap: 2rem; flex-wrap: wrap; align-items: baseline; margin-bottom: 0.75rem;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 1.8rem; font-weight: 500; color: var(--green);">$2.4M</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 1.8rem; font-weight: 500; color: var(--sapphire);">-38%</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 1rem; color: var(--text-muted);">DISCOVERY · PHASE 01</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; color: var(--gold); letter-spacing: 0.12em;">SAVINGS CONFIRMED</span>
+        </div>
+        <div style="margin-top: 0.5rem; font-family: var(--font-mono); font-size: 0.65rem; color: var(--cyan); letter-spacing: 0.12em;">Google Fonts · Free · Weights: 300 400 500</div>
+      </div>
+
+      <!-- Color Palette -->
+      <div class="block-spacer"></div>
+      <span class="label-tag">Color Palette — 8 Tokens</span>
+      <h2 class="block-title">Precision-Engineered Color System</h2>
+
+      <div class="palette-section">
+        <div class="palette-label">Primary Palette — Dominant Foundation</div>
+        <div class="grid-4">
+          <div class="color-swatch">
+            <div class="swatch-color" style="background:#0A1628;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Midnight</div>
+              <span class="swatch-hex">#0A1628</span>
+              <div class="swatch-role">Primary backgrounds · Page base · Hero sections</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="swatch-color" style="background:#0F2440; border: 1px solid rgba(255,255,255,0.04);"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Deep Navy</div>
+              <span class="swatch-hex">#0F2440</span>
+              <div class="swatch-role">Cards · Elevated surfaces · Modal backgrounds</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="swatch-color" style="background:#2563EB;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Electric Sapphire</div>
+              <span class="swatch-hex">#2563EB</span>
+              <div class="swatch-role">Primary action · CTAs · Interactive states · Links</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="swatch-color" style="background:#06B6D4;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Bright Cyan</div>
+              <span class="swatch-hex">#06B6D4</span>
+              <div class="swatch-role">Innovation accent · Highlights · Active indicators</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="palette-section">
+        <div class="palette-label">Secondary Palette — Accent & Functional</div>
+        <div class="grid-4">
+          <div class="color-swatch">
+            <div class="swatch-color" style="background:#D4A843;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Prestige Gold</div>
+              <span class="swatch-hex">#D4A843</span>
+              <div class="swatch-role">Premium accents · Section numbers · Awards · Emphasis</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="swatch-color" style="background:#10B981;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Growth Green</div>
+              <span class="swatch-hex">#10B981</span>
+              <div class="swatch-role">Success states · Savings metrics · Positive KPIs</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="swatch-color" style="background:#E8ECF1;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Platinum</div>
+              <span class="swatch-hex">#E8ECF1</span>
+              <div class="swatch-role">Borders · Dividers · Subtle backgrounds on light</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="swatch-color" style="background:#F8F9FB; border: 1px solid #E8ECF1;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Warm White</div>
+              <span class="swatch-hex">#F8F9FB</span>
+              <div class="swatch-role">Light mode backgrounds · Document whites · Print</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Aesthetic Mood -->
+      <div class="block-spacer"></div>
+      <span class="label-tag">Aesthetic Mood</span>
+      <h2 class="block-title">Precision Intelligence — The Visual Reference Point</h2>
+      <p class="body-text">The aesthetic lives at the intersection of investment-grade finance and next-generation technology — where Bloomberg Terminal meets Stripe's product design. Restrained, intelligent, with flashes of precision-engineered color that signal momentum.</p>
+
+      <div class="mood-tags">
+        <span class="mood-tag">Precision Intelligence</span>
+        <span class="mood-tag">Quiet Authority</span>
+        <span class="mood-tag">Systems Thinking</span>
+        <span class="mood-tag">Earned Confidence</span>
+        <span class="mood-tag">Future-Ready</span>
+      </div>
+
+      <!-- Anti-Rules -->
+      <div class="block-spacer"></div>
+      <span class="label-tag">Visual Anti-Rules</span>
+      <h2 class="block-title">What ALISTA CONSULTING Never Does Visually</h2>
+
+      <div class="anti-rule">
+        <span class="anti-rule-num">01</span>
+        <div class="anti-rule-text"><strong>Never use gradient backgrounds that "look like AI."</strong> Purple-to-indigo, rainbow mesh gradients, and neon-glow aesthetics signal genericity. Our gradients are subtle, directional, and dark.</div>
+      </div>
+      <div class="anti-rule">
+        <span class="anti-rule-num">02</span>
+        <div class="anti-rule-text"><strong>Never fill the page.</strong> Negative space is not empty — it is the visual equivalent of confidence. A brand that needs to fill every pixel looks insecure. Premium brands breathe.</div>
+      </div>
+      <div class="anti-rule">
+        <span class="anti-rule-num">03</span>
+        <div class="anti-rule-text"><strong>Never use stock photo clichés.</strong> No handshakes, boardroom tables, or laptop-on-coffee-shop images. If photography is used, it shows real operational environments: factories, warehouses, offices with people actually working.</div>
+      </div>
+      <div class="anti-rule">
+        <span class="anti-rule-num">04</span>
+        <div class="anti-rule-text"><strong>Never use Prestige Gold as a background color.</strong> Gold is an accent — it appears in section numbers, metric highlights, and select emphasis. Applied as a background, it reads as cheap. Applied sparingly, it reads as earned.</div>
+      </div>
+      <div class="anti-rule">
+        <span class="anti-rule-num">05</span>
+        <div class="anti-rule-text"><strong>Never animate decoratively.</strong> Every animation must serve comprehension or guide attention. Spinning logos, bouncing icons, and parallax-for-parallax's-sake undermine the gravitas of a firm that charges for operational discipline.</div>
+      </div>
+
+    </section>
+
+    <!-- ══════════════════════════════
+         03 — LOGO CONCEPTS
+    ══════════════════════════════ -->
+    <section class="section" id="s03">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div class="section-title-block">
+          <span class="section-eyebrow">Pillar Three</span>
+          <h2 class="section-title">5 Original Logo Concepts</h2>
+        </div>
+      </div>
+
+      <p class="body-text" style="margin-bottom: 3rem;">Each concept is rendered as a working visual. All five are intentionally distinct — different in structure, symbolism, and typographic direction — to serve as true strategic alternatives, not iterations of the same idea.</p>
+
+      <!-- CONCEPT 1: VERTEX (RECOMMENDED) -->
+      <div class="logo-concept featured">
+        <div class="logo-preview">
+          <svg viewBox="0 0 200 100" width="200" height="100" xmlns="http://www.w3.org/2000/svg">
+            <!-- Symbol: Vertex A -->
+            <line x1="20" y1="82" x2="50" y2="14" stroke="#2563EB" stroke-width="4.5" stroke-linecap="round"/>
+            <line x1="80" y1="82" x2="50" y2="14" stroke="#2563EB" stroke-width="4.5" stroke-linecap="round"/>
+            <line x1="31" y1="54" x2="69" y2="54" stroke="#06B6D4" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="50" cy="14" r="3.5" fill="#D4A843"/>
+          </svg>
+          <svg viewBox="0 0 240 28" width="220" xmlns="http://www.w3.org/2000/svg">
+            <text font-family="Syne, sans-serif" font-weight="800" font-size="15" fill="#F8F9FB" x="0" y="18" letter-spacing="1.5">ALISTA</text>
+            <text font-family="DM Sans, sans-serif" font-weight="400" font-size="9" fill="#7FA5B8" x="1" y="27" letter-spacing="3.5">CONSULTING</text>
+          </svg>
+        </div>
+        <div class="logo-detail">
+          <h3>Vertex</h3>
+          <div class="concept-type">Combination Mark · Recommended</div>
+
+          <div class="logo-detail-row">
+            <span class="row-label">Visual Structure</span>
+            <div class="row-text">Two converging lines form a sharp peak — the geometry of the letter A reduced to its essential form. A thin cyan crossbar at mid-height. A gold dot marks the apex. Below: wordmark in Syne 800 + DM Sans body.</div>
+          </div>
+          <div class="logo-detail-row">
+            <span class="row-label">Symbolic Meaning</span>
+            <div class="row-text">The converging lines represent two forces meeting at a single point of maximum efficiency — client operations and AI-powered strategy. The peak is the outcome: measurable savings. The gold apex is the moment of realization.</div>
+          </div>
+          <div class="logo-detail-row">
+            <span class="row-label">Typographic Direction</span>
+            <div class="row-text">Syne 800 for "ALISTA" — architectural weight that commands attention. Wide-tracked DM Sans 400 for "CONSULTING" — the qualification that grounds the authority.</div>
+          </div>
+          <div class="logo-detail-row">
+            <span class="row-label">Audience Resonance</span>
+            <div class="row-text">Family business owners recognize the upward trajectory immediately. It's not abstract — it reads as progress. The clean geometry signals precision without feeling cold or corporate. The gold apex signals the reward.</div>
+          </div>
+          <div class="logo-detail-row">
+            <span class="row-label">Competitive Differentiation</span>
+            <div class="row-text">Regional IT consultancies use circuit patterns, globes, and gears. This mark is architectural and minimal — it reads as a design-forward firm, not a technology vendor. Visually closer to McKinsey than to a local IT shop.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONCEPT 2: SIGNAL -->
+      <div class="logo-concept">
+        <div class="logo-preview">
+          <svg viewBox="0 0 130 90" width="130" height="90" xmlns="http://www.w3.org/2000/svg">
+            <!-- Signal bars -->
+            <rect x="0" y="52" width="28" height="34" rx="4" fill="#10B981"/>
+            <rect x="36" y="30" width="28" height="56" rx="4" fill="#2563EB"/>
+            <rect x="72" y="8" width="28" height="78" rx="4" fill="#06B6D4"/>
+            <!-- Arrow above tallest bar -->
+            <polyline points="86,4 86,0 82,4 86,0 90,4" fill="none" stroke="#06B6D4" stroke-width="1.8" stroke-linejoin="round"/>
+          </svg>
+          <svg viewBox="0 0 200 26" width="190" xmlns="http://www.w3.org/2000/svg">
+            <text font-family="Syne, sans-serif" font-weight="700" font-size="13" fill="#F8F9FB" x="0" y="16" letter-spacing="1">ALISTA</text>
+            <text font-family="DM Sans, sans-serif" font-weight="300" font-size="8" fill="#7FA5B8" x="1" y="25" letter-spacing="3">CONSULTING</text>
+          </svg>
+        </div>
+        <div class="logo-detail">
+          <h3>Signal</h3>
+          <div class="concept-type">Abstract Mark</div>
+
+          <div class="logo-detail-row">
+            <span class="row-label">Visual Structure</span>
+            <div class="row-text">Three ascending rectangular bars in green, sapphire, and cyan — heights escalating left to right. A minimal upward arrow above the tallest bar. Proportions echo signal-strength indicators but at a refined scale.</div>
+          </div>
+          <div class="logo-detail-row">
+            <span class="row-label">Symbolic Meaning</span>
+            <div class="row-text">Green = current savings unlocked. Blue = strategy deployed. Cyan = full digital transformation achieved. The progression is the promise: every bar represents a phase of improvement. The arrow signals it never stops.</div>
+          </div>
+          <div class="logo-detail-row">
+            <span class="row-label">Typographic Direction</span>
+            <div class="row-text">Syne 700 (lighter than Concept 1) for "ALISTA" — still authoritative but with more white space. Ultra-light DM Sans for "CONSULTING" — the restraint in weight contrasts with the bold bars above.</div>
+          </div>
+          <div class="logo-detail-row">
+            <span class="row-label">Audience Resonance</span>
+            <div class="row-text">Immediately readable as "progress." No abstraction required. A business owner sees three bars going up and a number — it communicates measurable improvement without a single word.</div>
+          </div>
+          <div class="logo-detail-row">
+            <span class="row-label">Competitive Differentiation</span>
+            <div class="row-text">Color-coded metrics embedded in a logo. Unusual in the consulting space — more common in fintech/SaaS. This positions ALISTA as a data-first firm, not a strategy boutique.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONCEPT 3: MONOGRAM -->
+      <div class="logo-concept">
+        <div class="logo-preview">
+          <svg viewBox="0 0 110 110" width="110" height="110" xmlns="http://www.w3.org/2000/svg">
+            <!-- Badge background -->
+            <rect x="2" y="2" width="106" height="106" rx="14" fill="#0F2440" stroke="#D4A843" stroke-width="1.5"/>
+            <!-- A letterform -->
+            <path d="M28,82 L55,28 L82,82" fill="none" stroke="#D4A843" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+            <line x1="40" y1="61" x2="70" y2="61" stroke="#D4A843" stroke-width="5" stroke-linecap="round"/>
+            <!-- C arc accent -->
+            <path d="M76,40 A22,22 0,1,0 76,70" fill="none" stroke="#06B6D4" stroke-width="3.5" stroke-linecap="round" opacity="0.85"/>
+          </svg>
+          <svg viewBox="0 0 180 20" width="170" xmlns="http://www.w3.org/2000/svg">
+            <text font-family="DM Sans, sans-serif" font-weight="500" font-size="9" fill="#D4A843" x="0" y="14" letter-spacing="4">ALISTA CONSULTING</text>
+          </svg>
+        </div>
+        <div class="logo-detail">
+          <h3>Cipher</h3>
+          <div class="concept-type">Monogram — Badge Format</div>
+
+          <div class="logo-detail-row">
+            <span class="row-label">Visual Structure</span>
+            <div class="row-text">A square badge with rounded corners. A geometric A letterform in Prestige Gold dominates the center. A partial C arc in Bright Cyan overlaps the right side — the two initials in dialogue. Border in Gold.</div>
+          </div>
+          <div class="logo-detail-row">
+            <span class="row-label">Symbolic Meaning</span>
+            <div class="row-text">The A and C are not simply initials — they are a cipher, a locked system waiting to be unlocked. The incomplete C arc suggests that the engagement is ongoing, not closed. Gold = the premium value. Cyan = the technology layer.</div>
+          </div>
+          <div class="logo-detail-row">
+            <span class="row-label">Typographic Direction</span>
+            <div class="row-text">The badge is the primary mark. The wordmark below is a supporting element in tracked DM Sans 500 in Gold — restrained, letterspaced, elegant.</div>
+          </div>
+          <div class="logo-detail-row">
+            <span class="row-label">Audience Resonance</span>
+            <div class="row-text">The badge format reads as institutional and credentialed — like a firm that has been around long enough to earn a seal. Family business owners respond to signals of permanence and trust.</div>
+          </div>
+          <div class="logo-detail-row">
+            <span class="row-label">Competitive Differentiation</span>
+            <div class="row-text">No regional competitor uses a badge/seal format. This positions ALISTA closer to a private equity firm or professional association than an IT consultancy — intentionally so.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONCEPT 4: COMPASS -->
+      <div class="logo-concept">
+        <div class="logo-preview">
+          <svg viewBox="0 0 100 100" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+            <!-- Four-pointed star / compass -->
+            <path d="M50,8 C50,8 57,38 72,50 C57,62 50,92 50,92 C50,92 43,62 28,50 C43,38 50,8 50,8 Z" fill="#2563EB" opacity="0.9"/>
+            <!-- Slim horizontal points -->
+            <path d="M8,50 C8,50 35,45 50,50 C35,55 8,50 8,50 Z" fill="#06B6D4" opacity="0.75"/>
+            <path d="M92,50 C92,50 65,45 50,50 C65,55 92,50 92,50 Z" fill="#06B6D4" opacity="0.75"/>
+            <!-- Center dot -->
+            <circle cx="50" cy="50" r="5" fill="#F8F9FB"/>
+            <circle cx="50" cy="50" r="2.5" fill="#D4A843"/>
+          </svg>
+          <svg viewBox="0 0 200 28" width="190" xmlns="http://www.w3.org/2000/svg">
+            <text font-family="Syne, sans-serif" font-weight="800" font-size="14" fill="#F8F9FB" x="0" y="17" letter-spacing="2">ALISTA</text>
+            <text font-family="Syne, sans-serif" font-weight="400" font-size="9" fill="#7FA5B8" x="1" y="27" letter-spacing="3.5">CONSULTING</text>
+          </svg>
+        </div>
+        <div class="logo-detail">
+          <h3>Compass</h3>
+          <div class="concept-type">Geometric Symbol</div>
+
+          <div class="logo-detail-row">
+            <span class="row-label">Visual Structure</span>
+            <div class="row-text">A four-pointed star with one elongated north point in Electric Sapphire. Two horizontal cyan points extend east and west. A white circle at the center, with a gold dot as the compass needle. Pure geometric construction.</div>
+          </div>
+          <div class="logo-detail-row">
+            <span class="row-label">Symbolic Meaning</span>
+            <div class="row-text">Strategy is navigation. The elongated north point is the direction — the singular outcome ALISTA aims at. The horizontal points represent the full operational scan (process, technology, people, data). The gold center is the client's position.</div>
+          </div>
+          <div class="logo-detail-row">
+            <span class="row-label">Typographic Direction</span>
+            <div class="row-text">Syne 800 for "ALISTA" with Syne 400 for "CONSULTING" — same family, different weights. The weight contrast within one typeface is cleaner and more sophisticated than two font families.</div>
+          </div>
+          <div class="logo-detail-row">
+            <span class="row-label">Audience Resonance</span>
+            <div class="row-text">Navigation and direction resonate universally with business owners who feel lost in technology choices. "You'll know where you're going" is a visceral promise.</div>
+          </div>
+          <div class="logo-detail-row">
+            <span class="row-label">Competitive Differentiation</span>
+            <div class="row-text">The star/compass motif is common in strategy consulting globally but rare in Mexican regional IT consulting. At this level of execution — pure geometric, no gradients — it reads as internationally calibrated.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONCEPT 5: CLARITY -->
+      <div class="logo-concept">
+        <div class="logo-preview" style="gap: 0.75rem;">
+          <svg viewBox="0 0 280 60" width="280" height="60" xmlns="http://www.w3.org/2000/svg">
+            <!-- ALISTA wordmark with extended A crossbar -->
+            <text font-family="Syne, sans-serif" font-weight="800" font-size="38" fill="#2563EB" x="0" y="42" letter-spacing="3">ALISTA</text>
+            <!-- Extended crossbar through the A (visual accent) -->
+            <line x1="0" y1="50" x2="280" y2="50" stroke="#06B6D4" stroke-width="1.2" opacity="0.5"/>
+            <text font-family="DM Sans, sans-serif" font-weight="400" font-size="10" fill="#E8ECF1" x="1" y="60" letter-spacing="7">CONSULTING</text>
+          </svg>
+        </div>
+        <div class="logo-detail">
+          <h3>Clarity</h3>
+          <div class="concept-type">Typographic Wordmark — Maximum Confidence</div>
+
+          <div class="logo-detail-row">
+            <span class="row-label">Visual Structure</span>
+            <div class="row-text">"ALISTA" in Syne 800 at large scale in Electric Sapphire. A hairline cyan rule below the entire wordmark — a datum line, like a chart baseline. "CONSULTING" in wide-tracked DM Sans below in Platinum. No symbol.</div>
+          </div>
+          <div class="logo-detail-row">
+            <span class="row-label">Symbolic Meaning</span>
+            <div class="row-text">The datum line is a measurement baseline — the starting point from which all savings are calculated. This is a consulting firm that frames everything as measurable from a known starting point. Pure data confidence.</div>
+          </div>
+          <div class="logo-detail-row">
+            <span class="row-label">Typographic Direction</span>
+            <div class="row-text">The entire concept is typographic. Syne's geometric weight at display size has enough visual personality to function as a mark. The tracking contrast between "ALISTA" and "CONSULTING" creates hierarchy without a symbol.</div>
+          </div>
+          <div class="logo-detail-row">
+            <span class="row-label">Audience Resonance</span>
+            <div class="row-text">For sophisticated buyers — second-generation family business owners, finance directors — a pure wordmark signals that the firm's name is strong enough to stand alone. No crutches. Confident.</div>
+          </div>
+          <div class="logo-detail-row">
+            <span class="row-label">Competitive Differentiation</span>
+            <div class="row-text">Virtually every competitor in the regional space uses a symbol. A bold, well-executed wordmark immediately reads as a larger, more established firm. The absence of a symbol is the differentiator.</div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ══════════════════════════════
+         04 — PREMIUM PERCEPTION
+    ══════════════════════════════ -->
+    <section class="section" id="s04">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div class="section-title-block">
+          <span class="section-eyebrow">Pillar Four</span>
+          <h2 class="section-title">Premium Brand Perception</h2>
+        </div>
+      </div>
+
+      <!-- Color Psychology -->
+      <span class="label-tag">Color Psychology — What Each Color Signals to Non-Technical Buyers</span>
+      <h2 class="block-title">Colors Are Arguments. Use Them Deliberately.</h2>
+
+      <div class="card" style="margin-bottom: 2rem; padding: 0;">
+        <div style="padding: 1.5rem 1.75rem; border-bottom: 1px solid var(--border);">
+          <div class="color-psychology-row">
+            <div class="cp-dot" style="background:#0A1628; border: 1px solid rgba(255,255,255,0.15);"></div>
+            <div><div class="cp-name">Midnight</div><div class="cp-hex">#0A1628</div></div>
+            <div class="cp-desc"><strong>Security, depth, authority.</strong> Dark backgrounds signal that the brand has nothing to prove. Buyers associate deep navy/midnight with financial institutions, private equity, and established firms. It says "we've been doing this."</div>
+          </div>
+          <div class="color-psychology-row">
+            <div class="cp-dot" style="background:#2563EB;"></div>
+            <div><div class="cp-name">Electric Sapphire</div><div class="cp-hex">#2563EB</div></div>
+            <div class="cp-desc"><strong>Trust, technology, action.</strong> Blue is the universal signal of reliability. The electric saturation elevates it beyond corporate blue — it feels active, not passive. CTAs in Sapphire say "this is the path."</div>
+          </div>
+          <div class="color-psychology-row">
+            <div class="cp-dot" style="background:#06B6D4;"></div>
+            <div><div class="cp-name">Bright Cyan</div><div class="cp-hex">#06B6D4</div></div>
+            <div class="cp-desc"><strong>Innovation, speed, precision.</strong> Cyan reads as technical and forward-looking — it is the color of digital displays, laser cutting, and precision instruments. Used sparingly, it signals "we have something others don't."</div>
+          </div>
+          <div class="color-psychology-row">
+            <div class="cp-dot" style="background:#D4A843;"></div>
+            <div><div class="cp-name">Prestige Gold</div><div class="cp-hex">#D4A843</div></div>
+            <div class="cp-desc"><strong>Achievement, premium, earned status.</strong> Gold is psychologically associated with scarce resources and high value. Using it only for metrics, section numbers, and emphasis means that every time it appears, it carries weight.</div>
+          </div>
+          <div class="color-psychology-row">
+            <div class="cp-dot" style="background:#10B981;"></div>
+            <div><div class="cp-name">Growth Green</div><div class="cp-hex">#10B981</div></div>
+            <div class="cp-desc"><strong>Money, growth, confirmation.</strong> Green is the universal color for "go" and "gain." In a consulting firm centered on savings, every positive metric in green is a subconscious reminder of the business case.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Typography Rules -->
+      <span class="label-tag">Typography Premium Rules</span>
+      <h2 class="block-title">How Type Signals Authority at the Right Ratio</h2>
+
+      <div class="grid-2" style="margin-bottom: 2rem; gap: 1rem;">
+        <div class="card">
+          <div class="card-label" style="color: var(--sapphire);">Rule</div>
+          <div class="card-title">Use weight contrast, not size contrast.</div>
+          <p class="card-desc">A Syne 800 headline at 2rem next to a DM Sans 400 body at 1rem is more premium than a 4rem headline. Massive type screams for attention; weight contrast commands it quietly.</p>
+        </div>
+        <div class="card">
+          <div class="card-label" style="color: var(--sapphire);">Rule</div>
+          <div class="card-title">Wide tracking on small labels only.</div>
+          <p class="card-desc">Letter-spacing is premium at small sizes (eyebrows, tags, labels at 0.1–0.2em). Applied to large headings, it reads as weak. The distinction: precision tracking vs. compensatory tracking.</p>
+        </div>
+        <div class="card">
+          <div class="card-label" style="color: var(--sapphire);">Rule</div>
+          <div class="card-title">Monospace = data and precision.</div>
+          <p class="card-desc">IBM Plex Mono appears only for numbers, metrics, labels, and technical callouts. Every time it appears, it signals that the content is measured, not estimated.</p>
+        </div>
+        <div class="card">
+          <div class="card-label" style="color: var(--sapphire);">Rule</div>
+          <div class="card-title">Never center-align body text.</div>
+          <p class="card-desc">Centered body text is a design student habit. Left-aligned body text is how serious information is presented — in annual reports, financial disclosures, and premium brand guidelines.</p>
+        </div>
+      </div>
+
+      <!-- Messaging Style -->
+      <span class="label-tag">Messaging Vocabulary</span>
+      <h2 class="block-title">Words That Earn Trust vs. Words That Lose It</h2>
+
+      <div class="vocab-grid">
+        <div class="vocab-col power">
+          <h4>Power Words — Use These</h4>
+          <div>
+            <span class="vocab-pill">measurable savings</span>
+            <span class="vocab-pill">deployed</span>
+            <span class="vocab-pill">automated</span>
+            <span class="vocab-pill">your margins</span>
+            <span class="vocab-pill">confirmed</span>
+            <span class="vocab-pill">discovery</span>
+            <span class="vocab-pill">implementation</span>
+            <span class="vocab-pill">fractional CTO</span>
+            <span class="vocab-pill">eliminar trabajo manual</span>
+            <span class="vocab-pill">ahorros comprobados</span>
+            <span class="vocab-pill">ROI first</span>
+            <span class="vocab-pill">your team</span>
+            <span class="vocab-pill">process</span>
+            <span class="vocab-pill">documented</span>
+          </div>
+        </div>
+        <div class="vocab-col forbidden">
+          <h4>Forbidden Phrases — Delete These</h4>
+          <div>
+            <span class="vocab-pill">synergies</span>
+            <span class="vocab-pill">leverage (verb)</span>
+            <span class="vocab-pill">best-in-class</span>
+            <span class="vocab-pill">holistic approach</span>
+            <span class="vocab-pill">solution</span>
+            <span class="vocab-pill">digital transformation journey</span>
+            <span class="vocab-pill">empower</span>
+            <span class="vocab-pill">innovative</span>
+            <span class="vocab-pill">cutting-edge</span>
+            <span class="vocab-pill">seamless</span>
+            <span class="vocab-pill">paradigm shift</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Headline Formula -->
+      <div class="callout" style="margin-top: 2rem;">
+        <p><strong>Headline Formula:</strong> [Specific outcome] + [without the usual cost / risk / pain]<br>
+        Examples: "38% reduction in manual processing — without replacing your team." · "IT strategy that runs itself, starting with 90-minute Discovery." · "Your savings fund our fees."</p>
+      </div>
+
+      <!-- 10 Visual Rules -->
+      <div class="block-spacer"></div>
+      <span class="label-tag">10 Visual Rules for Premium Perception</span>
+      <h2 class="block-title">The Rules That Separate Premium From Pretend</h2>
+
+      <div class="visual-rule">
+        <span class="rule-number">R01</span>
+        <div class="rule-content">
+          <strong>Never fill more than 60% of a layout.</strong>
+          <p>Negative space is not empty — it is confidence. Brands that need to fill every pixel look insecure. Premium brands breathe. Apply this to every touchpoint: proposals, social graphics, website sections.</p>
+        </div>
+      </div>
+      <div class="visual-rule">
+        <span class="rule-number">R02</span>
+        <div class="rule-content">
+          <strong>No more than 2 accent colors per UI block.</strong>
+          <p>Pick the primary role (e.g., Sapphire for CTAs) and one supporting role (Green for metrics). Adding a third color breaks visual hierarchy and reads as amateur.</p>
+        </div>
+      </div>
+      <div class="visual-rule">
+        <span class="rule-number">R03</span>
+        <div class="rule-content">
+          <strong>Electric Sapphire occupies maximum 20% of any surface.</strong>
+          <p>This color is the call-to-action color. Overuse kills its urgency. Apply it to interactive states, primary buttons, and key data points only.</p>
+        </div>
+      </div>
+      <div class="visual-rule">
+        <span class="rule-number">R04</span>
+        <div class="rule-content">
+          <strong>Prestige Gold is earned — never decorative.</strong>
+          <p>Gold appears for: confirmed savings metrics, section/pillar numbers, award callouts, and premium emphasis. Never as a button color, background fill, or generic accent.</p>
+        </div>
+      </div>
+      <div class="visual-rule">
+        <span class="rule-number">R05</span>
+        <div class="rule-content">
+          <strong>Every positive metric uses Growth Green.</strong>
+          <p>Savings figures, ROI percentages, successful implementation numbers — always in Growth Green. This conditions clients subconsciously: green = money saved = ALISTA.</p>
+        </div>
+      </div>
+      <div class="visual-rule">
+        <span class="rule-number">R06</span>
+        <div class="rule-content">
+          <strong>Icons are always line-style, never filled.</strong>
+          <p>Filled icons read as early 2010s app design. Line icons read as precise, technical, considered. The negative space inside the line matches the brand's philosophy of restraint.</p>
+        </div>
+      </div>
+      <div class="visual-rule">
+        <span class="rule-number">R07</span>
+        <div class="rule-content">
+          <strong>Shadows are color-tinted, never pure black.</strong>
+          <p>box-shadow using Deep Navy (#0F2440) at 30–50% opacity. Never rgba(0,0,0,x). Black shadows look cheap. Navy shadows look crafted.</p>
+        </div>
+      </div>
+      <div class="visual-rule">
+        <span class="rule-number">R08</span>
+        <div class="rule-content">
+          <strong>Typography: 3 size levels maximum per section.</strong>
+          <p>Heading → Subhead → Body. Every additional level adds noise, not hierarchy. If you need a 4th level, the content architecture is broken, not the type system.</p>
+        </div>
+      </div>
+      <div class="visual-rule">
+        <span class="rule-number">R09</span>
+        <div class="rule-content">
+          <strong>Borders are 1px Platinum at 40% opacity.</strong>
+          <p>rgba(232,236,241,0.40) on dark backgrounds. This creates structure without heaviness. A thick, opaque border on a dark card looks like a mistake. The hairline border looks intentional.</p>
+        </div>
+      </div>
+      <div class="visual-rule">
+        <span class="rule-number">R10</span>
+        <div class="rule-content">
+          <strong>Animate only transform and opacity. 150ms ease.</strong>
+          <p>transition: transform 0.15s ease, opacity 0.15s ease. Never transition-all. Never animate color, background, or border-radius on hover. Motion is precision — not decoration.</p>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ══════════════════════════════
+         05 — BRAND SYSTEM
+    ══════════════════════════════ -->
+    <section class="section" id="s05">
+      <div class="section-header">
+        <div class="section-num">05</div>
+        <div class="section-title-block">
+          <span class="section-eyebrow">Pillar Five</span>
+          <h2 class="section-title">Scalable Brand System</h2>
+        </div>
+      </div>
+
+      <!-- Logo Variations -->
+      <span class="label-tag">Logo Variations — Vertex Mark (Recommended)</span>
+      <h2 class="block-title">One Mark. Six Contexts.</h2>
+
+      <div class="logo-var-grid" style="margin-bottom: 2.5rem;">
+
+        <div class="logo-var-card">
+          <svg viewBox="0 0 180 80" width="180" xmlns="http://www.w3.org/2000/svg">
+            <line x1="14" y1="68" x2="40" y2="10" stroke="#2563EB" stroke-width="4" stroke-linecap="round"/>
+            <line x1="66" y1="68" x2="40" y2="10" stroke="#2563EB" stroke-width="4" stroke-linecap="round"/>
+            <line x1="23" y1="44" x2="57" y2="44" stroke="#06B6D4" stroke-width="2.2" stroke-linecap="round"/>
+            <circle cx="40" cy="10" r="3" fill="#D4A843"/>
+            <text font-family="Syne,sans-serif" font-weight="800" font-size="13" fill="#F8F9FB" x="78" y="36" letter-spacing="1">ALISTA</text>
+            <text font-family="DM Sans,sans-serif" font-weight="400" font-size="7.5" fill="#7FA5B8" x="79" y="50" letter-spacing="3">CONSULTING</text>
+          </svg>
+          <span class="logo-var-label">Primary — Horizontal</span>
+        </div>
+
+        <div class="logo-var-card">
+          <svg viewBox="0 0 130 100" width="110" xmlns="http://www.w3.org/2000/svg">
+            <line x1="30" y1="58" x2="65" y2="8" stroke="#2563EB" stroke-width="4" stroke-linecap="round"/>
+            <line x1="100" y1="58" x2="65" y2="8" stroke="#2563EB" stroke-width="4" stroke-linecap="round"/>
+            <line x1="42" y1="37" x2="88" y2="37" stroke="#06B6D4" stroke-width="2.2" stroke-linecap="round"/>
+            <circle cx="65" cy="8" r="3" fill="#D4A843"/>
+            <text font-family="Syne,sans-serif" font-weight="800" font-size="11" fill="#F8F9FB" x="18" y="76" letter-spacing="1.5">ALISTA</text>
+            <text font-family="DM Sans,sans-serif" font-weight="400" font-size="6.5" fill="#7FA5B8" x="12" y="88" letter-spacing="2.5">CONSULTING</text>
+          </svg>
+          <span class="logo-var-label">Stacked — Square Format</span>
+        </div>
+
+        <div class="logo-var-card">
+          <svg viewBox="0 0 60 60" width="60" xmlns="http://www.w3.org/2000/svg">
+            <line x1="8" y1="52" x2="30" y2="8" stroke="#2563EB" stroke-width="4.5" stroke-linecap="round"/>
+            <line x1="52" y1="52" x2="30" y2="8" stroke="#2563EB" stroke-width="4.5" stroke-linecap="round"/>
+            <line x1="16" y1="34" x2="44" y2="34" stroke="#06B6D4" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="30" cy="8" r="3.5" fill="#D4A843"/>
+          </svg>
+          <span class="logo-var-label">Icon Only — App / Favicon</span>
+        </div>
+
+        <div class="logo-var-card on-light">
+          <svg viewBox="0 0 180 60" width="180" xmlns="http://www.w3.org/2000/svg">
+            <line x1="14" y1="52" x2="38" y2="8" stroke="#0A1628" stroke-width="4" stroke-linecap="round"/>
+            <line x1="62" y1="52" x2="38" y2="8" stroke="#0A1628" stroke-width="4" stroke-linecap="round"/>
+            <line x1="23" y1="33" x2="53" y2="33" stroke="#0F2440" stroke-width="2.2" stroke-linecap="round" opacity="0.5"/>
+            <circle cx="38" cy="8" r="3" fill="#0A1628"/>
+            <text font-family="Syne,sans-serif" font-weight="800" font-size="13" fill="#0A1628" x="76" y="28" letter-spacing="1">ALISTA</text>
+            <text font-family="DM Sans,sans-serif" font-weight="400" font-size="7.5" fill="#57707D" x="77" y="42" letter-spacing="3">CONSULTING</text>
+          </svg>
+          <span class="logo-var-label" style="color:#666;">Monochrome — Light BG</span>
+        </div>
+
+        <div class="logo-var-card">
+          <svg viewBox="0 0 180 60" width="180" xmlns="http://www.w3.org/2000/svg">
+            <line x1="14" y1="52" x2="38" y2="8" stroke="#F8F9FB" stroke-width="4" stroke-linecap="round"/>
+            <line x1="62" y1="52" x2="38" y2="8" stroke="#F8F9FB" stroke-width="4" stroke-linecap="round"/>
+            <line x1="23" y1="33" x2="53" y2="33" stroke="#E8ECF1" stroke-width="2.2" stroke-linecap="round" opacity="0.6"/>
+            <circle cx="38" cy="8" r="3" fill="#F8F9FB"/>
+            <text font-family="Syne,sans-serif" font-weight="800" font-size="13" fill="#F8F9FB" x="76" y="28" letter-spacing="1">ALISTA</text>
+            <text font-family="DM Sans,sans-serif" font-weight="400" font-size="7.5" fill="rgba(248,249,251,0.55)" x="77" y="42" letter-spacing="3">CONSULTING</text>
+          </svg>
+          <span class="logo-var-label">Monochrome — Reversed / White</span>
+        </div>
+
+        <div class="logo-var-card" style="justify-content: space-between; align-items: flex-start; padding: 1.5rem;">
+          <span class="logo-var-label" style="margin-bottom: 0.5rem; display: block;">Clear Space Rule</span>
+          <p style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.6; text-align: left;">Minimum clear space = height of the symbol on all sides. Never place the logo closer than this to any other element, edge, or competing visual.</p>
+          <div style="margin-top: 0.75rem; font-family: var(--font-mono); font-size: 0.62rem; color: var(--cyan);">Min size digital: 80px wide<br>Min size print: 20mm wide</div>
+        </div>
+
+      </div>
+
+      <!-- Color Hierarchy -->
+      <span class="label-tag">Color Usage Hierarchy</span>
+      <h2 class="block-title">When and Where Each Color Appears</h2>
+
+      <table class="color-usage-table" style="margin-bottom: 2.5rem; border-radius: 10px; overflow: hidden;">
+        <thead>
+          <tr>
+            <th>Color</th>
+            <th>Website</th>
+            <th>LinkedIn / Social</th>
+            <th>PDF / Proposals</th>
+            <th>Email Signature</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="use-dot" style="background:#0A1628; border:1px solid rgba(255,255,255,0.2);"></span>Midnight</td>
+            <td>Page background</td>
+            <td>Post backgrounds</td>
+            <td>Page backgrounds</td>
+            <td>Background (if dark)</td>
+          </tr>
+          <tr>
+            <td><span class="use-dot" style="background:#0F2440;"></span>Deep Navy</td>
+            <td>Cards, sections</td>
+            <td>Card overlays</td>
+            <td>Table headers</td>
+            <td>Dividers</td>
+          </tr>
+          <tr>
+            <td><span class="use-dot" style="background:#2563EB;"></span>Sapphire</td>
+            <td>CTAs, links, buttons</td>
+            <td>Highlight elements</td>
+            <td>Section headings</td>
+            <td>Name, job title</td>
+          </tr>
+          <tr>
+            <td><span class="use-dot" style="background:#06B6D4;"></span>Bright Cyan</td>
+            <td>Active states, tags</td>
+            <td>Accent lines only</td>
+            <td>Accent elements</td>
+            <td>Phone / email label</td>
+          </tr>
+          <tr>
+            <td><span class="use-dot" style="background:#D4A843;"></span>Prestige Gold</td>
+            <td>Pillar numbers only</td>
+            <td>Metric highlights</td>
+            <td>ROI callouts</td>
+            <td>Logo mark only</td>
+          </tr>
+          <tr>
+            <td><span class="use-dot" style="background:#10B981;"></span>Growth Green</td>
+            <td>Positive metrics</td>
+            <td>Savings stats</td>
+            <td>KPI tables</td>
+            <td>Not used</td>
+          </tr>
+          <tr>
+            <td><span class="use-dot" style="background:#E8ECF1;"></span>Platinum</td>
+            <td>Borders, muted text</td>
+            <td>Body text</td>
+            <td>Body text</td>
+            <td>Muted info</td>
+          </tr>
+          <tr>
+            <td><span class="use-dot" style="background:#F8F9FB; border:1px solid #ccc;"></span>Warm White</td>
+            <td>Not used (dark site)</td>
+            <td>Light BG posts</td>
+            <td>Page background</td>
+            <td>Email background</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Typography Scale -->
+      <span class="label-tag">Typography Scale</span>
+      <h2 class="block-title">Type System Across All Contexts</h2>
+
+      <div class="card" style="padding: 0; overflow: hidden; margin-bottom: 2.5rem;">
+        <div style="padding: 1rem 1.5rem; background: var(--deep-navy); border-bottom: 1px solid var(--border);">
+          <span style="font-family: var(--font-mono); font-size: 0.6rem; color: var(--text-muted); letter-spacing: 0.14em; text-transform: uppercase;">Syne Display + DM Sans Body + IBM Plex Mono Accent</span>
+        </div>
+        <div style="padding: 1.5rem;">
+
+          <div class="type-scale-row">
+            <div class="type-scale-meta"><span class="meta-name">DISPLAY / HERO</span><span class="meta-spec">Syne 800 · 4–7rem · -0.03em</span></div>
+            <div style="font-family: 'Syne',sans-serif; font-weight: 800; font-size: 2.8rem; color: var(--warm-white); line-height: 1; letter-spacing: -0.03em;">Strategy.</div>
+          </div>
+
+          <div class="type-scale-row">
+            <div class="type-scale-meta"><span class="meta-name">H1 — PAGE TITLE</span><span class="meta-spec">Syne 800 · 2–3rem · -0.02em</span></div>
+            <div style="font-family: 'Syne',sans-serif; font-weight: 800; font-size: 1.8rem; color: var(--warm-white); letter-spacing: -0.02em;">IT Strategy That Pays For Itself</div>
+          </div>
+
+          <div class="type-scale-row">
+            <div class="type-scale-meta"><span class="meta-name">H2 — SECTION</span><span class="meta-spec">Syne 700 · 1.4–1.8rem · -0.01em</span></div>
+            <div style="font-family: 'Syne',sans-serif; font-weight: 700; font-size: 1.3rem; color: var(--warm-white); letter-spacing: -0.01em;">Discovery Phase — What We Find</div>
+          </div>
+
+          <div class="type-scale-row">
+            <div class="type-scale-meta"><span class="meta-name">H3 — CARD TITLE</span><span class="meta-spec">Syne 700 · 1–1.2rem · 0em</span></div>
+            <div style="font-family: 'Syne',sans-serif; font-weight: 700; font-size: 1rem; color: var(--warm-white);">Operational Automation Mapping</div>
+          </div>
+
+          <div class="type-scale-row">
+            <div class="type-scale-meta"><span class="meta-name">BODY</span><span class="meta-spec">DM Sans 400 · 0.95rem · 0em · lh 1.8</span></div>
+            <div style="font-family: 'DM Sans',sans-serif; font-weight: 400; font-size: 0.95rem; color: var(--text-muted); line-height: 1.8; max-width: 520px;">We analyze your current operations and identify every process that can be automated, eliminated, or accelerated using AI tools already available.</div>
+          </div>
+
+          <div class="type-scale-row" style="border-bottom: none;">
+            <div class="type-scale-meta"><span class="meta-name">LABEL / TAG</span><span class="meta-spec">IBM Plex Mono 400 · 0.62rem · 0.18em UC</span></div>
+            <div style="font-family: 'IBM Plex Mono',monospace; font-size: 0.62rem; color: var(--cyan); letter-spacing: 0.18em; text-transform: uppercase;">PHASE 01 · DISCOVERY</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Application Guidelines -->
+      <span class="label-tag">Application Guidelines</span>
+      <h2 class="block-title">How the Brand System Applies Across Touchpoints</h2>
+
+      <div class="grid-3" style="gap: 1rem; margin-bottom: 1.25rem;">
+
+        <div class="app-card">
+          <h4>Website</h4>
+          <ul>
+            <li>Dark mode by default (Midnight bg)</li>
+            <li>Sapphire CTAs, always full-width on mobile</li>
+            <li>Syne 800 for above-fold headline</li>
+            <li>Growth Green for all savings metrics</li>
+            <li>Logo: Primary horizontal, top-left</li>
+            <li>Subtle grain overlay at 3–4% opacity</li>
+          </ul>
+        </div>
+
+        <div class="app-card">
+          <h4>LinkedIn & Social</h4>
+          <ul>
+            <li>Profile banner: Midnight bg + Vertex mark centered</li>
+            <li>Posts: 1:1 ratio, Deep Navy card bg</li>
+            <li>Stat posts: Large metric in Green/Gold (IBM Plex Mono)</li>
+            <li>Consistent Syne headline in every post</li>
+            <li>Max 2 colors per post graphic</li>
+            <li>No stock photo backgrounds</li>
+          </ul>
+        </div>
+
+        <div class="app-card">
+          <h4>PDF Proposals</h4>
+          <ul>
+            <li>Light mode (Warm White bg) for printability</li>
+            <li>Midnight text, Sapphire headings</li>
+            <li>Gold for section numbers and callouts</li>
+            <li>Monochrome dark logo (top-left header)</li>
+            <li>ROI projections always in Growth Green table</li>
+            <li>Consistent DM Sans body, 10–11pt</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="grid-3" style="gap: 1rem;">
+
+        <div class="app-card" style="border-top-color: var(--cyan);">
+          <h4>Email Signature</h4>
+          <ul>
+            <li>Name: Syne 700 in Sapphire</li>
+            <li>Title: DM Sans 500, Platinum</li>
+            <li>Phone/email: IBM Plex Mono, Cyan label</li>
+            <li>Logo: Reversed/white on dark OR monochrome-dark on white</li>
+            <li>Divider: 1px Platinum 30%</li>
+            <li>No background color in signature block</li>
+          </ul>
+        </div>
+
+        <div class="app-card" style="border-top-color: var(--gold);">
+          <h4>Pitch Decks</h4>
+          <ul>
+            <li>Cover: Full-bleed Midnight with Vertex mark</li>
+            <li>Section dividers: Sapphire full-width rule</li>
+            <li>Data slides: Green for positive KPIs, always</li>
+            <li>Syne 800 for every section title</li>
+            <li>Discovery vs. Implementation: use 2 distinct slide styles</li>
+            <li>Last slide: positioning statement in Syne 800</li>
+          </ul>
+        </div>
+
+        <div class="app-card" style="border-top-color: var(--green);">
+          <h4>Business Cards</h4>
+          <ul>
+            <li>Front: Midnight bg, Vertex icon centered, name in Syne</li>
+            <li>Back: Deep Navy with full logo + tagline in DM Sans</li>
+            <li>Spot Gold foil on the Vertex apex dot</li>
+            <li>Matte black finish, not glossy</li>
+            <li>Standard 3.5×2" — no unusual shapes</li>
+            <li>QR code to Discovery booking page (Cyan)</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Final Positioning Block -->
+      <div style="margin-top: 4rem; padding: 3rem; background: linear-gradient(135deg, rgba(37,99,235,0.10) 0%, rgba(6,182,212,0.05) 60%, rgba(212,168,67,0.06) 100%); border: 1px solid rgba(37,99,235,0.22); border-radius: 16px; position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--sapphire), var(--cyan), var(--gold));"></div>
+        <div style="font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cyan); margin-bottom: 1.25rem;">Brand Summary</div>
+        <div style="font-family: var(--font-display); font-size: clamp(1.1rem, 2.5vw, 1.7rem); font-weight: 800; color: var(--warm-white); line-height: 1.4; margin-bottom: 1rem;">ALISTA CONSULTING positions as the only fractional IT executive firm in Mexico that earns on Phase 1 Discovery <em style="color: var(--gold);">and</em> shares risk on Phase 2 implementation — making premium AI transformation accessible without betting the company.</div>
+        <div style="font-size: 0.95rem; color: var(--text-muted); font-style: italic; line-height: 1.7;">ALISTA CONSULTING se posiciona como la única firma de dirección tecnológica fraccionada en México que cobra en la Fase 1 de Discovery y comparte el riesgo en la Fase 2 de implementación — haciendo accesible la transformación premium con IA sin apostar todo el negocio.</div>
+      </div>
+
+    </section>
+
+  </main>
+</div>
+
+<script>
+// Sidebar active section tracking
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.sidebar-nav a');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + entry.target.id) {
+          link.classList.add('active');
+        }
+      });
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+
+sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>

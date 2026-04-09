@@ -1,0 +1,1675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALISTA CONSULTING — Complete Brand Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --midnight: #0A1628;
+  --deep-navy: #0F2440;
+  --royal-blue: #1B3A5C;
+  --electric-sapphire: #2563EB;
+  --bright-cyan: #06B6D4;
+  --platinum: #E8ECF1;
+  --soft-silver: #C4CCD8;
+  --warm-white: #F8F9FB;
+  --gold-accent: #D4A843;
+  --success-green: #10B981;
+  --charcoal: #1E293B;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--warm-white);
+  color: var(--charcoal);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* COVER */
+.cover {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--midnight) 0%, var(--deep-navy) 40%, var(--royal-blue) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 60px 40px;
+  position: relative;
+  overflow: hidden;
+}
+.cover::before {
+  content: '';
+  position: absolute;
+  top: -200px; right: -200px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(37,99,235,0.15) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.cover::after {
+  content: '';
+  position: absolute;
+  bottom: -150px; left: -100px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(6,182,212,0.1) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.cover-badge {
+  display: inline-block;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: var(--bright-cyan);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  padding: 8px 24px;
+  border-radius: 40px;
+  margin-bottom: 48px;
+  position: relative;
+  z-index: 1;
+}
+.cover-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(48px, 7vw, 96px);
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: -1px;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 1;
+}
+.cover-logo span {
+  font-weight: 400;
+  color: var(--bright-cyan);
+}
+.cover-tagline {
+  font-size: clamp(14px, 2vw, 18px);
+  color: var(--soft-silver);
+  font-weight: 300;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  margin-bottom: 60px;
+  position: relative;
+  z-index: 1;
+}
+.cover-title {
+  font-size: clamp(20px, 3vw, 32px);
+  color: rgba(255,255,255,0.6);
+  font-weight: 300;
+  position: relative;
+  z-index: 1;
+}
+.cover-line {
+  width: 60px;
+  height: 2px;
+  background: var(--gold-accent);
+  margin: 32px auto;
+  position: relative;
+  z-index: 1;
+}
+.cover-date {
+  font-size: 13px;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 2px;
+  position: relative;
+  z-index: 1;
+}
+
+/* NAVIGATION */
+.toc {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 80px 40px;
+}
+.toc h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  color: var(--midnight);
+  margin-bottom: 48px;
+}
+.toc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+.toc-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid var(--platinum);
+  transition: all 0.2s;
+  text-decoration: none;
+  color: var(--charcoal);
+}
+.toc-item:hover {
+  border-color: var(--electric-sapphire);
+  box-shadow: 0 4px 20px rgba(37,99,235,0.08);
+}
+.toc-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--electric-sapphire);
+  background: rgba(37,99,235,0.08);
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.toc-label {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* SECTIONS */
+.section {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 80px 40px;
+}
+.section-header {
+  margin-bottom: 56px;
+}
+.section-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--electric-sapphire);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.section h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 4vw, 42px);
+  color: var(--midnight);
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+.section-intro {
+  font-size: 17px;
+  color: #64748B;
+  max-width: 640px;
+  line-height: 1.8;
+}
+.divider {
+  width: 100%;
+  height: 1px;
+  background: var(--platinum);
+  margin: 0 auto;
+  max-width: 960px;
+}
+
+/* CARDS */
+.card {
+  background: #FFFFFF;
+  border: 1px solid var(--platinum);
+  border-radius: 16px;
+  padding: 36px;
+  margin-bottom: 24px;
+  transition: box-shadow 0.2s;
+}
+.card:hover {
+  box-shadow: 0 8px 32px rgba(10,22,40,0.06);
+}
+.card-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--electric-sapphire);
+  margin-bottom: 12px;
+}
+.card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  color: var(--midnight);
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+.card p {
+  font-size: 15px;
+  color: #475569;
+  line-height: 1.8;
+}
+
+/* VALUE GRID */
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+}
+.value-card {
+  background: #fff;
+  border: 1px solid var(--platinum);
+  border-radius: 16px;
+  padding: 32px;
+  text-align: center;
+  transition: all 0.3s;
+}
+.value-card:hover {
+  border-color: var(--electric-sapphire);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(37,99,235,0.08);
+}
+.value-icon {
+  width: 56px; height: 56px;
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 20px;
+  font-size: 24px;
+}
+.value-card h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--midnight);
+  margin-bottom: 10px;
+}
+.value-card p {
+  font-size: 14px;
+  color: #64748B;
+  line-height: 1.7;
+}
+
+/* COLOR PALETTE */
+.palette-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-top: 32px;
+}
+.color-card {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--platinum);
+  background: #fff;
+}
+.color-swatch {
+  height: 120px;
+  position: relative;
+}
+.color-info {
+  padding: 20px;
+}
+.color-name {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--midnight);
+  margin-bottom: 4px;
+}
+.color-hex {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: #94A3B8;
+}
+.color-role {
+  font-size: 12px;
+  color: #64748B;
+  margin-top: 6px;
+}
+
+/* TYPOGRAPHY */
+.type-specimen {
+  background: #fff;
+  border: 1px solid var(--platinum);
+  border-radius: 16px;
+  padding: 48px;
+  margin-bottom: 24px;
+}
+.type-specimen-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--electric-sapphire);
+  margin-bottom: 24px;
+}
+.type-display {
+  font-size: 48px;
+  line-height: 1.1;
+  margin-bottom: 16px;
+  color: var(--midnight);
+}
+.type-meta {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.type-meta span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: #94A3B8;
+  background: var(--warm-white);
+  padding: 4px 12px;
+  border-radius: 6px;
+}
+
+/* LOGO CONCEPTS */
+.logo-concept {
+  background: #fff;
+  border: 1px solid var(--platinum);
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+.logo-visual {
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.logo-visual-content {
+  text-align: center;
+}
+.logo-details {
+  padding: 36px;
+  border-top: 1px solid var(--platinum);
+}
+.logo-details h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  color: var(--midnight);
+  margin-bottom: 6px;
+}
+.logo-subtitle {
+  font-size: 13px;
+  color: var(--electric-sapphire);
+  font-weight: 500;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+.logo-details p {
+  font-size: 15px;
+  color: #475569;
+  line-height: 1.8;
+  margin-bottom: 12px;
+}
+.logo-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+.logo-tag {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 5px 14px;
+  border-radius: 20px;
+  background: rgba(37,99,235,0.06);
+  color: var(--electric-sapphire);
+}
+
+/* PREMIUM RULES */
+.rule-block {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 24px;
+  padding: 32px 0;
+  border-bottom: 1px solid var(--platinum);
+}
+.rule-block:last-child { border-bottom: none; }
+.rule-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--electric-sapphire);
+  padding-top: 4px;
+}
+.rule-content h4 {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--midnight);
+  margin-bottom: 8px;
+}
+.rule-content p {
+  font-size: 15px;
+  color: #475569;
+  line-height: 1.8;
+}
+
+/* BRAND SYSTEM */
+.system-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+}
+.system-card {
+  background: #fff;
+  border: 1px solid var(--platinum);
+  border-radius: 16px;
+  padding: 32px;
+}
+.system-card h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--midnight);
+  margin-bottom: 12px;
+}
+.system-card p {
+  font-size: 14px;
+  color: #64748B;
+  line-height: 1.7;
+}
+.system-card ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 12px;
+}
+.system-card li {
+  font-size: 14px;
+  color: #475569;
+  padding: 6px 0;
+  border-bottom: 1px solid #F1F5F9;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.system-card li::before {
+  content: '→';
+  color: var(--electric-sapphire);
+  font-size: 12px;
+}
+
+/* SPACING DIAGRAM */
+.spacing-demo {
+  background: var(--warm-white);
+  border: 1px solid var(--platinum);
+  border-radius: 16px;
+  padding: 48px;
+  text-align: center;
+  margin: 32px 0;
+}
+.spacing-logo-box {
+  display: inline-block;
+  position: relative;
+  padding: 40px 60px;
+  border: 2px dashed var(--bright-cyan);
+  border-radius: 8px;
+}
+.spacing-logo-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--midnight);
+}
+.spacing-logo-text span { color: var(--bright-cyan); }
+.spacing-label {
+  position: absolute;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--electric-sapphire);
+  background: rgba(37,99,235,0.08);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+.spacing-label.top { top: -10px; left: 50%; transform: translateX(-50%); }
+.spacing-label.right { right: -36px; top: 50%; transform: translateY(-50%); }
+.spacing-label.bottom { bottom: -10px; left: 50%; transform: translateX(-50%); }
+.spacing-label.left { left: -36px; top: 50%; transform: translateY(-50%); }
+
+/* COLOR HIERARCHY */
+.hierarchy-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.hierarchy-bar {
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+}
+.hierarchy-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* TONE TABLE */
+.tone-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  background: var(--platinum);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-top: 24px;
+}
+.tone-cell {
+  background: #fff;
+  padding: 24px;
+}
+.tone-cell.header {
+  background: var(--midnight);
+  color: #fff;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+.tone-do {
+  color: var(--success-green);
+  font-weight: 600;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+.tone-dont {
+  color: #EF4444;
+  font-weight: 600;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+/* PERSONALITY SPECTRUM */
+.spectrum {
+  margin: 32px 0;
+}
+.spectrum-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.spectrum-label {
+  width: 120px;
+  font-size: 13px;
+  color: #94A3B8;
+  text-align: right;
+  padding-right: 16px;
+}
+.spectrum-label-right {
+  width: 120px;
+  font-size: 13px;
+  color: #94A3B8;
+  padding-left: 16px;
+}
+.spectrum-bar {
+  flex: 1;
+  height: 8px;
+  background: var(--platinum);
+  border-radius: 4px;
+  position: relative;
+}
+.spectrum-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--electric-sapphire), var(--bright-cyan));
+}
+.spectrum-dot {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 16px; height: 16px;
+  background: var(--electric-sapphire);
+  border: 3px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(37,99,235,0.3);
+}
+
+/* FOOTER */
+.footer {
+  background: var(--midnight);
+  color: rgba(255,255,255,0.5);
+  text-align: center;
+  padding: 48px 40px;
+  font-size: 13px;
+}
+.footer strong {
+  color: #fff;
+}
+
+/* MESSAGING EXAMPLES */
+.msg-example {
+  background: var(--midnight);
+  border-radius: 16px;
+  padding: 36px;
+  margin: 16px 0;
+  color: #fff;
+}
+.msg-example .msg-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--bright-cyan);
+  margin-bottom: 16px;
+}
+.msg-example .msg-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .section { padding: 48px 24px; }
+  .rule-block { grid-template-columns: 1fr; gap: 8px; }
+  .tone-grid { grid-template-columns: 1fr; }
+  .spectrum-label, .spectrum-label-right { width: 80px; font-size: 11px; }
+}
+
+@media print {
+  .cover { min-height: auto; padding: 120px 40px; }
+  .section { page-break-inside: avoid; }
+  .logo-concept { page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- COVER -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="cover">
+  <div class="cover-badge">Brand Strategy &amp; Identity</div>
+  <div class="cover-logo">ALISTA <span>CONSULTING</span></div>
+  <div class="cover-tagline">Premium Fractional Tech Leadership</div>
+  <div class="cover-line"></div>
+  <div class="cover-title">Complete Brand Foundation Guide</div>
+  <div class="cover-date">March 2026 — Version 1.0</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- TABLE OF CONTENTS -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="toc">
+  <h2>Contents</h2>
+  <div class="toc-grid">
+    <a class="toc-item" href="#foundation"><div class="toc-num">01</div><div class="toc-label">Brand Foundation</div></a>
+    <a class="toc-item" href="#positioning"><div class="toc-num">02</div><div class="toc-label">Unique Positioning</div></a>
+    <a class="toc-item" href="#personality"><div class="toc-num">03</div><div class="toc-label">Personality &amp; Voice</div></a>
+    <a class="toc-item" href="#visual"><div class="toc-num">04</div><div class="toc-label">Visual Identity Direction</div></a>
+    <a class="toc-item" href="#colors"><div class="toc-num">05</div><div class="toc-label">Color System</div></a>
+    <a class="toc-item" href="#typography"><div class="toc-num">06</div><div class="toc-label">Typography</div></a>
+    <a class="toc-item" href="#logos"><div class="toc-num">07</div><div class="toc-label">Logo Concepts</div></a>
+    <a class="toc-item" href="#premium"><div class="toc-num">08</div><div class="toc-label">Premium Perception</div></a>
+    <a class="toc-item" href="#system"><div class="toc-num">09</div><div class="toc-label">Scalable Brand System</div></a>
+    <a class="toc-item" href="#messaging"><div class="toc-num">10</div><div class="toc-label">Messaging Framework</div></a>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 01 · BRAND FOUNDATION -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="section" id="foundation">
+  <div class="section-header">
+    <div class="section-num">Section 01</div>
+    <h2>Brand Foundation</h2>
+    <p class="section-intro">The strategic bedrock of ALISTA CONSULTING — defining who we are, what we believe, and the promise we make to every client.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-label">Mission Statement</div>
+    <h3>Unlock Hidden Revenue Through Intelligent Technology</h3>
+    <p>ALISTA CONSULTING exists to transform family businesses and mid-market companies into lean, AI-powered organizations that extract maximum value from their current operations. We embed ourselves as fractional IT Directors and CTOs — not as an expense, but as a profit center — ensuring every business we touch discovers money they didn't know they had, and only charging when savings are realized.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-label">Vision</div>
+    <h3>A World Where Every Business Runs at Its Full Potential</h3>
+    <p>We envision a future where no family business or growing company is held back by outdated processes, manual work, or missing technology strategy. ALISTA CONSULTING will be the standard for risk-free, results-driven technology consulting — proving that premium expertise should be measured by outcomes, not invoices.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-label">Brand Promise</div>
+    <h3>You Don't Pay Until You Save</h3>
+    <p>This is not a tagline — it is our operating principle. We align our success entirely with our clients' success. No retainers. No vague deliverables. We earn by finding real, measurable savings in your operations through strategic IT leadership and AI-driven automation. If we don't find savings, you owe us nothing.</p>
+  </div>
+
+  <div style="margin-top: 48px;">
+    <div class="card-label">Core Values</div>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-icon" style="background: rgba(37,99,235,0.08);">🎯</div>
+        <h4>Results Over Rhetoric</h4>
+        <p>We measure ourselves in dollars saved and hours returned — not slide decks delivered. Every engagement is anchored to quantifiable impact.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon" style="background: rgba(6,182,212,0.08);">🤝</div>
+        <h4>Aligned Incentives</h4>
+        <p>Our pay-for-performance model means we only win when our clients win. This isn't marketing — it's how we operate, and it governs every decision we make.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon" style="background: rgba(212,168,67,0.08);">🧠</div>
+        <h4>Quiet Excellence</h4>
+        <p>Premium doesn't mean loud. We deliver executive-grade strategy with the intimacy of a trusted advisor. Our work speaks through transformed P&Ls, not self-promotion.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon" style="background: rgba(16,185,129,0.08);">⚡</div>
+        <h4>Practical Innovation</h4>
+        <p>We don't chase trends. We implement proven AI and automation solutions that deliver immediate, tangible value — technology that works today, not theoretically tomorrow.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon" style="background: rgba(37,99,235,0.08);">🔒</div>
+        <h4>Trust as Foundation</h4>
+        <p>Family businesses are built on trust. We honor that. Full transparency in findings, honest about limitations, and protective of the relationships that define our clients' companies.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon" style="background: rgba(6,182,212,0.08);">🔄</div>
+        <h4>Liberation Through Automation</h4>
+        <p>We believe every hour spent on repetitive processes, documentation, and manual work is an hour stolen from growth. Our purpose is to give that time back.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 02 · UNIQUE POSITIONING -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="section" id="positioning">
+  <div class="section-header">
+    <div class="section-num">Section 02</div>
+    <h2>Unique Positioning</h2>
+    <p class="section-intro">How ALISTA CONSULTING occupies a distinct space in the market — differentiated from traditional IT consultancies, MSPs, and freelance CTOs.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-label">Positioning Statement</div>
+    <h3>The Zero-Risk Technology Partner for Growth-Ready Businesses</h3>
+    <p>For family businesses and mid-market companies that know they're leaving money on the table but can't justify another overhead cost, ALISTA CONSULTING is the fractional technology leadership firm that embeds premium CTO/IT Director expertise, deploys AI-driven process automation, and only gets paid from the savings it creates — making world-class IT strategy not an expense, but a self-funding investment.</p>
+  </div>
+
+  <div style="margin-top: 32px;">
+    <div class="card-label">Competitive Differentiation</div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 24px;">
+      <div class="card" style="border-left: 3px solid #EF4444;">
+        <h3 style="font-size: 16px;">Traditional IT Consultancies</h3>
+        <p>Charge by the hour or project. Deliver reports and recommendations. Leave implementation to you. The meter runs whether results come or not.</p>
+        <p style="margin-top: 12px; color: var(--electric-sapphire); font-weight: 600; font-size: 14px;">ALISTA difference → We stay embedded, implement ourselves, and only earn from measurable savings.</p>
+      </div>
+      <div class="card" style="border-left: 3px solid #F59E0B;">
+        <h3 style="font-size: 16px;">Managed Service Providers</h3>
+        <p>Focus on keeping systems running — break/fix, helpdesk, infrastructure. They maintain the status quo but don't optimize for growth or savings.</p>
+        <p style="margin-top: 12px; color: var(--electric-sapphire); font-weight: 600; font-size: 14px;">ALISTA difference → We're strategic, not operational. We find hidden revenue, not just fix printers.</p>
+      </div>
+      <div class="card" style="border-left: 3px solid #8B5CF6;">
+        <h3 style="font-size: 16px;">Freelance Fractional CTOs</h3>
+        <p>Offer part-time executive guidance but often lack the AI automation toolkit and the willingness to tie compensation to outcomes.</p>
+        <p style="margin-top: 12px; color: var(--electric-sapphire); font-weight: 600; font-size: 14px;">ALISTA difference → CTO-level strategy + hands-on AI deployment + performance-based pricing. The complete package.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top: 32px; background: var(--midnight); color: #fff; border: none;">
+    <div class="card-label" style="color: var(--bright-cyan);">The ALISTA Framework</div>
+    <h3 style="color: #fff; font-size: 20px;">Audit → Liberate → Implement → Save → Transform → Accelerate</h3>
+    <p style="color: rgba(255,255,255,0.7); margin-top: 12px;"><strong style="color: var(--bright-cyan);">A</strong>udit your current operations and tech stack. <strong style="color: var(--bright-cyan);">L</strong>iberate your team from manual processes. <strong style="color: var(--bright-cyan);">I</strong>mplement AI-driven automation. <strong style="color: var(--bright-cyan);">S</strong>ave measurable dollars. <strong style="color: var(--bright-cyan);">T</strong>ransform how your business operates. <strong style="color: var(--bright-cyan);">A</strong>ccelerate growth with the capital you've recovered. The name itself is the methodology.</p>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 03 · PERSONALITY & VOICE -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="section" id="personality">
+  <div class="section-header">
+    <div class="section-num">Section 03</div>
+    <h2>Brand Personality &amp; Tone of Voice</h2>
+    <p class="section-intro">How ALISTA CONSULTING sounds, feels, and shows up in every interaction — from a LinkedIn post to a boardroom presentation.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-label">Personality Archetype</div>
+    <h3>The Trusted Strategist</h3>
+    <p>Think of a seasoned advisor who walks into a family business, immediately earns the respect of the founder and the next generation alike, and within weeks has identified six figures in recoverable costs — all while making the team feel empowered rather than disrupted. That's the ALISTA personality: confident but never arrogant, technical but always clear, premium but never pretentious.</p>
+  </div>
+
+  <div style="margin-top: 32px;">
+    <div class="card-label">Personality Traits Spectrum</div>
+    <div class="spectrum">
+      <div class="spectrum-row">
+        <div class="spectrum-label">Casual</div>
+        <div class="spectrum-bar">
+          <div class="spectrum-fill" style="width: 72%;"></div>
+          <div class="spectrum-dot" style="left: 72%;"></div>
+        </div>
+        <div class="spectrum-label-right">Formal</div>
+      </div>
+      <div class="spectrum-row">
+        <div class="spectrum-label">Playful</div>
+        <div class="spectrum-bar">
+          <div class="spectrum-fill" style="width: 68%;"></div>
+          <div class="spectrum-dot" style="left: 68%;"></div>
+        </div>
+        <div class="spectrum-label-right">Serious</div>
+      </div>
+      <div class="spectrum-row">
+        <div class="spectrum-label">Technical</div>
+        <div class="spectrum-bar">
+          <div class="spectrum-fill" style="width: 40%;"></div>
+          <div class="spectrum-dot" style="left: 40%;"></div>
+        </div>
+        <div class="spectrum-label-right">Accessible</div>
+      </div>
+      <div class="spectrum-row">
+        <div class="spectrum-label">Warm</div>
+        <div class="spectrum-bar">
+          <div class="spectrum-fill" style="width: 38%;"></div>
+          <div class="spectrum-dot" style="left: 38%;"></div>
+        </div>
+        <div class="spectrum-label-right">Authoritative</div>
+      </div>
+      <div class="spectrum-row">
+        <div class="spectrum-label">Humble</div>
+        <div class="spectrum-bar">
+          <div class="spectrum-fill" style="width: 55%;"></div>
+          <div class="spectrum-dot" style="left: 55%;"></div>
+        </div>
+        <div class="spectrum-label-right">Bold</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top: 32px;">
+    <div class="card-label">Five Personality Pillars</div>
+    <div class="values-grid">
+      <div class="value-card">
+        <h4>1. Confidently Understated</h4>
+        <p>We don't need to convince you we're experts. Our results do that. The tone is self-assured without being boastful — premium brands whisper, they don't shout.</p>
+      </div>
+      <div class="value-card">
+        <h4>2. Empathetically Direct</h4>
+        <p>We understand the emotional weight of business decisions, especially in family companies. But we don't sugarcoat. We deliver truth wrapped in respect.</p>
+      </div>
+      <div class="value-card">
+        <h4>3. Intellectually Generous</h4>
+        <p>We share insights freely in our content. This builds authority and trust. When prospects realize how much we give away for free, they understand what paid engagement must deliver.</p>
+      </div>
+      <div class="value-card">
+        <h4>4. Pragmatically Visionary</h4>
+        <p>We paint the picture of what's possible while keeping feet firmly on the ground. Every vision is backed by a roadmap, every promise by a plan.</p>
+      </div>
+      <div class="value-card">
+        <h4>5. Relationally Focused</h4>
+        <p>Technology is the tool, but relationships are the foundation. Our voice always centers the people behind the business — the founder, the family, the team.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top: 48px;">
+    <div class="card-label">Tone of Voice — Do's and Don'ts</div>
+    <div class="tone-grid">
+      <div class="tone-cell header">WE SAY</div>
+      <div class="tone-cell header">WE NEVER SAY</div>
+      <div class="tone-cell">
+        <div class="tone-do">✓ Confident</div>
+        <p style="font-size: 14px; color: #475569;">"We'll identify at least three areas of recoverable cost in the first 30 days."</p>
+      </div>
+      <div class="tone-cell">
+        <div class="tone-dont">✗ Arrogant</div>
+        <p style="font-size: 14px; color: #475569;">"No one else can do what we do." / "Your current setup is a disaster."</p>
+      </div>
+      <div class="tone-cell">
+        <div class="tone-do">✓ Clear</div>
+        <p style="font-size: 14px; color: #475569;">"We automate the repetitive work your team shouldn't be doing manually."</p>
+      </div>
+      <div class="tone-cell">
+        <div class="tone-dont">✗ Jargon-heavy</div>
+        <p style="font-size: 14px; color: #475569;">"We leverage synergistic AI paradigms to optimize your digital transformation roadmap."</p>
+      </div>
+      <div class="tone-cell">
+        <div class="tone-do">✓ Warm</div>
+        <p style="font-size: 14px; color: #475569;">"We understand — your business is your family's legacy. We treat it that way."</p>
+      </div>
+      <div class="tone-cell">
+        <div class="tone-dont">✗ Cold/Transactional</div>
+        <p style="font-size: 14px; color: #475569;">"Per our engagement terms, deliverables are scoped to the initial SOW."</p>
+      </div>
+      <div class="tone-cell">
+        <div class="tone-do">✓ Ambitious</div>
+        <p style="font-size: 14px; color: #475569;">"There's unrealized revenue in your current operations. Let's find it together."</p>
+      </div>
+      <div class="tone-cell">
+        <div class="tone-dont">✗ Hyperbolic</div>
+        <p style="font-size: 14px; color: #475569;">"We'll 10x your revenue overnight with revolutionary AI disruption!"</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 04 · VISUAL IDENTITY DIRECTION -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="section" id="visual">
+  <div class="section-header">
+    <div class="section-num">Section 04</div>
+    <h2>Visual Identity Direction</h2>
+    <p class="section-intro">The aesthetic framework that translates ALISTA CONSULTING's strategic positioning into a cohesive visual language.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-label">Recommended Logo Style</div>
+    <h3>Refined Wordmark with Abstract Accent</h3>
+    <p>For ALISTA CONSULTING, a wordmark-forward approach is strategically optimal. The name "ALISTA" is distinctive and memorable — hiding it behind a symbol would waste brand equity. The recommended direction is a clean, typographic wordmark where the letterforms themselves carry the brand personality, paired with a subtle abstract element (a geometric accent or integrated symbol) that adds visual distinction without competing with the name.</p>
+    <p style="margin-top: 12px;">This approach works because: family business owners and mid-market executives respond to names they can read and remember immediately; a wordmark projects stability and professionalism over trendiness; and it scales beautifully from a website header to a business card to a LinkedIn profile image.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-label">Overall Aesthetic Mood</div>
+    <h3>Elevated Minimalism Meets Strategic Confidence</h3>
+    <p>The visual mood board lives at the intersection of management consultancy gravitas and modern tech sophistication. Think: the clean authority of McKinsey meets the approachable innovation of Stripe. Generous whitespace. Precise geometry. Deep, assured color. Nothing extraneous — every visual element earns its place.</p>
+    <p style="margin-top: 12px;">Key aesthetic principles: intentional restraint (less is always more), confident negative space, subtle depth through shadow and layering, precision in alignment and spacing, and moments of unexpected warmth through accent color and photography style.</p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin-top: 24px;">
+    <div class="card">
+      <div class="card-label">Photography Style</div>
+      <p>Authentic, warm-lit images of real business environments. Focus on hands-on moments — teams collaborating, founders reviewing data, candid working sessions. Never stock-photo-sterile. Natural light, shallow depth of field, subtle warm toning. Avoid cliché tech imagery (glowing circuits, abstract blue networks).</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Iconography</div>
+      <p>Line-weight icons with 1.5px stroke. Rounded caps for approachability, geometric construction for precision. Monochromatic in Deep Navy or Electric Sapphire. Used sparingly — only where they genuinely aid comprehension, never as decoration.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Graphic Elements</div>
+      <p>Subtle grid patterns, fine dotted textures, and geometric shapes (circles, chevrons) used at low opacity as background treatments. These reference data, structure, and systematic thinking without being literal. The "A" letterform from the logo can be abstracted into a repeating pattern motif.</p>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 05 · COLOR SYSTEM -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="section" id="colors">
+  <div class="section-header">
+    <div class="section-num">Section 05</div>
+    <h2>Color System</h2>
+    <p class="section-intro">A carefully calibrated palette that communicates trust, intelligence, and premium positioning — grounded in color psychology research.</p>
+  </div>
+
+  <div class="card-label">Primary Palette</div>
+  <div class="palette-grid">
+    <div class="color-card">
+      <div class="color-swatch" style="background: #0A1628;"></div>
+      <div class="color-info">
+        <div class="color-name">Midnight</div>
+        <div class="color-hex">#0A1628</div>
+        <div class="color-role">Primary dark · Headers · Backgrounds</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background: #0F2440;"></div>
+      <div class="color-info">
+        <div class="color-name">Deep Navy</div>
+        <div class="color-hex">#0F2440</div>
+        <div class="color-role">Secondary dark · Cards · Depth</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background: #2563EB;"></div>
+      <div class="color-info">
+        <div class="color-name">Electric Sapphire</div>
+        <div class="color-hex">#2563EB</div>
+        <div class="color-role">Primary action · CTAs · Links</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background: #06B6D4;"></div>
+      <div class="color-info">
+        <div class="color-name">Bright Cyan</div>
+        <div class="color-hex">#06B6D4</div>
+        <div class="color-role">Innovation accent · Highlights</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top: 36px;">
+    <div class="card-label">Secondary & Neutral Palette</div>
+    <div class="palette-grid">
+      <div class="color-card">
+        <div class="color-swatch" style="background: #D4A843;"></div>
+        <div class="color-info">
+          <div class="color-name">Prestige Gold</div>
+          <div class="color-hex">#D4A843</div>
+          <div class="color-role">Premium accent · Awards · Emphasis</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background: #10B981;"></div>
+        <div class="color-info">
+          <div class="color-name">Growth Green</div>
+          <div class="color-hex">#10B981</div>
+          <div class="color-role">Success · Savings · Positive metrics</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background: #E8ECF1;"></div>
+        <div class="color-info">
+          <div class="color-name">Platinum</div>
+          <div class="color-hex">#E8ECF1</div>
+          <div class="color-role">Borders · Dividers · Subtle BG</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background: #F8F9FB;"></div>
+        <div class="color-info">
+          <div class="color-name">Warm White</div>
+          <div class="color-hex">#F8F9FB</div>
+          <div class="color-role">Page backgrounds · Clean space</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top: 36px;">
+    <div class="card-label">Color Psychology Rationale</div>
+    <p><strong style="color: var(--deep-navy);">Deep Navy/Midnight:</strong> Trust, authority, depth of expertise. Navy is the most universally trusted color in business contexts — it communicates competence without the coldness of black. For family businesses that need to trust an outsider with their operations, navy is foundational.</p>
+    <p style="margin-top: 12px;"><strong style="color: var(--electric-sapphire);">Electric Sapphire:</strong> Intelligence, reliability, forward momentum. A brighter blue that injects energy and modernity into the trustworthy navy foundation. Signals technology and innovation without feeling cold or robotic.</p>
+    <p style="margin-top: 12px;"><strong style="color: var(--bright-cyan);">Bright Cyan:</strong> Innovation, clarity, differentiation. This is the "unexpected" color — it separates ALISTA from the sea of navy-and-gray consultancies. Cyan communicates freshness and technological sophistication.</p>
+    <p style="margin-top: 12px;"><strong style="color: var(--gold-accent);">Prestige Gold:</strong> Premium value, achievement, reward. Used sparingly, gold signals that ALISTA operates at a higher tier. It psychologically reinforces the "savings" narrative — gold is the color of wealth recovered.</p>
+    <p style="margin-top: 12px;"><strong style="color: var(--success-green);">Growth Green:</strong> Savings, success, positive outcomes. Reserved exclusively for communicating results — savings dashboards, ROI metrics, success stories. It creates a Pavlovian association: when you see green in ALISTA materials, it means money saved.</p>
+  </div>
+
+  <div style="margin-top: 32px;">
+    <div class="card-label">Color Usage Hierarchy</div>
+    <div style="margin-top: 16px;">
+      <div class="hierarchy-row">
+        <div class="hierarchy-bar" style="background: var(--midnight); width: 60%; color: #fff;">
+          <span class="hierarchy-label" style="color: #fff;">Midnight/Navy — 60%</span>
+        </div>
+      </div>
+      <div class="hierarchy-row">
+        <div class="hierarchy-bar" style="background: var(--electric-sapphire); width: 20%; color: #fff;">
+          <span class="hierarchy-label" style="color: #fff;">Sapphire — 20%</span>
+        </div>
+      </div>
+      <div class="hierarchy-row">
+        <div class="hierarchy-bar" style="background: var(--bright-cyan); width: 10%; color: #fff;">
+          <span class="hierarchy-label" style="color: #fff;">Cyan — 10%</span>
+        </div>
+      </div>
+      <div class="hierarchy-row">
+        <div class="hierarchy-bar" style="background: var(--gold-accent); width: 5%; color: #fff;">
+          <span class="hierarchy-label" style="color: #fff;">Gold — 5%</span>
+        </div>
+      </div>
+      <div class="hierarchy-row">
+        <div class="hierarchy-bar" style="background: var(--success-green); width: 5%; color: #fff;">
+          <span class="hierarchy-label" style="color: #fff;">Green — 5%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 06 · TYPOGRAPHY -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="section" id="typography">
+  <div class="section-header">
+    <div class="section-num">Section 06</div>
+    <h2>Typography System</h2>
+    <p class="section-intro">A dual-typeface system that balances editorial elegance with modern clarity — establishing a premium reading experience across all touchpoints.</p>
+  </div>
+
+  <div class="type-specimen">
+    <div class="type-specimen-label">Display / Headlines</div>
+    <div class="type-display" style="font-family: 'Playfair Display', serif; font-weight: 600;">
+      Playfair Display
+    </div>
+    <p style="font-family: 'Playfair Display', serif; font-size: 20px; color: #475569; margin-bottom: 24px;">
+      Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz
+    </p>
+    <div class="type-meta">
+      <span>Serif</span>
+      <span>Weights: 400–700</span>
+      <span>Use: Headlines, Quotes, Hero Text</span>
+      <span>Feeling: Established, Trustworthy, Premium</span>
+    </div>
+    <p style="margin-top: 16px; font-size: 14px; color: #64748B;">A transitional serif with high contrast between thick and thin strokes. Chosen for its authority and warmth — it signals that ALISTA is a firm of substance, not a tech startup. The serif connotes legacy and trustworthiness, speaking directly to family business values while maintaining contemporary elegance.</p>
+  </div>
+
+  <div class="type-specimen">
+    <div class="type-specimen-label">Body / Interface</div>
+    <div class="type-display" style="font-family: 'Inter', sans-serif; font-weight: 500;">
+      Inter
+    </div>
+    <p style="font-family: 'Inter', sans-serif; font-size: 20px; color: #475569; margin-bottom: 24px;">
+      Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz
+    </p>
+    <div class="type-meta">
+      <span>Sans-serif</span>
+      <span>Weights: 300–700</span>
+      <span>Use: Body, UI, Captions, Data</span>
+      <span>Feeling: Modern, Clean, Readable</span>
+    </div>
+    <p style="margin-top: 16px; font-size: 14px; color: #64748B;">Optimized for screen readability at all sizes. Inter's tall x-height and open letterforms ensure clarity in body text, presentations, and digital interfaces. Its neutral personality lets the serif headline face carry the brand character while Inter handles the heavy lifting of communication.</p>
+  </div>
+
+  <div class="type-specimen">
+    <div class="type-specimen-label">Data / Code / Technical</div>
+    <div class="type-display" style="font-family: 'JetBrains Mono', monospace; font-weight: 400; font-size: 36px;">
+      JetBrains Mono
+    </div>
+    <p style="font-family: 'JetBrains Mono', monospace; font-size: 16px; color: #475569; margin-bottom: 24px;">
+      0123456789 · $1,247,500 saved · ROI: 340%
+    </p>
+    <div class="type-meta">
+      <span>Monospace</span>
+      <span>Weights: 400–500</span>
+      <span>Use: Data, Metrics, Labels, Code</span>
+      <span>Feeling: Precise, Technical, Credible</span>
+    </div>
+    <p style="margin-top: 16px; font-size: 14px; color: #64748B;">Reserved for moments that require precision and technical credibility — data displays, savings calculations, ROI figures, and technical labels. The monospace face signals accuracy and analytical rigor, reinforcing ALISTA's role as a data-driven partner.</p>
+  </div>
+
+  <div class="card" style="margin-top: 24px;">
+    <div class="card-label">Type Scale</div>
+    <div style="margin-top: 16px;">
+      <p style="font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 600; color: var(--midnight); line-height: 1.1;">Display — 48px / 700</p>
+      <p style="font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 600; color: var(--midnight); line-height: 1.2; margin-top: 16px;">Heading 1 — 36px / 600</p>
+      <p style="font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 500; color: var(--midnight); line-height: 1.3; margin-top: 16px;">Heading 2 — 28px / 500</p>
+      <p style="font-family: 'Inter', sans-serif; font-size: 20px; font-weight: 500; color: var(--midnight); line-height: 1.4; margin-top: 16px;">Heading 3 — 20px / 500</p>
+      <p style="font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 400; color: #475569; line-height: 1.7; margin-top: 16px;">Body — 16px / 400 · Line height 1.7</p>
+      <p style="font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 400; color: #64748B; line-height: 1.6; margin-top: 12px;">Small — 14px / 400 · Captions, labels</p>
+      <p style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 400; color: var(--electric-sapphire); line-height: 1.5; margin-top: 12px;">Mono — 13px / 400 · Data, metrics, labels</p>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 07 · LOGO CONCEPTS -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="section" id="logos">
+  <div class="section-header">
+    <div class="section-num">Section 07</div>
+    <h2>Five Logo Concepts</h2>
+    <p class="section-intro">Each concept is designed to communicate premium technology leadership, trust, and results — while standing apart from generic consulting identities.</p>
+  </div>
+
+  <!-- CONCEPT 1 -->
+  <div class="logo-concept">
+    <div class="logo-visual" style="background: linear-gradient(135deg, #0A1628, #0F2440);">
+      <div class="logo-visual-content">
+        <svg width="400" height="80" viewBox="0 0 400 80">
+          <text x="0" y="52" font-family="'Playfair Display', Georgia, serif" font-size="52" font-weight="700" fill="#FFFFFF" letter-spacing="2">ALISTA</text>
+          <line x1="230" y1="20" x2="230" y2="60" stroke="#06B6D4" stroke-width="1.5" opacity="0.6"/>
+          <text x="244" y="38" font-family="'Inter', sans-serif" font-size="14" font-weight="300" fill="#C4CCD8" letter-spacing="6">CONSULTING</text>
+          <line x1="0" y1="68" x2="100" y2="68" stroke="#D4A843" stroke-width="2"/>
+        </svg>
+      </div>
+    </div>
+    <div class="logo-details">
+      <h3>Concept 1 — The Heritage Mark</h3>
+      <div class="logo-subtitle">REFINED WORDMARK WITH GOLD UNDERLINE</div>
+      <p><strong>Visual Structure:</strong> The word "ALISTA" is set in a high-contrast serif (Playfair Display Bold) with generous letter-spacing. "CONSULTING" is rendered in a light-weight sans-serif at a smaller scale, separated by a thin cyan vertical line. A gold underline extends from beneath the "A" — exactly one-third the width of the wordmark — creating a sense of deliberate restraint.</p>
+      <p><strong>Symbolic Meaning:</strong> The serif typeface communicates heritage and establishment — critical for winning the trust of multigenerational family businesses. The gold underline represents the "bottom line" — the financial foundation ALISTA strengthens. The vertical cyan divider signals the bridge between traditional business and modern technology. The asymmetric underline suggests forward motion and incomplete potential (there's more to unlock).</p>
+      <p><strong>Why It Resonates:</strong> Family business owners will see a brand that respects tradition while pointing forward. The premium typography signals that ALISTA operates at a different level than typical IT shops, while the restrained elegance avoids intimidation. This logo says "we belong in your boardroom."</p>
+      <div class="logo-tags">
+        <span class="logo-tag">Heritage</span>
+        <span class="logo-tag">Trust</span>
+        <span class="logo-tag">Premium</span>
+        <span class="logo-tag">Boardroom-ready</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONCEPT 2 -->
+  <div class="logo-concept">
+    <div class="logo-visual" style="background: #F8F9FB;">
+      <div class="logo-visual-content">
+        <svg width="400" height="100" viewBox="0 0 400 100">
+          <!-- Abstract A monogram -->
+          <polygon points="50,80 75,15 80,15 105,80" fill="none" stroke="#0A1628" stroke-width="2.5"/>
+          <line x1="58" y1="58" x2="97" y2="58" stroke="#06B6D4" stroke-width="2"/>
+          <circle cx="77" cy="58" r="3" fill="#06B6D4"/>
+          <!-- Wordmark -->
+          <text x="130" y="58" font-family="'Inter', sans-serif" font-size="32" font-weight="600" fill="#0A1628" letter-spacing="4">ALISTA</text>
+          <text x="130" y="78" font-family="'Inter', sans-serif" font-size="11" font-weight="400" fill="#94A3B8" letter-spacing="5">CONSULTING</text>
+        </svg>
+      </div>
+    </div>
+    <div class="logo-details">
+      <h3>Concept 2 — The Strategic Compass</h3>
+      <div class="logo-subtitle">GEOMETRIC A MONOGRAM + SANS-SERIF WORDMARK</div>
+      <p><strong>Visual Structure:</strong> An abstract "A" constructed from precise geometric lines — an open triangular form with a horizontal crossbar rendered in cyan, anchored by a small circle at its center. The "A" functions as both a letter and a directional symbol (pointing upward). Adjacent to it, "ALISTA" is set in a medium-weight geometric sans-serif with wide tracking, and "CONSULTING" appears below in a lighter weight with even wider letter-spacing.</p>
+      <p><strong>Symbolic Meaning:</strong> The upward-pointing "A" represents growth trajectory and strategic direction — ALISTA points businesses upward. The cyan crossbar with its central node represents the inflection point where strategy meets execution. The open form (not filled) communicates transparency and openness. The geometric construction signals systematic thinking and precision.</p>
+      <p><strong>Why It Resonates:</strong> Mid-market companies looking to grow will immediately connect with the upward directionality. The clean geometry signals modern thinking without being trendy, while the monogram provides a strong icon for social media profiles and app icons where the full wordmark won't fit. This logo says "we'll show you the way up."</p>
+      <div class="logo-tags">
+        <span class="logo-tag">Growth</span>
+        <span class="logo-tag">Direction</span>
+        <span class="logo-tag">Modern</span>
+        <span class="logo-tag">Versatile</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONCEPT 3 -->
+  <div class="logo-concept">
+    <div class="logo-visual" style="background: linear-gradient(135deg, #0F2440, #1B3A5C);">
+      <div class="logo-visual-content">
+        <svg width="420" height="80" viewBox="0 0 420 80">
+          <!-- Wordmark with integrated circuit-like A -->
+          <text x="0" y="52" font-family="'Inter', sans-serif" font-size="42" font-weight="700" fill="#FFFFFF" letter-spacing="6">ALISTA</text>
+          <!-- Small data node dots -->
+          <circle cx="6" cy="60" r="2.5" fill="#06B6D4"/>
+          <circle cx="6" cy="68" r="1.5" fill="#06B6D4" opacity="0.5"/>
+          <line x1="6" y1="62.5" x2="6" y2="66.5" stroke="#06B6D4" stroke-width="1" opacity="0.5"/>
+          <!-- Consulting -->
+          <text x="260" y="38" font-family="'Inter', sans-serif" font-size="12" font-weight="300" fill="rgba(255,255,255,0.5)" letter-spacing="5">CONSULTING</text>
+          <!-- Tagline bar -->
+          <rect x="260" y="48" width="150" height="1" fill="#06B6D4" opacity="0.3"/>
+          <text x="260" y="62" font-family="'Inter', sans-serif" font-size="9" font-weight="400" fill="#06B6D4" letter-spacing="3">FRACTIONAL TECH LEADERSHIP</text>
+        </svg>
+      </div>
+    </div>
+    <div class="logo-details">
+      <h3>Concept 3 — The Neural Network</h3>
+      <div class="logo-subtitle">BOLD WORDMARK WITH DATA NODES</div>
+      <p><strong>Visual Structure:</strong> "ALISTA" in a bold, contemporary sans-serif with tight letter-spacing, creating a monolithic, confident presence. At the base of the letter "A," small cyan dots connected by thin lines form a subtle data-node pattern — as if the letter is powered by an underlying network. "CONSULTING" and the descriptor "FRACTIONAL TECH LEADERSHIP" appear to the right in lighter weights, separated by a thin cyan rule.</p>
+      <p><strong>Symbolic Meaning:</strong> The data nodes at the foundation of the "A" represent the AI and automation infrastructure that ALISTA builds beneath every client's business — invisible to the end user but powering everything. The bold, grounded type communicates stability and strength. The descriptor line makes the offering immediately clear — no ambiguity about what ALISTA does.</p>
+      <p><strong>Why It Resonates:</strong> This concept bridges the gap between the traditional business world and AI/tech innovation. The boldness appeals to decisive business owners, while the subtle tech elements reassure them that ALISTA brings cutting-edge capability. The integrated descriptor eliminates the "what do you actually do?" question that plagues many consultancy brands. This logo says "technology powers everything we build."</p>
+      <div class="logo-tags">
+        <span class="logo-tag">Technology</span>
+        <span class="logo-tag">AI-powered</span>
+        <span class="logo-tag">Bold</span>
+        <span class="logo-tag">Clear</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONCEPT 4 -->
+  <div class="logo-concept">
+    <div class="logo-visual" style="background: #FFFFFF;">
+      <div class="logo-visual-content">
+        <svg width="380" height="100" viewBox="0 0 380 100">
+          <!-- Shield/crest shape containing A -->
+          <path d="M40,15 L80,15 Q90,15 90,25 L90,65 Q90,80 75,85 L60,90 L45,85 Q30,80 30,65 L30,25 Q30,15 40,15 Z" fill="none" stroke="#0A1628" stroke-width="2"/>
+          <text x="47" y="65" font-family="'Playfair Display', Georgia, serif" font-size="42" font-weight="700" fill="#0A1628">A</text>
+          <line x1="42" y1="72" x2="78" y2="72" stroke="#D4A843" stroke-width="1.5"/>
+          <!-- Wordmark -->
+          <text x="110" y="52" font-family="'Playfair Display', Georgia, serif" font-size="36" font-weight="600" fill="#0A1628" letter-spacing="3">ALISTA</text>
+          <text x="110" y="72" font-family="'Inter', sans-serif" font-size="12" font-weight="400" fill="#94A3B8" letter-spacing="4">CONSULTING</text>
+        </svg>
+      </div>
+    </div>
+    <div class="logo-details">
+      <h3>Concept 4 — The Guardian Crest</h3>
+      <div class="logo-subtitle">SHIELD MONOGRAM + SERIF WORDMARK</div>
+      <p><strong>Visual Structure:</strong> A refined shield (not heraldic — modern and minimal with soft corners) houses a single serif "A" with a gold underline. The shield form is rendered in a fine stroke rather than a fill, keeping it light and contemporary. Adjacent, "ALISTA" appears in a serif typeface with moderate tracking, and "CONSULTING" in sans-serif below. The overall composition is horizontal and balanced.</p>
+      <p><strong>Symbolic Meaning:</strong> The shield represents protection and guardianship — ALISTA protects its clients' interests, legacy, and bottom line. The single "A" within the shield communicates exclusivity and singular focus. The gold underline within the crest reinforces the financial value proposition. The open-stroke shield (not filled) signals transparency and accessibility — ALISTA is a guardian, not a gatekeeper.</p>
+      <p><strong>Why It Resonates:</strong> Family businesses deeply value legacy and protection. The shield speaks directly to the emotional core of a founder who has spent decades building something and wants a technology partner who will safeguard it while modernizing it. The crest-like quality elevates the brand above commodity consultancies, signaling prestige and exclusivity. This logo says "your legacy is safe with us."</p>
+      <div class="logo-tags">
+        <span class="logo-tag">Legacy</span>
+        <span class="logo-tag">Protection</span>
+        <span class="logo-tag">Prestige</span>
+        <span class="logo-tag">Family-resonant</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONCEPT 5 -->
+  <div class="logo-concept">
+    <div class="logo-visual" style="background: linear-gradient(135deg, #0A1628, #1B3A5C);">
+      <div class="logo-visual-content">
+        <svg width="400" height="100" viewBox="0 0 400 100">
+          <!-- Ascending bars / chart-like A -->
+          <rect x="30" y="60" width="8" height="25" rx="2" fill="#1B3A5C"/>
+          <rect x="44" y="45" width="8" height="40" rx="2" fill="#2563EB"/>
+          <rect x="58" y="30" width="8" height="55" rx="2" fill="#06B6D4"/>
+          <rect x="72" y="15" width="8" height="70" rx="2" fill="#D4A843"/>
+          <!-- Arrow tip -->
+          <polygon points="76,10 82,10 79,5" fill="#D4A843"/>
+          <!-- Wordmark -->
+          <text x="100" y="55" font-family="'Inter', sans-serif" font-size="38" font-weight="600" fill="#FFFFFF" letter-spacing="5">ALISTA</text>
+          <text x="100" y="75" font-family="'Inter', sans-serif" font-size="11" font-weight="300" fill="rgba(255,255,255,0.4)" letter-spacing="5">CONSULTING</text>
+        </svg>
+      </div>
+    </div>
+    <div class="logo-details">
+      <h3>Concept 5 — The Growth Engine</h3>
+      <div class="logo-subtitle">ASCENDING BAR SYMBOL + MODERN WORDMARK</div>
+      <p><strong>Visual Structure:</strong> Four ascending bars (evoking a growth chart) arranged to abstractly suggest the letter "A" through their ascending silhouette. Each bar is a different brand color — from dark navy through sapphire and cyan to gold at the peak — with a small upward arrow at the apex. "ALISTA" follows in a clean, semi-bold sans-serif with generous letter-spacing and "CONSULTING" in a light weight beneath.</p>
+      <p><strong>Symbolic Meaning:</strong> The ascending bars tell the ALISTA story in a single glance: progressive growth from the current state (navy/baseline) through strategic implementation (sapphire), innovation and automation (cyan), to measurable financial results (gold peak). The arrow atop the final bar communicates that the growth doesn't stop — ALISTA creates compounding returns. The color progression from cool to warm mirrors the client journey from initial engagement to realized savings.</p>
+      <p><strong>Why It Resonates:</strong> For business owners focused on finding more revenue in their current operations, this logo visually promises exactly that — a clear upward trajectory. The chart-like quality speaks to the data-driven, measurable nature of ALISTA's work — every engagement is tracked and quantified. The color progression makes the abstract tangible: prospects can literally see the journey from investment to return. This logo says "we make growth visible."</p>
+      <div class="logo-tags">
+        <span class="logo-tag">Growth</span>
+        <span class="logo-tag">Data-driven</span>
+        <span class="logo-tag">Results</span>
+        <span class="logo-tag">Momentum</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 08 · PREMIUM PERCEPTION -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="section" id="premium">
+  <div class="section-header">
+    <div class="section-num">Section 08</div>
+    <h2>Premium Brand Perception</h2>
+    <p class="section-intro">The specific visual rules, psychological principles, and design decisions that position ALISTA CONSULTING as a high-end brand within its competitive space.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-label">The Premium Equation</div>
+    <h3>Restraint + Precision + Substance = Perceived Premium</h3>
+    <p>Premium brands are defined not by what they add, but by what they remove. Every element in ALISTA's visual system must earn its place. If it doesn't serve a clear purpose — communicating trust, demonstrating capability, or facilitating understanding — it gets eliminated. White space is not emptiness; it is confidence. Simplicity is not simplistic; it is the result of rigorous editing.</p>
+  </div>
+
+  <div style="margin-top: 32px;">
+    <div class="rule-block">
+      <div class="rule-label">Whitespace</div>
+      <div class="rule-content">
+        <h4>The 40% Rule</h4>
+        <p>A minimum of 40% of any ALISTA layout should be negative space. This applies to presentations, website pages, social media graphics, and print materials. Generous spacing communicates that we value clarity over density, quality over quantity. When in doubt, add more space, not more content.</p>
+      </div>
+    </div>
+    <div class="rule-block">
+      <div class="rule-label">Color Usage</div>
+      <div class="rule-content">
+        <h4>The Three-Color Maximum</h4>
+        <p>No single layout or composition should use more than three brand colors simultaneously (excluding neutrals). Typically: one dark (Midnight/Navy), one accent (Sapphire or Cyan), and one highlight (Gold or Green). This constraint prevents visual noise and maintains the curated, intentional feeling of a premium brand.</p>
+      </div>
+    </div>
+    <div class="rule-block">
+      <div class="rule-label">Typography</div>
+      <div class="rule-content">
+        <h4>Hierarchy Through Weight, Not Size</h4>
+        <p>Avoid dramatic size contrasts that feel aggressive. Instead, create hierarchy through weight variation (Light → Medium → Bold), letter-spacing adjustments, and color shifts. Headlines should be authoritative but not shouting. Body text should be generous in size (never below 15px on screen, 10pt in print) — premium brands don't make you squint.</p>
+      </div>
+    </div>
+    <div class="rule-block">
+      <div class="rule-label">Imagery</div>
+      <div class="rule-content">
+        <h4>Real Over Rendered</h4>
+        <p>Use authentic photography over illustrations, stock, or AI-generated imagery. Images should feature real working environments — not staged corporate photos. Muted, warm toning. Depth of field that draws focus. People should look engaged, not posed. If using abstract visuals, they must be geometric and minimal — never decorative.</p>
+      </div>
+    </div>
+    <div class="rule-block">
+      <div class="rule-label">Animation</div>
+      <div class="rule-content">
+        <h4>Smooth and Purposeful</h4>
+        <p>All digital motion (hover states, transitions, scroll animations) should use ease-out curves with 200-400ms duration. Never use bounce effects, flashy transitions, or attention-grabbing animations. Motion should feel like luxury — smooth, inevitable, and almost unnoticeable. If someone notices the animation, it's too much.</p>
+      </div>
+    </div>
+    <div class="rule-block">
+      <div class="rule-label">Materials</div>
+      <div class="rule-content">
+        <h4>Tactile Quality in Print</h4>
+        <p>Business cards on 450gsm uncoated stock with a soft-touch matte laminate and spot UV on the logo. Proposals on 120gsm premium uncoated paper. Presentation folders with foil-stamped logo. These physical touchpoints create subconscious associations with quality that digital alone cannot achieve. Every physical artifact should feel substantial in the hand.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 09 · SCALABLE BRAND SYSTEM -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="section" id="system">
+  <div class="section-header">
+    <div class="section-num">Section 09</div>
+    <h2>Scalable Brand System</h2>
+    <p class="section-intro">A modular visual system designed to work consistently across every touchpoint — from a 16×16 favicon to a conference stage backdrop.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-label">Logo Variation System</div>
+    <h3>Four Logo Configurations</h3>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-top: 24px;">
+      <div style="background: var(--midnight); border-radius: 12px; padding: 32px; text-align: center;">
+        <svg width="200" height="50" viewBox="0 0 200 50">
+          <text x="0" y="35" font-family="'Playfair Display', Georgia, serif" font-size="30" font-weight="700" fill="#FFFFFF" letter-spacing="2">ALISTA</text>
+          <text x="145" y="24" font-family="'Inter', sans-serif" font-size="8" font-weight="300" fill="#C4CCD8" letter-spacing="3">CONSULTING</text>
+          <line x1="0" y1="44" x2="55" y2="44" stroke="#D4A843" stroke-width="1.5"/>
+        </svg>
+        <p style="font-size: 11px; color: var(--soft-silver); margin-top: 12px; letter-spacing: 2px;">PRIMARY — DARK BG</p>
+      </div>
+      <div style="background: #fff; border: 1px solid var(--platinum); border-radius: 12px; padding: 32px; text-align: center;">
+        <svg width="200" height="50" viewBox="0 0 200 50">
+          <text x="0" y="35" font-family="'Playfair Display', Georgia, serif" font-size="30" font-weight="700" fill="#0A1628" letter-spacing="2">ALISTA</text>
+          <text x="145" y="24" font-family="'Inter', sans-serif" font-size="8" font-weight="300" fill="#94A3B8" letter-spacing="3">CONSULTING</text>
+          <line x1="0" y1="44" x2="55" y2="44" stroke="#D4A843" stroke-width="1.5"/>
+        </svg>
+        <p style="font-size: 11px; color: #94A3B8; margin-top: 12px; letter-spacing: 2px;">PRIMARY — LIGHT BG</p>
+      </div>
+      <div style="background: var(--midnight); border-radius: 12px; padding: 32px; text-align: center;">
+        <svg width="60" height="60" viewBox="0 0 60 60">
+          <text x="10" y="45" font-family="'Playfair Display', Georgia, serif" font-size="42" font-weight="700" fill="#FFFFFF">A</text>
+          <line x1="12" y1="50" x2="42" y2="50" stroke="#D4A843" stroke-width="1.5"/>
+        </svg>
+        <p style="font-size: 11px; color: var(--soft-silver); margin-top: 12px; letter-spacing: 2px;">MONOGRAM</p>
+      </div>
+      <div style="background: #fff; border: 1px solid var(--platinum); border-radius: 12px; padding: 32px; text-align: center;">
+        <svg width="60" height="60" viewBox="0 0 60 60">
+          <rect x="5" y="5" width="50" height="50" rx="8" fill="#0A1628"/>
+          <text x="14" y="42" font-family="'Playfair Display', Georgia, serif" font-size="34" font-weight="700" fill="#FFFFFF">A</text>
+          <line x1="15" y1="47" x2="38" y2="47" stroke="#D4A843" stroke-width="1.5"/>
+        </svg>
+        <p style="font-size: 11px; color: #94A3B8; margin-top: 12px; letter-spacing: 2px;">FAVICON / APP ICON</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top: 32px;">
+    <div class="card-label">Clear Space & Minimum Size</div>
+    <div class="spacing-demo">
+      <div class="spacing-logo-box">
+        <span class="spacing-label top">1x</span>
+        <span class="spacing-label right">1x</span>
+        <span class="spacing-label bottom">1x</span>
+        <span class="spacing-label left">1x</span>
+        <div class="spacing-logo-text">ALISTA <span>CONSULTING</span></div>
+      </div>
+      <p style="margin-top: 24px; font-size: 14px; color: #64748B;">Clear space = height of the capital "A" in the wordmark (1x unit). This space must remain free of any other elements on all sides. Minimum size: 120px wide for digital, 30mm for print.</p>
+    </div>
+  </div>
+
+  <div style="margin-top: 32px;">
+    <div class="card-label">Touchpoint Applications</div>
+    <div class="system-grid">
+      <div class="system-card">
+        <h4>Website</h4>
+        <ul>
+          <li>Primary logo in navigation (max height: 32px)</li>
+          <li>Midnight backgrounds for hero sections</li>
+          <li>Warm White for content areas</li>
+          <li>Sapphire for CTAs and interactive elements</li>
+          <li>Playfair Display for page titles only</li>
+          <li>Inter for all body text and UI</li>
+          <li>Maximum content width: 1200px</li>
+          <li>Section padding: 80-120px vertical</li>
+        </ul>
+      </div>
+      <div class="system-card">
+        <h4>Social Media</h4>
+        <ul>
+          <li>Profile: Monogram on Midnight background</li>
+          <li>Posts: 60/40 split (content/negative space)</li>
+          <li>LinkedIn: Midnight + Sapphire palette</li>
+          <li>Quote cards: Playfair Display on dark</li>
+          <li>Data visuals: JetBrains Mono for numbers</li>
+          <li>Stories: Full-bleed dark backgrounds</li>
+          <li>Never use more than 2 colors per post</li>
+          <li>Consistent 24px padding from edges</li>
+        </ul>
+      </div>
+      <div class="system-card">
+        <h4>Presentations</h4>
+        <ul>
+          <li>16:9 format, dark theme default</li>
+          <li>Title slides: Playfair Display centered</li>
+          <li>Content slides: Inter Regular/Medium</li>
+          <li>One key message per slide maximum</li>
+          <li>Data slides: Cyan + Gold accent colors</li>
+          <li>Monogram watermark bottom-right</li>
+          <li>Slide numbers in JetBrains Mono</li>
+          <li>60% whitespace minimum per slide</li>
+        </ul>
+      </div>
+      <div class="system-card">
+        <h4>Print & Collateral</h4>
+        <ul>
+          <li>Business cards: 90×50mm, soft-touch matte</li>
+          <li>Letterhead: Logo top-left, 15mm margin</li>
+          <li>Proposals: Bound, uncoated 120gsm stock</li>
+          <li>Folders: Foil-stamped monogram</li>
+          <li>Envelopes: Monogram seal on flap</li>
+          <li>Thank-you cards: Gold foil on navy stock</li>
+          <li>All print: CMYK equivalents of brand colors</li>
+          <li>QR codes styled in brand navy</li>
+        </ul>
+      </div>
+      <div class="system-card">
+        <h4>Email & Digital Docs</h4>
+        <ul>
+          <li>Email signature: Logo + gold separator line</li>
+          <li>Newsletter: Single-column, 600px max width</li>
+          <li>PDF reports: Consistent header/footer system</li>
+          <li>Invoice template: Clean, JetBrains Mono numbers</li>
+          <li>Proposal decks: Dark cover, light interior</li>
+          <li>Case studies: Before/after savings format</li>
+          <li>Infographics: Brand color palette strictly</li>
+          <li>Animated GIFs: Subtle, under 3 seconds</li>
+        </ul>
+      </div>
+      <div class="system-card">
+        <h4>Environmental / Events</h4>
+        <ul>
+          <li>Conference backdrops: Midnight gradient</li>
+          <li>Pull-up banners: Full wordmark, vertical</li>
+          <li>Name badges: Monogram + attendee name</li>
+          <li>Swag: Minimal — monogram-only on items</li>
+          <li>Slide decks on big screens: High contrast</li>
+          <li>Office signage: Brushed metal wordmark</li>
+          <li>Vehicle wraps: Not recommended (understated)</li>
+          <li>Stationery box: Navy box, gold foil logo</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top: 32px;">
+    <div class="card-label">Logo Misuse — What to Avoid</div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 16px;">
+      <div style="padding: 16px; background: #FEF2F2; border-radius: 10px; text-align: center;">
+        <p style="font-size: 13px; color: #991B1B; font-weight: 500;">Never rotate the logo</p>
+      </div>
+      <div style="padding: 16px; background: #FEF2F2; border-radius: 10px; text-align: center;">
+        <p style="font-size: 13px; color: #991B1B; font-weight: 500;">Never stretch or distort</p>
+      </div>
+      <div style="padding: 16px; background: #FEF2F2; border-radius: 10px; text-align: center;">
+        <p style="font-size: 13px; color: #991B1B; font-weight: 500;">Never change brand colors</p>
+      </div>
+      <div style="padding: 16px; background: #FEF2F2; border-radius: 10px; text-align: center;">
+        <p style="font-size: 13px; color: #991B1B; font-weight: 500;">Never add drop shadows</p>
+      </div>
+      <div style="padding: 16px; background: #FEF2F2; border-radius: 10px; text-align: center;">
+        <p style="font-size: 13px; color: #991B1B; font-weight: 500;">Never place on busy backgrounds</p>
+      </div>
+      <div style="padding: 16px; background: #FEF2F2; border-radius: 10px; text-align: center;">
+        <p style="font-size: 13px; color: #991B1B; font-weight: 500;">Never use below minimum size</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 10 · MESSAGING FRAMEWORK -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="section" id="messaging">
+  <div class="section-header">
+    <div class="section-num">Section 10</div>
+    <h2>Messaging Framework</h2>
+    <p class="section-intro">The words that bring the brand to life — taglines, elevator pitches, and messaging pillars calibrated for ALISTA's target audience.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-label">Primary Tagline</div>
+    <h3 style="font-size: 28px;">Find the Money You're Already Making.</h3>
+    <p>This tagline encapsulates the ALISTA promise: the revenue is already there, hidden inside inefficiencies, manual processes, and underutilized technology. We don't create new cost — we reveal existing value.</p>
+  </div>
+
+  <div style="margin-top: 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+    <div class="card">
+      <div class="card-label">Secondary Tagline</div>
+      <h3 style="font-size: 20px;">Your Technology Should Pay for Itself.</h3>
+    </div>
+    <div class="card">
+      <div class="card-label">Campaign Line</div>
+      <h3 style="font-size: 20px;">Zero Risk. Measurable Savings. Guaranteed.</h3>
+    </div>
+    <div class="card">
+      <div class="card-label">Brand Mantra</div>
+      <h3 style="font-size: 20px;">Strategy That Saves.</h3>
+    </div>
+  </div>
+
+  <div class="msg-example" style="margin-top: 32px;">
+    <div class="msg-label">30-Second Elevator Pitch</div>
+    <div class="msg-text">"Most family businesses and mid-market companies are bleeding money through manual processes, outdated tech, and missing IT strategy — but they can't justify hiring a full-time CTO to fix it. ALISTA CONSULTING embeds fractional technology leadership into your business, deploys AI to eliminate the work your team shouldn't be doing, and here's the difference: we only get paid from the savings we create. If we don't save you money, you owe us nothing."</div>
+  </div>
+
+  <div style="margin-top: 32px;">
+    <div class="card-label">Three Messaging Pillars</div>
+    <div class="values-grid">
+      <div class="value-card" style="text-align: left;">
+        <h4 style="color: var(--electric-sapphire);">Pillar 1: Zero-Risk Partnership</h4>
+        <p>Every message should reinforce that engaging ALISTA carries no financial risk. The pay-for-performance model is the single most powerful differentiator and should appear in some form in every major communication.</p>
+        <p style="margin-top: 12px; font-style: italic; color: var(--midnight);">Key phrases: "You don't pay until you save" · "Self-funding technology" · "Risk-free engagement" · "Aligned incentives"</p>
+      </div>
+      <div class="value-card" style="text-align: left;">
+        <h4 style="color: var(--electric-sapphire);">Pillar 2: Hidden Revenue Recovery</h4>
+        <p>Position technology not as a cost center but as a revenue discovery mechanism. The narrative is always about finding money that already exists within the client's operations — not about spending more to make more.</p>
+        <p style="margin-top: 12px; font-style: italic; color: var(--midnight);">Key phrases: "Revenue hiding in your processes" · "Efficiency is profit" · "Your operations are an untapped asset" · "Work on your business, not in it"</p>
+      </div>
+      <div class="value-card" style="text-align: left;">
+        <h4 style="color: var(--electric-sapphire);">Pillar 3: Premium Without Pretension</h4>
+        <p>ALISTA delivers CTO-level strategy and AI expertise at a fraction of the cost — and without the corporate attitude. Messaging should feel elite but accessible, expert but human, sophisticated but never intimidating.</p>
+        <p style="margin-top: 12px; font-style: italic; color: var(--midnight);">Key phrases: "Executive strategy, entrepreneurial approach" · "CTO expertise without the C-suite overhead" · "Enterprise-grade thinking for family-scale care"</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="msg-example" style="margin-top: 32px;">
+    <div class="msg-label">Website Hero Copy — Example</div>
+    <div class="msg-text" style="font-size: 20px;">"Your business is doing well. We'll show you how it can do better — without spending more. ALISTA CONSULTING brings fractional CTO leadership and AI-powered automation to family businesses and growing companies, eliminating the processes that drain your time and the inefficiencies that drain your profit. And we only earn when you save."</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- FOOTER -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="footer">
+  <p><strong>ALISTA CONSULTING</strong> — Complete Brand Foundation Guide</p>
+  <p style="margin-top: 8px;">Version 1.0 · March 2026 · Confidential</p>
+  <p style="margin-top: 8px;">This document defines the strategic and visual foundation for the ALISTA CONSULTING brand. All applications should reference this guide to ensure consistency.</p>
+</div>
+
+</body>
+</html>

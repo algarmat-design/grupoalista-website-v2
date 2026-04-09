@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://grupoalista.com/sitemap.xml
+
+# Block internal tools and dev assets
+Disallow: /banner.html
+Disallow: /brand_assets/
+Disallow: /screenshots/
+Disallow: /remotion-hero/
+Disallow: /node_modules/
