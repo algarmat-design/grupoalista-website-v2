@@ -470,6 +470,87 @@
        ALLIANCES
     ════════════════════════════════════════════ */
     #alliances { background: var(--bg-base); }
+    /* ════════════════════════════════════════════
+       CASE STUDIES
+    ════════════════════════════════════════════ */
+    .cs-header { text-align: center; margin-bottom: 3.5rem; }
+    .cs-header .section-rule { margin: 0 auto 1.6rem; }
+    .cs-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-top: 2px solid var(--border-cu);
+      padding: 3rem 2.5rem;
+      max-width: 820px; margin: 0 auto;
+      position: relative; overflow: hidden;
+      transition: border-top-color 0.3s, box-shadow 0.3s;
+    }
+    .cs-card:hover {
+      border-top-color: var(--copper);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    }
+    .cs-badge {
+      display: inline-block;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.5rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--copper); border: 1px solid var(--border-cu);
+      padding: 0.25rem 0.6rem; border-radius: 2px;
+      margin-bottom: 1rem;
+    }
+    .cs-title {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 1.15rem; font-weight: 500;
+      color: var(--text-primary); margin-bottom: 0.6rem;
+    }
+    .cs-subtitle {
+      font-size: 0.85rem; color: var(--text-muted);
+      line-height: 1.8; margin-bottom: 2rem;
+    }
+    .cs-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px; margin-bottom: 2rem;
+      background: var(--border);
+    }
+    .cs-metric {
+      background: var(--bg-card);
+      padding: 1.5rem 1rem;
+      text-align: center;
+    }
+    .cs-metric-val {
+      display: block;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 1.6rem; font-weight: 500;
+      color: var(--copper); margin-bottom: 0.4rem;
+    }
+    .cs-metric-lbl {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.55rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .cs-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem; margin-bottom: 2rem;
+    }
+    .cs-body-title {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--copper); margin-bottom: 0.6rem;
+    }
+    .cs-body-text {
+      font-size: 0.83rem; color: var(--text-muted);
+      line-height: 1.8;
+    }
+    .cs-quote {
+      font-style: italic; font-size: 0.9rem;
+      color: var(--text-muted); line-height: 1.8;
+      padding-left: 1.2rem;
+      border-left: 2px solid var(--border-cu);
+    }
+
+    /* ════════════════════════════════════════════
+       ALLIANCES
+    ════════════════════════════════════════════ */
     .allia-header { text-align: center; margin-bottom: 3.5rem; }
     .allia-header .section-rule { margin: 0 auto 1.6rem; }
     .allia-grid {
@@ -534,7 +615,7 @@
     /* ════════════════════════════════════════════
        INVESTMENT
     ════════════════════════════════════════════ */
-    #pricing { background: var(--bg-elevated); }
+    /* pricing bg inherits from section class */
     .pricing-header { margin-bottom: 3.5rem; }
     .pricing-grid {
       display: grid;
@@ -859,6 +940,7 @@
       .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
       .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
       .allia-grid { grid-template-columns: 1fr; }
+      .cs-body { grid-template-columns: 1fr; }
     }
     @media (max-width: 768px) {
       .section { padding: 5rem 1.5rem; }
@@ -878,6 +960,8 @@
       .process-steps { grid-template-columns: 1fr; }
       .process-step { border-right: none; border-bottom: 1px solid var(--border); }
       .process-step:last-child { border-bottom: none; }
+      .cs-metrics { grid-template-columns: 1fr; }
+      .cs-card { padding: 2rem 1.5rem; }
     }
   </style>
   <script type="application/ld+json">
@@ -921,6 +1005,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <li><a href="#framework"  data-nav="framework">Framework</a></li>
       <li><a href="#engagement" data-nav="engagement">Process</a></li>
       <li><a href="#alliances"  data-nav="alliances">Alliances</a></li>
+      <li><a href="#results"    data-nav="results">Results</a></li>
       <li><a href="#pricing"    data-nav="pricing">Investment</a></li>
       <li><a href="#about"      data-nav="about">About</a></li>
       <li><a href="#contact"    data-nav="contact">Contact</a></li>
@@ -939,6 +1024,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <a href="#framework"  onclick="closeDrawer()">Framework</a>
   <a href="#engagement" onclick="closeDrawer()">Process</a>
   <a href="#alliances"  onclick="closeDrawer()">Alliances</a>
+  <a href="#results"    onclick="closeDrawer()">Results</a>
   <a href="#pricing"    onclick="closeDrawer()">Investment</a>
   <a href="#about"      onclick="closeDrawer()">About</a>
   <a href="#contact"    onclick="closeDrawer()">Contact</a>
@@ -1177,12 +1263,61 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <!-- ════════════════════════════════════════════
+     §5.5 CASE STUDIES
+════════════════════════════════════════════ -->
+<section id="results" class="section section--alt" data-section>
+  <div class="section-inner">
+    <div class="cs-header reveal">
+      <p class="eyebrow">05 · Results</p>
+      <h2 class="section-title">Results That Speak</h2>
+      <div class="section-rule"></div>
+      <p class="section-lead" style="margin:0 auto">Our results-based model means our success is directly tied to yours. Here's what that looks like in practice.</p>
+    </div>
+
+    <div class="cs-card reveal" style="transition-delay:0.1s">
+      <span class="cs-badge">Case Study</span>
+      <h3 class="cs-title">Private Security Firm — Guadalajara</h3>
+      <p class="cs-subtitle">Business diagnostic + operational optimization for a private security company with 80+ employees. The goal: reduce operational costs without compromising service quality.</p>
+
+      <div class="cs-metrics">
+        <div class="cs-metric">
+          <span class="cs-metric-val">−30%</span>
+          <span class="cs-metric-lbl">Operational Costs</span>
+        </div>
+        <div class="cs-metric">
+          <span class="cs-metric-val">97%</span>
+          <span class="cs-metric-lbl">Satisfaction (NPS)</span>
+        </div>
+        <div class="cs-metric">
+          <span class="cs-metric-val">7.5</span>
+          <span class="cs-metric-lbl">Months to Positive ROI</span>
+        </div>
+      </div>
+
+      <div class="cs-body">
+        <div>
+          <p class="cs-body-title">The Challenge</p>
+          <p class="cs-body-text">Manual operational processes, rising costs from inefficiencies in staff allocation and routing, and lack of visibility into key performance metrics. Leadership needed concrete data to make strategic decisions.</p>
+        </div>
+        <div>
+          <p class="cs-body-title">The Solution</p>
+          <p class="cs-body-text">Comprehensive process diagnostic followed by phased implementation: automated shift scheduling, real-time KPI dashboards, and restructured reporting workflows. All without disrupting daily operations.</p>
+        </div>
+      </div>
+
+      <p class="cs-quote">"The Alista team understood our business from day one. The results weren't just in the numbers — the operations team felt the difference immediately."</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
      §6 INVESTMENT
 ════════════════════════════════════════════ -->
-<section id="pricing" class="section section--alt" data-section>
+<section id="pricing" class="section" data-section>
   <div class="section-inner">
     <div class="pricing-header reveal">
-      <p class="eyebrow">05 · Investment</p>
+      <p class="eyebrow">06 · Investment</p>
       <h2 class="section-title">Transparency at Every Step</h2>
       <div class="section-rule"></div>
       <p class="section-lead">No hidden fees, no surprises. Every proposal is customized — the price reflects the scope and expected results.</p>
@@ -1250,7 +1385,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <section id="about" class="section" data-section>
   <div class="section-inner">
     <div class="reveal" style="margin-bottom:3.5rem">
-      <p class="eyebrow">06 · About</p>
+      <p class="eyebrow">07 · About</p>
       <h2 class="section-title">Who We Are</h2>
       <div class="section-rule"></div>
     </div>
@@ -1335,7 +1470,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <section id="contact" class="section" data-section>
   <div class="section-inner">
     <div class="reveal" style="margin-bottom:3.5rem">
-      <p class="eyebrow">07 · Contact</p>
+      <p class="eyebrow">08 · Contact</p>
       <h2 class="section-title">Let's Talk About Your Project</h2>
       <div class="section-rule"></div>
     </div>
