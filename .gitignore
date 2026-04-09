@@ -43,3 +43,10 @@ screenshots/
 
 # Product images — deploy directly to S3, not via git (~200MB)
 assets/images/marketing/
+
+# AI assistant configs (local only)
+.agents/
+.claude/
+.kiro/
+.superpowers/
+skills-lock.json
